@@ -7,6 +7,7 @@ public class RegisteredUser {
     private String email;
     private String password;
     private String land;
+    private boolean isAdmin;
 
     public RegisteredUser(char sex, String username, String email, String password, String land){
         this.sex = sex;
@@ -14,6 +15,8 @@ public class RegisteredUser {
         this.email = email;
         this.password = password;
         this.land = land;
+
+        isAdmin = false; //dachte das Admin default mässig auf false ist, und nur von einem anderen Admin zu admin verändert werden kann
     }
 
 
@@ -51,6 +54,13 @@ public class RegisteredUser {
     }
     public void setLand(){
         this.land = land;
+    }
+
+    public boolean isAdmin(){
+        return this.isAdmin;
+    }
+    public void setAdmin(boolean isAdmin){
+        this.isAdmin = isAdmin;
     }
 
 
