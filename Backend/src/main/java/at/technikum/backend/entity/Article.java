@@ -4,6 +4,12 @@ import java.time.LocalDateTime;
 
 public class Article {
 
+    /*
+    TODO: id datatype = long? String UUID?
+    TODO: String article --> String content / text
+    TODO: dateOfCreating = LocalDateTime.now();
+     */
+
     private int id;
     private String article;
     private LocalDateTime dateOfCreation;

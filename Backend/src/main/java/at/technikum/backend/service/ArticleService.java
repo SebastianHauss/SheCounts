@@ -9,6 +9,10 @@ import java.util.List;
 @Service
 public class ArticleService {
 
+    /*
+    TODO: allArticles -> plural, enhanced for-loops (forEach), logs/messages in methods, error handling
+     */
+
     private List<Article> allArticle = new ArrayList<>();
 
 
