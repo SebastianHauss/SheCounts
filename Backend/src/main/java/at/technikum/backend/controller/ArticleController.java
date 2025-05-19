@@ -21,7 +21,7 @@ public class ArticleController {
 
     @GetMapping("article")
     public List<Article> readAll() {
-        return articleService.getAllArticle();
+        return articleService.getArticles();
     }
 
     @GetMapping("/{id}")

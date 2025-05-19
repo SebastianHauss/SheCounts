@@ -9,7 +9,7 @@ public class RegisteredUser {
     private String land;
     private boolean isAdmin;
 
-    public RegisteredUser(char sex, String username, String email, String password, String land){
+    public RegisteredUser(char sex, String username, String email, String password, String land) {
         this.sex = sex;
         this.username = username;
         this.email = email;
@@ -21,48 +21,53 @@ public class RegisteredUser {
 
 
     //GETTERS AND SETTERS
-    public char getSex(){
+    public char getSex() {
         return this.sex;
     }
-    public void setSex(char sex){
+
+    public void setSex(char sex) {
         this.sex = sex;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return this.username;
     }
-    public void setUsername(){
+
+    public void setUsername() {
         this.username = username;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return this.email;
     }
-    public void setEmail(){
+
+    public void setEmail() {
         this.email = email;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
-    public void setPassword(){
+
+    public void setPassword() {
         this.password = password;
     }
 
-    public String getLand(){
+    public String getLand() {
         return this.land;
     }
-    public void setLand(){
+
+    public void setLand() {
         this.land = land;
     }
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return this.isAdmin;
     }
-    public void setAdmin(boolean isAdmin){
+
+    public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-
 
 
 }
