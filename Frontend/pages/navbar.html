@@ -9,107 +9,72 @@
 </head>
 <body>
 
-<!-- TODO: myFont in style.css definieren (font-family und font-size) -->
+<!-- Simple navbar -->
 
 
 
 
 <nav class="navbar navbar-expand-lg nav-homepage sticky-top">
     <div class="container-fluid">   <!-- container-fluid sagt: „Dieser Bereich soll die ganze Breite des Bildschirms nutzen“ -->
-        <a class="navbar-brand" href="../index.html">  <!-- navbar-brand: Klasse für Titel oder Logo der Website -->
+        <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">  <!-- navbar-brand: Klasse für Titel oder Logo der Website -->
+            <img src="..." alt="Logo" width="30" height="24">
             <h2 class="myFont">SheCounts</h2>
+
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
+            <!-- class="navbar-toggler":  gibt dem Button einen Style
+                  data-bs-toggle="collapse" & data-bs-target="#navbarSupportedContent": Das sorgt dafür, dass beim Klicken ein Menü auf- oder zugeht.
+                  <span class="navbar-toggler-icon">: Zeigt ein Symbol (drei Linien = Hamburger-Menü)
+             -->
         </button>
 
-
-    </div>
-</nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Upper Navbar
-
-<nav class="navbar bg-body-tertiary sticky-top">
-    <div class="container-fluid nav-homepage">
-        <a class="navbar-brand" href="#">
-            <img src="https://fastly.picsum.photos/id/903/80/80.jpg?hmac=bXe6oYkRIicPmSkOGGBB8iwicX9KaayGalij9Jxxozs" alt="Bootstrap" width="30" height="24">
-        </a>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"  style="width: 550px;"/>
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-        <button type="button" class="btn btn-secondary">Login</button>
-
-    </div>
-</nav>
-
- Upper Navbar End
-
-
-Lower Navbar
-<nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-    <div class="container-fluid nav-homepage">
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">  <!-- Raum für Inhalte die collapsen wenn Bildschirm klein -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item  me-5">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <!-- me-auto: Sorgt dafür, dass das Menü nach links geschoben wird
+                    mb-2 mb-lg-0: Abstand nach unten (auf kleinen Geräten), kein Abstand auf großen Geräten
+                  -->
+                <li class="nav-item me-5"> <!-- me-5: Gibt etwas Abstand rechts (Margin-End) -->
+                    <a class="nav-link active" aria-current="page" href="#">Home</a> <!-- active & aria-current="page": Zeigt an, dass das gerade die aktuelle Seite ist. -->
                 </li>
                 <li class="nav-item me-5">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" aria-current="page" href="#">Erste Schritte</a>
                 </li>
                 <li class="nav-item me-5 dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Artikel
+                        Blogartikel
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Finanzielle Sicherheit </a></li>
                         <li><a class="dropdown-item" href="#">Frauen und ...</a></li>
                         <li><a class="dropdown-item" href="#">Topic 3</a></li>
                         <li><a class="dropdown-item" href="#">Topic 4</a></li>
-
                     </ul>
                 </li>
 
             </ul>
 
+
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+
+            <button class="btn btn-outline-success me-2 ms-3 px-3" type="button">Login</button>
+
         </div>
     </div>
 </nav>
 
- Lower Navbar End
 
--->
+
+
+
+
+
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
