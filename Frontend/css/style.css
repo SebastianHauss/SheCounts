@@ -21,6 +21,13 @@
     border-radius: 25px;
 }
 
+.logo {
+    max-height: 40px;
+    width: auto;
+    height: auto;
+}
+
+
 .loginBtn {
     background-color: var(--myDarkerPink);
     color: white;
