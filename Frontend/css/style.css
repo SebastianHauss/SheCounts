@@ -5,7 +5,7 @@
     --myDarkerPink: #b56468;
 }
 
-.nav-homepage {
+.nav-homepage, .myBG {
     background-color: var(--myPastelGreen);
 }
 
