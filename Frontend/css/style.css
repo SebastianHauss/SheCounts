@@ -3,15 +3,21 @@
     --myGrey: #796F80;
     --myPink: #C3868D;
     --myDarkerPink: #b56468;
+    --myBeige: #FAFAF1;
+    --basicFont: "Poppins", sans-serif;
+}
+
+
+body {
+    font-family: var(--basicFont);
 }
 
 .nav-homepage, .myBG {
     background-color: var(--myPastelGreen);
 }
 
-.myTitleFont {
-    font-family: 'Lobster', cursive;
-    color: white;
+.logo{
+    width: 300px;
 }
 
 .mySearchBar {
