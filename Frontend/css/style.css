@@ -3,35 +3,34 @@
     --myGrey: #796F80;
     --myPink: #C3868D;
     --myDarkerPink: #b56468;
-
 }
 
 .nav-homepage {
     background-color: var(--myPastelGreen);
 }
-.myTitleFont{
+
+.myTitleFont {
     font-family: 'Lobster', cursive;
     color: white;
 }
 
-.mySearchBar{
+.mySearchBar {
     width: 110%;
     background-color: white;
     border: 2px solid var(--myPastelGreen);
     border-radius: 25px;
 }
 
-
-.loginBtn{
+.loginBtn {
     background-color: var(--myDarkerPink);
     color: white;
 }
 
-.loginBtn:hover{
+.loginBtn:hover {
     background-color: var(--myPink);
 }
 
-.magnifiyingGlass{
+.magnifiyingGlass {
     text-shadow: 0 0 1px white;
     font-weight: bold;
 }
