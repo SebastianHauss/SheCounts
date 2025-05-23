@@ -12,16 +12,17 @@
 <body>
 
 <!-- Simple navbar -->
-
-
 <nav class="navbar navbar-expand-lg navbar-dark nav-homepage sticky-top">
     <div class="container-fluid">
         <!-- container-fluid sagt: „Dieser Bereich soll die ganze Breite des Bildschirms nutzen“ -->
+        <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center gap-2" href="../index.html">
             <!-- navbar-brand: Klasse für Titel oder Logo der Website -->
             <img src="..." alt="Logo" width="30" height="24">
             <h2 class="myTitleFont">SheCounts</h2>
         </a>
+
+        <!-- Hamburger -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,6 +32,7 @@
              -->
         </button>
 
+        <!-- Collapse-Inhale -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Raum für Inhalte die collapsen wenn Bildschirm klein -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5 fw-semibold">
@@ -58,14 +60,18 @@
                 </li>
             </ul>
 
+            <!-- Suchfeld -->
             <div class="d-flex align-items-center justify-content-between mt-3 mt-lg-0">
                 <form class="d-flex" role="search">
-                    <input class="form-control mySearchBar me-2" type="search" placeholder="Search" aria-label="Search"/>
+                    <input class="form-control mySearchBar me-2" type="search" placeholder="Search"
+                           aria-label="Search"/>
                     <button class="btn" type="submit">
                         <i class="bi bi-search text-white fs-4 magnifiyingGlass"></i>
                     </button>
                 </form>
-                <button class="btn loginBtn ms-2 px-3" type="button">Login</button>
+
+                <button class="btn loginBtn ms-2 px-3 ms-auto" type="button">Login</button>
+
             </div>
         </div>
     </div>
