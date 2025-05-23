@@ -1,13 +1,37 @@
 :root {
     --myPastelGreen: #A9B8A3;
     --myGrey: #796F80;
-    --myLightBeige: #C3868D;
     --myPink: #C3868D;
+    --myDarkerPink: #b56468;
+
 }
 
 .nav-homepage {
     background-color: var(--myPastelGreen);
 }
-.myFont{
+.myTitleFont{
     font-family: 'Lobster', cursive;
+    color: white;
+}
+
+.mySearchBar{
+    width: 110%;
+    background-color: white;
+    border: 2px solid var(--myPastelGreen);
+    border-radius: 25px;
+}
+
+
+.loginBtn{
+    background-color: var(--myDarkerPink);
+    color: white;
+}
+
+.loginBtn:hover{
+    background-color: var(--myPink);
+}
+
+.magnifiyingGlass{
+    text-shadow: 0 0 1px white;
+    font-weight: bold;
 }
