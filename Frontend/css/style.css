@@ -34,26 +34,3 @@
     text-shadow: 0 0 1px white;
     font-weight: bold;
 }
-
-.sideBar {
-    background-color: var(--myPink);
-
-    border-radius: 10px;
-
-    position: sticky;
-    top: 100px;
-}
-
-.sideBarLink {
-    color: black;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.1rem;
-}
-
-.sideBarLink:hover {
-    color: #3e3b3b;
-}
-.p2Element {
-    font-size: 1rem;
-}
