@@ -1,26 +1,50 @@
 package at.technikum.backend.entity;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+
+import java.util.UUID;
+
+@Entity
 public class RegisteredUser {
 
-    private char sex;   //char: w,m,d keine anderen werden akzeptiert
+    @Id
+    private String id;
+    @NotBlank
     private String username;
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
+    private char sex;   //char: w,m,d keine anderen werden akzeptiert
     private String land;
     private boolean isAdmin;
 
-    public RegisteredUser(char sex, String username, String email, String password, String land) {
-        this.sex = sex;
+    public RegisteredUser(String username, String email, String password, char sex, String land) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.sex = sex;
         this.land = land;
 
-        isAdmin = false; //dachte das Admin default mässig auf false ist, und nur von einem anderen Admin zu admin verändert werden kann
+        this.id = UUID.randomUUID().toString();
+        this.isAdmin = false;
+    }
+
+    public RegisteredUser() {
+        this.id = UUID.randomUUID().toString();
+        this.isAdmin = false;
     }
 
 
     //GETTERS AND SETTERS
+
+    public String getId() {
+        return id;
+    }
+
     public char getSex() {
         return this.sex;
     }

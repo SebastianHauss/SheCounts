@@ -1,42 +1,46 @@
 package at.technikum.backend.entity;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+@Entity
 public class Article {
 
-    /*
-    TODO: id datatype = long? String UUID?
-    TODO: String article --> String content / text
-    TODO: dateOfCreating = LocalDateTime.now();
-     */
-
-    private int id;
-    private String article;
+    @Id
+    private String id;
+    private String content;
     private LocalDateTime dateOfCreation;
 
 
-    public Article(int id, String article, LocalDateTime dateOfCreation) {
-        this.id = id;
-        this.article = article;
-        this.dateOfCreation = dateOfCreation;
+    public Article(String content) {
+        this.content = content;
+        this.dateOfCreation = LocalDateTime.now();
+        this.id = UUID.randomUUID().toString();
+    }
+
+    public Article() {
+        this.id = UUID.randomUUID().toString();
     }
 
 
     //GETTERS AND SETTERS   (no option to set Id)
-    public int getId() {
+    public String getId() {
         return this.id;
     }
 
-    public String getArticle() {
-        return this.article;
+    public String getContent() {
+        return this.content;
     }
 
     public LocalDateTime getDateOfCreation() {
         return this.dateOfCreation;
     }
 
-    public void setArticle(String article) {
-        this.article = article;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public void setDateOfCreation() {

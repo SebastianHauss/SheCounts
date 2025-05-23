@@ -11,37 +11,35 @@ import java.util.List;
 @RequestMapping("/")
 public class ArticleController {
 
-    private ArticleService articleService = new ArticleService();
 
     @Autowired
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
+    public ArticleController() {
     }
 
 
     @GetMapping("article")
     public List<Article> readAll() {
-        return articleService.getArticles();
+        return null;
     }
 
     @GetMapping("/{id}")
-    public Article read(@PathVariable int id) {
-        return articleService.getArticle(id);
+    public Article read(@PathVariable String  id) {
+        return null;
     }
 
     @PostMapping
-    public void addArticle(@RequestBody Article article) {
-        articleService.addArticle(article);
+    public Article create(@RequestBody Article article) {
+        return article;
     }
 
     @PutMapping
-    public void updateArticle(@RequestBody Article article, @RequestBody String newText) {
-        articleService.updateArticle(article, newText);
+    public Article update(@RequestBody Article article) {
+       return article;
     }
 
-    @DeleteMapping
-    public void deleteArticle(@RequestBody Article article) {
-        articleService.deleteArticle(article);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id) {
+        ;
     }
 
 
