@@ -22,16 +22,20 @@
             <h2 class="myTitleFont">SheCounts</h2>
         </a>
 
+        <div class="d-lg-none d-flex justify-content-end flex-row-reverse">
+            <button class="btn loginBtn px-3 ms-3" type="button">Login</button>
 
-        <!-- Hamburger -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            <!-- class="navbar-toggler":  gibt dem Button einen Style
-                  data-bs-toggle="collapse" & data-bs-target="#navbarSupportedContent": Das sorgt dafür, dass beim Klicken ein Menü auf- oder zugeht.
-                  <span class="navbar-toggler-icon">: Zeigt ein Symbol (drei Linien = Hamburger-Menü)
-             -->
-        </button>
+            <!-- Hamburger -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <!-- class="navbar-toggler":  gibt dem Button einen Style
+                      data-bs-toggle="collapse" & data-bs-target="#navbarSupportedContent": Das sorgt dafür, dass beim Klicken ein Menü auf- oder zugeht.
+                      <span class="navbar-toggler-icon">: Zeigt ein Symbol (drei Linien = Hamburger-Menü)
+                 -->
+            </button>
+        </div>
 
         <!-- Collapse-Inhale -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -62,15 +66,17 @@
             </ul>
 
             <!-- Suchfeld und Login Button-->
-            <div class="d-flex align-items-center justify-content-between mt-3 mt-lg-0">
-                <form class="d-flex" role="search">
+            <div class="d-flex align-items-center justify-content-center mt-3 mt-lg-0 ms-auto">
+                <form class="d-flex me-3" role="search">
                     <input class="form-control mySearchBar me-2" type="search" placeholder="Search"
                            aria-label="Search"/>
                     <button class="btn" type="submit">
                         <i class="bi bi-search text-white fs-4 magnifiyingGlass"></i>
                     </button>
                 </form>
-                <button class="btn loginBtn ms-2 px-3" type="button">Login</button>
+                <div>
+                    <button class="btn loginBtn px-3 d-lg-block d-none" type="button">Login</button>
+                </div>
             </div>
         </div>
     </div>
