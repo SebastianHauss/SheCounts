@@ -13,12 +13,15 @@ public class Article {
     private String id;
     private String content;
     private LocalDateTime dateOfCreation;
+    private String author;
 
 
-    public Article(String content) {
+    public Article(String content, String author) {
         this.content = content;
-        this.dateOfCreation = LocalDateTime.now();
+        this.author = author;
+
         this.id = UUID.randomUUID().toString();
+        this.dateOfCreation = LocalDateTime.now();
     }
 
     public Article() {
@@ -34,17 +37,22 @@ public class Article {
     public String getContent() {
         return this.content;
     }
-
-    public LocalDateTime getDateOfCreation() {
-        return this.dateOfCreation;
-    }
-
     public void setContent(String content) {
         this.content = content;
     }
 
-    public void setDateOfCreation() {
+    public LocalDateTime getDateOfCreation() {
+        return this.dateOfCreation;
+    }
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
 

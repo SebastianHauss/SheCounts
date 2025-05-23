@@ -12,10 +12,6 @@ import java.util.List;
 public class ArticleController {
 
 
-    @Autowired
-    public ArticleController() {
-    }
-
 
     @GetMapping("article")
     public List<Article> readAll() {
