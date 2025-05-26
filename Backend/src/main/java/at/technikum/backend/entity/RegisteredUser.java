@@ -4,6 +4,7 @@ package at.technikum.backend.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ public class RegisteredUser {
     @NotBlank
     private String username;
     @NotBlank
+    @UniqueElements
     private String email;
     @NotBlank
     private String password;
