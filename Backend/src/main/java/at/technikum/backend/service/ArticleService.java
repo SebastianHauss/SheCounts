@@ -21,7 +21,7 @@ public class ArticleService {
 
     public Article create(Article article) {
         if (checkIfArticleExists(article.getId()).isPresent()) {
-            throw new ArticleAlreadyExistsException("Article (id: " + article.getId() + ") already exists.");
+            throw new ArticleAlreadyExistsException("Article already exists.");
         }
         return articleRepository.save(article);
     }
@@ -32,21 +32,21 @@ public class ArticleService {
 
     public Article read(String id) {
         if (checkIfArticleExists(id).isEmpty()) {
-            throw new ArticleNotFoundException("Article (id: " + id + ") couldn't be found.");
+            throw new ArticleNotFoundException("Article couldn't be found.");
         }
         return checkIfArticleExists(id).get();
     }
 
     public Article update(Article article) {
         if (checkIfArticleExists(article.getId()).isEmpty()) {
-            throw new ArticleNotFoundException("Article (id: " + article.getId() + ") couldn't be found.");
+            throw new ArticleNotFoundException("Article couldn't be found.");
         }
         return articleRepository.save(article);
     }
 
     public void delete(String id) {
         if (checkIfArticleExists(id).isEmpty()) {
-            throw new ArticleNotFoundException("Article (id: " + id + ") couldn't be found.");
+            throw new ArticleNotFoundException("Article couldn't be found.");
         }
         articleRepository.delete(checkIfArticleExists(id).get());
     }
