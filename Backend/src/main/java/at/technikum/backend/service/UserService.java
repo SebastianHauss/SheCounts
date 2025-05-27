@@ -42,7 +42,7 @@ public class UserService {
     Da update() und delete() Daten verändern, ist es best practice,
     sie mit @Transactional zu versehen, damit bei einem Fehler rollback erfolgt
      */
-    //TODO: statt findUserById.isEmpty -> .orElseThrow(new ...) - ist eleganter
+    //TODO: statt findUserById.isEmpty lieber .orElseThrow(() -> new ...) - ist eleganter
     public RegisteredUser update(RegisteredUser user){
         Optional<RegisteredUser> findUserById = userRepository.findById(user.getId());
 
