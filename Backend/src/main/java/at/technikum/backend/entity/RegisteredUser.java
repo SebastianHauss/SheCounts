@@ -32,6 +32,7 @@ public class RegisteredUser {
             String country
     ) {
         this.username = username;
+        // TODO: @Email @NotBlank
         this.email = email;
         this.password = password;
         this.sex = sex;
