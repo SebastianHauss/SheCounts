@@ -12,9 +12,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+
     public UserService(UserRepository userRepository){
         this.userRepository = userRepository;
     }
+
 
     public RegisteredUser register(RegisteredUser user){
         Optional<RegisteredUser> checkIfUserExists = userRepository.findByEmail(user.getEmail());
@@ -52,7 +54,5 @@ public class UserService {
         }
         userRepository.delete(user);
     }
-
-
 
 }

@@ -15,6 +15,7 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public RegisteredUser register(RegisteredUser user) {
@@ -36,6 +37,5 @@ public class UserController {
     public void delete(RegisteredUser user) {
         userService.delete(user);
     }
-
 
 }
