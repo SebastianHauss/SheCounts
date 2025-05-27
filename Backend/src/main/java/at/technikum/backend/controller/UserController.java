@@ -10,34 +10,32 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
-    public UserController(UserService userService){
+
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RegisteredUser register(RegisteredUser user){
+    public RegisteredUser register(RegisteredUser user) {
         return userService.register(user);
     }
 
     @GetMapping("/{id}")
-    public RegisteredUser read(@PathVariable String id){
+    public RegisteredUser read(@PathVariable String id) {
         return userService.read(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public RegisteredUser update(RegisteredUser user){
+    public RegisteredUser update(RegisteredUser user) {
         return userService.update(user);
     }
 
     @DeleteMapping
-    public void delete(RegisteredUser user){
+    public void delete(RegisteredUser user) {
         userService.delete(user);
     }
-
-
-
 
 
 }

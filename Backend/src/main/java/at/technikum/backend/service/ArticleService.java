@@ -6,7 +6,6 @@ import at.technikum.backend.exceptions.ArticleNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,47 +14,45 @@ public class ArticleService {
 
     private final ArticleRepository articleRepository;
 
-    public ArticleService(ArticleRepository articleRepository){
+    public ArticleService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
 
     public Article create(Article article) {
-        if(checkIfArticleExists(article.getId()).isPresent()){
-            throw new ArticleAlreadyExistsException("Article already exists.");
+        if (checkIfArticleExists(article.getId()).isPresent()) {
+            throw new ArticleAlreadyExistsException("Article (id: " + article.getId() + ") already exists.");
         }
         return articleRepository.save(article);
     }
 
     public List<Article> readAll() {
-     return articleRepository.findAll();
+        return articleRepository.findAll();
     }
 
     public Article read(String id) {
-        if(checkIfArticleExists(id).isEmpty()){
-            throw new ArticleNotFoundException("Article couldn't be found.");
+        if (checkIfArticleExists(id).isEmpty()) {
+            throw new ArticleNotFoundException("Article (id: " + id + ") couldn't be found.");
         }
         return checkIfArticleExists(id).get();
     }
 
     public Article update(Article article) {
-        if (checkIfArticleExists(article.getId()).isEmpty()){
-            throw new ArticleNotFoundException("Article couldn't be found.");
+        if (checkIfArticleExists(article.getId()).isEmpty()) {
+            throw new ArticleNotFoundException("Article (id: " + article.getId() + ") couldn't be found.");
         }
         return articleRepository.save(article);
     }
 
     public void delete(String id) {
-        if(checkIfArticleExists(id).isEmpty()){
-            throw new ArticleNotFoundException("Article couldn't be found.");
+        if (checkIfArticleExists(id).isEmpty()) {
+            throw new ArticleNotFoundException("Article (id: " + id + ") couldn't be found.");
         }
         articleRepository.delete(checkIfArticleExists(id).get());
     }
 
-
-    public Optional<Article> checkIfArticleExists(String id){
+    public Optional<Article> checkIfArticleExists(String id) {
         return articleRepository.findById(id);
     }
-
 
 }

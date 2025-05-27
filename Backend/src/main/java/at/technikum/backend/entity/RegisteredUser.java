@@ -20,16 +20,22 @@ public class RegisteredUser {
     private String email;
     @NotBlank
     private String password;
-    private char sex;   //char: w,m,d keine anderen werden akzeptiert
-    private String land;
+    private char sex;   // w,m,d
+    private String country;
     private boolean isAdmin;
 
-    public RegisteredUser(String username, String email, String password, char sex, String land) {
+    public RegisteredUser(
+            String username,
+            String email,
+            String password,
+            char sex,
+            String country
+    ) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.sex = sex;
-        this.land = land;
+        this.country = country;
 
         this.id = UUID.randomUUID().toString();
         this.isAdmin = false;
@@ -40,9 +46,7 @@ public class RegisteredUser {
         this.isAdmin = false;
     }
 
-
     //GETTERS AND SETTERS
-
     public String getId() {
         return id;
     }
@@ -79,12 +83,12 @@ public class RegisteredUser {
         this.password = password;
     }
 
-    public String getLand() {
-        return this.land;
+    public String getCountry() {
+        return this.country;
     }
 
-    public void setLand() {
-        this.land = land;
+    public void setCountry() {
+        this.country = country;
     }
 
     public boolean isAdmin() {

@@ -29,7 +29,7 @@ public class Article {
     }
 
 
-    //GETTERS AND SETTERS   (no option to set Id)
+    //GETTERS AND SETTERS
     public String getId() {
         return this.id;
     }
@@ -37,6 +37,7 @@ public class Article {
     public String getContent() {
         return this.content;
     }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -44,6 +45,7 @@ public class Article {
     public LocalDateTime getDateOfCreation() {
         return this.dateOfCreation;
     }
+
     public void setDateOfCreation(LocalDateTime dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
@@ -51,9 +53,9 @@ public class Article {
     public String getAuthor() {
         return author;
     }
+
     public void setAuthor(String author) {
         this.author = author;
     }
-
 
 }

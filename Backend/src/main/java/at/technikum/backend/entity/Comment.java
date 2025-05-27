@@ -20,7 +20,6 @@ public class Comment {
     private LocalDateTime createdAt;
 
 
-
     public Comment(String article_id, String content, String author){
         this.article_id = article_id;
         this.content = content;
@@ -29,11 +28,9 @@ public class Comment {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Comment() {
+    public Comment() {}
 
-    }
-
-
+    // GETTERS AND SETTERS
     public int getId() {
         return id;
     }
