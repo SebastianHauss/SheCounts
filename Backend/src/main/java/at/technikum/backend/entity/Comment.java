@@ -8,20 +8,33 @@ import java.time.LocalDateTime;
 public class Comment {
     /*
     Todo: verschachtelte Comments recherche
+    Todo: Foreign Key Article_Id
      */
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    //@ForeignKey(Article)
-    private String article_id;
+
+
+    @ManyToOne
+    @JoinColumn(name = "article_id")
+    private Article article;
+
     private String content;
     private String author;
     private LocalDateTime createdAt;
 
+    public Article getArticle() {
+        return article;
+    }
 
-    public Comment(String article_id, String content, String author){
-        this.article_id = article_id;
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+
+    public Comment(Article article_id, String content, String author){
+        this.article = article_id;
         this.content = content;
         this.author = author;
 
@@ -35,8 +48,8 @@ public class Comment {
         return id;
     }
 
-    public String getArticle_id() {
-        return article_id;
+    public Article getArticle_id() {
+        return this.article;
     }
 
     public String getContent() {

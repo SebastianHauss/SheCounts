@@ -2,8 +2,11 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.OneToMany;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,6 +17,9 @@ public class Article {
     private String content;
     private LocalDateTime dateOfCreation;
     private String author;
+
+    @OneToMany(mappedBy = "article")
+    private List<Comment> comments;
 
 
     public Article(String content, String author) {
