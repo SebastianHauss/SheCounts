@@ -2,13 +2,14 @@ package at.technikum.backend.controller;
 
 import at.technikum.backend.entity.Article;
 import at.technikum.backend.service.ArticleService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/articles")
 public class ArticleController {
 
     private final ArticleService articleService;
@@ -17,7 +18,7 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping("article")
+    @GetMapping("/")
     public List<Article> readAll() {
         return articleService.readAll();
     }
@@ -29,7 +30,7 @@ public class ArticleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Article create(@RequestBody Article article) {
+    public Article create(@RequestBody @Valid Article article) {
         return articleService.create(article);
     }
 

@@ -14,6 +14,7 @@ import java.util.UUID;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
     @NotBlank
     private String username;
@@ -22,7 +23,7 @@ public class User {
     private String email;
     @NotBlank
     private String password;
-    private boolean isAdmin;
+    private boolean isAdmin = false;
 
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications = new ArrayList<>();
@@ -42,14 +43,10 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-
-        this.id = UUID.randomUUID().toString();
-        this.isAdmin = false;
     }
 
     public User() {
-        this.id = UUID.randomUUID().toString();
-        this.isAdmin = false;
+
     }
 
     //GETTERS AND SETTERS
