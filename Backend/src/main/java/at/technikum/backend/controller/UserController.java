@@ -1,6 +1,6 @@
 package at.technikum.backend.controller;
 
-import at.technikum.backend.entity.RegisteredUser;
+import at.technikum.backend.entity.User;
 import at.technikum.backend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,23 +18,23 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public RegisteredUser register(RegisteredUser user) {
+    public User register(User user) {
         return userService.register(user);
     }
 
     @GetMapping("/{id}")
-    public RegisteredUser read(@PathVariable String id) {
+    public User read(@PathVariable String id) {
         return userService.read(id);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public RegisteredUser update(RegisteredUser user) {
+    public User update(User user) {
         return userService.update(user);
     }
 
     @DeleteMapping
-    public void delete(RegisteredUser user) {
+    public void delete(User user) {
         userService.delete(user);
     }
 

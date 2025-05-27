@@ -1,6 +1,6 @@
 package at.technikum.backend.service;
 
-import at.technikum.backend.entity.RegisteredUser;
+import at.technikum.backend.entity.User;
 import at.technikum.backend.exceptions.EmailAlreadyRegisteredException;
 import at.technikum.backend.exceptions.UserNotFoundException;
 import at.technikum.backend.repository.UserRepository;
@@ -18,8 +18,8 @@ public class UserService {
     }
 
 
-    public RegisteredUser register(RegisteredUser user){
-        Optional<RegisteredUser> checkIfUserExists = userRepository.findByEmail(user.getEmail());
+    public User register(User user){
+        Optional<User> checkIfUserExists = userRepository.findByEmail(user.getEmail());
 
         if(checkIfUserExists.isPresent()){
             throw new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account.");
@@ -29,8 +29,8 @@ public class UserService {
     }
 
     //TODO: statt findUserById.isEmpty -> .orElseThrow(new ...) - ist eleganter
-    public RegisteredUser read(String id){
-        Optional<RegisteredUser> findUserById = userRepository.findById(id);
+    public User read(String id){
+        Optional<User> findUserById = userRepository.findById(id);
 
         if(findUserById.isEmpty()){
             throw new UserNotFoundException("User not found");
@@ -43,8 +43,8 @@ public class UserService {
     sie mit @Transactional zu versehen, damit bei einem Fehler rollback erfolgt
      */
     //TODO: statt findUserById.isEmpty lieber .orElseThrow(() -> new ...) - ist eleganter
-    public RegisteredUser update(RegisteredUser user){
-        Optional<RegisteredUser> findUserById = userRepository.findById(user.getId());
+    public User update(User user){
+        Optional<User> findUserById = userRepository.findById(user.getId());
 
         if (findUserById.isEmpty()){
             throw new UserNotFoundException("User not found");
@@ -57,8 +57,8 @@ public class UserService {
     TODO: Sollte deleteById(id) sein - REST löscht normalerweise per ID und das spart sich einen Datenbank-Call zum Laden des gesamten Objekts
      */
     // TODO: @Transactional
-    public void delete(RegisteredUser user){
-        Optional<RegisteredUser> findUserById = userRepository.findById(user.getId());
+    public void delete(User user){
+        Optional<User> findUserById = userRepository.findById(user.getId());
 
         if (findUserById.isEmpty()){
             throw new UserNotFoundException("User not found");

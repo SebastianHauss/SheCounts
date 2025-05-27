@@ -3,13 +3,15 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.UUID;
 
 @Entity
-public class RegisteredUser {
+@Table(name = "RegisteredUser")
+public class User {
 
     @Id
     private String id;
@@ -25,7 +27,7 @@ public class RegisteredUser {
     private boolean isAdmin;
 
     // TODO: Validation
-    public RegisteredUser(
+    public User(
             String username,
             String email,
             String password,
@@ -33,7 +35,6 @@ public class RegisteredUser {
             String country
     ) {
         this.username = username;
-        // TODO: @Email @NotBlank
         this.email = email;
         this.password = password;
         this.sex = sex;
@@ -43,7 +44,7 @@ public class RegisteredUser {
         this.isAdmin = false;
     }
 
-    public RegisteredUser() {
+    public User() {
         this.id = UUID.randomUUID().toString();
         this.isAdmin = false;
     }
