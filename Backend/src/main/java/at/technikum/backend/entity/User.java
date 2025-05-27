@@ -1,12 +1,12 @@
 package at.technikum.backend.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -22,9 +22,14 @@ public class User {
     private String email;
     @NotBlank
     private String password;
-    private char sex;   // w,m,d
-    private String country;
     private boolean isAdmin;
+
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications = new ArrayList<>();
+
+    @OneToOne(mappedBy = "user")
+    private Profile profile;
+
 
     // TODO: Validation
     public User(
@@ -37,8 +42,6 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.sex = sex;
-        this.country = country;
 
         this.id = UUID.randomUUID().toString();
         this.isAdmin = false;
@@ -52,14 +55,6 @@ public class User {
     //GETTERS AND SETTERS
     public String getId() {
         return id;
-    }
-
-    public char getSex() {
-        return this.sex;
-    }
-
-    public void setSex(char sex) {
-        this.sex = sex;
     }
 
     public String getUsername() {
@@ -84,14 +79,6 @@ public class User {
 
     public void setPassword() {
         this.password = password;
-    }
-
-    public String getCountry() {
-        return this.country;
-    }
-
-    public void setCountry() {
-        this.country = country;
     }
 
     public boolean isAdmin() {
