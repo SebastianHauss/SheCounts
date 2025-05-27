@@ -2,6 +2,7 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.RegisteredUser;
 import at.technikum.backend.exceptions.EmailAlreadyRegisteredException;
+import at.technikum.backend.exceptions.UserNotFoundException;
 import at.technikum.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +26,33 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void read(){
+    public RegisteredUser read(String id){
+        Optional<RegisteredUser> findUserById = userRepository.findById(id);
 
+        if(findUserById.isEmpty()){
+            throw new UserNotFoundException("User not found");
+        }
+        return findUserById.get();
     }
 
-    public void update(){
+    public RegisteredUser update(RegisteredUser user){
+        Optional<RegisteredUser> findUserById = userRepository.findById(user.getId());
 
+        if (findUserById.isEmpty()){
+            throw new UserNotFoundException("User not found");
+        }
+        return userRepository.save(user);
     }
 
-    public void delete(){
+    public void delete(RegisteredUser user){
+        Optional<RegisteredUser> findUserById = userRepository.findById(user.getId());
 
+        if (findUserById.isEmpty()){
+            throw new UserNotFoundException("User not found");
+        }
+        userRepository.delete(user);
     }
+
+
 
 }
