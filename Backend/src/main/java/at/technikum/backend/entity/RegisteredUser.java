@@ -24,6 +24,7 @@ public class RegisteredUser {
     private String country;
     private boolean isAdmin;
 
+    // TODO: Validation
     public RegisteredUser(
             String username,
             String email,
