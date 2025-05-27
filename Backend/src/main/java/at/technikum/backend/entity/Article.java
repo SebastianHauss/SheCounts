@@ -2,7 +2,6 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumns;
 import jakarta.persistence.OneToMany;
 
 import java.time.LocalDateTime;
