@@ -6,6 +6,7 @@
     --myBeige: #fbeae1;
 }
 
+/* --- Navbar --- */
 .nav-homepage, .myBG {
     background-color: var(--myPastelGreen);
 }
@@ -27,7 +28,6 @@
     width: auto;
     height: auto;
 }
-
 
 .loginBtn {
     background-color: var(--myDarkerPink);
@@ -88,6 +88,7 @@ h3.carousel-slide-1-text {
     filter: invert(0%) brightness(0) contrast(200%);
 }
 
+/* --- Sidebar --- */
 .sideBar {
     background-color: pink;
     border-radius: 10px;
