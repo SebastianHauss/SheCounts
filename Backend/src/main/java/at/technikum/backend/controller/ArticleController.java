@@ -18,6 +18,12 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Article create(@RequestBody @Valid Article article) {
+        return articleService.create(article);
+    }
+
     @GetMapping("/")
     public List<Article> readAll() {
         return articleService.readAll();
@@ -28,11 +34,6 @@ public class ArticleController {
         return articleService.read(id);
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Article create(@RequestBody @Valid Article article) {
-        return articleService.create(article);
-    }
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
