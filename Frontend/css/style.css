@@ -34,7 +34,7 @@ body {
 }
 
 .loginBtn {
-    background-color: var(--myDarkerPink);
+    background-color: var(--myGrey);
     color: white;
 }
 
@@ -94,6 +94,7 @@ body {
     position: sticky;
     top: 100px; /* Abstand von oben: Sticky wird erst ab hier aktiv */
     padding: 30px;
+    height: 300px;
 }
 
 .sideBarLink {
