@@ -74,7 +74,6 @@ body {
 
 .carousel-slide-3 h3 a {
     color: var(--myGrey);
-    text-decoration: underline;
     font-weight: 600;
     text-decoration: none;
 }
@@ -90,31 +89,36 @@ body {
 
 /* --- Sidebar --- */
 .sideBar {
-    background-color: pink;
+    background-color: var(--myBeige);
     border-radius: 10px;
     position: sticky;
     top: 100px; /* Abstand von oben: Sticky wird erst ab hier aktiv */
+    padding: 30px;
 }
 
 .sideBarLink {
     color: black;
     text-decoration: none;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 .sideBarLink:hover {
-    color: #3e3b3b;
+    color: var(--myGrey);
 }
 
 .p2Element {
     font-size: 1rem;
 }
 
-/* --- Carousel Media Queries --- */
-h3.carousel-slide-1-text {
-
+/* Blogartikel */
+.text-justify {
+    text-align: justify;
+    hyphens: auto;
 }
+
+/* --- Carousel Media Queries --- */
+
 @media (max-width: 767px) {
     .carousel-slide-1,
     .carousel-slide-2,
@@ -145,7 +149,7 @@ h3.carousel-slide-1-text {
     .carousel-slide-2,
     .carousel-slide-3 {
         padding: 15px 200px 15px 200px;
-        min-height: 300px;
+        min-height: 260px;
         display: flex;
         flex-direction: row;
         justify-content: center;
