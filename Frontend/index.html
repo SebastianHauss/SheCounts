@@ -112,37 +112,37 @@
     <!-- </editor-fold> -->
 
     <!-- Carousel -->
-    <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="carousel-item active carousel-1">
-                <div class="carousel-caption d-none d-md-block">
-                    <h2>Du musst nicht reich sein, um finanziell unabhängig zu sein. <br>
-                        Du musst nur anfangen
-                    </h2>
-                </div>
-                <div class="img-three-women">
-                    <img src="../img/three-women-carousel.png" class="" alt="...">
+
+    <div class="mt-4">
+        <div id="carouselExample" class="carousel slide">
+            <div class="carousel-inner">
+
+                <!-- Slide 1: Bild + Text nebeneinander, img-fluid notwendig?? -->
+                <div class="carousel-item active">
+                    <div class="d-flex flex-column flex-md-row text-center align-items-center justify-content-center img-fluid carousel-slide-1">
+                        <img class="img-three-women-carousel" src="../img/three-women-carousel.png" alt="three-women">
+                        <h3>"Du musst nicht reich sein, um finanziell unabhängig zu sein.
+                            <br>Du musst nur anfangen."</h3>
+                    </div>
                 </div>
 
-            </div>
-            <div class="carousel-item">
-                <div class="carousel-caption">
-                    <h2>Melde dich hier für eine gratis <br> Beratung: <br> +43 512 46688 </h2>
+                <!-- Slide 2 -->
+                <div class="carousel-item">
+                    <div class="d-flex align-items-center justify-content-center carousel-slide-2">
+                        <h3>Melde Dich hier für eine gratis Beratung: +43 512 46868</h3>
+                    </div>
                 </div>
             </div>
 
-            <div class="carousel-item">
-                <img src="#" class="" alt="...">
-            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon fs-1" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon fs-1" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
     </div>
 
     <!-- <editor-fold desc="Footer"> -->
