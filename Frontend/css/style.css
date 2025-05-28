@@ -175,3 +175,38 @@ body {
 
 /* --- Grid Cards Media Queries --- */
 
+
+
+
+/* ---- Profil Einstellungen Buttons ---- */
+.myPictureBtn{
+    border: 1px solid #474343;
+    border-radius: 80px;
+}
+.myPictureBtn:hover{
+    background-color: #dddcdc;
+}
+
+.mySubBtn{
+    border: 1px solid #ca5f75;
+    background-color: #e6a4b1;
+    border-radius: 80px;
+}
+
+.mySubBtn:hover{
+    background-color: #dc4e6b;
+}
+
+.myCancelBtn{
+    border: 1px solid #474343;
+    border-radius: 80px;
+}
+.myCancelBtn:hover{
+    background-color: #dddcdc;
+}
+
+.myDeleteAccBtn{
+    border: 1px solid #b60e0e;
+    background-color: #f61212;
+    border-radius: 80px;
+}
