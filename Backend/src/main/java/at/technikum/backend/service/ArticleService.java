@@ -4,6 +4,7 @@ import at.technikum.backend.entity.Article;
 import at.technikum.backend.exceptions.ArticleAlreadyExistsException;
 import at.technikum.backend.exceptions.ArticleNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class ArticleService {
         return checkIfArticleExists(id).get();
     }
 
+    @Transactional
     public Article update(Article article) {
         if (checkIfArticleExists(article.getId()).isEmpty()) {
             throw new ArticleNotFoundException("Article couldn't be found.");
@@ -44,6 +46,7 @@ public class ArticleService {
         return articleRepository.save(article);
     }
 
+    @Transactional
     public void delete(String id) {
         if (checkIfArticleExists(id).isEmpty()) {
             throw new ArticleNotFoundException("Article couldn't be found.");
