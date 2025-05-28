@@ -4,6 +4,7 @@ import at.technikum.backend.entity.Profile;
 import at.technikum.backend.exceptions.ProfileAlreadyExistsException;
 import at.technikum.backend.exceptions.ProfileNotFoundException;
 import at.technikum.backend.repository.ProfileRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class ProfileService {
         return checkIfProfileExists(id).get();
     }
 
+    @Transactional
     public Profile update(Profile profile){
         if (checkIfProfileExists(profile.getId()).isEmpty()){
             throw new ProfileNotFoundException("Profile not found.");
@@ -42,6 +44,7 @@ public class ProfileService {
         return profileRepository.save(profile);
     }
 
+    @Transactional
     public void delete(String id){
         if (checkIfProfileExists(id).isEmpty()){
             throw new ProfileNotFoundException("Profile not found.");
