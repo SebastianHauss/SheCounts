@@ -1,0 +1,5 @@
+#userlist-container {
+    max-width: 800px;
+    margin: 80px auto;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
