@@ -210,3 +210,12 @@ body {
     background-color: #f61212;
     border-radius: 80px;
 }
+
+
+/* ---- Login Register PopUp Buttons ---- */
+button.myPopUpBtn{
+    width: 100%;
+    color: white;
+    background-color:  var(--myPink);
+
+}
