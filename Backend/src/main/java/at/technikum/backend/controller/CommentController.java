@@ -2,6 +2,7 @@ package at.technikum.backend.controller;
 
 import at.technikum.backend.entity.Comment;
 import at.technikum.backend.service.CommentService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +21,7 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Comment create(@RequestBody Comment comment) {
+    public Comment create(@RequestBody @Valid Comment comment) {
         return commentService.create(comment);
     }
 
