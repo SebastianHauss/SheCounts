@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.UniqueElements;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,6 +28,8 @@ public class User {
 
     @NotBlank
     private String password;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     private boolean isAdmin = false;
 
@@ -51,21 +54,18 @@ public class User {
         this.password = password;
     }
 
-    public User() {}
-
-    public UUID getId() {
-        return id;
+    public User() {
     }
 
-    private void setId(UUID id) {
-        this.id = id;
+    public UUID getId() {
+        return this.id;
     }
 
     public String getUsername() {
         return this.username;
     }
 
-    public void setUsername() {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -73,7 +73,7 @@ public class User {
         return this.email;
     }
 
-    public void setEmail() {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -81,15 +81,47 @@ public class User {
         return this.password;
     }
 
-    public void setPassword() {
+    public void setPassword(String password) {
         this.password = password;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public boolean isAdmin() {
         return this.isAdmin;
     }
 
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public void setAdmin(boolean admin) {
+        this.isAdmin = admin;
+    }
+
+    public List<Notification> getNotifications() {
+        return this.notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Profile getProfile() {
+        return this.profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 }

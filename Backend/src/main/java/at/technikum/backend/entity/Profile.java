@@ -23,7 +23,6 @@ public class Profile {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-
     public Profile() {
     }
 
@@ -31,32 +30,20 @@ public class Profile {
         this.user = user;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public UUID getId() {
+        return this.id;
     }
 
     public String getProfilePicUrl() {
-        return profilePicUrl;
+        return this.profilePicUrl;
     }
 
     public void setProfilePicUrl(String profilePicUrl) {
         this.profilePicUrl = profilePicUrl;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    private void setId(UUID id) {
-        this.id = id;
-    }
-
     public char getGender() {
-        return gender;
+        return this.gender;
     }
 
     public void setGender(char gender) {
@@ -64,10 +51,18 @@ public class Profile {
     }
 
     public String getCountry() {
-        return country;
+        return this.country;
     }
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

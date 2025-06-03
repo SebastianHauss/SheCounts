@@ -19,7 +19,7 @@ public class Comment {
     @NotBlank
     private String author;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "article_id")
@@ -33,34 +33,17 @@ public class Comment {
         this.article = article_id;
         this.content = content;
         this.author = author;
-        this.createdAt = LocalDateTime.now();
-        this.id = UUID.randomUUID();
     }
 
-    public Comment() {}
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
+    public Comment() {
     }
 
     public UUID getId() {
-        return id;
-    }
-
-    private void setID(UUID id) {
-        this.id = id;
-    }
-
-    public Article getArticle_id() {
-        return this.article;
+        return this.id;
     }
 
     public String getContent() {
-        return content;
+        return this.content;
     }
 
     public void setContent(String content) {
@@ -68,7 +51,7 @@ public class Comment {
     }
 
     public String getAuthor() {
-        return author;
+        return this.author;
     }
 
     public void setAuthor(String author) {
@@ -76,6 +59,26 @@ public class Comment {
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Article getArticle() {
+        return this.article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

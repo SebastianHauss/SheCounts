@@ -20,7 +20,7 @@ public class Article {
     @NotBlank
     private String author;
 
-    private LocalDateTime dateOfCreation;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "article")
     private List<Comment> comments;
@@ -28,12 +28,9 @@ public class Article {
     public Article(String content, String author) {
         this.content = content;
         this.author = author;
-        this.id = UUID.randomUUID();
-        this.dateOfCreation = LocalDateTime.now();
     }
 
     public Article() {
-        this.id = UUID.randomUUID();
     }
 
     public UUID getId() {
@@ -52,20 +49,15 @@ public class Article {
         this.content = content;
     }
 
-    public LocalDateTime getDateOfCreation() {
-        return this.dateOfCreation;
-    }
-
-    public void setDateOfCreation(LocalDateTime dateOfCreation) {
-        this.dateOfCreation = dateOfCreation;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
     public String getAuthor() {
-        return author;
+        return this.author;
     }
 
     public void setAuthor(String author) {
         this.author = author;
     }
-
 }

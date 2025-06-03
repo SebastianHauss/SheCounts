@@ -18,12 +18,11 @@ public class Notification {
 
     private boolean read = false;
 
-    private LocalDateTime timestamp = LocalDateTime.now();
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
 
     public Notification() {
     }
@@ -33,25 +32,12 @@ public class Notification {
         this.message = message;
     }
 
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public UUID getId() {
-        return id;
-    }
-
-    private void setId(UUID id) {
-        this.id = id;
+        return this.id;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public void setTitle(String title) {
@@ -59,7 +45,7 @@ public class Notification {
     }
 
     public String getMessage() {
-        return message;
+        return this.message;
     }
 
     public void setMessage(String message) {
@@ -67,15 +53,26 @@ public class Notification {
     }
 
     public boolean isRead() {
-        return read;
+        return this.read;
     }
 
     public void setRead(boolean read) {
         this.read = read;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+    public LocalDateTime getCreatedAt() {
+        return this.createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
