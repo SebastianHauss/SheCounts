@@ -17,6 +17,7 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Notification create(@RequestBody Notification notification) {

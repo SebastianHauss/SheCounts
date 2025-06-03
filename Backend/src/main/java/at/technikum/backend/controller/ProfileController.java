@@ -16,6 +16,7 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Profile create(Profile profile){
