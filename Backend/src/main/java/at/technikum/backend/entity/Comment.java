@@ -33,7 +33,7 @@ public class Comment {
     }
 
 
-    public Comment(Article article_id, String content, String author){
+    public Comment(Article article_id, String content, String author) {
         this.article = article_id;
         this.content = content;
         this.author = author;
@@ -41,7 +41,8 @@ public class Comment {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Comment() {}
+    public Comment() {
+    }
 
     // GETTERS AND SETTERS
     public int getId() {
