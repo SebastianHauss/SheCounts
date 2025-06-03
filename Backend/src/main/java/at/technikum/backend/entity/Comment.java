@@ -15,14 +15,17 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String content;
+    private String author;
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Article article;
 
-    private String content;
-    private String author;
-    private LocalDateTime createdAt;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Article getArticle() {
         return article;

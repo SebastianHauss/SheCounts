@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "RegisteredUser")
@@ -28,9 +28,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments = new LinkedList<>();
+
     @OneToOne(mappedBy = "user")
     private Profile profile;
-
 
     // TODO: Validation
     public User(
@@ -85,6 +87,5 @@ public class User {
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-
 
 }
