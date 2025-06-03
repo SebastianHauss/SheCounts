@@ -5,6 +5,8 @@ import at.technikum.backend.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -15,7 +17,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public User register(User user) {
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User read(@PathVariable String id) {
+    public User read(@PathVariable UUID id) {
         return userService.read(id);
     }
 
@@ -37,5 +38,4 @@ public class UserController {
     public void delete(User user) {
         userService.delete(user);
     }
-
 }

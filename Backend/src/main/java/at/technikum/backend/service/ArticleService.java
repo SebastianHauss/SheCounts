@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ArticleService {
@@ -31,7 +32,7 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
-    public Article read(String id) {
+    public Article read(UUID id) {
         if (checkIfArticleExists(id).isEmpty()) {
             throw new ArticleNotFoundException("Article couldn't be found.");
         }
@@ -47,14 +48,14 @@ public class ArticleService {
     }
 
     @Transactional
-    public void delete(String id) {
+    public void delete(UUID id) {
         if (checkIfArticleExists(id).isEmpty()) {
             throw new ArticleNotFoundException("Article couldn't be found.");
         }
         articleRepository.delete(checkIfArticleExists(id).get());
     }
 
-    public Optional<Article> checkIfArticleExists(String id) {
+    public Optional<Article> checkIfArticleExists(UUID id) {
         return articleRepository.findById(id);
     }
 

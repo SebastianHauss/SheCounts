@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class NotificationService {
@@ -30,7 +31,7 @@ public class NotificationService {
         return notificationRepository.findAll();
     }
 
-    public Notification read(String id) {
+    public Notification read(UUID id) {
         if (checkIfExistsById(id).isEmpty()) {
             throw new NotificationNotFoundException("Notification not found.");
         }
@@ -46,14 +47,14 @@ public class NotificationService {
     }
 
     @Transactional
-    public void delete(String id) {
+    public void delete(UUID id) {
         if (checkIfExistsById(id).isEmpty()) {
             throw new NotificationNotFoundException("Notification not found.");
         }
         notificationRepository.delete(checkIfExistsById(id).get());
     }
 
-    public Optional<Notification> checkIfExistsById(String id) {
+    public Optional<Notification> checkIfExistsById(UUID id) {
         return notificationRepository.findById(id);
     }
 }

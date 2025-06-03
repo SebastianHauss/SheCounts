@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -18,7 +19,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-
     public User register(User user) {
         if (checkIfEmailExists(user.getEmail()).isPresent()) {
             throw new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account.");
@@ -26,7 +26,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User read(String id) {
+    public User read(UUID id) {
         return checkIfUserIdExists(id)
                 .orElseThrow(() -> new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account."));
     }
@@ -39,7 +39,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
     @Transactional
     public void delete(User user) {
         if (checkIfUserIdExists(user.getId()).isEmpty()) {
@@ -48,13 +47,11 @@ public class UserService {
         userRepository.delete(user);
     }
 
-
     public Optional<User> checkIfEmailExists(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public Optional<User> checkIfUserIdExists(String id) {
+    public Optional<User> checkIfUserIdExists(UUID id) {
         return userRepository.findById(id);
     }
-
 }

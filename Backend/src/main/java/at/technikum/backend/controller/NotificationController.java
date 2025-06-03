@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/notifications")
@@ -30,7 +31,7 @@ public class NotificationController {
     }
 
     @GetMapping("/{id}")
-    public Notification read(@PathVariable String id) {
+    public Notification read(@PathVariable UUID id) {
         return notificationService.read(id);
     }
 
@@ -40,7 +41,7 @@ public class NotificationController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable UUID id) {
         notificationService.delete(id);
     }
 }

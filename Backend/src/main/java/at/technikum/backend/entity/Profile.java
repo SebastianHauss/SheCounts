@@ -3,12 +3,14 @@ package at.technikum.backend.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.UUID;
+
 @Entity
 public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String profilePicUrl;
 
@@ -22,12 +24,12 @@ public class Profile {
     private User user;
 
 
-    public Profile() {}
-
-    public Profile(User user){
-        this.user = user;
+    public Profile() {
     }
 
+    public Profile(User user) {
+        this.user = user;
+    }
 
     public User getUser() {
         return user;
@@ -45,8 +47,12 @@ public class Profile {
         this.profilePicUrl = profilePicUrl;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
+    }
+
+    private void setId(UUID id) {
+        this.id = id;
     }
 
     public char getGender() {

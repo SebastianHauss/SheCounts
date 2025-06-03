@@ -3,13 +3,14 @@ package at.technikum.backend.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     private String title;
 
@@ -24,9 +25,10 @@ public class Notification {
     private User user;
 
 
-    public Notification() {}
+    public Notification() {
+    }
 
-    public Notification(String title, String message){
+    public Notification(String title, String message) {
         this.title = title;
         this.message = message;
     }
@@ -40,8 +42,12 @@ public class Notification {
         this.user = user;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
+    }
+
+    private void setId(UUID id) {
+        this.id = id;
     }
 
     public String getTitle() {

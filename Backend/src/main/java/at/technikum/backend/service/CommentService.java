@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CommentService {
@@ -30,7 +31,7 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
-    public Comment read(int id) {
+    public Comment read(UUID id) {
         if (checkIfCommentExistsById(id).isEmpty()) {
             throw new CommentNotFoundException("Comment not found.");
         }
@@ -46,14 +47,14 @@ public class CommentService {
     }
 
     @Transactional
-    public void delete(int id) {
+    public void delete(UUID id) {
         if (checkIfCommentExistsById(id).isEmpty()) {
             throw new CommentNotFoundException("Comment not found.");
         }
         commentRepository.delete(checkIfCommentExistsById(id).get());
     }
-    
-    public Optional<Comment> checkIfCommentExistsById(int id) {
+
+    public Optional<Comment> checkIfCommentExistsById(UUID id) {
         return commentRepository.findById(id);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/articles")
@@ -30,7 +31,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public Article read(@PathVariable String id) {
+    public Article read(@PathVariable UUID id) {
         return articleService.read(id);
     }
 
@@ -42,7 +43,7 @@ public class ArticleController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id) {
+    public void delete(@PathVariable UUID id) {
         articleService.delete(id);
     }
 }

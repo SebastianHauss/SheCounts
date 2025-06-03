@@ -1,8 +1,6 @@
 package at.technikum.backend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
@@ -13,7 +11,8 @@ import java.util.UUID;
 public class Article {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @NotBlank
     private String content;
@@ -26,23 +25,23 @@ public class Article {
     @OneToMany(mappedBy = "article")
     private List<Comment> comments;
 
-
     public Article(String content, String author) {
         this.content = content;
         this.author = author;
-
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID();
         this.dateOfCreation = LocalDateTime.now();
     }
 
     public Article() {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID();
     }
 
-
-    //GETTERS AND SETTERS
-    public String getId() {
+    public UUID getId() {
         return this.id;
+    }
+
+    private void setId(UUID id) {
+        this.id = id;
     }
 
     public String getContent() {

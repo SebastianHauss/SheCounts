@@ -8,14 +8,15 @@ import org.hibernate.validator.constraints.UniqueElements;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
-@Table(name = "RegisteredUser")
+@Table(name = "app_user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @NotBlank
     private String username;
@@ -38,7 +39,6 @@ public class User {
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
-    // TODO: Validation
     public User(
             String username,
             String email,
@@ -51,13 +51,14 @@ public class User {
         this.password = password;
     }
 
-    public User() {
+    public User() {}
 
+    public UUID getId() {
+        return id;
     }
 
-    //GETTERS AND SETTERS
-    public String getId() {
-        return id;
+    private void setId(UUID id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -91,5 +92,4 @@ public class User {
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-
 }

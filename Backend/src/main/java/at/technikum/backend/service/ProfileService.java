@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ProfileService {
@@ -29,7 +30,7 @@ public class ProfileService {
         return profileRepository.findAll();
     }
 
-    public Profile read(String id){
+    public Profile read(UUID id){
         if (checkIfProfileExists(id).isEmpty()){
             throw new ProfileNotFoundException("Profile not found.");
         }
@@ -45,16 +46,14 @@ public class ProfileService {
     }
 
     @Transactional
-    public void delete(String id){
+    public void delete(UUID id){
         if (checkIfProfileExists(id).isEmpty()){
             throw new ProfileNotFoundException("Profile not found.");
         }
         profileRepository.delete(checkIfProfileExists(id).get());
     }
 
-
-
-    public Optional<Profile> checkIfProfileExists(String id){
+    public Optional<Profile> checkIfProfileExists(UUID id){
         return profileRepository.findById(id);
     }
 }

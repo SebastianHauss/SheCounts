@@ -7,9 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("comments")
+@RequestMapping("/comments")
 public class CommentController {
 
     private final CommentService commentService;
@@ -17,7 +18,6 @@ public class CommentController {
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
     }
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -31,7 +31,7 @@ public class CommentController {
     }
 
     @GetMapping("/{id}")
-    public Comment read(@PathVariable int id) {
+    public Comment read(@PathVariable UUID id) {
         return commentService.read(id);
     }
 
@@ -41,7 +41,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable UUID id) {
         commentService.delete(id);
     }
 }
