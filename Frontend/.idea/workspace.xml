@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4775542f-8ac7-4420-a1df-ee7532c44687" name="Changes" comment="UserList Search und Sort HTML und CSS eingebaut">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/userlist.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/userlist.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +91,7 @@
       <workItem from="1748418111496" duration="1898000" />
       <workItem from="1748420043575" duration="2484000" />
       <workItem from="1748861720446" duration="350000" />
-      <workItem from="1748933283559" duration="1671000" />
+      <workItem from="1748933283559" duration="1810000" />
     </task>
     <task id="LOCAL-00001" summary="UserList Search und Sort HTML und CSS eingebaut">
       <option name="closed" value="true" />
