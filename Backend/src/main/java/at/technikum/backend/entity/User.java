@@ -16,13 +16,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
     @NotBlank
     private String username;
+
     @NotBlank
     @UniqueElements
     private String email;
+
     @NotBlank
     private String password;
+
     private boolean isAdmin = false;
 
     @OneToMany(mappedBy = "user")

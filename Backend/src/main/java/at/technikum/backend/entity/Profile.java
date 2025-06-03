@@ -5,12 +5,16 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Profile {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
     private String profilePicUrl;
+
     @NotBlank
-    private char gender;   // w,m,d -> wird im Frontend als Auswahl angezeigt
+    private char gender; // w,m,d
+
     private String country;
 
     @OneToOne
@@ -18,7 +22,7 @@ public class Profile {
     private User user;
 
 
-    public Profile(){}
+    public Profile() {}
 
     public Profile(User user){
         this.user = user;

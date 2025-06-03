@@ -10,14 +10,27 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
     private String title;
+
     private String message;
+
     private boolean read = false;
+
     private LocalDateTime timestamp = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+
+    public Notification() {}
+
+    public Notification(String title, String message){
+        this.title = title;
+        this.message = message;
+    }
+
 
     public User getUser() {
         return user;
@@ -26,15 +39,6 @@ public class Notification {
     public void setUser(User user) {
         this.user = user;
     }
-
-
-    public Notification(){}
-
-    public Notification(String title, String message){
-        this.title = title;
-        this.message = message;
-    }
-
 
     public String getId() {
         return id;

@@ -3,6 +3,7 @@ package at.technikum.backend.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,9 +14,14 @@ public class Article {
 
     @Id
     private String id;
+
+    @NotBlank
     private String content;
-    private LocalDateTime dateOfCreation;
+
+    @NotBlank
     private String author;
+
+    private LocalDateTime dateOfCreation;
 
     @OneToMany(mappedBy = "article")
     private List<Comment> comments;

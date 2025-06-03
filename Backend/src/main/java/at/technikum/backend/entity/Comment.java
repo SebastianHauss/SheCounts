@@ -1,6 +1,7 @@
 package at.technikum.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 
@@ -10,13 +11,15 @@ public class Comment {
     Todo: verschachtelte Comments recherche
     Todo: Foreign Key Article_Id
      */
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotBlank
     private String content;
+
     private String author;
+
     private LocalDateTime createdAt;
 
     @ManyToOne
@@ -26,14 +29,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
 
 
     public Comment(Article article_id, String content, String author) {
@@ -48,6 +43,14 @@ public class Comment {
     }
 
     // GETTERS AND SETTERS
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
+    }
+
     public int getId() {
         return id;
     }
