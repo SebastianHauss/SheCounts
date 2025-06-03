@@ -81,10 +81,11 @@ const users = [
     }
 ];
 
-
+/* Status Badge (active / inactive) je nach Status */
 const statusBadge = status =>
     `<span class="badge ${status === "active" ? "bg-success" : "bg-secondary"}">${status}</span>`;
 
+/* Füllt Users mit Avatar von der Liste in den Userlist-Table */
 $(function () {
     users.forEach(user => {
         $("#user-table-body").append(`
