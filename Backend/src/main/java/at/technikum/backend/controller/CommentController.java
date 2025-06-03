@@ -5,6 +5,8 @@ import at.technikum.backend.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("comments")
 public class CommentController {
@@ -18,26 +20,26 @@ public class CommentController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Comment create(@RequestBody Comment comment) {
-        return null;
+        return commentService.create(comment);
     }
 
     @GetMapping("/")
-    public Comment readAll() {
-        return null;
+    public List<Comment> readAll() {
+        return commentService.readAll();
     }
 
     @GetMapping("/{id}")
     public Comment read(@PathVariable int id) {
-        return null;
+        return commentService.read(id);
     }
 
     @PutMapping
     public Comment update(@RequestBody Comment comment) {
-        return null;
+        return commentService.update(comment);
     }
 
-    @DeleteMapping("/{id]")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable int id) {
-
+        commentService.delete(id);
     }
 }

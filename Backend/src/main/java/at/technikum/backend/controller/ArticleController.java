@@ -45,5 +45,4 @@ public class ArticleController {
     public void delete(@PathVariable String id) {
         articleService.delete(id);
     }
-
 }
