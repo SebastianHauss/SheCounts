@@ -2,9 +2,8 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Notification;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
-import at.technikum.backend.exceptions.NotificationAlreadyExistsException;
-import at.technikum.backend.exceptions.NotificationNotFoundException;
 import at.technikum.backend.repository.NotificationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -41,9 +40,12 @@ public class NotificationService {
     }
 
     @Transactional
-    public Notification update(Notification notification) {
+    public Notification update(UUID id, Notification notification) {
         if (checkIfExistsById(notification.getId()).isEmpty()) {
             throw new EntityNotFoundException("Notification not found.");
+        }
+        if(id != notification.getId()){
+            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return notificationRepository.save(notification);
     }

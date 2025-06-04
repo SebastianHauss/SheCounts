@@ -2,6 +2,7 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Article;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
 import jakarta.transaction.Transactional;
@@ -44,7 +45,7 @@ public class ArticleService {
             throw new EntityNotFoundException("Article couldn't be found.");
         }
         if (id != article.getId()) {
-            throw new EntityNotFoundException("ID does not match any article id.");
+            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return articleRepository.save(article);
     }

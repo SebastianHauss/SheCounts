@@ -2,9 +2,8 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
-import at.technikum.backend.exceptions.ProfileAlreadyExistsException;
-import at.technikum.backend.exceptions.ProfileNotFoundException;
 import at.technikum.backend.repository.ProfileRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -40,9 +39,12 @@ public class ProfileService {
     }
 
     @Transactional
-    public Profile update(Profile profile) {
+    public Profile update(UUID id, Profile profile) {
         if (checkIfProfileExists(profile.getId()).isEmpty()) {
             throw new EntityNotFoundException("Profile not found.");
+        }
+        if (id != profile.getId()){
+            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return profileRepository.save(profile);
     }

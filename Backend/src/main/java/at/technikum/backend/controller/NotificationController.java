@@ -35,10 +35,10 @@ public class NotificationController {
         return notificationService.create(notification);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Notification update(@RequestBody @Valid Notification notification) {
-        return notificationService.update(notification);
+    public Notification update(@PathVariable UUID id, @RequestBody @Valid Notification notification) {
+        return notificationService.update(id, notification);
     }
 
     @DeleteMapping("/{id}")

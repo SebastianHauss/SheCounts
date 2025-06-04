@@ -1,10 +1,9 @@
 package at.technikum.backend.service;
 
 import at.technikum.backend.entity.User;
-import at.technikum.backend.exceptions.EmailAlreadyRegisteredException;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
-import at.technikum.backend.exceptions.UserNotFoundException;
 import at.technikum.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -39,9 +38,12 @@ public class UserService {
     }
 
     @Transactional
-    public User update(User user) {
+    public User update(UUID id, User user) {
         if (checkIfUserIdExists(user.getId()).isEmpty()) {
             throw new EntityNotFoundException("User not found.");
+        }
+        if (id != user.getId()){
+            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return userRepository.save(user);
     }

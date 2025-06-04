@@ -34,10 +34,10 @@ public class ProfileController {
         return profileService.create(profile);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Profile update(@RequestBody @Valid Profile profile) {
-        return profileService.update(profile);
+    public Profile update(@PathVariable UUID id, @RequestBody @Valid Profile profile) {
+        return profileService.update(id, profile);
     }
 
     @DeleteMapping("/{id}")

@@ -35,10 +35,10 @@ public class UserController {
         return userService.create(user);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User update(@RequestBody @Valid User user) {
-        return userService.update(user);
+    public User update(@PathVariable UUID id, @RequestBody @Valid User user) {
+        return userService.update(id, user);
     }
 
     @DeleteMapping("/{id}")
