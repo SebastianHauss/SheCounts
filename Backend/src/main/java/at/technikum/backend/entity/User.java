@@ -36,25 +36,27 @@ public class User {
     private boolean isAdmin = false;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Notification> notifications = new ArrayList<>();
+    private List<Notification> notifications;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
 
     @OneToOne(mappedBy = "user")
     private Profile profile;
 
-    public User(
-            String username,
-            String email,
-            String password
-    ) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+
+        this.notifications = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
-    public User() {}
+    public User() {
+        this.notifications = new ArrayList<>();
+        this.comments = new ArrayList<>();
+    }
 
     public UUID getId() {
         return this.id;
