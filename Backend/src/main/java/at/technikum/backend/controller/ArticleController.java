@@ -35,9 +35,9 @@ public class ArticleController {
         return articleService.create(article);
     }
 
-    @PutMapping
-    public Article update(@RequestBody @Valid Article article) {
-        return articleService.update(article);
+    @PutMapping("/{id}")
+    public Article update(@PathVariable UUID id, @RequestBody @Valid Article article) {
+        return articleService.update(id, article);
     }
 
     @DeleteMapping("/{id}")

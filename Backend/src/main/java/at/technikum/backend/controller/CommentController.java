@@ -35,10 +35,10 @@ public class CommentController {
         return commentService.create(comment);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Comment update(@RequestBody @Valid Comment comment) {
-        return commentService.update(comment);
+    public Comment update(@PathVariable UUID id, @RequestBody @Valid Comment comment) {
+        return commentService.update(id, comment);
     }
 
     @DeleteMapping("/{id}")

@@ -39,9 +39,12 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment update(Comment comment) {
+    public Comment update(UUID id, Comment comment) {
         if (checkIfCommentExistsById(comment.getId()).isEmpty()) {
             throw new CommentNotFoundException("Comment not found.");
+        }
+        if (id != comment.getId()) {
+            throw new IllegalArgumentException();
         }
         return commentRepository.save(comment);
     }

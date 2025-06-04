@@ -39,9 +39,12 @@ public class ArticleService {
     }
 
     @Transactional
-    public Article update(Article article) {
+    public Article update(UUID id, Article article) {
         if (checkIfArticleExists(article.getId()).isEmpty()) {
             throw new ArticleNotFoundException("Article couldn't be found.");
+        }
+        if (id != article.getId()) {
+            throw new ArticleNotFoundException("ID does not match any article id.");
         }
         return articleRepository.save(article);
     }
