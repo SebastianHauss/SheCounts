@@ -21,31 +21,26 @@ public class Notification {
 
     private boolean read = false;
 
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Notification() {
-    }
+    public Notification() {}
 
-    public Notification(String title, String message) {
+    public Notification(User user, String title, String message) {
+        this.user = user;
         this.title = title;
         this.message = message;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
-
     public UUID getId() {
-        return this.id;
+        return id;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
     public void setTitle(String title) {
@@ -53,7 +48,7 @@ public class Notification {
     }
 
     public String getMessage() {
-        return this.message;
+        return message;
     }
 
     public void setMessage(String message) {
@@ -61,7 +56,7 @@ public class Notification {
     }
 
     public boolean isRead() {
-        return this.read;
+        return read;
     }
 
     public void setRead(boolean read) {
@@ -69,15 +64,11 @@ public class Notification {
     }
 
     public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+        return createdAt;
     }
 
     public User getUser() {
-        return this.user;
+        return user;
     }
 
     public void setUser(User user) {

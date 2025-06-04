@@ -1,7 +1,9 @@
 package at.technikum.backend.entity;
 
+import at.technikum.backend.enums.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.UUID;
 
@@ -14,9 +16,12 @@ public class Profile {
 
     private String profilePicUrl;
 
-    @NotBlank
-    private char gender; // w,m,d
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    @NotNull
+    private Gender gender;
 
+    @Column(nullable = false)
     @NotBlank
     private String country;
 
@@ -24,11 +29,12 @@ public class Profile {
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
-    public Profile() {
-    }
+    public Profile() {}
 
-    public Profile(User user) {
+    public Profile(User user, Gender gender, String country) {
         this.user = user;
+        this.gender = gender;
+        this.country = country;
     }
 
     public UUID getId() {
@@ -36,23 +42,23 @@ public class Profile {
     }
 
     public String getProfilePicUrl() {
-        return this.profilePicUrl;
+        return profilePicUrl;
     }
 
     public void setProfilePicUrl(String profilePicUrl) {
         this.profilePicUrl = profilePicUrl;
     }
 
-    public char getGender() {
-        return this.gender;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
     public String getCountry() {
-        return this.country;
+        return country;
     }
 
     public void setCountry(String country) {
@@ -60,7 +66,7 @@ public class Profile {
     }
 
     public User getUser() {
-        return this.user;
+        return user;
     }
 
     public void setUser(User user) {

@@ -16,55 +16,38 @@ public class Comment {
     @NotBlank
     private String content;
 
-    @NotBlank
-    private String author;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "article_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public Comment(Article article, String content, String author) {
+    public Comment(Article article, User user, String content) {
         this.article = article;
+        this.user = user;
         this.content = content;
-        this.author = author;
     }
 
-    public Comment() {
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    public Comment() {}
 
     public UUID getId() {
-        return this.id;
+        return id;
     }
 
     public String getContent() {
-        return this.content;
+        return content;
     }
 
     public void setContent(String content) {
         this.content = content;
     }
 
-    public String getAuthor() {
-        return this.author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public LocalDateTime getCreatedAt() {
-        return this.createdAt;
+        return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
@@ -72,7 +55,7 @@ public class Comment {
     }
 
     public Article getArticle() {
-        return this.article;
+        return article;
     }
 
     public void setArticle(Article article) {
@@ -80,7 +63,7 @@ public class Comment {
     }
 
     public User getUser() {
-        return this.user;
+        return user;
     }
 
     public void setUser(User user) {

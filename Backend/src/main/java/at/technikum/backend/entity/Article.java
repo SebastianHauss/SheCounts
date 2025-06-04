@@ -30,15 +30,10 @@ public class Article {
         this.author = author;
     }
 
-    public Article() {
-    }
+    public Article() {}
 
     public UUID getId() {
         return this.id;
-    }
-
-    private void setId(UUID id) {
-        this.id = id;
     }
 
     public String getContent() {

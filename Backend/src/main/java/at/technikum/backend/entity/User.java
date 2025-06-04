@@ -2,8 +2,8 @@ package at.technikum.backend.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,8 +21,9 @@ public class User {
     @NotBlank
     private String username;
 
+    @Email
+    @Column(unique = true)
     @NotBlank
-    @UniqueElements
     private String email;
 
     @NotBlank
@@ -32,10 +33,10 @@ public class User {
 
     private boolean isAdmin = false;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Notification> notifications = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
     @OneToOne(mappedBy = "user")
@@ -44,17 +45,14 @@ public class User {
     public User(
             String username,
             String email,
-            String password,
-            char sex,
-            String country
+            String password
     ) {
         this.username = username;
         this.email = email;
         this.password = password;
     }
 
-    public User() {
-    }
+    public User() {}
 
     @PrePersist
     protected void onCreate() {
