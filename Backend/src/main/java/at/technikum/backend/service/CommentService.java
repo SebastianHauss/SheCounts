@@ -19,14 +19,7 @@ public class CommentService {
     public CommentService(CommentRepository commentRepository) {
         this.commentRepository = commentRepository;
     }
-
-    public Comment create(Comment comment) {
-        if (checkIfCommentExistsById(comment.getId()).isPresent()) {
-            throw new CommentAlreadyExistsException("Comment already exists.");
-        }
-        return commentRepository.save(comment);
-    }
-
+    
     public List<Comment> readAll() {
         return commentRepository.findAll();
     }
@@ -36,6 +29,13 @@ public class CommentService {
             throw new CommentNotFoundException("Comment not found.");
         }
         return checkIfCommentExistsById(id).get();
+    }
+
+    public Comment create(Comment comment) {
+        if (checkIfCommentExistsById(comment.getId()).isPresent()) {
+            throw new CommentAlreadyExistsException("Comment already exists.");
+        }
+        return commentRepository.save(comment);
     }
 
     @Transactional

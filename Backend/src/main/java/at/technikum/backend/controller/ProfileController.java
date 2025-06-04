@@ -17,12 +17,6 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Profile create(Profile profile) {
-        return profileService.create(profile);
-    }
-
     @GetMapping
     public List<Profile> readAll() {
         return profileService.readAll();
@@ -31,6 +25,12 @@ public class ProfileController {
     @GetMapping("/{id}")
     public Profile read(@PathVariable UUID id) {
         return profileService.read(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Profile create(Profile profile) {
+        return profileService.create(profile);
     }
 
     @PutMapping

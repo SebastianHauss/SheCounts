@@ -7,6 +7,7 @@ import at.technikum.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,16 +20,20 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User register(User user) {
-        if (checkIfEmailExists(user.getEmail()).isPresent()) {
-            throw new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account.");
-        }
-        return userRepository.save(user);
+    public List<User> readAll() {
+        return userRepository.findAll();
     }
 
     public User read(UUID id) {
         return checkIfUserIdExists(id)
                 .orElseThrow(() -> new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account."));
+    }
+
+    public User create(User user) {
+        if (checkIfEmailExists(user.getEmail()).isPresent()) {
+            throw new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account.");
+        }
+        return userRepository.save(user);
     }
 
     @Transactional
@@ -40,11 +45,11 @@ public class UserService {
     }
 
     @Transactional
-    public void delete(User user) {
-        if (checkIfUserIdExists(user.getId()).isEmpty()) {
+    public void delete(UUID id) {
+        if (checkIfUserIdExists(id).isEmpty()) {
             throw new UserNotFoundException("User not found");
         }
-        userRepository.delete(user);
+        userRepository.delete(checkIfUserIdExists(id).get());
     }
 
     public Optional<User> checkIfEmailExists(String email) {

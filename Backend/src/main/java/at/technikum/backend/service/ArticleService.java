@@ -19,15 +19,7 @@ public class ArticleService {
     public ArticleService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
-
-
-    public Article create(Article article) {
-        if (checkIfArticleExists(article.getId()).isPresent()) {
-            throw new ArticleAlreadyExistsException("Article already exists.");
-        }
-        return articleRepository.save(article);
-    }
-
+    
     public List<Article> readAll() {
         return articleRepository.findAll();
     }
@@ -37,6 +29,13 @@ public class ArticleService {
             throw new ArticleNotFoundException("Article couldn't be found.");
         }
         return checkIfArticleExists(id).get();
+    }
+
+    public Article create(Article article) {
+        if (checkIfArticleExists(article.getId()).isPresent()) {
+            throw new ArticleAlreadyExistsException("Article already exists.");
+        }
+        return articleRepository.save(article);
     }
 
     @Transactional
@@ -58,5 +57,4 @@ public class ArticleService {
     public Optional<Article> checkIfArticleExists(UUID id) {
         return articleRepository.findById(id);
     }
-
 }

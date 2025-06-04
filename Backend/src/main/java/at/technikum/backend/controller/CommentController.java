@@ -19,12 +19,6 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Comment create(@RequestBody @Valid Comment comment) {
-        return commentService.create(comment);
-    }
-
     @GetMapping("/")
     public List<Comment> readAll() {
         return commentService.readAll();
@@ -33,6 +27,12 @@ public class CommentController {
     @GetMapping("/{id}")
     public Comment read(@PathVariable UUID id) {
         return commentService.read(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Comment create(@RequestBody @Valid Comment comment) {
+        return commentService.create(comment);
     }
 
     @PutMapping

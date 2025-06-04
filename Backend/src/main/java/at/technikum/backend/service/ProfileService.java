@@ -15,45 +15,45 @@ import java.util.UUID;
 public class ProfileService {
     private final ProfileRepository profileRepository;
 
-    public ProfileService(ProfileRepository profileRepository){
+    public ProfileService(ProfileRepository profileRepository) {
         this.profileRepository = profileRepository;
     }
 
-    public Profile create(Profile profile){
-        if (checkIfProfileExists(profile.getId()).isPresent()){
-            throw new ProfileAlreadyExistsException("Profile already exists.");
-        }
-        return profileRepository.save(profile);
-    }
-
-    public List<Profile> readAll(){
+    public List<Profile> readAll() {
         return profileRepository.findAll();
     }
 
-    public Profile read(UUID id){
-        if (checkIfProfileExists(id).isEmpty()){
+    public Profile read(UUID id) {
+        if (checkIfProfileExists(id).isEmpty()) {
             throw new ProfileNotFoundException("Profile not found.");
         }
         return checkIfProfileExists(id).get();
     }
 
+    public Profile create(Profile profile) {
+        if (checkIfProfileExists(profile.getId()).isPresent()) {
+            throw new ProfileAlreadyExistsException("Profile already exists.");
+        }
+        return profileRepository.save(profile);
+    }
+
     @Transactional
-    public Profile update(Profile profile){
-        if (checkIfProfileExists(profile.getId()).isEmpty()){
+    public Profile update(Profile profile) {
+        if (checkIfProfileExists(profile.getId()).isEmpty()) {
             throw new ProfileNotFoundException("Profile not found.");
         }
         return profileRepository.save(profile);
     }
 
     @Transactional
-    public void delete(UUID id){
-        if (checkIfProfileExists(id).isEmpty()){
+    public void delete(UUID id) {
+        if (checkIfProfileExists(id).isEmpty()) {
             throw new ProfileNotFoundException("Profile not found.");
         }
         profileRepository.delete(checkIfProfileExists(id).get());
     }
 
-    public Optional<Profile> checkIfProfileExists(UUID id){
+    public Optional<Profile> checkIfProfileExists(UUID id) {
         return profileRepository.findById(id);
     }
 }

@@ -18,13 +18,6 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Notification create(@RequestBody Notification notification) {
-        return notificationService.create(notification);
-    }
-
     @GetMapping("/")
     public List<Notification> readAll() {  //für den Admin
         return notificationService.readAll();
@@ -33,6 +26,12 @@ public class NotificationController {
     @GetMapping("/{id}")
     public Notification read(@PathVariable UUID id) {
         return notificationService.read(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Notification create(@RequestBody Notification notification) {
+        return notificationService.create(notification);
     }
 
     @PutMapping

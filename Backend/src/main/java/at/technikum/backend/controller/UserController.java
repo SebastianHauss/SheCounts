@@ -2,9 +2,11 @@ package at.technikum.backend.controller;
 
 import at.technikum.backend.entity.User;
 import at.technikum.backend.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -17,10 +19,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public User register(User user) {
-        return userService.register(user);
+    @GetMapping("/")
+    public List<User> readAll() {
+        return userService.readAll();
     }
 
     @GetMapping("/{id}")
@@ -28,14 +29,20 @@ public class UserController {
         return userService.read(id);
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public User create(@RequestBody @Valid User user) {
+        return userService.create(user);
+    }
+
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public User update(User user) {
+    public User update(@RequestBody User user) {
         return userService.update(user);
     }
 
-    @DeleteMapping
-    public void delete(User user) {
-        userService.delete(user);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable UUID id) {
+        userService.delete(id);
     }
 }

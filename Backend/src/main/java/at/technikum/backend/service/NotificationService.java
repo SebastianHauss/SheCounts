@@ -20,13 +20,6 @@ public class NotificationService {
         this.notificationRepository = notificationRepository;
     }
 
-    public Notification create(Notification notification) {
-        if (checkIfExistsById(notification.getId()).isPresent()) {
-            throw new NotificationAlreadyExistsException("Notification already exists.");
-        }
-        return notificationRepository.save(notification);
-    }
-
     public List<Notification> readAll() {
         return notificationRepository.findAll();
     }
@@ -36,6 +29,13 @@ public class NotificationService {
             throw new NotificationNotFoundException("Notification not found.");
         }
         return checkIfExistsById(id).get();
+    }
+
+    public Notification create(Notification notification) {
+        if (checkIfExistsById(notification.getId()).isPresent()) {
+            throw new NotificationAlreadyExistsException("Notification already exists.");
+        }
+        return notificationRepository.save(notification);
     }
 
     @Transactional
