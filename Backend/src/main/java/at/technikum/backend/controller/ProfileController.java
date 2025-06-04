@@ -35,6 +35,7 @@ public class ProfileController {
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public Profile update(@RequestBody @Valid Profile profile) {
         return profileService.update(profile);
     }

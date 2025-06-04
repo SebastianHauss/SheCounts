@@ -1,6 +1,7 @@
 package at.technikum.backend.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,8 +13,10 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank
     private String title;
 
+    @NotBlank
     private String message;
 
     private boolean read = false;

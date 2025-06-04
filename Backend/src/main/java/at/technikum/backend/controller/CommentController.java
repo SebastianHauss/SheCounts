@@ -36,6 +36,7 @@ public class CommentController {
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public Comment update(@RequestBody @Valid Comment comment) {
         return commentService.update(comment);
     }

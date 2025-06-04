@@ -36,6 +36,7 @@ public class NotificationController {
     }
 
     @PutMapping
+    @ResponseStatus(HttpStatus.OK)
     public Notification update(@RequestBody @Valid Notification notification) {
         return notificationService.update(notification);
     }

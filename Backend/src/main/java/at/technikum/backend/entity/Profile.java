@@ -17,6 +17,7 @@ public class Profile {
     @NotBlank
     private char gender; // w,m,d
 
+    @NotBlank
     private String country;
 
     @OneToOne
