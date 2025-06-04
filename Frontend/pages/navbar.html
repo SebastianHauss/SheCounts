@@ -27,7 +27,9 @@
             </a>
 
             <div class="d-lg-none d-flex justify-content-end flex-row-reverse">
-                <button class="btn loginBtn px-3 ms-3" type="button">Login</button>
+                <button class="btn loginBtn px-3 ms-3" type="button" data-bs-toggle="modal" data-bs-target="#ModalCenter">
+                    Login
+                </button>
 
                 <!-- Hamburger -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -79,13 +81,89 @@
                         </button>
                     </form>
                     <div>
-                        <button class="btn loginBtn px-3 d-lg-block d-none" type="button">Login</button>
+                        <button class="btn loginBtn px-3 d-lg-block d-none" type="button" data-bs-toggle="modal" data-bs-target="#ModalCenter">
+                            Login
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 </div>
+
+
+
+<!-- Login PopUp -->
+<div class="modal fade" id="ModalCenter" tabindex="-1" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalLongTitle">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="mb-3">
+                        <label for="InputEmail" class="form-label">Email Adresse</label>
+                        <input type="email" class="form-control" id="InputEmail" aria-describedby="emailOrUsername">
+                    </div>
+                    <div class="mb-3">
+                        <label for="InputPassword" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="InputPassword">
+                    </div>
+
+                    <button type="submit" class="btn myPopUpBtn mb-3">Login</button>
+
+                    <div class="d-flex align-items-center justify-content-center mb-3">
+                        Not registered? &nbsp;
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Register here</a>
+                    </div>
+
+                    <a class="mb-3 text-decoration-underline text-dark" href="#">Forgot Password?</a>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Register PopUp -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Registrieren</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+
+                    <button type="submit" class="btn myPopUpBtn mb-3">Registrieren</button>
+
+                    <div class="d-flex justify-content-center">
+                        Ich habe schon einen Account: &nbsp;
+                        <a class="mb-3 text-primary" href="#" data-bs-toggle="modal" data-bs-target="#ModalCenter"> Login</a>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
