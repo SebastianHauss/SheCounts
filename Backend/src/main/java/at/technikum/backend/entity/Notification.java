@@ -2,6 +2,7 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -21,7 +22,8 @@ public class Notification {
 
     private boolean read = false;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)

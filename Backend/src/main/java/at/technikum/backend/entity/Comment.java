@@ -2,6 +2,7 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,14 +17,13 @@ public class Comment {
     @NotBlank
     private String content;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "article_id", nullable = false)
     private Article article;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     public Comment(Article article, User user, String content) {

@@ -36,7 +36,6 @@ public class ArticleController {
     }
 
     @PutMapping
-    @ResponseStatus(HttpStatus.OK)
     public Article update(@RequestBody @Valid Article article) {
         return articleService.update(article);
     }

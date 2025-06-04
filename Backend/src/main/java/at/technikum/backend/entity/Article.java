@@ -2,6 +2,7 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,17 +22,21 @@ public class Article {
     @NotBlank
     private String author;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
+    private List<Comment> comments;
 
     public Article(String content, String author) {
         this.content = content;
         this.author = author;
+        this.comments = new ArrayList<>();
     }
 
-    public Article() {}
+    public Article() {
+        this.comments = new ArrayList<>();
+    }
 
     public UUID getId() {
         return id;

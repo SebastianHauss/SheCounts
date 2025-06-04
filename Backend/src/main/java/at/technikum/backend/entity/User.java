@@ -4,6 +4,7 @@ package at.technikum.backend.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class User {
     @NotBlank
     private String password;
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     private boolean isAdmin = false;
@@ -53,11 +55,6 @@ public class User {
     }
 
     public User() {}
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
 
     public UUID getId() {
         return this.id;
