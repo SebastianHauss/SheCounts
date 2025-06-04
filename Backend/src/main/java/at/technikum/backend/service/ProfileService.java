@@ -43,7 +43,7 @@ public class ProfileService {
         if (checkIfProfileExists(profile.getId()).isEmpty()) {
             throw new EntityNotFoundException("Profile not found.");
         }
-        if (id != profile.getId()){
+        if (!id.equals(profile.getId())){
             throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return profileRepository.save(profile);

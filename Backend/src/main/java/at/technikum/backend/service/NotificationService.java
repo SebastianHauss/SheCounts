@@ -44,7 +44,7 @@ public class NotificationService {
         if (checkIfExistsById(notification.getId()).isEmpty()) {
             throw new EntityNotFoundException("Notification not found.");
         }
-        if(id != notification.getId()){
+        if(!id.equals(notification.getId())){
             throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return notificationRepository.save(notification);

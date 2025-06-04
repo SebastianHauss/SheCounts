@@ -42,7 +42,7 @@ public class UserService {
         if (checkIfUserIdExists(user.getId()).isEmpty()) {
             throw new EntityNotFoundException("User not found.");
         }
-        if (id != user.getId()){
+        if (!id.equals(user.getId())){
             throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return userRepository.save(user);

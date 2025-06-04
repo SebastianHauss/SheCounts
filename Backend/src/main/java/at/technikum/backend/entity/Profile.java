@@ -25,8 +25,7 @@ public class Profile {
     @NotBlank
     private String country;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    @OneToOne(optional = false)
     private User user;
 
     public Profile() {}

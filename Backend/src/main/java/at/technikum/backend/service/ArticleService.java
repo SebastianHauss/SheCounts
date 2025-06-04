@@ -44,7 +44,7 @@ public class ArticleService {
         if (checkIfArticleExists(article.getId()).isEmpty()) {
             throw new EntityNotFoundException("Article couldn't be found.");
         }
-        if (id != article.getId()) {
+        if (!id.equals(article.getId())) {
             throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return articleRepository.save(article);

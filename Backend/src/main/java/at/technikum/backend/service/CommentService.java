@@ -42,7 +42,7 @@ public class CommentService {
         if (checkIfCommentExistsById(comment.getId()).isEmpty()) {
             throw new EntityNotFoundException("Comment not found.");
         }
-        if (id != comment.getId()) {
+        if (!id.equals(comment.getId())) {
             throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
         }
         return commentRepository.save(comment);
