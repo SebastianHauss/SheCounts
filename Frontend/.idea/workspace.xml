@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4775542f-8ac7-4420-a1df-ee7532c44687" name="Changes" comment="UserList Search und Sort HTML und CSS eingebaut">
+    <list default="true" id="4775542f-8ac7-4420-a1df-ee7532c44687" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/js/article.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/testArticles.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/userlist.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/userlist.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/userlist.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/userlist.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +17,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="HTML File" />
       </list>
     </option>
@@ -33,7 +34,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/SebastianHauss/SheCounts.git&quot;,
-    &quot;accountId&quot;: &quot;2e6b9f3e-6b11-4340-8498-92e4115bcc6a&quot;
+    &quot;accountId&quot;: &quot;7c28c25a-a876-46cc-a45a-beb51d2c5629&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -54,14 +55,14 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/moham/Desktop/FH Technikum Wien/shecounts_final/SheCounts/Frontend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;C:/Users/Boss/AppData/Roaming/JetBrains/WebStorm2025.1/node/versions/22.16.0/node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -74,7 +75,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-WS-251.25410.117" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-WS-251.23774.424" />
       </set>
     </attachedChunks>
   </component>
@@ -92,19 +93,10 @@
       <workItem from="1748348498759" duration="5932000" />
       <workItem from="1748418111496" duration="1898000" />
       <workItem from="1748420043575" duration="2484000" />
-      <workItem from="1748861720446" duration="350000" />
-      <workItem from="1748933283559" duration="3285000" />
-      <workItem from="1748947921008" duration="537000" />
+      <workItem from="1748518503872" duration="2492000" />
+      <workItem from="1749020618829" duration="19000" />
+      <workItem from="1749035548131" duration="3609000" />
     </task>
-    <task id="LOCAL-00001" summary="UserList Search und Sort HTML und CSS eingebaut">
-      <option name="closed" value="true" />
-      <created>1748935549359</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1748935549359</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,9 +112,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="UserList Search und Sort HTML und CSS eingebaut" />
-    <option name="LAST_COMMIT_MESSAGE" value="UserList Search und Sort HTML und CSS eingebaut" />
   </component>
 </project>
