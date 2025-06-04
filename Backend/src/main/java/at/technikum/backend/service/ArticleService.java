@@ -1,8 +1,8 @@
 package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Article;
-import at.technikum.backend.exceptions.ArticleAlreadyExistsException;
-import at.technikum.backend.exceptions.ArticleNotFoundException;
+import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -26,14 +26,14 @@ public class ArticleService {
 
     public Article read(UUID id) {
         if (checkIfArticleExists(id).isEmpty()) {
-            throw new ArticleNotFoundException("Article couldn't be found.");
+            throw new EntityNotFoundException("Article couldn't be found.");
         }
         return checkIfArticleExists(id).get();
     }
 
     public Article create(Article article) {
         if (checkIfArticleExists(article.getId()).isPresent()) {
-            throw new ArticleAlreadyExistsException("Article already exists.");
+            throw new EntityAlreadyExistsException("Article already exists.");
         }
         return articleRepository.save(article);
     }
@@ -41,10 +41,10 @@ public class ArticleService {
     @Transactional
     public Article update(UUID id, Article article) {
         if (checkIfArticleExists(article.getId()).isEmpty()) {
-            throw new ArticleNotFoundException("Article couldn't be found.");
+            throw new EntityNotFoundException("Article couldn't be found.");
         }
         if (id != article.getId()) {
-            throw new ArticleNotFoundException("ID does not match any article id.");
+            throw new EntityNotFoundException("ID does not match any article id.");
         }
         return articleRepository.save(article);
     }
@@ -52,7 +52,7 @@ public class ArticleService {
     @Transactional
     public void delete(UUID id) {
         if (checkIfArticleExists(id).isEmpty()) {
-            throw new ArticleNotFoundException("Article couldn't be found.");
+            throw new EntityNotFoundException("Article couldn't be found.");
         }
         articleRepository.delete(checkIfArticleExists(id).get());
     }

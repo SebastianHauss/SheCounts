@@ -2,6 +2,8 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.User;
 import at.technikum.backend.exceptions.EmailAlreadyRegisteredException;
+import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.exceptions.UserNotFoundException;
 import at.technikum.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -26,12 +28,12 @@ public class UserService {
 
     public User read(UUID id) {
         return checkIfUserIdExists(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new EntityNotFoundException("User not found."));
     }
 
     public User create(User user) {
         if (checkIfEmailExists(user.getEmail()).isPresent()) {
-            throw new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account.");
+            throw new EntityAlreadyExistsException("This email is already registered. Choose another email or login to your account.");
         }
         return userRepository.save(user);
     }
@@ -39,7 +41,7 @@ public class UserService {
     @Transactional
     public User update(User user) {
         if (checkIfUserIdExists(user.getId()).isEmpty()) {
-            throw new UserNotFoundException("User not found.");
+            throw new EntityNotFoundException("User not found.");
         }
         return userRepository.save(user);
     }
@@ -47,7 +49,7 @@ public class UserService {
     @Transactional
     public void delete(UUID id) {
         User user = checkIfUserIdExists(id)
-                .orElseThrow(() -> new UserNotFoundException("User not found."));
+                .orElseThrow(() -> new EntityNotFoundException("User not found."));
         userRepository.delete(user);
     }
 

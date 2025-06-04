@@ -1,6 +1,8 @@
 package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Profile;
+import at.technikum.backend.exceptions.EntityAlreadyExistsException;
+import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.exceptions.ProfileAlreadyExistsException;
 import at.technikum.backend.exceptions.ProfileNotFoundException;
 import at.technikum.backend.repository.ProfileRepository;
@@ -25,14 +27,14 @@ public class ProfileService {
 
     public Profile read(UUID id) {
         if (checkIfProfileExists(id).isEmpty()) {
-            throw new ProfileNotFoundException("Profile not found.");
+            throw new EntityNotFoundException("Profile not found.");
         }
         return checkIfProfileExists(id).get();
     }
 
     public Profile create(Profile profile) {
         if (checkIfProfileExists(profile.getId()).isPresent()) {
-            throw new ProfileAlreadyExistsException("Profile already exists.");
+            throw new EntityAlreadyExistsException("Profile already exists.");
         }
         return profileRepository.save(profile);
     }
@@ -40,7 +42,7 @@ public class ProfileService {
     @Transactional
     public Profile update(Profile profile) {
         if (checkIfProfileExists(profile.getId()).isEmpty()) {
-            throw new ProfileNotFoundException("Profile not found.");
+            throw new EntityNotFoundException("Profile not found.");
         }
         return profileRepository.save(profile);
     }
@@ -48,7 +50,7 @@ public class ProfileService {
     @Transactional
     public void delete(UUID id) {
         if (checkIfProfileExists(id).isEmpty()) {
-            throw new ProfileNotFoundException("Profile not found.");
+            throw new EntityNotFoundException("Profile not found.");
         }
         profileRepository.delete(checkIfProfileExists(id).get());
     }

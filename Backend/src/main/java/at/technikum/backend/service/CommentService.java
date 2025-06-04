@@ -1,8 +1,7 @@
 package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Comment;
-import at.technikum.backend.exceptions.CommentAlreadyExistsException;
-import at.technikum.backend.exceptions.CommentNotFoundException;
+import at.technikum.backend.exceptions.*;
 import at.technikum.backend.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -26,14 +25,14 @@ public class CommentService {
 
     public Comment read(UUID id) {
         if (checkIfCommentExistsById(id).isEmpty()) {
-            throw new CommentNotFoundException("Comment not found.");
+            throw new EntityNotFoundException("Comment not found.");
         }
         return checkIfCommentExistsById(id).get();
     }
 
     public Comment create(Comment comment) {
         if (checkIfCommentExistsById(comment.getId()).isPresent()) {
-            throw new CommentAlreadyExistsException("Comment already exists.");
+            throw new EntityAlreadyExistsException("Comment already exists.");
         }
         return commentRepository.save(comment);
     }
@@ -41,10 +40,10 @@ public class CommentService {
     @Transactional
     public Comment update(UUID id, Comment comment) {
         if (checkIfCommentExistsById(comment.getId()).isEmpty()) {
-            throw new CommentNotFoundException("Comment not found.");
+            throw new EntityNotFoundException("Comment not found.");
         }
         if (id != comment.getId()) {
-            throw new IllegalArgumentException();
+            throw new EntityIdDoesNotMatchException("UUID Id doesn't match Object Id");
         }
         return commentRepository.save(comment);
     }
@@ -52,7 +51,7 @@ public class CommentService {
     @Transactional
     public void delete(UUID id) {
         if (checkIfCommentExistsById(id).isEmpty()) {
-            throw new CommentNotFoundException("Comment not found.");
+            throw new EntityNotFoundException("Comment not found.");
         }
         commentRepository.delete(checkIfCommentExistsById(id).get());
     }
