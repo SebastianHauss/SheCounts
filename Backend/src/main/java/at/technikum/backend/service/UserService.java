@@ -26,7 +26,7 @@ public class UserService {
 
     public User read(UUID id) {
         return checkIfUserIdExists(id)
-                .orElseThrow(() -> new EmailAlreadyRegisteredException("This email is already registered. Choose another email or login to your account."));
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
     }
 
     public User create(User user) {
@@ -39,17 +39,16 @@ public class UserService {
     @Transactional
     public User update(User user) {
         if (checkIfUserIdExists(user.getId()).isEmpty()) {
-            throw new UserNotFoundException("User not found");
+            throw new UserNotFoundException("User not found.");
         }
         return userRepository.save(user);
     }
 
     @Transactional
     public void delete(UUID id) {
-        if (checkIfUserIdExists(id).isEmpty()) {
-            throw new UserNotFoundException("User not found");
-        }
-        userRepository.delete(checkIfUserIdExists(id).get());
+        User user = checkIfUserIdExists(id)
+                .orElseThrow(() -> new UserNotFoundException("User not found."));
+        userRepository.delete(user);
     }
 
     public Optional<User> checkIfEmailExists(String email) {
