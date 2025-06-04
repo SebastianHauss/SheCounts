@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.UniqueElements;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ public class User {
     @NotBlank
     private String password;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     private boolean isAdmin = false;
 
@@ -37,7 +36,7 @@ public class User {
     private List<Notification> notifications = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private List<Comment> comments = new LinkedList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToOne(mappedBy = "user")
     private Profile profile;
@@ -55,6 +54,11 @@ public class User {
     }
 
     public User() {
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public UUID getId() {

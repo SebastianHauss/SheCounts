@@ -21,7 +21,7 @@ public class Notification {
 
     private boolean read = false;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,6 +33,11 @@ public class Notification {
     public Notification(String title, String message) {
         this.title = title;
         this.message = message;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public UUID getId() {

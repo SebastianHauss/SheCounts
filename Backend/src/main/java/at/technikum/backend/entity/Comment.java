@@ -19,7 +19,7 @@ public class Comment {
     @NotBlank
     private String author;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     @ManyToOne
     @JoinColumn(name = "article_id")
@@ -29,13 +29,18 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Comment(Article article_id, String content, String author) {
-        this.article = article_id;
+    public Comment(Article article, String content, String author) {
+        this.article = article;
         this.content = content;
         this.author = author;
     }
 
     public Comment() {
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public UUID getId() {
