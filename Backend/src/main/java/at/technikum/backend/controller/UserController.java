@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<User> readAll() {
         return userService.readAll();
     }
@@ -37,11 +37,12 @@ public class UserController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public User update(@RequestBody User user) {
+    public User update(@RequestBody @Valid User user) {
         return userService.update(user);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
         userService.delete(id);
     }

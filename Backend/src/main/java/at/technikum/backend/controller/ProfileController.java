@@ -2,6 +2,7 @@ package at.technikum.backend.controller;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.service.ProfileService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,16 +30,17 @@ public class ProfileController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Profile create(Profile profile) {
+    public Profile create(@RequestBody @Valid Profile profile) {
         return profileService.create(profile);
     }
 
     @PutMapping
-    public Profile update(@RequestBody Profile profile) {
+    public Profile update(@RequestBody @Valid Profile profile) {
         return profileService.update(profile);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
         profileService.delete(id);
     }

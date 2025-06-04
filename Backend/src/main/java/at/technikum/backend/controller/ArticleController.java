@@ -19,7 +19,7 @@ public class ArticleController {
         this.articleService = articleService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Article> readAll() {
         return articleService.readAll();
     }
@@ -37,11 +37,12 @@ public class ArticleController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public Article update(@RequestBody Article article) {
+    public Article update(@RequestBody @Valid Article article) {
         return articleService.update(article);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
         articleService.delete(id);
     }

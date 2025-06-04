@@ -19,7 +19,7 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<Comment> readAll() {
         return commentService.readAll();
     }
@@ -36,11 +36,12 @@ public class CommentController {
     }
 
     @PutMapping
-    public Comment update(@RequestBody Comment comment) {
+    public Comment update(@RequestBody @Valid Comment comment) {
         return commentService.update(comment);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id) {
         commentService.delete(id);
     }
