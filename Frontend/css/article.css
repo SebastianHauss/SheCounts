@@ -1,0 +1,28 @@
+:root {
+    --myPastelGreen: #A9B8A3;
+    --myGrey: #796F80;
+    --myPink: #C3868D;
+    --myDarkerPink: #b56468;
+    --myBeige: #fbeae1;
+    --myBorderRGB: 121, 111, 128;
+}
+
+
+/* Blogartikel */
+.comment-container p {
+    margin: 0;
+    padding: 0;
+}
+.comment-icon {
+    background-color: rgba(var(--myBorderRGB), 0.1);
+    border-radius: 5px;
+}
+
+.article-container {
+    border-radius: 3px;
+}
+
+.text-justify {
+    text-align: justify;
+    hyphens: auto;
+}

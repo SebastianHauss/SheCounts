@@ -4,6 +4,7 @@
     --myPink: #C3868D;
     --myDarkerPink: #b56468;
     --myBeige: #fbeae1;
+    --myBorderRGB: 121, 111, 128;
 }
 
 body {
@@ -99,11 +100,6 @@ background-color: var(--myBeige);
     font-size: 1rem;
 }
 
-/* Blogartikel */
-.text-justify {
-    text-align: justify;
-    hyphens: auto;
-}
 
 /* --- Carousel Media Queries --- */
 
