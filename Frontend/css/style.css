@@ -69,13 +69,17 @@ body {
 
 /* --- Sidebar --- */
 .sideBar {
-    background-color: var(--myBeige);
+
     border-radius: 10px;
     position: sticky;
     top: 100px; /* Abstand von oben: Sticky wird erst ab hier aktiv */
     padding: 30px;
     height: 300px;
 }
+/*
+background-color: var(--myBeige);
+*/
+
 
 .sideBarLink {
     color: black;
@@ -89,6 +93,9 @@ body {
 }
 
 .p2Element {
+    font-size: 1.1rem;
+}
+.p3Element {
     font-size: 1rem;
 }
 
