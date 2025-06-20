@@ -12,44 +12,38 @@
     <title>Homepage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/index.css">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
 
-    <!-- <editor-fold desc="Navbar"> -->
     <div id="navbar-placeholder"></div>
     <script>
         $(function() {
-            $("#navbar-placeholder").load("/pages/navbarHomepage.html");
+            $("#navbar-placeholder").load("/NavFooter/navbarHomepage.html");
         });
     </script>
-    <!-- </editor-fold> -->
 
-    <!-- <editor-fold desc="Grid Cards (Articles)"> -->
-    <div class="container mt-5 mb-5">
-        <div class="row g-4">
-            <!-- Links: Main Card -->
-            <div class="col-12 col-lg-4">
-                <div class="card main-article h-100 mb-4">
-                    <div class="row g-0 flex-column flex-md-row h-100">
-                        <div class="col-md-5">
-                            <img src="/img/article_image_placeholder.jpg" class="img-fluid main-card-img"
-                                alt="main article image">
-                        </div>
-                        <div class="col-md-7 d-flex align-items-center">
-                            <div class="card-body">
-                                <h4 class="card-title">Main Article Title</h4>
-                                <p class="card-text">This is the main article with more space and visibility...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Rechts: 6 Small Cards -->
+				<div class="container mt-5 mb-5">
+					<div class="row g-4">
+						<!-- Main Card -->
+						<a href="ArticlePages/article.html">
+						<div class="col-12 col-lg-4">
+							<div class="card main-article h-100 mb-4">
+								<img src="/img/article_image_placeholder.jpg" class="card-img-top" alt="main article image">
+								<div class="card-body">
+									<h4 class="card-title">Main Article Title</h4>
+									<p class="card-text">This is the main article with more space and visibility...</p>
+								</div>
+							</div>
+							</a>
+						</div>
+						
+            <!-- 6 Small Cards -->
             <div class="col-12 col-lg-8">
+							<a href="ArticlePages/article.html">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
                     <div class="col">
                         <div class="card h-100">
@@ -60,6 +54,8 @@
                             </div>
                         </div>
                     </div>
+									</a>
+									<a href="ArticlePages/article.html">
                     <div class="col">
                         <div class="card h-100">
                             <img src="/img/article_image_placeholder.jpg" class="card-img-top" alt="...">
@@ -68,7 +64,9 @@
                                 <p class="card-text">Short description.</p>
                             </div>
                         </div>
-                    </div>
+                    	</div>
+										</a>
+                    <a href="ArticlePages/article.html">
                     <div class="col">
                         <div class="card h-100">
                             <img src="/img/article_image_placeholder.jpg" class="card-img-top" alt="...">
@@ -77,7 +75,9 @@
                                 <p class="card-text">Short description.</p>
                             </div>
                         </div>
-                    </div>
+                    	</div>
+										</a>
+                    <a href="ArticlePages/article.html">
                     <div class="col">
                         <div class="card h-100">
                             <img src="/img/article_image_placeholder.jpg" class="card-img-top" alt="...">
@@ -86,7 +86,9 @@
                                 <p class="card-text">Short description.</p>
                             </div>
                         </div>
-                    </div>
+                    	</div>
+										</a>
+                    <a href="ArticlePages/article.html">
                     <div class="col">
                         <div class="card h-100">
                             <img src="/img/article_image_placeholder.jpg" class="card-img-top" alt="...">
@@ -95,7 +97,9 @@
                                 <p class="card-text">Short description.</p>
                             </div>
                         </div>
-                    </div>
+                    	</div>
+										</a>
+               			<a href="ArticlePages/article.html">
                     <div class="col">
                         <div class="card h-100">
                             <img src="/img/article_image_placeholder.jpg" class="card-img-top" alt="...">
@@ -104,12 +108,12 @@
                                 <p class="card-text">Short description.</p>
                             </div>
                         </div>
-                    </div>
+                    	</div>
+										</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- </editor-fold> -->
 
     <!-- Carousel alle 10s weiter -->
     <div class="mt-4 mb-0">
@@ -158,7 +162,7 @@
     <div id="footer-placeholder"></div>
     <script>
         $(function() {
-            $("#footer-placeholder").load("/pages/footer.html");
+            $("#footer-placeholder").load("/NavFooter/footer.html");
         });
     </script>
     <!-- </editor-fold> -->

@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4775542f-8ac7-4420-a1df-ee7532c44687" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/at/technikum/backend/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/at/technikum/backend/controller/ArticleController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ArticlePages/finanzwissenAllg.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NavFooter/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/NavFooter/navbar.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +71,6 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/js/ArticlePages" />
       <recent name="$PROJECT_DIR$/img" />
       <recent name="C:\Users\moham\Desktop\FH Technikum Wien\shecounts_final\SheCounts\Frontend" />
       <recent name="C:\Users\moham\Desktop\FH Technikum Wien\shecounts_final\SheCounts\Frontend\.idea\src" />
@@ -102,7 +103,6 @@
       <workItem from="1749194882384" duration="7332000" />
       <workItem from="1749799048990" duration="11317000" />
       <workItem from="1750347377365" duration="5834000" />
-      <workItem from="1750402236856" duration="7852000" />
     </task>
     <servers />
   </component>

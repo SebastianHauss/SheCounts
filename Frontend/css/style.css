@@ -4,6 +4,7 @@
     --myPink: #C3868D;
     --myDarkerPink: #b56468;
     --myBeige: #fbeae1;
+    --myBorderRGB: 121, 111, 128;
 }
 
 body {
@@ -45,26 +46,6 @@ body {
 .magnifiyingGlass {
     text-shadow: 0 0 1px white;
     font-weight: bold;
-}
-
-/* --- Grid Cards --- */
-.main-card-img {
-    height: 100%;
-    object-fit: cover;
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
-}
-
-@media (max-width: 767.98px) {
-    .main-card-img {
-        height: auto;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 0.375rem;
-    }
-}
-
-.card {
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* --- Carousel --- */
@@ -119,11 +100,6 @@ background-color: var(--myBeige);
     font-size: 1rem;
 }
 
-/* Blogartikel */
-.text-justify {
-    text-align: justify;
-    hyphens: auto;
-}
 
 /* --- Carousel Media Queries --- */
 
