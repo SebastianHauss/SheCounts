@@ -12,8 +12,12 @@
     padding: 0;
 }
 .comment-icon {
-    background-color: rgba(var(--myBorderRGB), 0.1);
+    background-color: rgba(var(--myBorderRGB), 0.2);
     border-radius: 5px;
+}
+
+.comment-icon:hover {
+    background-color: rgba(var(--myBorderRGB), 0.1);
 }
 
 .article-container {
@@ -23,4 +27,28 @@
 .text-justify {
     text-align: justify;
     hyphens: auto;
+}
+
+.discussion-box {
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* Media Queries */
+
+@media (max-width: 991px) {
+    .article-container {
+        display: block;
+        margin: 0 auto;
+        max-width: 80%;
+    }
+
+    .discussion-box {
+        display: block;
+        margin: 0 auto;
+    }
+
+
+
 }

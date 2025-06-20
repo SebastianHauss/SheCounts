@@ -64,7 +64,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="../ArticlePages/finanzwissenAllg.html">Finanzwissen von Grund auf</a></li>
-                            <li><a class="dropdown-item" href="#">Topic 2</a></li>
+                            <li><a class="dropdown-item" href="../ArticlePages/private-finanzen.html">Private Finanzen</a></li>
                             <li><a class="dropdown-item" href="#">Topic 3</a></li>
                             <li><a class="dropdown-item" href="#">Topic 4</a></li>
                         </ul>
@@ -80,10 +80,22 @@
                             <i class="bi bi-search text-white fs-4 magnifiyingGlass"></i>
                         </button>
                     </form>
-                    <div>
+                    <div id="loginBlock">
                         <button class="btn loginBtn px-3 d-lg-block d-none" type="button" data-bs-toggle="modal" data-bs-target="#ModalLogin">
                             Login
                         </button>
+                    </div>
+                    <!-- user menu -->
+                    <div id="userBlock" class="dropdown d-lg-block d-none" style="display: none;">
+                        <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <img src="../img/profilbild.png" alt="avatar" width="40" height="40" class="rounded-circle me-2">
+                            <strong>Mein Profil</strong>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+                            <li><a class="dropdown-item" href="#">Profile Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Notifications</a></li>
+                            <li><a class="dropdown-item" href="#">Sign out</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -224,5 +236,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
+<script src="../js/navbar-auth.js"></script>
 </body>
 </html>

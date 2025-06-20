@@ -22,26 +22,26 @@
 
 <!-- SideBar -->
 <div class="row">
-    <div class="col-lg-3">
+    <div class="d-none d-lg-block col-md-3">
         <div class="position-sticky sideBar m-5 ps-4 py-4 shadow">
             <div class="d-flex flex-column gap-2 simple-list-example-scrollspy text-left" id="simple-list-example">
                 <a class="pt-1 pb-2 rounded sideBarLink" href="#simple-list-item-1">Artikelübersicht</a>
                 <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ueberblick">Überblick</a>
-                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ehe-partnerschaft">Ziele</a>
-                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ehe-partnerschaft">Schulden</a>
-                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ehe-partnerschaft">Mindset</a>
-                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#familie">Sparen</a>
-                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#vermögensaufbau">Fazit</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ziele">Ziele</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#schulden">Schulden</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#mindset">Mindset</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#sparen">Sparen</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#fazit">Fazit</a>
             </div>
         </div>
     </div>
 
 
     <!-- Article -->
-    <div class="col-8 article-container mt-5 shadow">
+    <div class="article-container col-11 col-lg-8 mt-5 mb-3 shadow">
         <div data-bs-spy="scroll" data-bs-target="#simple-list-example" data-bs-offset="0" data-bs-smooth-scroll="true"
              class="scrollspy-example" tabindex="0">
-            <h5 class="mt-3">ÜBERBEGRIFF</h5>
+            <h5 class="mt-3 text-uppercase">Private Finanzen</h5>
             <div class="comment-container d-flex mb-3">
             <p class="pe-3">Autor:in Datum</p>
             <!--Kommentar-Icon-->
@@ -52,6 +52,9 @@
                     <span>12 Postings</span>
                 </a>
             </div>
+            </div>
+            <div class="article-img mb-2 mt-2">
+                <img class="img-fluid" src="../img/finanzen-ordnung.jpg" alt="">
             </div>
 
             <h1 id="simple-list-item-1">Wie bringst du deine privaten Finanzen in Ordnung?</h1>
@@ -70,44 +73,45 @@
                 kontrollieren oder dir Vorwürfe zu machen – sondern um Transparenz. Nur was du siehst, kannst du auch
                 verändern.</p>
 
-            <h3>Ziele helfen dir, dranzubleiben.</h3>
+            <h3 id="ziele">Ziele helfen dir, dranzubleiben.</h3>
             <p class="mb-4 fs-5 fs-md-4 fs-lg-3 lh-base fw-light text-justify">Statt dir vage vorzunehmen „Ich will sparen“, setze dir konkrete, erreichbare Ziele. Vielleicht möchtest
                 du ein kleines Polster von 500 Euro aufbauen, jeden Monat einen fixen Betrag zur Seite legen oder eine
                 Rücklage für unerwartete Ausgaben schaffen. Solche Ziele machen deine Fortschritte sichtbar – und das
                 motiviert dich, weiterzugehen. Denk daran: Auch kleine Schritte bringen dich in Bewegung.</p>
 
-            <h3>Wenn du Schulden hast, schau hin.</h3>
+            <h3 id="schulden">Wenn du Schulden hast, schau hin.</h3>
             <p class="mb-4 fs-5 fs-md-4 fs-lg-3 lh-base fw-light text-justify">Viele Menschen haben Schulden – ob durch Ratenkäufe, Studienkredite oder unerwartete Ausgaben. Das ist
                 nichts, wofür man sich schämen muss. Wichtig ist nur, dass du nicht länger wegschiebst, was dich
                 belastet. Eine einfache Liste hilft: Wem schuldest du wie viel? Welche Zinsen fallen an? Gibt es
                 Möglichkeiten zur Umschuldung oder eine Ratenpause? In vielen Städten gibt es kostenlose
                 Beratungsstellen – auch das ist ein Zeichen von Stärke, sich dort Hilfe zu holen.</p>
 
-            <h3>Dein Mindset ist genauso wichtig wie deine Zahlen.</h3>
+            <h3 id="mindset">Dein Mindset ist genauso wichtig wie deine Zahlen.</h3>
             <p class="mb-4 fs-5 fs-md-4 fs-lg-3 lh-base fw-light text-justify">Hast du dich schon einmal gefragt, welche Glaubenssätze du über Geld mit dir herumträgst? Viele Frauen
                 haben gelernt, dass Finanzen kompliziert oder „nicht ihr Thema“ sind. Doch das ist ein Mythos, der dich
                 klein halten soll. Fang an, deine Beziehung zu Geld zu hinterfragen. Erlaube dir, finanziellen Erfolg zu
                 denken. Und lerne, dir selbst auch im Geldbereich zu vertrauen – du wirst sehen: Es lohnt sich.</p>
 
-            <h3>Sparen ist gut – investieren ist besser.</h3>
+            <h3 id="sparen">Sparen ist gut – investieren ist besser.</h3>
             <p class="mb-4 fs-5 fs-md-4 fs-lg-3 lh-base fw-light text-justify">Sobald du ein kleines Polster hast, solltest du darüber nachdenken, wie du dein Geld für dich arbeiten
                 lassen kannst. Das klingt vielleicht nach „großer Finanzwelt“, aber auch hier gilt: Jeder fängt klein
                 an. Ein ETF-Sparplan ist zum Beispiel schon ab 25 Euro im Monat möglich. Je früher du beginnst, desto
                 mehr kannst du langfristig aufbauen. Und du musst keine Expertin sein – du darfst lernen, Schritt für
                 Schritt.</p>
 
-            <h3>Fazit</h3>
+            <h3 id="fazit">Fazit</h3>
             <p class="mb-5 fs-5 fs-md-4 fs-lg-3 lh-base fw-light text-justify">Deine Finanzen in Ordnung zu bringen ist kein einmaliger Akt, sondern ein Prozess – und ein persönlicher.
                 Es geht nicht um Verzicht, sondern um Freiheit. Nicht um Kontrolle, sondern um Selbstbestimmung. Fang
                 mit einem Schritt an – heute. SheCounts begleitet dich dabei.</p>
 
+        </div>
+    </div>
+</div>
 
-            <h4 id="ehe-partnerschaft">Ehe und Partnerschaft</h4>
-            <p>...</p>
-            <h4 id="familie">Familie</h4>
-            <p>...</p>
-            <h4 id="vermögensaufbau">Vermögensaufbau</h4>
-            <p>...</p>
+<div class="row">
+    <div class="col-11 offset-lg-3 col-lg-8 mt-5 mb-3 shadow discussion-box">
+        <div id="diskussion">
+            <h1>Diskussionsforum</h1>
         </div>
     </div>
 </div>
