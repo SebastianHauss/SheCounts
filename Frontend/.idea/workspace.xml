@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4775542f-8ac7-4420-a1df-ee7532c44687" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/css/comments.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img/profilbild.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/replyfunc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/blogartikelDiskussion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Backend/src/main/java/at/technikum/backend/controller/ArticleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/src/main/java/at/technikum/backend/controller/ArticleController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/registerAndLogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/registerAndLogin.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +22,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -55,18 +60,20 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/moham/Desktop/FH Technikum Wien/shecounts_final/SheCounts/Frontend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tanakalinovska/Desktop/SheCount/SheCounts/Frontend&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;C:/Users/Boss/AppData/Roaming/JetBrains/WebStorm2025.1/node/versions/22.16.0/node&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/img" />
       <recent name="C:\Users\moham\Desktop\FH Technikum Wien\shecounts_final\SheCounts\Frontend" />
       <recent name="C:\Users\moham\Desktop\FH Technikum Wien\shecounts_final\SheCounts\Frontend\.idea\src" />
     </key>
@@ -96,6 +103,8 @@
       <workItem from="1749020618829" duration="19000" />
       <workItem from="1749035548131" duration="5711000" />
       <workItem from="1749194882384" duration="7332000" />
+      <workItem from="1749799048990" duration="11317000" />
+      <workItem from="1750347377365" duration="5834000" />
     </task>
     <servers />
   </component>
