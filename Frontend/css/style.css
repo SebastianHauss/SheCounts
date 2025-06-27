@@ -176,9 +176,9 @@ background-color: var(--myBeige);
     background-color: #dc4e6b;
 }
 
-.myCancelBtn, .myEditProfileBtn{
-    border: 1px solid #474343;
-    border-radius: 80px;
+.myCancelBtn, .edit-profile-btn{
+    background-color: var(--myBeige);
+    border-radius: 15px;
 }
 .myCancelBtn:hover, .myEditProfileBtn:hover{
     background-color: #dddcdc;
