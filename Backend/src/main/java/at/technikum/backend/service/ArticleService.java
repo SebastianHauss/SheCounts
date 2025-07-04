@@ -5,7 +5,6 @@ import at.technikum.backend.exceptions.EntityAlreadyExistsException;
 import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
-import jakarta.annotation.Resource;
 import jakarta.transaction.Transactional;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -64,12 +63,13 @@ public class ArticleService {
 
     public String getArticleContentByFilename(String filename) {
         try {
-            ClassPathResource resource = new ClassPathResource("articles/" + filename);
-            return Files.readString(resource.getFile().toPath());
+            ClassPathResource resource = new ClassPathResource("static/articles/" + filename);
+            return new String(resource.getInputStream().readAllBytes());
         } catch (IOException e) {
             throw new RuntimeException("Could not read article content from file: " + filename, e);
         }
     }
+
 
 
 
