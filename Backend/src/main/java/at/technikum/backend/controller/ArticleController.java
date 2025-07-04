@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/articles")
 public class ArticleController { /*fjjkfjf*/
@@ -17,6 +17,12 @@ public class ArticleController { /*fjjkfjf*/
 
     public ArticleController(ArticleService articleService) {
         this.articleService = articleService;
+    }
+
+
+    @GetMapping("/content/{filename}/html")
+    public String getArticleHtml(@PathVariable String filename) {
+        return articleService.getArticleContentByFilename(filename);
     }
 
     @GetMapping
