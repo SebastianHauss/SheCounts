@@ -1,9 +1,0 @@
-services:
-  db:
-    image: shecounts-postgres-image
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_USER=shecounts-user
-      - POSTGRES_PASSWORD=shecounts
-      - POSTGRES_DB=shecounts-db
