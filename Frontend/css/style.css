@@ -198,3 +198,6 @@ button.myPopUpBtn{
     background-color:  var(--myPink);
 
 }
+#footer-placeholder {
+    margin-top: 48px;
+}
