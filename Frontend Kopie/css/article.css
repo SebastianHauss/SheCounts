@@ -1,0 +1,60 @@
+:root {
+    --myPastelGreen: #A9B8A3;
+    --myGrey: #796F80;
+    --myPink: #C3868D;
+    --myDarkerPink: #b56468;
+    --myBeige: #fbeae1;
+    --myBorderRGB: 121, 111, 128;
+}
+
+.comment-container p {
+    margin: 0;
+    padding: 0;
+}
+.comment-icon {
+    background-color: rgba(var(--myBorderRGB), 0.2);
+    border-radius: 5px;
+}
+
+.comment-icon:hover {
+    background-color: rgba(var(--myBorderRGB), 0.1);
+}
+
+.article-container {
+    border-radius: 3px;
+}
+
+.text-justify {
+    text-align: justify;
+    hyphens: auto;
+}
+
+.discussion-box {
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* Media Queries */
+
+@media (max-width: 991px) {
+    .article-container {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .discussion-box {
+        display: block;
+        margin: 0 auto;
+    }
+
+}
+
+/* === Discussion Button === */
+#floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}

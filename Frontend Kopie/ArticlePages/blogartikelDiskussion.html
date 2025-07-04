@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blogartikel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/article.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .discussion-btn {
+            position: sticky;
+            top: 20px;
+            left: 90%;
+            z-index: 999;
+            display: block;
+        }
+
+        .sticky-wrapper {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+
+<div id="navbar-placeholder"></div>
+<script>
+    $(function () {
+        $("#navbar-placeholder").load("../NavFooter/navbar.html");
+    });
+</script>
+
+<!--DiscussionButton-->
+<div class="sticky-wrapper">
+    <a href="#diskussion" class="discussion-btn">
+        <img src="/img/commentButton.png" alt="Kommentare" width="48" height="48">
+    </a>
+</div>
+
+<!-- SideBar -->
+<div class="row">
+    <div class="col-lg-3">
+        <div class="position-sticky sideBar m-5 ps-4 py-4">
+            <div class="d-flex flex-column gap-2 simple-list-example-scrollspy text-left" id="simple-list-example">
+                <a class="pt-1 pb-2 rounded sideBarLink" href="#simple-list-item-1">Artikelübersicht</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ehe-partnerschaft">Ehe und Partnerschaft</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#familie">Familie</a>
+                <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#vermögensaufbau">Vermögensaufbau</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Nested Comments-->
+<div class="container my-4" id="diskussion">
+    <h3>Diskussion</h3>
+    <p><i class="bi bi-chat-left-text"></i> 112 Postings</p>
+
+    <!-- Post Form -->
+    <div class="mb-3">
+        <input type="text" class="form-control mb-2" placeholder="Titel hinzufügen">
+        <textarea class="form-control mb-2" rows="3" placeholder="Was sagst du dazu?"></textarea>
+        <button class="btn btn-light fw-bold">Posten</button>
+    </div>
+
+    <!-- Comment -->
+    <div class="d-flex position-relative comment-container ms-4 mt-3">
+        <div class="avatar">
+            <img src="/img/profilbild.png" class="rounded-circle" width="40" height="40">
+        </div>
+        <div class="ms-3 flex-grow-1 p-3 border rounded position-relative">
+            <div class="small text-muted">username<br>timestamp</div>
+            <div class="mt-2">Lorem ipsum comment text...</div>
+            <div class="d-flex justify-content-between mt-3">
+                <span><i class="bi bi-chat-left"></i> 14</span>
+                <button class="btn btn-light fw-bold reply-btn">Antworten</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- FOOTER -->
+<div id="footer-placeholder"></div>
+<script>
+    $(function () {
+        $("#footer-placeholder").load("../NavFooter/footer.html");
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+
+<script src="../js/ArticlePages/replyfunc.js"></script>
+</body>
+</html>
