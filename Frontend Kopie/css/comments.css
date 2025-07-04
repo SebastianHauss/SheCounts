@@ -1,0 +1,39 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.discussion-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.discussion-btn img {
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#diskussion {
+    scroll-margin-top: 100px;
+}
+.comment-container {
+    margin-bottom: 30px;
+}
+
+.avatar {
+    position: relative;
+}
+
+.comment-container::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 20px;
+    width: 2px;
+    height: 100%;
+    background-color: #ccc;
+}
