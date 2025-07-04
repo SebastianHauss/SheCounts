@@ -21,7 +21,7 @@
 
 <!--DiscussionButton-->
 <a href="#diskussion" id="floating-button">
-    <img src="/img/commentButton.png" alt="Kommentare" width="48" height="48">
+    <img src="/img/commentButton.png" alt="Kommentare" width="55" height="48">
 </a>
 
 <!-- SideBar -->
@@ -112,13 +112,45 @@
     </div>
 </div>
 
+<!--DISCUSSION FIELD-->
 <div class="row ms-2 me-2">
     <div class="col-12 offset-lg-3 col-lg-8 mt-5 mb-3 shadow discussion-box">
         <div id="diskussion">
             <h1>Diskussionsforum</h1>
+            <p><i class="bi bi-chat-left-text"></i> 112 Postings</p>
+            <!-- Post Form -->
+            <div class="discussion-box-form mb-3 position-relative">
+                <input type="text" class="form-control mb-2" placeholder="Titel hinzufügen">
+
+                <div class="position-relative">
+                    <textarea class="form-control pe-5" rows="3" placeholder="Was sagst du dazu?"></textarea>
+                    <button class="btn btn-light position-absolute" style="bottom: 8px; right: 8px;">Posten</button>
+                </div>
+            </div>
+            <!-- Kommentare -->
+            <div class="comment d-flex mt-4">
+                <img src="/img/profilbild.png" class="rounded-circle" width="40" height="40">
+                <div class="ms-3 flex-grow-1 p-3 border rounded">
+                    <div class="small text-muted">username<br>timestamp</div>
+                    <div class="mt-2">Lorem ipsum comment text...</div>
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="btn btn-sm btn-light reply-btn">Antworten</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Antwort-Formular -->
+            <div class="reply-form mt-4 d-none">
+                <label for="reply-text" class="visually-hidden">Antwort</label>
+
+                <div class="position-relative">
+                    <textarea id="reply-text" class="form-control pe-5" rows="3" placeholder="Deine Antwort..."></textarea>
+                    <button class="btn btn-sm btn-light position-absolute" style="bottom: 8px; right: 8px;">Antwort senden</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
 
 <div id="footer-placeholder"></div>
 <script>
@@ -132,6 +164,6 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
 <script src="../js/ArticlePages/scrollToDiscussionButton.js"></script>
-
+<script src="../js/ArticlePages/replyfunc.js"></script>
 </body>
 </html>

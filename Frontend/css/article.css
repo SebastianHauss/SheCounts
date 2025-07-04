@@ -31,9 +31,13 @@
 
 .discussion-box {
     display: block;
-    margin: 0 auto;
+    padding: 12px;
 }
 
+#reply-text {
+    width: 90%;
+    margin-left: auto;
+}
 
 /* Media Queries */
 
