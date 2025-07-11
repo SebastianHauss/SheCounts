@@ -54,6 +54,15 @@
 
 }
 
+.article-link .underline-on-hover {
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.article-link:hover .underline-on-hover {
+    border-color: black;
+}
+
 /* === Discussion Button === */
 #floating-button {
     position: fixed;

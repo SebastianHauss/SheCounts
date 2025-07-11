@@ -1,4 +1,4 @@
-const isLoggedIn = true; //Nur zu Testzwecken – wird später durch Backend ersetzt
+const isLoggedIn = false; //Nur zu Testzwecken – wird später durch Backend ersetzt
 const isAdmin = true; /*Auch nur zum Testen – Admin-Rolle kommt später vom Backend*/
 
 document.addEventListener("DOMContentLoaded", () => {
