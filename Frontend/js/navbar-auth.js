@@ -1,5 +1,5 @@
-const isLoggedIn = false; //Nur zu Testzwecken – wird später durch Backend ersetzt
-const isAdmin = true; /*Auch nur zum Testen – Admin-Rolle kommt später vom Backend*/
+const userId = localStorage.getItem("userId");
+const isLoggedIn = !!userId;
 
 document.addEventListener("DOMContentLoaded", () => {
     const loginBlock = document.getElementById("loginBlock");
@@ -14,7 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
         userBlock?.style.setProperty("display", "none", "important");
     }
 
-    if (isAdmin && adminLink) {
-        adminLink.style.setProperty("display", "block", "important");
-    }
+    // TODO: додати логіку для перевірки isAdmin, коли буде бекенд-підтримка
 });

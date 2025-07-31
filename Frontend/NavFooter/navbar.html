@@ -125,14 +125,14 @@
                 </div>
                 <div class="modal-body">
 
-                    <form>
+                    <form id="loginForm">
                         <div class="mb-3">
-                            <label for="InputEmail" class="form-label">Email Adresse</label>
-                            <input type="email" class="form-control" id="InputEmail" aria-describedby="emailOrUsername">
+                            <label for="email" class="form-label">Email Adresse</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailOrUsername">
                         </div>
                         <div class="mb-3">
-                            <label for="InputPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="InputPassword">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password">
                         </div>
 
                         <button type="submit" class="btn myPopUpBtn mb-3">Login</button>
@@ -201,18 +201,18 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username">
+                            <label for="usernameField" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="usernameField">
                         </div>
 
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
+                            <label for="emailField" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="emailField"
                                 aria-describedby="emailHelp">
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <label for="passwordField" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="passwordField">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword2" class="form-label">Repeat password</label>
@@ -229,7 +229,7 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn myPopUpBtn mb-3">Registrieren</button>
+                        <button id="registerButton" type="submit" class="btn myPopUpBtn mb-3">Registrieren</button>
 
                         <div class="d-flex justify-content-center">
                             Ich habe schon einen Account: &nbsp;
@@ -250,6 +250,7 @@
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
     <script src="../js/navbar-auth.js"></script>
+    <script src="../js/NavFooter/register-data.js"></script>
 
 </body>
 
