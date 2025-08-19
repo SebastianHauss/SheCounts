@@ -13,10 +13,17 @@
 <body>
 
 <div id="navbar-placeholder"></div>
+
 <script>
-    $(function () {
-        $("#navbar-placeholder").load("../NavFooter/navbar.html");
-    });
+    fetch('../NavFooter/navbar.html')
+        .then(res => res.text())
+        .then(html => {
+            document.getElementById('navbar-placeholder').innerHTML = html;
+
+            const script = document.createElement('script');
+            script.src = '../js/navbar-auth.js';
+            document.body.appendChild(script);
+        });
 </script>
 
 <!--DiscussionButton-->

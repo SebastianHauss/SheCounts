@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
 
     const registerButton = document.querySelector('#registerModal .myPopUpBtn');
 
@@ -65,4 +65,4 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.warn('Register-Button nicht gefunden! Prüfe die Modal-Struktur.');
     }
-});
+});*/

@@ -1,3 +1,4 @@
+/*
 document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -26,4 +27,4 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         alert("Fehler beim Login: " + err.message);
     }
 });
-});
+});*/
