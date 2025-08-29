@@ -1,5 +1,6 @@
 package at.technikum.backend.controller;
 
+import at.technikum.backend.dto.CommentCreateDto;
 import at.technikum.backend.entity.Comment;
 import at.technikum.backend.service.CommentService;
 import jakarta.validation.Valid;
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/api/comments")
 public class CommentController {
 
     private final CommentService commentService;
@@ -31,8 +33,9 @@ public class CommentController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Comment create(@RequestBody @Valid Comment comment) {
-        return commentService.create(comment);
+    public Comment create(@RequestBody @Valid CommentCreateDto dto) {
+        System.out.println("отримали DTO: " + dto);
+        return commentService.create(dto);
     }
 
     @PutMapping("/{id}")

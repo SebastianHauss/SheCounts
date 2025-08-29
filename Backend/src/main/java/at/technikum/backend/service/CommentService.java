@@ -1,8 +1,13 @@
 package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Comment;
+import at.technikum.backend.entity.Article;
+import at.technikum.backend.entity.User;
 import at.technikum.backend.exceptions.*;
+import at.technikum.backend.repository.ArticleRepository;
 import at.technikum.backend.repository.CommentRepository;
+import at.technikum.backend.dto.CommentCreateDto;
+import at.technikum.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +19,17 @@ import java.util.UUID;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final ArticleRepository articleRepository;
+    private final UserRepository userRepository;
 
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository,
+                          ArticleRepository articleRepository,
+                          UserRepository userRepository) {
         this.commentRepository = commentRepository;
+        this.articleRepository = articleRepository;
+        this.userRepository = userRepository;
     }
-    
+
     public List<Comment> readAll() {
         return commentRepository.findAll();
     }
@@ -34,6 +45,16 @@ public class CommentService {
         if (checkIfCommentExistsById(comment.getId()).isPresent()) {
             throw new EntityAlreadyExistsException("Comment already exists.");
         }
+        return commentRepository.save(comment);
+    }
+
+    public Comment create(CommentCreateDto dto) {
+        Article article = articleRepository.findById(dto.getArticleId())
+                .orElseThrow(() -> new EntityNotFoundException("Article not found"));
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        Comment comment = new Comment(article, user, dto.getTitle(), dto.getText());
         return commentRepository.save(comment);
     }
 

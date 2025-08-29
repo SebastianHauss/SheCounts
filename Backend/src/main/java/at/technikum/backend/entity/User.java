@@ -19,7 +19,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank
+    @NotBlank(message = "username darf nicht leer sein")
     private String username;
 
     @Email

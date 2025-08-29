@@ -14,13 +14,15 @@ public class UserConfig {
     @Bean
     CommandLineRunner userInitializer(UserRepository userRepository) {
         return args -> {
-            User admin = new User ("admin", "admin@shecounts.at", "admin123");
-            admin.setAdmin(true);
+            if (userRepository.count() == 0) {
+                User admin = new User("admin", "admin@shecounts.at", "admin123");
+                admin.setAdmin(true);
 
-            User user1 = new User("emily", "emily@example.com", "emily123");
-            User user2 = new User("alex", "alex@example.com", "alex123");
+                User user1 = new User("emily", "emily@example.com", "emily123");
+                User user2 = new User("alex", "alex@example.com", "alex123");
 
-            userRepository.saveAll(List.of(admin, user1, user2));
+                userRepository.saveAll(List.of(admin, user1, user2));
+            }
         };
     }
 

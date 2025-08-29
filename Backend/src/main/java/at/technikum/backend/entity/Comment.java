@@ -14,8 +14,10 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank
-    private String content;
+    private String title;
+
+    private String text;
+
 
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -26,10 +28,11 @@ public class Comment {
     @ManyToOne(optional = false)
     private User user;
 
-    public Comment(Article article, User user, String content) {
+    public Comment(Article article, User user, String title, String text) {
         this.article = article;
         this.user = user;
-        this.content = content;
+        this.title = title;
+        this.text = text;
     }
 
     public Comment() {}
@@ -38,12 +41,20 @@ public class Comment {
         return id;
     }
 
-    public String getContent() {
-        return content;
+    public String getTitle() {
+        return title;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public LocalDateTime getCreatedAt() {
