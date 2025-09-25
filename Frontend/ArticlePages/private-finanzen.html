@@ -6,8 +6,8 @@
     <title>Main Article</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/article.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/Frontend/css/article.css">
+    <link rel="stylesheet" href="/Frontend/css/style.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
@@ -15,20 +15,20 @@
 <div id="navbar-placeholder"></div>
 
 <script>
-    fetch('../NavFooter/navbar.html')
+    fetch('/Frontend/NavFooter/navbar.html')
         .then(res => res.text())
         .then(html => {
             document.getElementById('navbar-placeholder').innerHTML = html;
 
             const script = document.createElement('script');
-            script.src = '../js/NavFooter/navbar-auth.js';
+            script.src = '/Frontend/js/NavFooter/navbar-auth.js';
             document.body.appendChild(script);
         });
 </script>
 
 <!--DiscussionButton-->
 <a href="#diskussion" id="floating-button">
-    <img src="/img/commentButton.png" alt="Kommentare" width="55" height="48">
+    <img src="/Frontend/img/commentButton.png" alt="Kommentare" width="55" height="48">
 </a>
 
 <!-- Content Row -->
@@ -123,7 +123,7 @@
         <div class="position-sticky top-0 mt-5 me-2">
             <h6 class="text-uppercase">Weitere Artikel</h6>
 
-        <a href="finanzwissenAllg.html" class="article-link text-decoration-none text-dark">
+        <a href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung" class="article-link text-decoration-none text-dark">
             <div class="border p-3 mb-3 bg-light rounded shadow-sm">
                 <small class="text-muted">Finanzwissen</small><br>
                 <strong><span class="underline-on-hover">Budgetierung: Dein Geld unter Kontrolle</span></strong><br>
@@ -166,7 +166,7 @@
             </div>
             <!-- Kommentare -->
             <div class="comment d-flex mt-4">
-                <img src="/img/profilbild.png" class="rounded-circle" width="40" height="40">
+                <img src="/Frontend/img/profilbild.png" class="rounded-circle" width="40" height="40">
                 <div class="ms-3 flex-grow-1 p-3 border rounded">
                     <div class="small text-muted">username<br>timestamp</div>
                     <div class="mt-2">Lorem ipsum comment text...</div>
@@ -191,7 +191,7 @@
 <div id="footer-placeholder"></div>
 <script>
     $(function () {
-        $("#footer-placeholder").load("../NavFooter/footer.html");
+        $("#footer-placeholder").load("/Frontend/NavFooter/footer.html");
     });
 </script>
 
@@ -199,7 +199,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
-<script src="../js/ArticlePages/scrollToDiscussionButton.js"></script>
-<script src="../js/ArticlePages/replyfunc.js"></script>
+<script src="/Frontend/js/ArticlePages/scrollToDiscussionButton.js"></script>
+<script src="/Frontend/js/ArticlePages/replyfunc.js"></script>
 </body>
 </html>
