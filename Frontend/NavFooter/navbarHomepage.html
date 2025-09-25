@@ -82,7 +82,13 @@
                             </button>
                         </form>
                         <div>
-                            <button class="btn loginBtn px-3 d-lg-block d-none" type="button">Login</button>
+                            <button id="login-btn-navbar" 
+                              class="btn loginBtn px-3 ms-3" 
+                              type="button" 
+                              data-bs-toggle="modal" 
+                              data-bs-target="#loginModal">
+                            Login
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -90,11 +96,131 @@
         </nav>
     </div>
 
+    <!-- POPUPS -->
+    <!-- Login PopUp -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalTitle">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmailField" class="form-label">Email Adresse</label>
+                            <input type="email" class="form-control" id="loginEmailField" aria-describedby="emailOrUsername">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPasswordField" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPasswordField">
+                        </div>
+
+                        <button type="submit" class="btn myLoginBtn mb-3 myPopUpBtn">Login</button>
+
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+                            Not registered? &nbsp;
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register here</a>
+                        </div>
+                        <a class="mb-3 text-decoration-underline text-dark" href="#" data-bs-toggle="modal"
+                            data-bs-target="#pswZurückModal" data-bs-dismiss="modal">Forgot Password?</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Passwort zurücksetzen Popup -->
+    <div class="modal fade" id="pswZurückModal" tabindex="-1" aria-labelledby="pswZurückLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="pswZurückLabel">Passwort zurücksetzen</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3 ">
+                            <label for="InputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                    <button id="resetPasswordBtn" type="button" class="btn btn-primary myResetBtn">Zurücksetzen</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register PopUp -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalTitle">Registrieren</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form>
+                        <div class="mb-3">
+                            <label for="anrede" class="form-label">Anrede</label><br>
+                            <select class="form-select" id="anrede">
+                                <option selected></option>
+                                <option>Frau</option>
+                                <option>Herr</option>
+                                <option>Person (neutral)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="usernameField" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="usernameField">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="emailField" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="emailField"
+                                aria-describedby="emailHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="passwordField" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="passwordField">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword2" class="form-label">Repeat password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <select class="form-select" id="country">
+                                <option selected></option>
+                                <option>Österreich</option>
+                                <option>Deutschland</option>
+                                <option>Schweiz</option>
+                            </select>
+                        </div>
+
+                        <button id="registerButton" type="submit" class="btn myPopUpBtn mb-3">Registrieren</button>
+
+                        <div class="d-flex justify-content-center">
+                            Ich habe schon einen Account: &nbsp;
+                            <a class="mb-3 text-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
     <script src="/Frontend/js/navbar-auth.js"></script>
+    <script src="/Frontend/js/navbar.js"></script>
 </body>
 
 </html>

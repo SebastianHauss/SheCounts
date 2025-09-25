@@ -196,8 +196,20 @@ button.myPopUpBtn{
     width: 100%;
     color: white;
     background-color:  var(--myPink);
-
 }
+
+.myPopUpBtn:hover {
+    background-color:  var(--myDarkerPink);
+}
+
+.modal-backdrop + .modal-backdrop {
+    display: none !important;
+}
+
+.modal-open {
+    overflow: hidden !important;
+}
+
 #footer-placeholder {
     margin-top: 48px;
 }
