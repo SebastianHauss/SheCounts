@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+vendor/
+
+# build outputs
+dist/
+build/
+out/
+target/
+
+# environment & config
+.env
+*.log
+
+# data & assets
+coverage/
+public/
+uploads/
+storage/
