@@ -16,7 +16,13 @@
   </head>
   <body>
     <div id="navbar-placeholder"></div>
+    <script>
+      $(function () {
+        $('#navbar-placeholder').load('/Frontend/NavFooter/navbar.html');
+      });
+    </script>
 
+    <!-- <div id="navbar-placeholder"></div>
     <script>
       fetch('/Frontend/NavFooter/navbar.html')
         .then((res) => res.text())
@@ -27,7 +33,7 @@
           script.src = '/Frontend/js/NavFooter/navbar-auth.js';
           document.body.appendChild(script);
         });
-    </script>
+    </script> -->
 
     <!--DiscussionButton-->
     <!-- <a href="#diskussion" id="floating-button">
