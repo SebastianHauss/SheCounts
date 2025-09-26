@@ -30,27 +30,41 @@
     </script>
 
     <!--DiscussionButton-->
-    <a href="#diskussion" id="floating-button">
+    <!-- <a href="#diskussion" id="floating-button">
       <img
         src="/Frontend/img/commentButton.png"
         alt="Kommentare"
         width="55"
         height="48"
       />
+    </a> -->
+
+    <a
+      href="#diskussion"
+      id="floating-button"
+      class="text-dark rounded-circle d-flex align-items-center justify-content-center"
+      style="
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-decoration: none;
+      "
+    >
+      <i class="bi bi-chat-text" style="font-size: 1.5rem"></i>
     </a>
 
     <!-- Content Row -->
-    <div class="row ms-2 me-2">
-      <!-- Sidebar Links (left) -->
+
+    <!-- Sidebar Links (left)
       <div class="d-none d-lg-block col-lg-3">
-        <div class="position-sticky sideBar m-5 ps-4 py-4 shadow">
+        <div class="position-sticky sideBar mt-5 shadow bg-light">
           <div
             class="d-flex flex-column gap-2 simple-list-example-scrollspy text-left"
             id="simple-list-example"
           >
-            <a class="pt-1 pb-2 rounded sideBarLink" href="#simple-list-item-1"
-              >Artikelübersicht</a
-            >
+            <a class="p-1 sideBarLink" href="#simple-list-item-1">Inhalt</a>
             <a
               class="ps-3 pb-1 rounded sideBarLink p2Element"
               href="#ueberblick"
@@ -68,7 +82,60 @@
             <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#sparen"
               >Sparen</a
             >
-            <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#fazit"
+            <a class="ps-3 rounded sideBarLink p2Element" href="#fazit"
+              >Fazit</a
+            >
+            <div class="mb-5"></div>
+          </div>
+        </div>
+      </div> -->
+
+    <!-- Sidebar Links (left) -->
+    <div class="row">
+      <div class="d-none d-lg-block col-lg-2">
+        <div
+          class="position-sticky shadow bg-light"
+          style="
+            margin-top: 3rem;
+            padding: 1.5rem 1.5rem 4rem 1.5rem;
+            min-height: 400px;
+          "
+        >
+          <div class="d-flex flex-column" id="simple-list-example">
+            <div class="mb-3">
+              <h5 class="mb-0 fw-bold text-start text-uppercase text-muted">
+                Inhalt
+              </h5>
+              <hr class="mt-2 mb-0" />
+            </div>
+            <a
+              class="px-2 py-2 sideBarLink p2Element text-decoration-none text-center"
+              href="#ueberblick"
+              >Überblick</a
+            >
+            <a
+              class="px-2 py-2 sideBarLink p2Element text-decoration-none text-center"
+              href="#ziele"
+              >Ziele</a
+            >
+            <a
+              class="px-2 py-2 sideBarLink p2Element text-decoration-none text-center"
+              href="#schulden"
+              >Schulden</a
+            >
+            <a
+              class="px-2 py-2 sideBarLink p2Element text-decoration-none text-center"
+              href="#mindset"
+              >Mindset</a
+            >
+            <a
+              class="px-2 py-2 sideBarLink p2Element text-decoration-none text-center"
+              href="#sparen"
+              >Sparen</a
+            >
+            <a
+              class="px-2 py-2 sideBarLink p2Element text-decoration-none text-center"
+              href="#fazit"
               >Fazit</a
             >
           </div>
@@ -76,7 +143,7 @@
       </div>
 
       <!-- Article (middle) -->
-      <div class="col-12 col-lg-6 mt-5 mb-3 shadow">
+      <div class="col-12 col-lg-7 mt-5 mb-3 shadow rounded">
         <div
           class="scrollspy-example"
           data-bs-spy="scroll"
@@ -87,7 +154,7 @@
         >
           <h5 class="mt-3 text-uppercase">Private Finanzen</h5>
           <div class="comment-container d-flex mb-3">
-            <p class="pe-3">Autor:in Datum</p>
+            <p class="pe-3">Lisa Stein | 15.04.2025</p>
             <!--Kommentar-Icon-->
             <div class="comment-icon ps-1 pe-1">
               <a
@@ -192,20 +259,23 @@
       <!-- WEITERE ARTIKEL -->
       <div class="d-none d-lg-block col-lg-3">
         <div class="position-sticky top-0 mt-5 me-2">
-          <h6 class="text-uppercase">Weitere Artikel</h6>
+          <!-- <h6 class="text-uppercase">Weiterlesen</h6> -->
 
           <a
             href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung"
             class="article-link text-decoration-none text-dark"
           >
-            <div class="border p-3 mb-3 bg-light rounded shadow-sm">
-              <small class="text-muted">Finanzwissen</small><br />
+            <div
+              class="border p3- mb-3 bg-light rounded shadow-sm side-article-box"
+            >
+              <small class="text-muted text-uppercase">Finanzwissen</small
+              ><br />
               <strong
-                ><span class="underline-on-hover"
+                ><span class="underline-on-hover text-block"
                   >Budgetierung: Dein Geld unter Kontrolle</span
                 ></strong
               ><br />
-              <span class="small text-muted"
+              <span class="small text-muted text-justify"
                 >Für viele Menschen klingt das Wort „Budget“ nach Einschränkung
                 – doch in Wahrheit ist es ein Werkzeug für Freiheit und
                 Selbstbestimmung...</span
@@ -214,26 +284,46 @@
           </a>
 
           <a
-            href="article2.html"
+            href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung"
             class="article-link text-decoration-none text-dark"
           >
-            <div class="border p-3 mb-3 bg-light rounded shadow-sm">
-              <small class="text-muted">ÜBERBEGRIFF</small><br />
-              <strong><span class="underline-on-hover">Titel</span></strong
+            <div
+              class="border p3- mb-3 bg-light rounded shadow-sm side-article-box"
+            >
+              <small class="text-muted text-uppercase">Finanzwissen</small
               ><br />
-              <span class="small text-muted">This is our article preview.</span>
+              <strong
+                ><span class="underline-on-hover text-block"
+                  >Budgetierung: Dein Geld unter Kontrolle</span
+                ></strong
+              ><br />
+              <span class="small text-muted text-justify"
+                >Für viele Menschen klingt das Wort „Budget“ nach Einschränkung
+                – doch in Wahrheit ist es ein Werkzeug für Freiheit und
+                Selbstbestimmung...</span
+              >
             </div>
           </a>
 
           <a
-            href="article3.html"
+            href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung"
             class="article-link text-decoration-none text-dark"
           >
-            <div class="border p-3 mb-3 bg-light rounded shadow-sm">
-              <small class="text-muted">ÜBERBEGRIFF</small><br />
-              <strong><span class="underline-on-hover">Titel</span></strong
+            <div
+              class="border p3- mb-3 bg-light rounded shadow-sm side-article-box"
+            >
+              <small class="text-muted text-uppercase">Finanzwissen</small
               ><br />
-              <span class="small text-muted">This is our article preview.</span>
+              <strong
+                ><span class="underline-on-hover text-block"
+                  >Budgetierung: Dein Geld unter Kontrolle</span
+                ></strong
+              ><br />
+              <span class="small text-muted text-justify"
+                >Für viele Menschen klingt das Wort „Budget“ nach Einschränkung
+                – doch in Wahrheit ist es ein Werkzeug für Freiheit und
+                Selbstbestimmung...</span
+              >
             </div>
           </a>
         </div>
@@ -241,7 +331,9 @@
     </div>
 
     <!--DISCUSSION FIELD-->
-    <div class="col-12 col-lg-6 offset-lg-3 mt-5 mb-3 shadow discussion-box">
+    <div
+      class="col-12 col-lg-7 offset-lg-2 mt-5 mb-3 shadow discussion-box bg-light"
+    >
       <div id="diskussion">
         <h1>Diskussionsforum</h1>
         <p><i class="bi bi-chat-left-text"></i> 112 Postings</p>
