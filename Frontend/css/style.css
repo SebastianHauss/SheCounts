@@ -1,215 +1,213 @@
 :root {
-    --myPastelGreen: #A9B8A3;
-    --myGrey: #796F80;
-    --myPink: #C3868D;
-    --myDarkerPink: #b56468;
-    --myBeige: #fbeae1;
-    --myBorderRGB: 121, 111, 128;
+  --myPastelGreen: #a9b8a3;
+  --myGrey: #796f80;
+  --myPink: #c3868d;
+  --myDarkerPink: #b56468;
+  --myBeige: #fbeae1;
+  --myBorderRGB: 121, 111, 128;
 }
 
 body {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 /* --- Navbar --- */
-.nav-homepage, .myBG {
-    background-color: var(--myPastelGreen);
+.nav-homepage,
+.myBG {
+  background-color: var(--myPastelGreen);
 }
 
 .myTitleFont {
-    font-family: 'Lobster', cursive;
-    color: white;
+  font-family: 'Lobster', cursive;
+  color: white;
 }
 
 .mySearchBar {
-    width: 110%;
-    background-color: white;
-    border: 2px solid var(--myPastelGreen);
-    border-radius: 25px;
+  width: 110%;
+  background-color: white;
+  border: 2px solid var(--myPastelGreen);
+  border-radius: 25px;
 }
 
 .logo {
-    max-height: 70px;
-    width: auto;
-    height: auto;
+  max-height: 70px;
+  width: auto;
+  height: auto;
 }
 
 .loginBtn {
-    background-color: var(--myGrey);
-    color: white;
+  background-color: var(--myGrey);
+  color: white;
 }
 
 .loginBtn:hover {
-    background-color: var(--myPink);
+  background-color: var(--myPink);
 }
 
 .magnifiyingGlass {
-    text-shadow: 0 0 1px white;
-    font-weight: bold;
+  text-shadow: 0 0 1px white;
+  font-weight: bold;
 }
 
 /* --- Carousel --- */
 .carousel-inner {
-    background-color: var(--myBeige);
+  background-color: var(--myBeige);
 }
 
 .carousel-slide-3 h3 a {
-    color: var(--myGrey);
-    font-weight: 600;
-    text-decoration: none;
+  color: var(--myGrey);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .carousel-slide-3 h3 a:hover {
-    color: var(--myDarkerPink);
+  color: var(--myDarkerPink);
 }
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    filter: invert(0%) brightness(0) contrast(200%);
+  filter: invert(0%) brightness(0) contrast(200%);
 }
 
 /* --- Sidebar --- */
 .sideBar {
-
-    border-radius: 10px;
-    position: sticky;
-    top: 100px; /* Abstand von oben: Sticky wird erst ab hier aktiv */
-    padding: 30px;
-    height: 300px;
+  border-radius: 10px;
+  position: sticky;
+  top: 100px; /* Abstand von oben: Sticky wird erst ab hier aktiv */
+  padding: 30px;
+  height: 300px;
 }
 /*
 background-color: var(--myBeige);
 */
 
-
 .sideBarLink {
-    color: black;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1.2rem;
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.2rem;
 }
 
 .sideBarLink:hover {
-    color: var(--myGrey);
+  color: var(--myGrey);
 }
 
 .p2Element {
-    font-size: 1.1rem;
+  font-size: 1.1rem;
 }
 .p3Element {
-    font-size: 1rem;
+  font-size: 1rem;
 }
-
 
 /* --- Carousel Media Queries --- */
 
 @media (max-width: 767px) {
-    .carousel-slide-1,
-    .carousel-slide-2,
-    .carousel-slide-3 {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 15px 60px 15px 60px;
-        min-height: 160px;
-    }
+  .carousel-slide-1,
+  .carousel-slide-2,
+  .carousel-slide-3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 60px 15px 60px;
+    min-height: 160px;
+  }
 
-    .carousel-slide-1 h3,
-    .carousel-slide-2 h3,
-    .carousel-slide-3 h3 {
-        text-align: center;
-        font-size: 14px;
-    }
+  .carousel-slide-1 h3,
+  .carousel-slide-2 h3,
+  .carousel-slide-3 h3 {
+    text-align: center;
+    font-size: 14px;
+  }
 
-    .img-three-women,
-    .img-empowering-fist {
-        max-height: 60px;
-        margin-right: 15px;
-    }
+  .img-three-women,
+  .img-empowering-fist {
+    max-height: 60px;
+    margin-right: 15px;
+  }
 }
 @media (min-width: 768px) {
-    .carousel-slide-1,
-    .carousel-slide-2,
-    .carousel-slide-3 {
-        padding: 15px 200px 15px 200px;
-        min-height: 260px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
+  .carousel-slide-1,
+  .carousel-slide-2,
+  .carousel-slide-3 {
+    padding: 15px 200px 15px 200px;
+    min-height: 260px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .carousel-slide-1 h3,
-    .carousel-slide-2 h3,
-    .carousel-slide-3 h3 {
-        text-align: center;
-        font-size: 30px;
-        padding: 60px 20px;
-    }
+  .carousel-slide-1 h3,
+  .carousel-slide-2 h3,
+  .carousel-slide-3 h3 {
+    text-align: center;
+    font-size: 30px;
+    padding: 60px 20px;
+  }
 
-    .img-three-women,
-    .img-empowering-fist {
-        margin-top: 30px;
-        max-height: 200px;
-        object-fit: cover;
-    }
+  .img-three-women,
+  .img-empowering-fist {
+    margin-top: 30px;
+    max-height: 200px;
+    object-fit: cover;
+  }
 }
-
 
 /* ---- Profil Einstellungen Buttons ---- */
-.myPictureBtn{
-    border: 1px solid #474343;
-    border-radius: 80px;
+.myPictureBtn {
+  border: 1px solid #474343;
+  border-radius: 80px;
 }
-.myPictureBtn:hover{
-    background-color: #dddcdc;
-}
-
-.mySubBtn{
-    border: 1px solid #ca5f75;
-    background-color: #e6a4b1;
-    border-radius: 80px;
+.myPictureBtn:hover {
+  background-color: #dddcdc;
 }
 
-.mySubBtn:hover{
-    background-color: #dc4e6b;
+.mySubBtn {
+  border: 1px solid #ca5f75;
+  background-color: #e6a4b1;
+  border-radius: 80px;
 }
 
-.myCancelBtn, .edit-profile-btn{
-    background-color: var(--myBeige);
-    border-radius: 15px;
-}
-.myCancelBtn:hover, .myEditProfileBtn:hover{
-    background-color: #dddcdc;
+.mySubBtn:hover {
+  background-color: #dc4e6b;
 }
 
-.myDeleteAccBtn{
-    border: 1px solid #b60e0e;
-    background-color: #f61212;
-    border-radius: 80px;
+.myCancelBtn,
+.edit-profile-btn {
+  background-color: var(--myBeige);
+  border-radius: 15px;
+}
+.myCancelBtn:hover,
+.myEditProfileBtn:hover {
+  background-color: #dddcdc;
 }
 
+.myDeleteAccBtn {
+  border: 1px solid #b60e0e;
+  background-color: #f61212;
+  border-radius: 80px;
+}
 
 /* ---- Login Register PopUp Buttons ---- */
-button.myPopUpBtn{
-    width: 100%;
-    color: white;
-    background-color:  var(--myPink);
+button.myPopUpBtn {
+  width: 100%;
+  color: white;
+  background-color: var(--myPink);
 }
 
 .myPopUpBtn:hover {
-    background-color:  var(--myDarkerPink);
+  background-color: var(--myDarkerPink);
 }
 
 .modal-backdrop + .modal-backdrop {
-    display: none !important;
+  display: none !important;
 }
 
 .modal-open {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 #footer-placeholder {
-    margin-top: 48px;
+  margin-top: 48px;
 }

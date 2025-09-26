@@ -17,16 +17,16 @@
 
 /* --- Grid Cards --- */
 .main-card-img {
-    height: 100%;
-    object-fit: cover;
-    border-top-left-radius: 0.375rem;
-    border-bottom-left-radius: 0.375rem;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
 }
 
 @media (max-width: 767.98px) {
-    .main-card-img {
-        height: auto;
-        border-bottom-left-radius: 0;
-        border-top-right-radius: 0.375rem;
-    }
+  .main-card-img {
+    height: auto;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0.375rem;
+  }
 }

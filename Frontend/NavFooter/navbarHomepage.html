@@ -1,226 +1,388 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bootstrap demo</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="/Frontend/css/style.css">
-</head>
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/Frontend/css/style.css" />
+  </head>
 
-<body>
-
+  <body>
     <div class="navbar-container">
+      <!-- Simple navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark nav-homepage sticky-top">
+        <div class="container-fluid">
+          <!-- container-fluid sagt: „Dieser Bereich soll die ganze Breite des Bildschirms nutzen“ -->
+          <!-- Logo -->
+          <a
+            class="navbar-brand d-flex align-items-center gap-2"
+            href="/Frontend/index.html"
+          >
+            <img
+              class="logo me-2"
+              src="/Frontend/img/shecounts-logo.png"
+              alt="logo"
+            />
+          </a>
 
-        <!-- Simple navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark nav-homepage sticky-top">
-            <div class="container-fluid">
-                <!-- container-fluid sagt: „Dieser Bereich soll die ganze Breite des Bildschirms nutzen“ -->
-                <!-- Logo -->
-                <a class="navbar-brand d-flex align-items-center gap-2" href="/Frontend/index.html">
-                    <img class="logo me-2" src="/Frontend/img/shecounts-logo.png" alt="logo">
-                </a>
+          <div class="d-lg-none d-flex justify-content-end flex-row-reverse">
+            <button class="btn loginBtn px-3 ms-3" type="button">Login</button>
 
-                <div class="d-lg-none d-flex justify-content-end flex-row-reverse">
-                    <button class="btn loginBtn px-3 ms-3" type="button">Login</button>
-
-                    <!-- Hamburger -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                        <!-- class="navbar-toggler":  gibt dem Button einen Style
+            <!-- Hamburger -->
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+              <!-- class="navbar-toggler":  gibt dem Button einen Style
                           data-bs-toggle="collapse" & data-bs-target="#navbarSupportedContent": Das sorgt dafür, dass beim Klicken ein Menü auf- oder zugeht.
                           <span class="navbar-toggler-icon">: Zeigt ein Symbol (drei Linien = Hamburger-Menü)
                      -->
-                    </button>
-                </div>
+            </button>
+          </div>
 
-                <!-- Collapse-Inhale -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Raum für Inhalte die collapsen wenn Bildschirm klein -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5 fw-semibold">
-                        <!-- me-auto: Sorgt dafür, dass das Menü nach links geschoben wird
+          <!-- Collapse-Inhale -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Raum für Inhalte die collapsen wenn Bildschirm klein -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 fs-5 fw-semibold">
+              <!-- me-auto: Sorgt dafür, dass das Menü nach links geschoben wird
                         mb-2 mb-lg-0: Abstand nach unten (auf kleinen Geräten), kein Abstand auf großen Geräten
                       -->
-                        <li class="nav-item me-5"> <!-- me-5: Gibt etwas Abstand rechts (Margin-End) -->
-                            <a class="nav-link active" aria-current="page" href="">Home</a>
-                            <!-- active & aria-current="page": Zeigt an, dass das gerade die aktuelle Seite ist. -->
-                        </li>
-                        <li class="nav-item me-5">
-                            <a class="nav-link" aria-current="page" href="/Frontend/AllgemeineSeiten/erste-schritte.html">Erste Schritte</a>
-                        </li>
-                        <li class="nav-item me-5 dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Blogartikel
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/Frontend/ArticlePages/finanzwissenAllg.html">Finanzwissen von Grund auf</a></li>
-                                <li><a class="dropdown-item" href="/Frontend/ArticlePages/private-finanzen.html">Private Finanzen</a></li>
-                                <li><a class="dropdown-item" href="#">Ehe und Partnerschaft</a></li>
-                                <li><a class="dropdown-item" href="#">Finanzielle Sicherheit</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+              <li class="nav-item me-5">
+                <!-- me-5: Gibt etwas Abstand rechts (Margin-End) -->
+                <a class="nav-link active" aria-current="page" href="">Home</a>
+                <!-- active & aria-current="page": Zeigt an, dass das gerade die aktuelle Seite ist. -->
+              </li>
+              <li class="nav-item me-5">
+                <a
+                  class="nav-link"
+                  aria-current="page"
+                  href="/Frontend/AllgemeineSeiten/erste-schritte.html"
+                  >Erste Schritte</a
+                >
+              </li>
+              <li class="nav-item me-5 dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Blogartikel
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="/Frontend/ArticlePages/finanzwissenAllg.html"
+                      >Finanzwissen von Grund auf</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      href="/Frontend/ArticlePages/private-finanzen.html"
+                      >Private Finanzen</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Ehe und Partnerschaft</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Finanzielle Sicherheit</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
 
-                    <!-- Suchfeld und Login Button-->
-                    <div class="d-flex align-items-center justify-content-center mt-3 mt-lg-0 ms-auto">
-                        <form class="d-flex me-3" role="search">
-                            <input class="form-control mySearchBar me-2" type="search" placeholder="Search"
-                                aria-label="Search" />
-                            <button class="btn" type="submit">
-                                <i class="bi bi-search text-white fs-4 magnifiyingGlass"></i>
-                            </button>
-                        </form>
-                        <div>
-                            <button id="login-btn-navbar" 
-                              class="btn loginBtn px-3 ms-3" 
-                              type="button" 
-                              data-bs-toggle="modal" 
-                              data-bs-target="#loginModal">
-                            Login
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <!-- Suchfeld und Login Button-->
+            <div
+              class="d-flex align-items-center justify-content-center mt-3 mt-lg-0 ms-auto"
+            >
+              <form class="d-flex me-3" role="search">
+                <input
+                  class="form-control mySearchBar me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn" type="submit">
+                  <i class="bi bi-search text-white fs-4 magnifiyingGlass"></i>
+                </button>
+              </form>
+              <div>
+                <button
+                  id="login-btn-navbar"
+                  class="btn loginBtn px-3 ms-3"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  Login
+                </button>
+              </div>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </div>
 
     <!-- POPUPS -->
     <!-- Login PopUp -->
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalTitle">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm">
-                        <div class="mb-3">
-                            <label for="loginEmailField" class="form-label">Email Adresse</label>
-                            <input type="email" class="form-control" id="loginEmailField" aria-describedby="emailOrUsername">
-                        </div>
-                        <div class="mb-3">
-                            <label for="loginPasswordField" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="loginPasswordField">
-                        </div>
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalTitle">Login</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="loginEmailField" class="form-label"
+                  >Email Adresse</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="loginEmailField"
+                  aria-describedby="emailOrUsername"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="loginPasswordField" class="form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPasswordField"
+                />
+              </div>
 
-                        <button type="submit" class="btn myLoginBtn mb-3 myPopUpBtn">Login</button>
+              <button type="submit" class="btn myLoginBtn mb-3 myPopUpBtn">
+                Login
+              </button>
 
-                        <div class="d-flex align-items-center justify-content-center mb-3">
-                            Not registered? &nbsp;
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="modal">Register here</a>
-                        </div>
-                        <a class="mb-3 text-decoration-underline text-dark" href="#" data-bs-toggle="modal"
-                            data-bs-target="#pswZurückModal" data-bs-dismiss="modal">Forgot Password?</a>
-                    </form>
-                </div>
-            </div>
+              <div
+                class="d-flex align-items-center justify-content-center mb-3"
+              >
+                Not registered? &nbsp;
+                <a
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#registerModal"
+                  data-bs-dismiss="modal"
+                  >Register here</a
+                >
+              </div>
+              <a
+                class="mb-3 text-decoration-underline text-dark"
+                href="#"
+                data-bs-toggle="modal"
+                data-bs-target="#pswZurückModal"
+                data-bs-dismiss="modal"
+                >Forgot Password?</a
+              >
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Passwort zurücksetzen Popup -->
-    <div class="modal fade" id="pswZurückModal" tabindex="-1" aria-labelledby="pswZurückLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="pswZurückLabel">Passwort zurücksetzen</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3 ">
-                            <label for="InputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp">
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
-                    <button id="resetPasswordBtn" type="button" class="btn btn-primary myResetBtn">Zurücksetzen</button>
-                </div>
-            </div>
+    <div
+      class="modal fade"
+      id="pswZurückModal"
+      tabindex="-1"
+      aria-labelledby="pswZurückLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="pswZurückLabel">
+              Passwort zurücksetzen
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="InputEmail1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="InputEmail1"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Abbrechen
+            </button>
+            <button
+              id="resetPasswordBtn"
+              type="button"
+              class="btn btn-primary myResetBtn"
+            >
+              Zurücksetzen
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Register PopUp -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="registerModalTitle">Registrieren</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+    <div
+      class="modal fade"
+      id="registerModal"
+      tabindex="-1"
+      aria-labelledby="registerModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalTitle">Registrieren</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="anrede" class="form-label">Anrede</label><br />
+                <select class="form-select" id="anrede">
+                  <option selected></option>
+                  <option>Frau</option>
+                  <option>Herr</option>
+                  <option>Person (neutral)</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="usernameField" class="form-label">Username</label>
+                <input type="text" class="form-control" id="usernameField" />
+              </div>
 
-                    <form>
-                        <div class="mb-3">
-                            <label for="anrede" class="form-label">Anrede</label><br>
-                            <select class="form-select" id="anrede">
-                                <option selected></option>
-                                <option>Frau</option>
-                                <option>Herr</option>
-                                <option>Person (neutral)</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="usernameField" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="usernameField">
-                        </div>
+              <div class="mb-3">
+                <label for="emailField" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="emailField"
+                  aria-describedby="emailHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="passwordField" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="passwordField"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword2" class="form-label"
+                  >Repeat password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword2"
+                />
+              </div>
 
-                        <div class="mb-3">
-                            <label for="emailField" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="emailField"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="passwordField" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="passwordField">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword2" class="form-label">Repeat password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword2">
-                        </div>
+              <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <select class="form-select" id="country">
+                  <option selected></option>
+                  <option>Österreich</option>
+                  <option>Deutschland</option>
+                  <option>Schweiz</option>
+                </select>
+              </div>
 
-                        <div class="mb-3">
-                            <label for="country" class="form-label">Country</label>
-                            <select class="form-select" id="country">
-                                <option selected></option>
-                                <option>Österreich</option>
-                                <option>Deutschland</option>
-                                <option>Schweiz</option>
-                            </select>
-                        </div>
+              <button
+                id="registerButton"
+                type="submit"
+                class="btn myPopUpBtn mb-3"
+              >
+                Registrieren
+              </button>
 
-                        <button id="registerButton" type="submit" class="btn myPopUpBtn mb-3">Registrieren</button>
-
-                        <div class="d-flex justify-content-center">
-                            Ich habe schon einen Account: &nbsp;
-                            <a class="mb-3 text-primary" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                Login</a>
-                        </div>
-                    </form>
-                </div>
-            </div>
+              <div class="d-flex justify-content-center">
+                Ich habe schon einen Account: &nbsp;
+                <a
+                  class="mb-3 text-primary"
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  Login</a
+                >
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
     <script src="/Frontend/js/navbar-auth.js"></script>
     <script src="/Frontend/js/navbar.js"></script>
-</body>
-
+  </body>
 </html>
