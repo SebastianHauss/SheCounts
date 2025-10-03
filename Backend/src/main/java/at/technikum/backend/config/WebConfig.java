@@ -15,13 +15,17 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:63343")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+                registry.addMapping("/api/**")
+                        .allowedOrigins(
+                                "http://127.0.0.1:5500",
+                                "http://localhost:63343")
+                        .allowedHeaders("*")
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowCredentials(true);
             }
         };
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
