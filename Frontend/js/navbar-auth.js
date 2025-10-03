@@ -1,186 +1,189 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const userId = localStorage.getItem('userId');
-  const isLoggedIn = !!userId;
+// document.addEventListener('DOMContentLoaded', () => {
+//   const userId = localStorage.getItem('userId');
+//   const isLoggedIn = !!userId;
 
-  // NAVBAR
-  const loginBlock = document.getElementById('loginBlock');
-  const userBlock = document.getElementById('userBlock');
-  const adminLink = document.getElementById('adminLink');
+//   // NAVBAR
+//   const loginBlock = document.getElementById('loginBlock');
+//   const userBlock = document.getElementById('userBlock');
+//   const adminLink = document.getElementById('adminLink');
 
-  if (isLoggedIn) {
-    loginBlock?.style.setProperty('display', 'none', 'important');
-    userBlock?.style.setProperty('display', 'block', 'important');
-  } else {
-    loginBlock?.style.setProperty('display', 'block', 'important');
-    userBlock?.style.setProperty('display', 'none', 'important');
-  }
+//   if (isLoggedIn) {
+//     loginBlock?.style.setProperty('display', 'none', 'important');
+//     userBlock?.style.setProperty('display', 'block', 'important');
+//   } else {
+//     loginBlock?.style.setProperty('display', 'block', 'important');
+//     userBlock?.style.setProperty('display', 'none', 'important');
+//   }
 
-  //LOGOUT
-  const logoutBtn = document.getElementById('logoutBtn');
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', () => {
-      localStorage.clear();
-      location.reload();
-    });
-  }
+//   //LOGOUT
+//   const logoutBtn = document.getElementById('logoutBtn');
+//   if (logoutBtn) {
+//     logoutBtn.addEventListener('click', () => {
+//       localStorage.clear();
+//       location.reload();
+//     });
+//   }
 
-  //REGISTRIERUNG
-  const registerButton = document.querySelector('#registerModal .myPopUpBtn');
-  if (registerButton) {
-    registerButton.addEventListener('click', async (e) => {
-      e.preventDefault();
+//   //REGISTRIERUNG
+//   const registerButton = document.querySelector('#registerModal .myPopUpBtn');
+//   if (registerButton) {
+//     registerButton.addEventListener('click', async (e) => {
+//       e.preventDefault();
 
-      const emailField = document.getElementById('emailField');
-      const usernameField = document.getElementById('usernameField');
-      const passwordField = document.getElementById('passwordField');
+//       const emailField = document.getElementById('emailField');
+//       const usernameField = document.getElementById('usernameField');
+//       const passwordField = document.getElementById('passwordField');
 
-      if (!emailField || !passwordField || !usernameField) {
-        console.error('Register-Felder nicht gefunden!');
-        return;
-      }
+//       if (!emailField || !passwordField || !usernameField) {
+//         console.error('Register-Felder nicht gefunden!');
+//         return;
+//       }
 
-      const email = emailField.value.trim();
-      const username = usernameField.value.trim();
-      const password = passwordField.value;
+//       const email = emailField.value.trim();
+//       const username = usernameField.value.trim();
+//       const password = passwordField.value;
 
-      if (!email || !password || !username) {
-        alert('Bitte Email, Username und Passwort eingeben!');
-        return;
-      }
+//       if (!email || !password || !username) {
+//         alert('Bitte Email, Username und Passwort eingeben!');
+//         return;
+//       }
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert('Bitte gib eine gültige Email-Adresse ein!');
-        return;
-      }
+//       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//       if (!emailRegex.test(email)) {
+//         alert('Bitte gib eine gültige Email-Adresse ein!');
+//         return;
+//       }
 
-      if (password.length < 6) {
-        alert('Passwort muss mindestens 6 Zeichen haben!');
-        return;
-      }
+//       if (password.length < 6) {
+//         alert('Passwort muss mindestens 6 Zeichen haben!');
+//         return;
+//       }
 
-      try {
-        const res = await fetch('http://localhost:8080/api/auth/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, username }),
-        });
+//       try {
+//         const res = await fetch('http://localhost:8080/api/auth/register', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({ email, password, username }),
+//         });
 
-        if (!res.ok) {
-          const errText = await res.text();
-          throw new Error(errText || 'Registrierung fehlgeschlagen');
-        }
+//         if (!res.ok) {
+//           const errText = await res.text();
+//           throw new Error(errText || 'Registrierung fehlgeschlagen');
+//         }
 
-        alert('Registrierung erfolgreich!');
-        const modal = bootstrap.Modal.getInstance(
-          document.getElementById('registerModal')
-        );
-        modal?.hide();
+//         alert('Registrierung erfolgreich!');
+//         const modal = bootstrap.Modal.getInstance(
+//           document.getElementById('registerModal')
+//         );
+//         modal?.hide();
 
-        emailField.value = '';
-        passwordField.value = '';
-        usernameField.value = '';
-      } catch (err) {
-        console.error(err);
-        alert('Fehler bei der Registrierung: ' + err.message);
-      }
-    });
-  }
+//         emailField.value = '';
+//         passwordField.value = '';
+//         usernameField.value = '';
+//       } catch (err) {
+//         console.error(err);
+//         alert('Fehler bei der Registrierung: ' + err.message);
+//       }
+//     });
+//   }
 
-  //LOGIN
-  const loginButton = document.querySelector('#loginModal .myLoginBtn');
-  if (loginButton) {
-    loginButton.addEventListener('click', async (e) => {
-      e.preventDefault();
+//   //LOGIN
+//  const loginButton = document.getElementById('login-btn-navbar');
 
-      const emailField = document.getElementById('loginEmailField');
-      const passwordField = document.getElementById('loginPasswordField');
+//   if (loginButton) {
+//     console.log("LoginButton gefunden");
+//     loginButton.addEventListener('click', async (e) => {
+//       console.log("Login-Button geklickt");
+//       e.preventDefault();
 
-      if (!emailField || !passwordField) {
-        console.error('Login-Felder nicht gefunden!');
-        return;
-      }
+//       const emailField = document.getElementById('loginEmailField');
+//       const passwordField = document.getElementById('loginPasswordField');
 
-      const email = emailField.value.trim();
-      const password = passwordField.value;
+//       if (!emailField || !passwordField) {
+//         console.error('Login-Felder nicht gefunden!');
+//         return;
+//       }
 
-      if (!email || !password) {
-        alert('Bitte Email und Passwort eingeben!');
-        return;
-      }
+//       const email = emailField.value.trim();
+//       const password = passwordField.value;
 
-      try {
-        const res = await fetch('http://localhost:8080/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        });
+//       if (!email || !password) {
+//         alert('Bitte Email und Passwort eingeben!');
+//         return;
+//       }
 
-        if (!res.ok) {
-          const errText = await res.text();
-          throw new Error(errText || 'Login fehlgeschlagen');
-        }
+//       try {
+//         const res = await fetch('http://localhost:8080/api/auth/login', {
+//           method: 'POST',
+//           headers: { 'Content-Type': 'application/json' },
+//           body: JSON.stringify({ email, password }),
+//         });
 
-        const data = await res.json();
-        localStorage.setItem('userId', data.userId);
+//         if (!res.ok) {
+//           const errText = await res.text();
+//           throw new Error(errText || 'Login fehlgeschlagen');
+//         }
 
-        alert('Login erfolgreich!');
-        const modal = bootstrap.Modal.getInstance(
-          document.getElementById('loginModal')
-        );
-        modal?.hide();
-        location.reload();
-      } catch (err) {
-        console.error(err);
-        alert('Fehler beim Login: ' + err.message);
-      }
-    });
-  }
-  // PASSWORT ZURÜCKSETZEN
-  const resetBtn = document.querySelector('#pswZurückModal .myResetBtn');
-  if (resetBtn) {
-    resetBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
+//         const data = await res.json();
+//         localStorage.setItem('userId', data);
 
-      const emailField = document.getElementById('resetEmailField');
+//         alert('Login erfolgreich!');
+//         const modal = bootstrap.Modal.getInstance(
+//           document.getElementById('loginModal')
+//         );
+//         modal?.hide();
+//         location.reload();
+//       } catch (err) {
+//         console.error(err);
+//         alert('Fehler beim Login: ' + err.message);
+//       }
+//     });
+//   }
+//   // PASSWORT ZURÜCKSETZEN
+//   const resetBtn = document.querySelector('#pswZurückModal .myResetBtn');
+//   if (resetBtn) {
+//     resetBtn.addEventListener('click', async (e) => {
+//       e.preventDefault();
 
-      if (!emailField) {
-        console.error('Reset-Feld nicht gefunden!');
-        return;
-      }
+//       const emailField = document.getElementById('resetEmailField');
 
-      const email = emailField.value.trim();
-      if (!email) {
-        alert('Bitte gib deine Email-Adresse ein!');
-        return;
-      }
+//       if (!emailField) {
+//         console.error('Reset-Feld nicht gefunden!');
+//         return;
+//       }
 
-      try {
-        const res = await fetch(
-          'http://localhost:8080/api/auth/reset-password',
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email }),
-          }
-        );
+//       const email = emailField.value.trim();
+//       if (!email) {
+//         alert('Bitte gib deine Email-Adresse ein!');
+//         return;
+//       }
 
-        if (!res.ok) {
-          const errText = await res.text();
-          throw new Error(errText || 'Zurücksetzen fehlgeschlagen');
-        }
+//       try {
+//         const res = await fetch(
+//           'http://localhost:8080/api/auth/reset-password',
+//           {
+//             method: 'POST',
+//             headers: { 'Content-Type': 'application/json' },
+//             body: JSON.stringify({ email }),
+//           }
+//         );
 
-        alert('Passwort-Zurücksetzungsanfrage wurde gesendet!');
-        const modal = bootstrap.Modal.getInstance(
-          document.getElementById('pswZurückModal')
-        );
-        modal?.hide();
+//         if (!res.ok) {
+//           const errText = await res.text();
+//           throw new Error(errText || 'Zurücksetzen fehlgeschlagen');
+//         }
 
-        emailField.value = '';
-      } catch (err) {
-        console.error(err);
-        alert('Fehler beim Zurücksetzen: ' + err.message);
-      }
-    });
-  }
-});
+//         alert('Passwort-Zurücksetzungsanfrage wurde gesendet!');
+//         const modal = bootstrap.Modal.getInstance(
+//           document.getElementById('pswZurückModal')
+//         );
+//         modal?.hide();
+
+//         emailField.value = '';
+//       } catch (err) {
+//         console.error(err);
+//         alert('Fehler beim Zurücksetzen: ' + err.message);
+//       }
+//     });
+//   }
+// });
