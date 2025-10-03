@@ -133,9 +133,11 @@
                 </button>
               </form>
 
+              <!-- Login Block -->
               <div id="loginBlock">
                 <button
-                  class="btn loginBtn px-3 d-lg-block d-none"
+                  id="login-block-btn"
+                  class="btn loginBtn px-3"
                   type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#loginModal"
@@ -144,12 +146,8 @@
                 </button>
               </div>
 
-              <!-- user menu -->
-              <div
-                id="userBlock"
-                class="dropdown d-lg-block d-none"
-                style="display: none"
-              >
+              <!-- User Block -->
+              <div id="userBlock" class="dropdown" style="display: none">
                 <a
                   class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                   href="#"
@@ -240,7 +238,11 @@
                 />
               </div>
 
-              <button type="submit" class="btn myLoginBtn mb-3 myPopUpBtn">
+              <button
+                id="loginButton"
+                type="submit"
+                class="btn myPopUpBtn mb-3"
+              >
                 Login
               </button>
 
@@ -429,7 +431,7 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
-    <script src="/Frontend/js/navbar-auth.js"></script>
+    <script src="/Frontend/js/login.js"></script>
     <script src="/Frontend/js/modal-util.js"></script>
   </body>
 </html>
