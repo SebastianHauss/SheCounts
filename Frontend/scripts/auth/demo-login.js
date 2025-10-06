@@ -1,5 +1,5 @@
 // Simple Authentication System for School Project
-// Add this to your existing navbar-auth.js file or create a new JS file
+// Add this to your existing navbar-auth.scripts file or create a new JS file
 
 // Hardcoded credentials for demo purposes
 const DEMO_CREDENTIALS = {

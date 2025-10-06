@@ -3,6 +3,7 @@
   --myGrey: #796f80;
   --myPink: #c3868d;
   --myDarkerPink: #b56468;
+  --myDarkerPink: #b56468;
   --myBeige: #fbeae1;
   --myBorderRGB: 121, 111, 128;
 }
@@ -71,6 +72,7 @@
   z-index: 1000;
   transition: opacity 0.3s ease-in-out;
   background-color: #ff1493 !important;
+
 }
 
 .side-article-box {

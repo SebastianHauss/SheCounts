@@ -10,7 +10,7 @@
       integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/Frontend/css/article.css" />
+    <link rel="stylesheet" href="/Frontend/css/articles.css" />
     <link rel="stylesheet" href="/Frontend/css/style.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
@@ -18,19 +18,19 @@
     <div id="navbar-placeholder"></div>
     <script>
       $(function () {
-        $('#navbar-placeholder').load('/Frontend/NavFooter/navbar.html');
+        $('#navbar-placeholder').load('/Frontend/components/navbar.html');
       });
     </script>
 
     <!-- <div id="navbar-placeholder"></div>
     <script>
-      fetch('/Frontend/NavFooter/navbar.html')
+      fetch('/Frontend/components/navbar.html')
         .then((res) => res.text())
         .then((html) => {
           document.getElementById('navbar-placeholder').innerHTML = html;
 
           const script = document.createElement('script');
-          script.src = '/Frontend/js/NavFooter/navbar-auth.js';
+          script.src = '/Frontend/scripts/components/navbar-auth.scripts';
           document.body.appendChild(script);
         });
     </script> -->
@@ -38,7 +38,7 @@
     <!--DiscussionButton-->
     <!-- <a href="#diskussion" id="floating-button">
       <img
-        src="/Frontend/img/commentButton.png"
+        src="/Frontend/img/comment-button.png"
         alt="Kommentare"
         width="55"
         height="48"
@@ -46,7 +46,7 @@
     </a> -->
 
     <a
-      href="#diskussion"
+      href="#discussion"
       id="floating-button"
       class="text-dark rounded-circle d-flex align-items-center justify-content-center"
       style="
@@ -164,7 +164,7 @@
             <!--Kommentar-Icon-->
             <div class="comment-icon ps-1 pe-1">
               <a
-                href="#diskussion"
+                href="#discussion"
                 class="d-flex text-decoration-none text-dark"
               >
                 <i class="bi bi-chat-left-text me-1"></i>
@@ -173,7 +173,7 @@
             </div>
           </div>
           <div class="article-img mb-2 mt-2">
-            <img class="img-fluid" src="../img/finanzen-ordnung.jpg" alt="" />
+            <img class="img-fluid" src="/Frontend/img/finance-organization.jpg" alt="" />
           </div>
 
           <h1 id="simple-list-item-1">
@@ -268,7 +268,7 @@
           <!-- <h6 class="text-uppercase">Weiterlesen</h6> -->
 
           <a
-            href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung"
+            href="/Frontend/pages/articles/financial-literacy.html"
             class="article-link text-decoration-none text-dark"
           >
             <div
@@ -290,7 +290,7 @@
           </a>
 
           <a
-            href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung"
+            href="/Frontend/pages/articles/financial-literacy.html"
             class="article-link text-decoration-none text-dark"
           >
             <div
@@ -312,7 +312,7 @@
           </a>
 
           <a
-            href="/Frontend/ArticlePages/finanzwissenAllg.html#budgetierung"
+            href="/Frontend/pages/articles/financial-literacy.html#budgetierung"
             class="article-link text-decoration-none text-dark"
           >
             <div
@@ -340,7 +340,7 @@
     <div
       class="col-12 col-lg-7 offset-lg-2 mt-5 mb-3 shadow discussion-box bg-light"
     >
-      <div id="diskussion">
+      <div id="discussion">
         <h1>Diskussionsforum</h1>
         <p><i class="bi bi-chat-left-text"></i> 112 Postings</p>
         <!-- Post Form -->
@@ -368,7 +368,7 @@
         <!-- Kommentare -->
         <div class="comment d-flex mt-4">
           <img
-            src="/Frontend/img/profilbild.png"
+            src="/Frontend/img/profile-picture.png"
             class="rounded-circle"
             width="40"
             height="40"
@@ -406,7 +406,7 @@
     <div id="footer-placeholder"></div>
     <script>
       $(function () {
-        $('#footer-placeholder').load('/Frontend/NavFooter/footer.html');
+        $('#footer-placeholder').load('/Frontend/components/footer.html');
       });
     </script>
 
@@ -415,7 +415,7 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
-    <script src="/Frontend/js/ArticlePages/scrollToDiscussionButton.js"></script>
-    <script src="/Frontend/js/ArticlePages/replyfunc.js"></script>
+    <script src="/Frontend/scripts/articles/scroll-to-discussion.js"></script>
+    <script src="/Frontend/scripts/articles/reply-function.js"></script>
   </body>
 </html>

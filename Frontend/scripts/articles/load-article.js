@@ -27,7 +27,7 @@ async function loadArticle2() {
   const mdText = await contentResponse.text();
 
   const p = document.createElement('div');
-  p.textContent = marked.parse(mdText); // falls du marked.js verwendest
+  p.textContent = marked.parse(mdText); // falls du marked.scripts verwendest
 
   placeForContent.appendChild(p);
 }

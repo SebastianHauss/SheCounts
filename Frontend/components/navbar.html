@@ -42,7 +42,15 @@
           </a>
 
           <div class="d-lg-none d-flex justify-content-end flex-row-reverse">
-            <button class="btn loginBtn px-3 ms-3" type="button">Login</button>
+            <button
+              id="login-btn-navbar"
+              class="btn loginBtn px-3 ms-3"
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Login
+            </button>
 
             <!-- Hamburger -->
             <button
@@ -71,14 +79,19 @@
                       -->
               <li class="nav-item me-5">
                 <!-- me-5: Gibt etwas Abstand rechts (Margin-End) -->
-                <a class="nav-link active" aria-current="page" href="">Home</a>
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="/Frontend/index.html"
+                  >Home</a
+                >
                 <!-- active & aria-current="page": Zeigt an, dass das gerade die aktuelle Seite ist. -->
               </li>
               <li class="nav-item me-5">
                 <a
                   class="nav-link"
                   aria-current="page"
-                  href="/Frontend/AllgemeineSeiten/erste-schritte.html"
+                  href="/Frontend/pages/general/getting-started.html"
                   >Erste Schritte</a
                 >
               </li>
@@ -96,14 +109,14 @@
                   <li>
                     <a
                       class="dropdown-item"
-                      href="/Frontend/ArticlePages/finanzwissenAllg.html"
-                      >Finanzwissen von Grund auf</a
+                      href="/Frontend/pages/articles/financial-literacy.html"
+                      >Finanzwissen</a
                     >
                   </li>
                   <li>
                     <a
                       class="dropdown-item"
-                      href="/Frontend/ArticlePages/private-finanzen.html"
+                      href="/Frontend/pages/articles/personal-finance.html"
                       >Private Finanzen</a
                     >
                   </li>
@@ -133,9 +146,11 @@
                 </button>
               </form>
 
+              <!-- Login Block -->
               <div id="loginBlock">
                 <button
-                  class="btn loginBtn px-3 d-lg-block d-none"
+                  id="login-block-btn"
+                  class="btn loginBtn px-3"
                   type="button"
                   data-bs-toggle="modal"
                   data-bs-target="#loginModal"
@@ -144,12 +159,8 @@
                 </button>
               </div>
 
-              <!-- user menu -->
-              <div
-                id="userBlock"
-                class="dropdown d-lg-block d-none"
-                style="display: none"
-              >
+              <!-- User Block -->
+              <div id="userBlock" class="dropdown" style="display: none">
                 <a
                   class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                   href="#"
@@ -157,7 +168,7 @@
                   data-bs-toggle="dropdown"
                 >
                   <img
-                    src="/Frontend/img/profilbild.png"
+                    src="/Frontend/img/profile-picture.png"
                     alt="avatar"
                     width="40"
                     height="40"
@@ -169,7 +180,7 @@
                   <li>
                     <a
                       class="dropdown-item"
-                      href="/Frontend/AllgemeineSeiten/profile.html"
+                      href="/Frontend/pages/users/profile.html"
                     >
                       Profil Einstellungen
                     </a>
@@ -177,7 +188,7 @@
                   <li>
                     <a
                       class="dropdown-item"
-                      href="/Frontend/AllgemeineSeiten/userlist.html"
+                      href="/Frontend/pages/users/user-list.html"
                     >
                       User Liste
                     </a>
@@ -240,7 +251,11 @@
                 />
               </div>
 
-              <button type="submit" class="btn myLoginBtn mb-3 myPopUpBtn">
+              <button
+                id="loginButton"
+                type="submit"
+                class="btn myPopUpBtn mb-3"
+              >
                 Login
               </button>
 
@@ -314,11 +329,7 @@
             >
               Abbrechen
             </button>
-            <button
-              id="resetPasswordBtn"
-              type="button"
-              class="btn btn-primary myResetBtn"
-            >
+            <button id="resetPasswordBtn" type="button" class="btn btn-primary">
               Zurücksetzen
             </button>
           </div>
@@ -414,6 +425,7 @@
                   href="#"
                   data-bs-toggle="modal"
                   data-bs-target="#loginModal"
+                  data-bs-dismiss="modal"
                 >
                   Login</a
                 >
@@ -429,7 +441,7 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
-    <script src="/Frontend/js/navbar-auth.js"></script>
+    <script src="/Frontend/js/login.js"></script>
     <script src="/Frontend/js/modal-util.js"></script>
   </body>
 </html>
