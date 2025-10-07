@@ -1,7 +1,7 @@
 # SheCounts – Finanzbildung für Frauen
 
 **Projektarbeit der FH Technikum Wien**  
-**Team C – Verena, Luisa, Sebastian**
+**Team C – Tania, Verena, Luisa, Sebastian**
 
 ## 📌 Projektübersicht
 
