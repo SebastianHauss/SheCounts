@@ -92,4 +92,4 @@ Dieses Projekt ist im Rahmen der Ausbildung am FH Technikum Wien entstanden und 
 - [Verena](https://github.com/verenx)  
 - [Luisa](https://github.com/JohnSheppard7901)  
 - [Sebastian](https://github.com/SebastianHauss)
-- [Tetiana] (https://github.com/tklnsk)
+- [Tetiana](https://github.com/tklnsk)
