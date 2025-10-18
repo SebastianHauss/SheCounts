@@ -1,12 +1,12 @@
 package at.technikum.backend.security.authdtos;
 
 public class AuthenticationRequest {
-    private String username;
+    private String email;
     private String password;
 
-    public AuthenticationRequest(String username, String password) {
-        this.username = username;
-        this.password = password;
+    public AuthenticationRequest(String email, String password) {
+        this.email = email;
+        this.password = email;
     }
 
     public String getPassword() {
@@ -18,10 +18,10 @@ public class AuthenticationRequest {
     }
 
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.email = username;
     }
 }
