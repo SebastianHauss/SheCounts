@@ -1,9 +1,11 @@
-package at.technikum.backend.service;
+package at.technikum.backend.security;
 
 import at.technikum.backend.dto.RegisterRequest;
 import at.technikum.backend.entity.User;
 import at.technikum.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,17 +14,25 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserDetailsService userDetailsService;
 
     @Autowired
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userDetailsService = userDetailsService;
     }
 
-    public User login(String email, String password) {
-        return userRepository.findByEmail(email)
-                .filter(user -> passwordEncoder.matches(password, user.getPassword()))
-                .orElse(null);
+    public UserDetails login(String email, String password) {
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        return userDetails;
+
+
+
+//        return userRepository.findByEmail(email)
+//                .filter(user -> passwordEncoder.matches(password, user.getPassword()))
+//                .orElse(null);
     }
 
     public User register(RegisterRequest request) {
