@@ -10,15 +10,15 @@
       integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/Frontend/css/articles.css" />
-    <link rel="stylesheet" href="/Frontend/css/style.css" />
+    <link rel="stylesheet" href="../../css/articles.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body>
     <div id="navbar-placeholder"></div>
     <script>
       $(function () {
-        $('#navbar-placeholder').load('/Frontend/components/navbar.html');
+        $('#navbar-placeholder').load('../../components/navbar.html');
       });
     </script>
 
@@ -172,13 +172,15 @@
               </a>
             </div>
           </div>
-          <div class="article-img mb-2 mt-2">
-            <img class="img-fluid" src="/Frontend/img/finance-organization.jpg" alt="" />
-          </div>
-
           <h1 id="simple-list-item-1">
             Wie bringst du deine privaten Finanzen in Ordnung?
           </h1>
+          <div class="article-img mb-2 mt-5">
+            <img class="img-fluid" src="../../img/articles/finance-organization.jpg" alt="" />
+          </div>
+          <small>Bildunterschrift</small>
+
+
           <p class="mt-4 mb-4 fs-5 fs-md-4 fs-lg-3 text-justify">
             Geld ist persönlich, emotional und oft auch mit Unsicherheit
             verbunden – besonders wenn man das Gefühl hat, keinen Überblick mehr
@@ -268,7 +270,7 @@
           <!-- <h6 class="text-uppercase">Weiterlesen</h6> -->
 
           <a
-            href="/Frontend/pages/articles/financial-literacy.html"
+            href="../../pages/articles/financial-literacy.html"
             class="article-link text-decoration-none text-dark"
           >
             <div
@@ -290,7 +292,7 @@
           </a>
 
           <a
-            href="/Frontend/pages/articles/financial-literacy.html"
+            href="../../pages/articles/financial-literacy.html"
             class="article-link text-decoration-none text-dark"
           >
             <div
@@ -312,7 +314,7 @@
           </a>
 
           <a
-            href="/Frontend/pages/articles/financial-literacy.html#budgetierung"
+            href="../../pages/articles/financial-literacy.html#budgetierung"
             class="article-link text-decoration-none text-dark"
           >
             <div
@@ -368,7 +370,7 @@
         <!-- Kommentare -->
         <div class="comment d-flex mt-4">
           <img
-            src="/Frontend/img/profile-picture.png"
+            src="../../img/users/profile-picture.png"
             class="rounded-circle"
             width="40"
             height="40"
@@ -406,7 +408,7 @@
     <div id="footer-placeholder"></div>
     <script>
       $(function () {
-        $('#footer-placeholder').load('/Frontend/components/footer.html');
+        $('#footer-placeholder').load('../../components/footer.html');
       });
     </script>
 
@@ -415,7 +417,7 @@
       integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
       crossorigin="anonymous"
     ></script>
-    <script src="/Frontend/scripts/articles/scroll-to-discussion.js"></script>
-    <script src="/Frontend/scripts/articles/reply-function.js"></script>
+    <script src="../../scripts/articles/scroll-to-discussion.js"></script>
+    <script src="../../scripts/articles/reply-function.js"></script>
   </body>
 </html>
