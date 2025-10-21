@@ -21,54 +21,71 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/components.css" />
   </head>
 
   <body>
-    <div class="navbar-container">
-      <!-- Simple navbar -->
+<!--    <div class="navbar-container">-->
+<!--      &lt;!&ndash; Simple navbar &ndash;&gt;-->
       <nav class="navbar navbar-expand-lg navbar-dark nav-homepage sticky-top">
         <div class="container-fluid">
-          <!-- container-fluid sagt: „Dieser Bereich soll die ganze Breite des Bildschirms nutzen“ -->
+
           <!-- Logo -->
           <a
             class="navbar-brand d-flex align-items-center gap-2"
             href="../../index.html"
           >
             <img
-              class="logo me-2"
+              class="logo"
               src="../../img/logo/shecounts-logo.png"
-              alt="logo"
+              alt="SheCounts Logo"
+              height="40"
             />
           </a>
 
-          <div class="d-lg-none d-flex justify-content-end flex-row-reverse">
-            <button
-              id="login-btn-navbar"
-              class="btn loginBtn px-3 ms-3"
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#loginModal"
-            >
-              Login
-            </button>
+          <!-- HAMBURGER MENU BUTTON - Only visible on mobile (<992px) -->
+          <button
+                  class="navbar-toggler"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#navbarContent"
+                  aria-controls="navbarContent"
+                  aria-expanded="false"
+                  aria-label="Navigation öffnen"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-            <!-- Hamburger -->
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-              <!-- class="navbar-toggler":  gibt dem Button einen Style
-                          data-bs-toggle="collapse" & data-bs-target="#navbarSupportedContent": Das sorgt dafür, dass beim Klicken ein Menü auf- oder zugeht.
-                          <span class="navbar-toggler-icon">: Zeigt ein Symbol (drei Linien = Hamburger-Menü)
-                     -->
-            </button>
-          </div>
+<!--          <div class="d-lg-none d-flex justify-content-end flex-row-reverse">-->
+<!--            <button-->
+<!--              id="login-btn-navbar"-->
+<!--              class="btn loginBtn px-3 ms-3"-->
+<!--              type="button"-->
+<!--              data-bs-toggle="modal"-->
+<!--              data-bs-target="#loginModal"-->
+<!--            >-->
+<!--              Login-->
+<!--            </button>-->
+
+<!--            &lt;!&ndash; Hamburger &ndash;&gt;-->
+<!--            <button-->
+<!--              class="navbar-toggler"-->
+<!--              type="button"-->
+<!--              data-bs-toggle="collapse"-->
+<!--              data-bs-target="#navbarSupportedContent"-->
+<!--              aria-controls="navbarSupportedContent"-->
+<!--              aria-expanded="false"-->
+<!--              aria-label="Toggle navigation"-->
+<!--            >-->
+<!--              <span class="navbar-toggler-icon"></span>-->
+<!--              &lt;!&ndash; class="navbar-toggler":  gibt dem Button einen Style-->
+<!--                          data-bs-toggle="collapse" & data-bs-target="#navbarSupportedContent": Das sorgt dafür, dass beim Klicken ein Menü auf- oder zugeht.-->
+<!--                          <span class="navbar-toggler-icon">: Zeigt ein Symbol (drei Linien = Hamburger-Menü)-->
+<!--                     &ndash;&gt;-->
+<!--            </button>-->
+<!--          </div>-->
+
+
 
           <!-- Collapse-Inhale -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -128,6 +145,19 @@
                   </li>
                 </ul>
               </li>
+            </ul>
+
+            <!-- LOGIN LINK - Only visible on mobile (inside hamburger menu) -->
+            <li class="nav-item d-lg-none">
+              <a
+                      class="nav-link"
+                      href="#"
+                      data-bs-toggle="modal"
+                      data-bs-target="#loginModal"
+              >
+                Login
+              </a>
+            </li>
             </ul>
 
             <!-- Suchfeld und Login Button-->
