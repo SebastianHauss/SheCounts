@@ -37,7 +37,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark nav-homepage sticky-top">
   <div class="container-fluid">
 
-    <!-- LOGO - Always visible on left side -->
+    <!-- LOGO -->
     <a class="navbar-brand d-flex align-items-center" href="index.html">
       <img
               class="logo"
@@ -47,7 +47,7 @@
       />
     </a>
 
-    <!-- HAMBURGER MENU BUTTON - Only visible on mobile (<992px) -->
+    <!-- HAMBURGER MENU BUTTON -->
     <button
             class="navbar-toggler"
             type="button"
@@ -115,8 +115,9 @@
           </ul>
         </li>
 
+
         <!-- LOGIN LINK - Only visible on mobile (inside hamburger menu) -->
-        <li class="nav-item d-lg-none">
+        <li class="nav-item d-lg-none" id="mobileLoginLink">
           <a
                   class="nav-link"
                   href="#"
@@ -126,13 +127,42 @@
             Login
           </a>
         </li>
+
+        <li class="nav-item dropdown mobile-login" id="mobileUserBlock">
+          <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Mein Profil
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="../../pages/users/profile.html">
+                Profil Einstellungen
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="../../pages/users/user-list.html">
+                User Liste
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">
+                Benachrichtigungen
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="#" id="logoutBtnMobile">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
 
-      <!-- RIGHT SIDE CONTENT - Search and Login (always visible, outside hamburger) -->
+<!--       RIGHT SIDE CONTENT - Search and Login (always visible, outside hamburger) -->
       <div class="d-flex align-items-center gap-3">
 
         <!-- SEARCH FORM - Always visible on all screen sizes -->
-        <form class="d-flex" role="search">
+        <form class="d-flex mobile-search" role="search">
           <input
                   class="form-control me-2"
                   type="search"
@@ -469,6 +499,9 @@
   </div>
 </div>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!-- Bootstrap JS Bundle -->
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
@@ -479,5 +512,7 @@
 <!-- Custom Scripts -->
 <script src="scripts/auth/login.js"></script>
 <script src="scripts/common/modal-util.js"></script>
+<!--currently not working -->
+<script src="scripts/common/hamburger-toggle.js"></script>
 </body>
 </html>
