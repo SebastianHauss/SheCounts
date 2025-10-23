@@ -1,22 +1,38 @@
 $(document).ready(function () {
   const API_URL = 'http://localhost:8080/api/auth';
 
-  // Helper: switch navbar blocks
+  // Helper: switch navbar&hamburger blocks
   function updateNavbar() {
     console.log('updateNavbar called');
     const userId = localStorage.getItem('userId');
     console.log('userId =', userId);
 
     if (userId && userId.trim() !== '') {
+      // User is logged in - show profile, hide login
+      // Desktop
       $('#loginBlock').hide();
       $('#userBlock').show();
+
+      // Mobile
+      $('#mobileLoginLink').hide();
+      $('#mobileUserBlock').show();
     } else {
+      // User is logged out - show login, hide profile
+      // Desktop
       $('#loginBlock').show();
       $('#userBlock').hide();
+
+      // Mobile
+      $('#mobileLoginLink').show();
+      $('#mobileUserBlock').hide();
     }
   }
 
-  // Initial state
+  // Initial state - make sure we start logged OUT
+  // Clear any old data on page load
+  if (!localStorage.getItem('userId')) {
+    localStorage.removeItem('userId');
+  }
   updateNavbar();
 
   // LOGIN
@@ -51,11 +67,20 @@ $(document).ready(function () {
     });
   });
 
-  // LOGOUT
+  // LOGOUT - Desktop
   $('#logoutBtn').on('click', function (e) {
     e.preventDefault();
     localStorage.removeItem('userId');
     updateNavbar();
+    alert('Logout erfolgreich!');
+  });
+
+  // LOGOUT - Mobile
+  $('#logoutBtnMobile').on('click', function (e) {
+    e.preventDefault();
+    localStorage.removeItem('userId');
+    updateNavbar();
+    alert('Logout erfolgreich!');
   });
 
   // REGISTER
