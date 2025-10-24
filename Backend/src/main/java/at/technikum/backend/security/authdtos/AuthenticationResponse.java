@@ -1,0 +1,16 @@
+package at.technikum.backend.security.authdtos;
+
+import lombok.Builder;
+
+@Builder
+public class AuthenticationResponse {
+    private String token;
+
+    public AuthenticationResponse(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+}
