@@ -33,6 +33,59 @@
     height: auto;
 }
 
+
+/* Footer link hover effects */
+.footer-link {
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    opacity: 1;
+}
+
+/* Social icon hover effects */
+.social-link {
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+.social-link i {
+    transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    footer .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    footer h5 {
+        font-size: 1.25rem;
+    }
+
+    footer h6 {
+        font-size: 1rem;
+    }
+
+    .social-link i {
+        font-size: 1.25rem !important;
+    }
+}
+
+
 /* Hide mobile login/profile elements on desktop */
 @media (min-width: 992px) {
     .mobile-login {
