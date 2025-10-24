@@ -1,0 +1,110 @@
+
+.loginBtn {
+    background-color: var(--myGrey) !important;
+    color: white !important;
+}
+
+.loginBtn:hover {
+    background-color: var(--myPink);
+}
+
+
+/* --- Navbar --- */
+.nav-homepage,
+.myBG {
+    background-color: var(--myPastelGreen);
+}
+
+.myTitleFont {
+    font-family: 'Lobster', cursive;
+    color: white;
+}
+
+.mySearchBar {
+    width: 110%;
+    background-color: white;
+    border: 2px solid var(--myPastelGreen);
+    border-radius: 25px;
+}
+
+.logo {
+    max-height: 70px;
+    width: auto;
+    height: auto;
+}
+
+
+/* Footer link hover effects */
+.footer-link {
+    opacity: 0.85;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.footer-link:hover {
+    opacity: 1;
+}
+
+/* Social icon hover effects */
+.social-link {
+    opacity: 0.9;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+.social-link i {
+    transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+    footer .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    footer h5 {
+        font-size: 1.25rem;
+    }
+
+    footer h6 {
+        font-size: 1rem;
+    }
+
+    .social-link i {
+        font-size: 1.25rem !important;
+    }
+}
+
+
+/* Hide mobile login/profile elements on desktop */
+@media (min-width: 992px) {
+    .mobile-login {
+        display: none !important;
+    }
+}
+
+/* Hide desktop login/profile elements on mobile */
+@media (max-width: 991px) {
+    #loginBlock, #userBlock {
+        display: none !important;
+    }
+
+    /* Make search bar full width on mobile (in hamburger menu) */
+    .mobile-search {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+}
+
+
+

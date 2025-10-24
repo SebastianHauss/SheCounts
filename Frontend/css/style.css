@@ -11,44 +11,6 @@ body {
   box-sizing: border-box;
 }
 
-/* --- Navbar --- */
-.nav-homepage,
-.myBG {
-  background-color: var(--myPastelGreen);
-}
-
-.myTitleFont {
-  font-family: 'Lobster', cursive;
-  color: white;
-}
-
-.mySearchBar {
-  width: 110%;
-  background-color: white;
-  border: 2px solid var(--myPastelGreen);
-  border-radius: 25px;
-}
-
-.logo {
-  max-height: 70px;
-  width: auto;
-  height: auto;
-}
-
-.loginBtn {
-  background-color: var(--myGrey) !important;
-  color: white !important;
-}
-
-.loginBtn:hover {
-  background-color: var(--myPink);
-}
-
-.magnifiyingGlass {
-  text-shadow: 0 0 1px white;
-  font-weight: bold;
-}
-
 /* --- Carousel --- */
 .carousel-inner {
   background-color: var(--myBeige);
