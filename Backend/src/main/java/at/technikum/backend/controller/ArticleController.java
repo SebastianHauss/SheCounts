@@ -11,7 +11,7 @@ import java.util.UUID;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/articles")
-public class ArticleController { /*fjjkfjf*/
+public class ArticleController {
 
     private final ArticleService articleService;
 

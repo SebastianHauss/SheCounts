@@ -1,6 +1,8 @@
 package at.technikum.backend.controller;
 
+import at.technikum.backend.dto.UserDto;
 import at.technikum.backend.entity.User;
+import at.technikum.backend.mapper.UserMapper;
 import at.technikum.backend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -14,14 +16,17 @@ import java.util.UUID;
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     @GetMapping
-    public List<User> readAll() {
-        return userService.readAll();
+    public List<UserDto> readAll() {
+        List<User> userList = userService.readAll();
+        return userList.stream().map(userMapper::toDto).toList();
     }
 
     @GetMapping("/{id}")
