@@ -36,8 +36,8 @@ body {
 }
 
 .loginBtn {
-  background-color: var(--myGrey);
-  color: white;
+  background-color: var(--myGrey) !important;
+  color: white !important;
 }
 
 .loginBtn:hover {

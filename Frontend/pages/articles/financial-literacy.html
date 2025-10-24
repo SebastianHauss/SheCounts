@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/Frontend/css/style.css" />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+    <script>
+      $(function () {
+        $('#navbar-placeholder').load('/Frontend/components/navbar.html');
+      });
+    </script>
+
+    <!-- SideBar -->
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="position-sticky m-5 ps-4 py-4 sideBar shadow-lg">
+          <div
+            class="d-flex flex-column gap-2 simple-list-example-scrollspy text-left"
+            id="simple-list-example"
+          >
+            <a class="pt-1 pb-2 rounded sideBarLink" href="#"
+              >Artikelübersicht</a
+            >
+            <a class="ps-3 rounded sideBarLink p2Element" href="#finanzwissen"
+              >Finanzwissen</a
+            >
+            <a class="ps-5 rounded sideBarLink p3Element" href="#budgetierung"
+              >Budgetierung</a
+            >
+            <a class="ps-5 rounded sideBarLink p3Element" href="#sparen"
+              >Sparen</a
+            >
+            <a class="ps-5 rounded sideBarLink p3Element" href="#zinsen"
+              >Zinsen</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- SideBar Ende -->
+
+      <!-- Article Strg+Alt+L automatisch formatieren-->
+      <div class="col-8">
+        <div
+          data-bs-spy="scroll"
+          data-bs-target="#simple-list-example"
+          data-bs-offset="0"
+          data-bs-smooth-scroll="true"
+          class="scrollspy-example"
+          tabindex="0"
+        >
+          <h5 class="mt-5" id="finanzwissen">Finanzwissen von Grund auf</h5>
+          <p>
+            Autor:in ChatGPT <br />
+            Datum: 20.06.2025
+          </p>
+
+          <!-- Artikel 1: Budgetierung -->
+          <div class="container shadow-lg p-5 my-5 bg-body rounded">
+            <article>
+              <h2 id="budgetierung">Budgetierung: Dein Geld unter Kontrolle</h2>
+              <p>
+                Die Kontrolle über die eigenen Finanzen beginnt mit einem
+                soliden Budget. Für viele Menschen klingt das Wort „Budget“ nach
+                Einschränkung – doch in Wahrheit ist es ein Werkzeug für
+                Freiheit und Selbstbestimmung. Besonders für Frauen, die häufig
+                mit besonderen finanziellen Herausforderungen wie der Gender Pay
+                Gap oder der Teilzeitfalle konfrontiert sind, ist Budgetierung
+                ein essenzieller Schritt zur finanziellen Unabhängigkeit.
+              </p>
+
+              <p>
+                Ein Budget zeigt dir genau, wie viel Geld du einnimmst, wie viel
+                du ausgibst und wo deine finanziellen Prioritäten liegen. Ohne
+                diese Übersicht kann es schnell passieren, dass du mehr
+                ausgibst, als du zur Verfügung hast – was langfristig zu
+                Schulden und finanzieller Unsicherheit führen kann.
+              </p>
+
+              <h3>Die Grundlagen eines Budgets</h3>
+              <p>
+                Bevor du ein Budget aufstellst, solltest du zunächst deine
+                Einnahmen und Ausgaben erfassen. Dazu gehören Gehalt,
+                Kindergeld, Unterhaltszahlungen, aber auch Ausgaben wie Miete,
+                Versicherungen, Lebensmittel, Freizeit oder Mobilität. Es ist
+                wichtig, sowohl fixe als auch variable Ausgaben zu
+                berücksichtigen, damit du ein realistisches Bild deiner
+                finanziellen Situation bekommst.
+              </p>
+
+              <h3>Die 50-30-20-Regel als Orientierung</h3>
+              <p>
+                Eine einfache und effektive Methode zur Budgetplanung ist die
+                50-30-20-Regel. Sie unterteilt dein Nettoeinkommen in drei
+                Kategorien:
+              </p>
+              <ul>
+                <li>
+                  50 % für notwendige Ausgaben (Miete, Lebensmittel, Strom)
+                </li>
+                <li>30 % für Wünsche (Shopping, Reisen, Hobbys)</li>
+                <li>20 % für Sparen und Schuldentilgung</li>
+              </ul>
+              <p>
+                Diese Regel ist flexibel und kann an deine individuelle
+                Lebenssituation angepasst werden. Wichtig ist, dass du bewusst
+                entscheidest, wie du dein Geld einsetzt.
+              </p>
+
+              <h3>Tools und Tipps zur Budgeterstellung</h3>
+              <p>
+                Du kannst dein Budget auf Papier, in Excel oder mit Hilfe von
+                Budget-Apps erstellen. Viele Apps bieten automatisierte
+                Kategorisierungen und Visualisierungen, die dir helfen, den
+                Überblick zu behalten. Entscheidend ist nicht das Tool, sondern
+                die Regelmäßigkeit und Disziplin bei der Umsetzung.
+              </p>
+
+              <p>
+                Ein bewährter Tipp ist es, das Budget monatlich zu überprüfen
+                und anzupassen. Hast du mehr ausgegeben als geplant? Gab es
+                unerwartete Einnahmen oder Ausgaben? So bleibst du flexibel und
+                lernst ständig dazu.
+              </p>
+
+              <h3>Vorteile der Budgetierung</h3>
+              <p>Ein Budget hat viele Vorteile:</p>
+              <ul>
+                <li>Du erkennst Sparpotenziale und unnötige Ausgaben</li>
+                <li>
+                  Du kannst gezielt für Ziele wie eine Weiterbildung oder
+                  Altersvorsorge sparen
+                </li>
+                <li>
+                  Du reduzierst finanziellen Stress, weil du weißt, was du dir
+                  leisten kannst
+                </li>
+                <li>Du stärkst dein Selbstbewusstsein im Umgang mit Geld</li>
+              </ul>
+
+              <h3>Häufige Fehler vermeiden</h3>
+              <p>
+                Viele Menschen scheitern an der Budgetierung, weil sie sich zu
+                sehr einschränken oder das Budget nicht realistisch planen.
+                Setze dir erreichbare Ziele und plane auch kleine Ausgaben wie
+                den Coffee-to-go oder Online-Abos mit ein. Vergiss außerdem
+                nicht, regelmäßig Rücklagen für unerwartete Kosten zu bilden –
+                Stichwort: Notgroschen.
+              </p>
+
+              <h3>Fazit</h3>
+              <p>
+                Budgetierung ist kein Hexenwerk, sondern eine kraftvolle
+                Methode, um deine Finanzen in den Griff zu bekommen. Sie
+                ermöglicht dir, bewusster mit deinem Geld umzugehen, finanzielle
+                Prioritäten zu setzen und langfristige Ziele zu verfolgen. Als
+                Frau kannst du mit einem Budget nicht nur dein finanzielles
+                Selbstvertrauen stärken, sondern auch aktiv deine Unabhängigkeit
+                gestalten. Fang heute an – dein zukünftiges Ich wird es dir
+                danken.
+              </p>
+            </article>
+          </div>
+
+          <!-- Artikel 2 -->
+
+          <div class="container shadow-lg p-5 my-5 bg-body rounded">
+            <article>
+              <h2 id="sparen">
+                Richtig Sparen: Kleine Schritte, große Wirkung
+              </h2>
+              <p>
+                Sparen ist ein zentrales Element jeder gesunden Finanzstrategie.
+                Es geht nicht nur darum, Geld zur Seite zu legen, sondern vor
+                allem darum, finanzielle Sicherheit und Unabhängigkeit
+                aufzubauen. Für viele Frauen stellt sich beim Thema Sparen die
+                Frage: Wo anfangen? Wie viel? Und wofür?
+              </p>
+
+              <h3>Warum Sparen wichtig ist</h3>
+              <p>
+                Ein finanzielles Polster gibt dir Sicherheit – sei es für
+                unerwartete Ausgaben, eine berufliche Auszeit oder größere
+                Lebensziele wie eine Weiterbildung, ein Sabbatical oder der Kauf
+                einer Immobilie. Darüber hinaus ist Sparen ein erster Schritt in
+                Richtung Vermögensaufbau. Je früher du beginnst, desto besser –
+                auch kleine Beträge wachsen über die Zeit.
+              </p>
+
+              <h3>Psychologie des Sparens</h3>
+              <p>
+                Viele Menschen empfinden Sparen als Verzicht. Dabei sollte es
+                vielmehr als Investition in die eigene Zukunft gesehen werden.
+                Wenn du dir Sparziele setzt, die dich emotional motivieren –
+                etwa ein Traumurlaub oder der Start in die Selbstständigkeit –
+                fällt es dir leichter, dran zu bleiben. Visuelle Hilfsmittel wie
+                Spartracker oder Zielbilder können helfen, motiviert zu bleiben.
+              </p>
+
+              <h3>Wie viel sparen ist realistisch?</h3>
+              <p>
+                Die empfohlene Faustregel lautet: 10 bis 20 % des monatlichen
+                Nettoeinkommens sollten gespart werden. Das ist nicht für jede
+                Lebenssituation machbar – insbesondere nicht bei niedrigem
+                Einkommen oder Alleinverantwortung für Kinder. Aber: Jeder Euro
+                zählt. Wichtig ist die Regelmäßigkeit, nicht die Höhe.
+              </p>
+
+              <h3>Sparmöglichkeiten im Alltag</h3>
+              <ul>
+                <li>
+                  Verzichte gezielt auf kleine Ausgaben wie Coffee-to-go oder
+                  spontane Onlinekäufe
+                </li>
+                <li>Kaufe saisonal und plane deinen Wocheneinkauf</li>
+                <li>
+                  Nutze Vergleichsportale für Strom, Versicherungen oder
+                  Handyverträge
+                </li>
+                <li>Reduziere unnötige Abos und Verträge</li>
+              </ul>
+
+              <h3>Die richtige Strategie finden</h3>
+              <p>
+                Es gibt viele Möglichkeiten, um effektiv zu sparen. Eine
+                beliebte Methode ist das automatisierte Sparen: Richte einen
+                Dauerauftrag direkt nach Gehaltseingang ein – so „verschwindet“
+                das Geld auf ein separates Sparkonto, bevor du es ausgeben
+                kannst. Weitere Methoden:
+              </p>
+              <ul>
+                <li>
+                  <strong>Rundungsfunktion:</strong> Aufrundung von Ausgaben und
+                  Differenz wird gespart
+                </li>
+                <li>
+                  <strong>Cash-Stuffing:</strong> Ausgabenbarrieren durch
+                  Bargeld in Umschlägen
+                </li>
+                <li>
+                  <strong>Sparduelle mit Freundinnen:</strong> Motivation durch
+                  gegenseitige Unterstützung
+                </li>
+              </ul>
+
+              <h3>Sparziele definieren</h3>
+              <p>
+                Setze dir konkrete, erreichbare Ziele. Das kann ein Notgroschen
+                von 1.000 Euro sein, drei Monatsgehälter für Notfälle oder ein
+                bestimmter Betrag für eine Reise. Wichtig: Mache das Ziel
+                greifbar, notiere es und überprüfe regelmäßig deinen
+                Fortschritt.
+              </p>
+
+              <h3>Fehler beim Sparen vermeiden</h3>
+              <p>
+                Viele Menschen sparen zu unregelmäßig oder greifen zu schnell
+                auf Erspartes zurück. Trenne dein Sparkonto bewusst von deinem
+                Alltagskonto und mache dir den Unterschied zwischen „Sparen“ und
+                „Parken“ klar. Auch solltest du das Sparen nicht vollständig
+                automatisieren, ohne es im Blick zu behalten – Transparenz ist
+                der Schlüssel.
+              </p>
+
+              <h3>Fazit</h3>
+              <p>
+                Sparen ist kein Luxus, sondern eine Notwendigkeit – besonders
+                für Frauen, die in vielen Lebensphasen finanziell stärker
+                gefordert sind. Es geht nicht um Perfektion, sondern um
+                Konstanz. Mit klaren Zielen, kleinen Beträgen und ein wenig
+                Disziplin kannst du große Wirkung erzielen – und Stück für Stück
+                ein finanziell selbstbestimmtes Leben aufbauen.
+              </p>
+            </article>
+          </div>
+
+          <!-- Artikel 3: Zinsen -->
+          <div class="container shadow-lg p-5 my-5 bg-body rounded">
+            <article>
+              <h2 id="zinsen">Zinsen verstehen: Der Preis des Geldes</h2>
+              <p>
+                Zinsen spielen eine zentrale Rolle im Finanzsystem – sie sind
+                der Preis für geliehenes Geld und der Gewinn für verliehenes
+                Kapital. Doch obwohl sie uns täglich betreffen – beim Kredit,
+                beim Sparen, beim Dispokonto – sind Zinsen für viele ein
+                abstraktes Konzept. Gerade Frauen, die ihre Finanzen oft
+                delegieren oder zu wenig einbezogen werden, sollten sich mit
+                diesem Grundbegriff der Finanzbildung vertraut machen.
+              </p>
+
+              <h3>Was sind Zinsen?</h3>
+              <p>
+                Einfach gesagt: Zinsen sind der Preis, den du für geliehenes
+                Geld zahlst – oder den du erhältst, wenn du Geld verleihst.
+                Nimmst du einen Kredit auf, zahlst du Zinsen an die Bank. Legst
+                du Geld auf ein Sparkonto, erhältst du Zinsen als Ertrag.
+              </p>
+
+              <h3>Zinssatz und Zinseszins</h3>
+              <p>
+                Der Zinssatz gibt an, wie hoch die Zinsen in Prozent bezogen auf
+                einen bestimmten Zeitraum sind – meist pro Jahr (p.a.). Eine
+                zentrale Rolle spielt der Zinseszinseffekt: Wenn du Zinsen nicht
+                abhebst, sondern weiter anlegst, wächst dein Kapital
+                exponentiell. Das bedeutet: Je früher du sparst, desto mehr
+                profitierst du langfristig.
+              </p>
+
+              <h3>Zinsen beim Sparen</h3>
+              <p>
+                Nach Jahren der Niedrigzinsen steigen die Sparzinsen langsam
+                wieder. Klassische Sparprodukte wie Tagesgeld oder Festgeld
+                werfen wieder mehr ab. Doch Vorsicht: Die Inflation kann die
+                realen Zinsen negativ machen – du bekommst zwar Zinsen,
+                verlierst aber an Kaufkraft.
+              </p>
+
+              <h3>Zinsen beim Kredit</h3>
+              <p>
+                Wenn du Geld leihst, zahlst du Zinsen. Der Zinssatz hängt von
+                der Bonität, der Kreditlaufzeit und dem allgemeinen Zinsniveau
+                ab. Es lohnt sich, Kreditangebote genau zu vergleichen. Achtung:
+                Besonders Konsumentenkredite oder Dispokredite haben oft sehr
+                hohe Zinssätze.
+              </p>
+
+              <h3>Negativzinsen und Leitzins</h3>
+              <p>
+                Auch das gibt es: In bestimmten Zeiten erheben Banken
+                Negativzinsen auf hohe Einlagen – du zahlst also dafür, Geld zu
+                besitzen. Der Leitzins der Zentralbank (z. B. der EZB)
+                beeinflusst das Zinsniveau insgesamt – er ist ein
+                Steuerungsinstrument für Inflation und Konjunktur.
+              </p>
+
+              <h3>Zinsen richtig nutzen</h3>
+              <ul>
+                <li>
+                  Vergleiche Kreditangebote sorgfältig – auch Kleinstkredite
+                  können teuer werden
+                </li>
+                <li>
+                  Sichere dir hohe Zinsen beim Sparen durch flexible Anbieter
+                </li>
+                <li>
+                  Vermeide unnötige Schulden, die dich langfristig belasten
+                </li>
+                <li>
+                  Nutze den Zinseszinseffekt langfristig durch regelmäßiges
+                  Sparen und Anlegen
+                </li>
+              </ul>
+
+              <h3>Fazit</h3>
+              <p>
+                Zinsen betreffen jede von uns – ob beim Sparen oder beim
+                Schuldenmachen. Wer sie versteht, kann klügere finanzielle
+                Entscheidungen treffen, Kosten sparen und Vermögen aufbauen.
+                Gerade in Zeiten wirtschaftlicher Unsicherheit ist Zinswissen
+                ein wichtiges Werkzeug für finanzielle Selbstbestimmung.
+                Vertraue nicht blind auf Angebote – informiere dich, vergleiche
+                und entscheide selbstbestimmt.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      $(function () {
+        $('#footer-placeholder').load('/Frontend/NavFooter/footer.html');
+      });
+    </script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

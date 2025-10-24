@@ -1,0 +1,105 @@
+:root {
+  --myPastelGreen: #a9b8a3;
+  --myGrey: #796f80;
+  --myPink: #c3868d;
+  --myDarkerPink: #b56468;
+  --myDarkerPink: #b56468;
+  --myBeige: #fbeae1;
+  --myBorderRGB: 121, 111, 128;
+}
+
+.article-container {
+  max-width: 2500px;
+  margin-top: 4rem;
+}
+
+.article-sidebar {
+  padding: 1.5rem 1.5rem 4rem 1.5rem;
+  min-height: 400px;
+}
+
+.main-article-container {
+  padding: 0 3.5rem 4rem 3.5rem !important;
+}
+
+.comment-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.comment-icon {
+  background-color: rgba(var(--myBorderRGB), 0.2);
+  border-radius: 5px;
+}
+
+.comment-icon:hover {
+  background-color: rgba(var(--myBorderRGB), 0.1);
+}
+
+.text-justify {
+  text-align: justify;
+  hyphens: auto;
+}
+
+.discussion-box {
+  display: block;
+  padding: 12px;
+}
+
+#reply-text {
+  width: 90%;
+  margin-left: auto;
+}
+
+/* Media Queries */
+
+@media (max-width: 991px) {
+  /*.article-container {*/
+  /*  display: block;*/
+  /*  margin: 0 auto;*/
+  /*}*/
+
+  .discussion-box {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.article-link .underline-on-hover {
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.article-link:hover .underline-on-hover {
+  border-color: black;
+}
+
+/* === Discussion Button === */
+/*#floating-button {*/
+/*  position: fixed;*/
+/*  bottom: 50px !important;*/
+/*  right: 260px !important;*/
+/*  z-index: 1000;*/
+/*  transition: opacity 0.3s ease-in-out;*/
+/*  background-color: #ff1493 !important;*/
+/*}*/
+
+#floating-button {
+  position: sticky;
+  top: 50%; /* Vertically centered */
+  transform: translateY(-50%);
+  float: right;
+  margin-left: 20px;
+  margin-right: -75px; /* Pushes it outside the article column */
+  width: 60px;
+  height: 60px;
+  background-color: #ff1493 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+  z-index: 1000;
+  transition: opacity 0.3s ease-in-out;
+}
+
+
+
+
