@@ -10,76 +10,18 @@
             integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
             crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="../../css/articles.css"/>
-    <link rel="stylesheet" href="../../css/style.css"/>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!--Bootstrap Icons    -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!--Custom CSS    -->
+    <link rel="stylesheet" href="/css/index.css"/>
+    <link rel="stylesheet" href="/css/components.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/articles.css"/>
 </head>
 <body>
 <div id="navbar-placeholder"></div>
-<script>
-    $(function () {
-        $('#navbar-placeholder').load('../../components/navbar.html');
-    });
-</script>
-
-<!-- <div id="navbar-placeholder"></div>
-<script>
-  fetch('/Frontend/components/navbar.html')
-    .then((res) => res.text())
-    .then((html) => {
-      document.getElementById('navbar-placeholder').innerHTML = html;
-
-      const script = document.createElement('script');
-      script.src = '/Frontend/scripts/components/navbar-auth.scripts';
-      document.body.appendChild(script);
-    });
-</script> -->
-
-<!--DiscussionButton-->
-<!-- <a href="#diskussion" id="floating-button">
-  <img
-    src="/Frontend/img/comment-button.png"
-    alt="Kommentare"
-    width="55"
-    height="48"
-  />
-</a> -->
-
-
-<!-- Content Row -->
-
-<!-- Sidebar Links (left)
-  <div class="d-none d-lg-block col-lg-3">
-    <div class="position-sticky sideBar mt-5 shadow bg-light">
-      <div
-        class="d-flex flex-column gap-2 simple-list-example-scrollspy text-left"
-        id="simple-list-example"
-      >
-        <a class="p-1 sideBarLink" href="#simple-list-item-1">Inhalt</a>
-        <a
-          class="ps-3 pb-1 rounded sideBarLink p2Element"
-          href="#ueberblick"
-          >Überblick</a
-        >
-        <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#ziele"
-          >Ziele</a
-        >
-        <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#schulden"
-          >Schulden</a
-        >
-        <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#mindset"
-          >Mindset</a
-        >
-        <a class="ps-3 pb-1 rounded sideBarLink p2Element" href="#sparen"
-          >Sparen</a
-        >
-        <a class="ps-3 rounded sideBarLink p2Element" href="#fazit"
-          >Fazit</a
-        >
-        <div class="mb-5"></div>
-      </div>
-    </div>
-  </div> -->
 
 <!-- Sidebar Links (left) -->
 <div class="container-fluid article-container">
@@ -409,18 +351,21 @@
 </div>
 
 <div id="footer-placeholder"></div>
-<script>
-    $(function () {
-        $('#footer-placeholder').load('../../components/footer.html');
-    });
-</script>
 
+<!--JQuery Import-->
+<script
+        src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
+
+<!--Bootstrap JS Import-->
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"
 ></script>
-<script src="../../scripts/articles/scroll-to-discussion.js"></script>
-<script src="../../scripts/articles/reply-function.js"></script>
+<script src="/scripts/common/components.js"></script>
+<script src="/scripts/articles/scroll-to-discussion.js"></script>
+<script src="/scripts/articles/reply-function.js"></script>
 </body>
 </html>
