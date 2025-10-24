@@ -2,6 +2,7 @@ package at.technikum.backend.security.auth;
 
 import at.technikum.backend.security.authdtos.AuthenticationRequest;
 import at.technikum.backend.security.authdtos.AuthenticationResponse;
+import at.technikum.backend.security.authdtos.RegisterRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
         return authenticationService.register(request);
     }
 

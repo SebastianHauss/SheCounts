@@ -18,7 +18,6 @@ public class Profile {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @NotNull
     private Gender gender;
 
     @Column(nullable = false)

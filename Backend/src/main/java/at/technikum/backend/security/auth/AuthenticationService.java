@@ -2,9 +2,11 @@ package at.technikum.backend.security.auth;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.entity.User;
+import at.technikum.backend.repository.ProfileRepository;
 import at.technikum.backend.repository.UserRepository;
 import at.technikum.backend.security.authdtos.AuthenticationRequest;
 import at.technikum.backend.security.authdtos.AuthenticationResponse;
+import at.technikum.backend.security.authdtos.RegisterRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +29,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationService implements AuthService{
     private final AuthenticationManager authenticationManager;
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+    private final ProfileRepository profileRepository;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
@@ -35,9 +38,14 @@ public class AuthenticationService implements AuthService{
     private String secretKey;
     private final Long jwtExpiryMs = 86400000L;
 
-    public AuthenticationService(AuthenticationManager authenticationManager, UserRepository repository, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public AuthenticationService(AuthenticationManager authenticationManager,
+                                 UserRepository userRepository,
+                                 ProfileRepository profileRepository,
+                                 UserDetailsService userDetailsService,
+                                 PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
-        this.repository = repository;
+        this.userRepository = userRepository;
+        this.profileRepository = profileRepository;
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -58,16 +66,25 @@ public class AuthenticationService implements AuthService{
         return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<AuthenticationResponse> register(AuthenticationRequest request) {
+    public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) {
         User user = new User();
-        user.setEmail(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-//        //if a user is created a profile should be created as well
+        userRepository.save(user);
+
+        //if a user is created a profile should be created as well
 //        Profile profile = new Profile();
 //        profile.setUser(user);
+//        profile.setCountry(request.getCountry());
+//        //später set Gender
+//        profileRepository.save(profile);
+
+
 //        user.setProfile(profile);
-        repository.save(user);
+
+        //userRepository.save(user);
 
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
