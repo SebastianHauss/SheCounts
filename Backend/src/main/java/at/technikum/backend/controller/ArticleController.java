@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 @CrossOrigin
 @RestController
-@RequestMapping("/articles")
+@RequestMapping("/api/articles")
 public class ArticleController { /*fjjkfjf*/
 
     private final ArticleService articleService;

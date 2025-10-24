@@ -14,11 +14,11 @@ public class AuthenticationRequest {
         this.password = password;
     }
 
-    public String getUsername() {
+    public String getEmail() {
         return email;
     }
 
-    public void setUsername(String username) {
+    public void setEmail(String username) {
         this.email = username;
     }
 }

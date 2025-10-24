@@ -2,6 +2,7 @@ package at.technikum.backend.security.auth;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.entity.User;
+import at.technikum.backend.enums.Gender;
 import at.technikum.backend.repository.ProfileRepository;
 import at.technikum.backend.repository.UserRepository;
 import at.technikum.backend.security.authdtos.AuthenticationRequest;
@@ -53,7 +54,7 @@ public class AuthenticationService implements AuthService{
 
     public ResponseEntity<AuthenticationResponse> login(AuthenticationRequest loginRequest) {
         UserDetails userDetails = authenticate(
-                loginRequest.getUsername(),
+                loginRequest.getEmail(),
                 loginRequest.getPassword()
         );
 
@@ -75,16 +76,23 @@ public class AuthenticationService implements AuthService{
         userRepository.save(user);
 
         //if a user is created a profile should be created as well
-//        Profile profile = new Profile();
-//        profile.setUser(user);
-//        profile.setCountry(request.getCountry());
-//        //später set Gender
-//        profileRepository.save(profile);
+        Profile profile = new Profile();
+        profile.setUser(user);
+        profile.setCountry(request.getCountry());
 
+        String gender = request.getGender();
+        if (gender.equalsIgnoreCase("female")){
+            profile.setGender(Gender.FEMALE);
+        }else if (gender.equalsIgnoreCase("male")){
+            profile.setGender(Gender.MALE);
+        }else {
+            profile.setGender(Gender.DIVERSE);
+        }
 
-//        user.setProfile(profile);
+        profileRepository.save(profile);
 
-        //userRepository.save(user);
+        user.setProfile(profile);
+        userRepository.save(user);
 
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());

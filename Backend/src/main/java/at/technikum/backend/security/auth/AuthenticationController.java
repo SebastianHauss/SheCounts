@@ -37,9 +37,4 @@ public class AuthenticationController {
         return "The authentication endpoint is working!";
     }
 
-    @PostMapping("/test2")
-    public AuthenticationRequest test2 (@RequestBody AuthenticationRequest request){
-
-        return request;
-    }
 }
