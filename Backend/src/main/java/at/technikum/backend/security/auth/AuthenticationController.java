@@ -3,8 +3,9 @@ package at.technikum.backend.security.auth;
 import at.technikum.backend.security.authdtos.AuthenticationRequest;
 import at.technikum.backend.security.authdtos.AuthenticationResponse;
 import at.technikum.backend.security.authdtos.RegisterRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,20 +21,22 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest loginRequest) {
-        return authenticationService.login(loginRequest);
+    public ResponseEntity<AuthenticationResponse> login(
+            @RequestBody AuthenticationRequest loginRequest,
+            HttpServletResponse httpServletResponse) {
+        return authenticationService.login(loginRequest, httpServletResponse);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
-        return authenticationService.register(request);
+    public ResponseEntity<AuthenticationResponse> register(
+            @RequestBody RegisterRequest request,
+            HttpServletResponse httpServletResponse) {
+        return authenticationService.register(request, httpServletResponse);
     }
 
-
     @PostMapping("/test")
-    public String test (){
+    public String test() {
         return "The authentication endpoint is working!";
     }
 
