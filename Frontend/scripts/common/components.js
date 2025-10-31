@@ -1,5 +1,3 @@
-// components.js
-
 $(document).ready(function() {
 
     // Load navbar first, then initialize everything
@@ -40,7 +38,7 @@ function initializeNavbarComponents() {
         console.log('Hamburger collapse initialized');
     }
 
-    console.log('✅ All Bootstrap components initialized!');
+    console.log(' All Bootstrap components initialized!');
 }
 
 // Function to initialize authentication
