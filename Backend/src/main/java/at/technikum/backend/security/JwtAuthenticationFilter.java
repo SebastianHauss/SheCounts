@@ -6,6 +6,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Cookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,9 +21,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     public JwtAuthenticationFilter(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
-
-
-
 
     @Override
     protected void doFilterInternal(
@@ -40,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         try {
             String token = extractToken(request);
-            if (token != null){
+            if (token != null) {
                 UserDetails userDetails = authenticationService.validateToken(token);
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -51,12 +49,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                if (userDetails instanceof SCUserDetails){
+                if (userDetails instanceof SCUserDetails) {
                     request.setAttribute("userId", ((SCUserDetails) userDetails).getId());
                 }
 
             }
-        } catch (Exception exception){
+        } catch (Exception exception) {
             //doesn't throw exception, User is just not authenticated
             System.out.println("Token was invalid");
         }
@@ -64,9 +62,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private String extractToken(HttpServletRequest request){
+    private String extractToken(HttpServletRequest request) {
+// 1) Try cookie first
+        if (request.getCookies() != null) {
+            for (Cookie c : request.getCookies()) {
+                if ("auth_token".equals(c.getName())) {
+                    return c.getValue();
+                }
+            }
+        }
+
+        // 2) Fallback: Authorization header (for API testing)
+
         String bearerToken = request.getHeader("Authorization");
-        if(bearerToken != null && bearerToken.startsWith("Bearer ")){
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         }
         return null;
