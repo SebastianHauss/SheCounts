@@ -9,6 +9,9 @@ $(document).ready(function() {
 
         // 2. Re-initialize Auth functionality
         initializeAuth();
+
+        // 3. Check if user is logged in
+        refreshAuthUI();
     });
 
     // Load footer
@@ -38,7 +41,7 @@ function initializeNavbarComponents() {
         console.log('Hamburger collapse initialized');
     }
 
-    console.log(' All Bootstrap components initialized!');
+    console.log('All Bootstrap components initialized!');
 }
 
 // Function to initialize authentication
@@ -47,25 +50,16 @@ function initializeAuth() {
 
     const API_URL = 'http://localhost:8080/api/auth';
 
-    // Update navbar based on login state
-    updateNavbar();
-
     // Attach event listeners for login
     $('#loginButton').off('click').on('click', function (e) {
         e.preventDefault();
         handleLogin(API_URL);
     });
 
-    // Attach event listeners for logout (desktop)
-    $('#logoutBtn').off('click').on('click', function (e) {
+    // Attach event listeners for logout (desktop & mobile)
+    $('#logoutBtn, #logoutBtnMobile').off('click').on('click', function (e) {
         e.preventDefault();
-        handleLogout();
-    });
-
-    // Attach event listeners for logout (mobile)
-    $('#logoutBtnMobile').off('click').on('click', function (e) {
-        e.preventDefault();
-        handleLogout();
+        handleLogout(API_URL);
     });
 
     // Attach event listeners for register
@@ -83,30 +77,45 @@ function initializeAuth() {
     console.log('Authentication initialized!');
 }
 
-// Helper: Update navbar visibility based on login state
-function updateNavbar() {
-    console.log('Updating navbar...');
-    const userId = localStorage.getItem('userId');
-    console.log('userId =', userId);
+// Check if user is logged in via cookie
+async function refreshAuthUI() {
+    console.log('Checking authentication status...');
 
-    if (userId && userId.trim() !== '') {
-        // User is logged in - show profile, hide login
-        $('#loginBlock').hide();
-        $('#userBlock').show();
-        $('#mobileLoginLink').hide();
-        $('#mobileUserBlock').show();
-        console.log('User is logged in');
-    } else {
-        // User is logged out - show login, hide profile
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/me', {
+            method: 'GET',
+            credentials: 'include'  // Send cookie with request
+        });
+
+        if (response.ok) {
+            // User is logged in
+            const data = await response.json();
+            console.log('User is logged in');
+
+            $('#loginBlock').hide();
+            $('#userBlock').show();
+            $('#mobileLoginLink').hide();
+            $('#mobileUserBlock').show();
+
+        } else {
+            // User is logged out
+            console.log('User is not logged in');
+
+            $('#loginBlock').show();
+            $('#userBlock').hide();
+            $('#mobileLoginLink').show();
+            $('#mobileUserBlock').hide();
+        }
+    } catch (error) {
+        console.error('Auth check failed:', error);
         $('#loginBlock').show();
         $('#userBlock').hide();
         $('#mobileLoginLink').show();
         $('#mobileUserBlock').hide();
-        console.log('User is logged out');
     }
 }
 
-// Handle login
+// Handle login with cookie
 function handleLogin(API_URL) {
     const email = $('#loginEmailField').val().trim();
     const password = $('#loginPasswordField').val();
@@ -120,36 +129,59 @@ function handleLogin(API_URL) {
         url: `${API_URL}/login`,
         type: 'POST',
         contentType: 'application/json',
+        xhrFields: {
+            withCredentials: true  // Allow cookies
+        },
+        crossDomain: true,
         data: JSON.stringify({ email, password }),
         success: function (data) {
-            localStorage.setItem('userId', data);
-            alert('Login erfolgreich!');
+            window.location.reload();
+            console.log('Login successful');
             $('#loginModal').modal('hide');
-            updateNavbar();
             $('.modal-backdrop').remove();
             $('body').removeClass('modal-open');
+
+            // Update UI to show logged-in state
+            refreshAuthUI();
         },
         error: function (xhr) {
-            alert('Login fehlgeschlagen: ' + xhr.responseText);
+            console.error(' Login failed:', xhr.responseText);
+
         },
     });
 }
 
-// Handle logout
-function handleLogout() {
-    localStorage.removeItem('userId');
-    updateNavbar();
-    alert('Logout erfolgreich!');
+// Handle logout with cookie deletion
+function handleLogout(API_URL) {
+    $.ajax({
+        url: `${API_URL}/logout`,
+        type: 'POST',
+        xhrFields: {
+            withCredentials: true  // CRITICAL: Send cookie to delete it
+        },
+        crossDomain: true,
+        success: function () {
+            console.log('Logout successful');
+            window.location.reload();
+
+            // Update UI to show logged-out state
+            refreshAuthUI();
+        },
+        error: function (xhr) {
+            console.error('Logout failed:', xhr.responseText);
+
+        },
+    });
 }
 
-// Handle register
+// Handle register with cookie
 function handleRegister(API_URL) {
     const email = $('#emailField').val().trim();
     const username = $('#usernameField').val().trim();
     const password = $('#passwordField').val();
 
     if (!email || !username || !password) {
-        alert('Bitte alle Felder ausfüllen!');
+
         return;
     }
 
@@ -157,16 +189,26 @@ function handleRegister(API_URL) {
         url: `${API_URL}/register`,
         type: 'POST',
         contentType: 'application/json',
+        xhrFields: {
+            withCredentials: true  // CRITICAL: Allow cookies
+        },
+        crossDomain: true,
         data: JSON.stringify({ email, username, password }),
         success: function () {
-            alert('Registrierung erfolgreich!');
+            window.location.reload();
+            console.log('Registration successful');
+
             $('#registerModal').modal('hide');
             $('#emailField, #usernameField, #passwordField').val('');
             $('.modal-backdrop').remove();
             $('body').removeClass('modal-open');
+
+            // Update UI to show logged-in state (they're auto-logged in)
+            refreshAuthUI();
         },
         error: function (xhr) {
-            alert('Registrierung fehlgeschlagen: ' + xhr.responseText);
+            console.error('Registration failed:', xhr.responseText);
+
         },
     });
 }
@@ -186,7 +228,7 @@ function handlePasswordReset(API_URL) {
         contentType: 'application/json',
         data: JSON.stringify({ email }),
         success: function () {
-            alert('Zurücksetzen erfolgreich!');
+
             $('#pswZurückModal').modal('hide');
             $('.modal-backdrop').remove();
             $('body').removeClass('modal-open');

@@ -4,9 +4,9 @@ import at.technikum.backend.security.auth.AuthenticationService;
 import at.technikum.backend.security.userdetails.SCUserDetails;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Cookie;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,8 +30,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String path = request.getServletPath();
-        if (path.startsWith("/api/auth/")) {
-            // Login, Register, Test überspringen
+
+// Only skip login, register, logout, test, reset-password - NOT /me!
+        if (path.equals("/api/auth/login") ||
+                path.equals("/api/auth/register") ||
+                path.equals("/api/auth/logout") ||
+                path.equals("/api/auth/test") ||
+                path.equals("/api/auth/reset-password")) {
+
             filterChain.doFilter(request, response);
             return;
         }
