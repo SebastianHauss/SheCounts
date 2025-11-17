@@ -63,7 +63,7 @@ function initializeAuth() {
     });
 
     // Attach event listeners for register
-    $('#registerButton').off('click').on('click', function (e) {
+    $('#registerForm').off('submit').on('submit', function (e) {
         e.preventDefault();
         handleRegister(API_URL);
     });
@@ -176,14 +176,26 @@ function handleLogout(API_URL) {
 
 // Handle register with cookie
 function handleRegister(API_URL) {
+    const anrede = $('#anrede').val();
     const email = $('#emailField').val().trim();
     const username = $('#usernameField').val().trim();
     const password = $('#passwordField').val();
+    const repeatPassword = $('#repeatPasswordField').val();
+    const country = $('#country').val();
 
-    if (!email || !username || !password) {
-
+    if (password !== repeatPassword) {
+        // Show error feedback for password mismatch
+        $('#repeatPasswordField').addClass('is-invalid');
         return;
     }
+
+    let gender = 'diverse';  // default
+    if (anrede === 'frau') {
+        gender = 'female';
+    } else if (anrede === 'herr') {
+        gender = 'male';
+    }
+
 
     $.ajax({
         url: `${API_URL}/register`,
@@ -193,22 +205,39 @@ function handleRegister(API_URL) {
             withCredentials: true  // CRITICAL: Allow cookies
         },
         crossDomain: true,
-        data: JSON.stringify({ email, username, password }),
+        data: JSON.stringify({
+            email: email,
+            username: username,
+            password: password,
+            country: country,
+            gender: gender
+        }),
         success: function () {
             window.location.reload();
             console.log('Registration successful');
 
+            // Clear form fields
+            $('#anrede').val('');
+            $('#emailField').val('');
+            $('#usernameField').val('');
+            $('#passwordField').val('');
+            $('#repeatPasswordField').val('');
+            $('#country').val('');
+
+            // Remove validation classes
+            $('#registerForm').removeClass('was-validated');
+            $('#registerForm input, #registerForm select').removeClass('is-valid is-invalid');
+
+            // Close modal
             $('#registerModal').modal('hide');
-            $('#emailField, #usernameField, #passwordField').val('');
             $('.modal-backdrop').remove();
             $('body').removeClass('modal-open');
 
-            // Update UI to show logged-in state (they're auto-logged in)
+            // Update UI to show logged-in state
             refreshAuthUI();
         },
         error: function (xhr) {
             console.error('Registration failed:', xhr.responseText);
-
         },
     });
 }
