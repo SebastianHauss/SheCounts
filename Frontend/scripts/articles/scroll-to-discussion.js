@@ -1,8 +1,16 @@
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('floating-button');
   const target = document.getElementById('diskussion');
 
-  if (!button || !target) return;
+  // Exit early if elements don't exist on this page
+  if (!button || !target) {
+    console.log('Floating button or discussion section not found - skipping scroll handler');
+    return;
+  }
+
+  console.log('Floating button scroll handler initialized');
 
   window.addEventListener('scroll', function () {
     const rect = target.getBoundingClientRect();
