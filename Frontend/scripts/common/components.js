@@ -20,6 +20,37 @@ $(document).ready(function() {
 
 });
 
+// Add this at the end of components.js
+function initializeRealTimeValidation() {
+    console.log('Initializing real-time validation...');
+
+    // Get all inputs and selects that need validation
+    const inputs = document.querySelectorAll('.needs-validation input, .needs-validation select');
+
+    inputs.forEach(input => {
+        // Show validation on blur (when user leaves the field)
+        input.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                // Only validate if field has content
+                if (this.checkValidity()) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                    this.classList.add('is-invalid');
+                }
+            }
+        });
+
+        // Remove validation styling when user starts typing again
+        input.addEventListener('input', function() {
+            this.classList.remove('is-invalid', 'is-valid');
+        });
+    });
+
+    console.log('Real-time validation initialized!');
+}
+
 // Function to re-initialize Bootstrap components
 function initializeNavbarComponents() {
     console.log('Re-initializing Bootstrap components...');
@@ -40,7 +71,7 @@ function initializeNavbarComponents() {
         console.log('Hamburger collapse initialized');
     }
 
-    console.log('✅ All Bootstrap components initialized!');
+    console.log('All Bootstrap components initialized!');
 }
 
 // Function to initialize authentication
@@ -82,7 +113,28 @@ function initializeAuth() {
         handlePasswordReset(API_URL);
     });
 
+    initializeFormValidation();
+    initializeRealTimeValidation();
+
     console.log('Authentication initialized!');
+}
+
+// adds to bootstrap frontend validation
+function initializeFormValidation() {
+    console.log('Initializing form validation...');
+
+    var forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+
+    console.log('Form validation initialized!');
 }
 
 // Helper: Update navbar visibility based on login state
