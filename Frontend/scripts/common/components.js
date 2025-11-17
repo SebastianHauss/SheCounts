@@ -184,7 +184,10 @@ function handleLogin(API_URL) {
             $('body').removeClass('modal-open');
         },
         error: function (xhr) {
-            alert('Login fehlgeschlagen: ' + xhr.responseText);
+            console.error('Login error:', xhr);
+            console.error('Status:', xhr.status);
+            console.error('Response:', xhr.responseText);
+            alert('Login fehlgeschlagen: ' + (xhr.responseText || xhr.statusText || 'Unbekannter Fehler'));
         },
     });
 }
