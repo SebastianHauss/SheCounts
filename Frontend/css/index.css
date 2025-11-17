@@ -1,32 +1,60 @@
+:root {
+    --myPastelGreen: #a9b8a3;
+    --myGrey: #796f80;
+    --myPink: #c3868d;
+    --myDarkerPink: #b56468;
+    --myBeige: #fbeae1;
+    --myBorderRGB: 121, 111, 128;
+}
+
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url('../img/home/hand-money.jpg');
+    /*filter: blur(2px);*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.primary-btn {
+    background-color: var(--myPink);
+    color: white;
+}
+
+.hero-section h1,
+.hero-section p {
+    color: white;
+}
+
 .card-container {
-  margin: 30px;
+    margin: 30px;
 }
 
 .container a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .card {
-  transition: box-shadow 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
 .card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* soft shadow effect */
-  cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* soft shadow effect */
+    cursor: pointer;
 }
 
 /* --- Grid Cards --- */
 .main-card-img {
-  height: 100%;
-  object-fit: cover;
-  border-top-left-radius: 0.375rem;
-  border-bottom-left-radius: 0.375rem;
+    height: 100%;
+    object-fit: cover;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
 }
 
 @media (max-width: 767.98px) {
-  .main-card-img {
-    height: auto;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0.375rem;
-  }
+    .main-card-img {
+        height: auto;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 0.375rem;
+    }
 }
