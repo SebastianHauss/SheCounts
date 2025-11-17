@@ -223,7 +223,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form id="loginForm">
+        <form id="loginForm" class="needs-validation" novalidate>
           <!-- Email Field -->
           <div class="mb-3">
             <label for="loginEmailField" class="form-label">
@@ -235,6 +235,9 @@
                     id="loginEmailField"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige Email-Adresse ein.
+            </div>
           </div>
 
           <!-- Password Field -->
@@ -246,8 +249,12 @@
                     type="password"
                     class="form-control"
                     id="loginPasswordField"
+                    minlength="6"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte geben Sie Ihr 6-stelliges Passwort ein.
+            </div>
           </div>
 
           <!-- Login Button -->
@@ -315,7 +322,7 @@
           Geben Sie Ihre Email-Adresse ein. Wir senden Ihnen einen Link zum
           Zurücksetzen Ihres Passworts.
         </p>
-        <form id="resetPasswordForm">
+        <form id="resetPasswordForm" class="needs-validation" novalidate>
           <div class="mb-3">
             <label for="resetEmailField" class="form-label">
               Email Adresse
@@ -326,6 +333,9 @@
                     id="resetEmailField"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige Email-Adresse ein.
+            </div>
           </div>
         </form>
       </div>
@@ -369,7 +379,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form id="registerForm">
+        <form id="registerForm" class="needs-validation" novalidate>
           <!-- Anrede (Salutation) -->
           <div class="mb-3">
             <label for="anrede" class="form-label">Anrede</label>
@@ -379,6 +389,9 @@
               <option value="herr">Herr</option>
               <option value="neutral">Person (neutral)</option>
             </select>
+            <div class="invalid-feedback">
+              Bitte wählen Sie eine Anrede.
+            </div>
           </div>
 
           <!-- Username -->
@@ -390,6 +403,9 @@
                     id="usernameField"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte geben Sie einen Username ein.
+            </div>
           </div>
 
           <!-- Email -->
@@ -401,6 +417,9 @@
                     id="emailField"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige Email-Adresse ein.
+            </div>
           </div>
 
           <!-- Password -->
@@ -410,8 +429,12 @@
                     type="password"
                     class="form-control"
                     id="passwordField"
+                    minlength="6"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte geben Sie ein Passwort mit mindestens 6 Zeichen ein.
+            </div>
           </div>
 
           <!-- Repeat Password -->
@@ -423,8 +446,12 @@
                     type="password"
                     class="form-control"
                     id="repeatPasswordField"
+                    minlength="6"
                     required
             />
+            <div class="invalid-feedback">
+              Bitte wiederholen Sie Ihr Passwort.
+            </div>
           </div>
 
           <!-- Country -->
@@ -436,6 +463,9 @@
               <option value="de">Deutschland</option>
               <option value="ch">Schweiz</option>
             </select>
+            <div class="invalid-feedback">
+              Bitte wählen Sie ein Land.
+            </div>
           </div>
 
           <!-- Register Button -->
