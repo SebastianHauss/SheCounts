@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+    // Prevent scroll on page load
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Load navbar first, then initialize everything
     $('#navbar-placeholder').load('/components/navbar-home.html', function() {
         console.log('Navbar loaded successfully!');
@@ -12,7 +18,7 @@ $(document).ready(function() {
         setActiveNavLink();
 
         // 3. Check if user is logged in
-        refreshAuthUI();
+        checkAuthStatus();
     });
 
     // Load footer
@@ -21,6 +27,37 @@ $(document).ready(function() {
     });
 
 });
+
+// Add this at the end of components.js
+function initializeRealTimeValidation() {
+    console.log('Initializing real-time validation...');
+
+    // Get all inputs and selects that need validation
+    const inputs = document.querySelectorAll('.needs-validation input, .needs-validation select');
+
+    inputs.forEach(input => {
+        // Show validation on blur (when user leaves the field)
+        input.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                // Only validate if field has content
+                if (this.checkValidity()) {
+                    this.classList.remove('is-invalid');
+                    this.classList.add('is-valid');
+                } else {
+                    this.classList.remove('is-valid');
+                    this.classList.add('is-invalid');
+                }
+            }
+        });
+
+        // Remove validation styling when user starts typing again
+        input.addEventListener('input', function() {
+            this.classList.remove('is-invalid', 'is-valid');
+        });
+    });
+
+    console.log('Real-time validation initialized!');
+}
 
 // Function to re-initialize Bootstrap components
 function initializeNavbarComponents() {
@@ -115,14 +152,20 @@ function initializeAuth() {
         handleLogin(API_URL);
     });
 
-    // Attach event listeners for logout (desktop & mobile)
-    $('#logoutBtn, #logoutBtnMobile').off('click').on('click', function (e) {
+    // Attach event listeners for logout (desktop)
+    $('#logoutBtn').off('click').on('click', function (e) {
         e.preventDefault();
-        handleLogout(API_URL);
+        handleLogout();
+    });
+
+    // Attach event listeners for logout (mobile)
+    $('#logoutBtnMobile').off('click').on('click', function (e) {
+        e.preventDefault();
+        handleLogout();
     });
 
     // Attach event listeners for register
-    $('#registerForm').off('submit').on('submit', function (e) {
+    $('#registerButton').off('click').on('click', function (e) {
         e.preventDefault();
         handleRegister(API_URL);
     });
@@ -133,54 +176,39 @@ function initializeAuth() {
         handlePasswordReset(API_URL);
     });
 
+    initializeFormValidation();
+    initializeRealTimeValidation();
+
     console.log('Authentication initialized!');
 }
 
-// Check if user is logged in via cookie
-async function refreshAuthUI() {
-    console.log('Checking authentication status...');
+// adds to bootstrap frontend validation
+function initializeFormValidation() {
+    console.log('Initializing form validation...');
 
-    try {
-        const response = await fetch('http://localhost:8080/api/auth/me', {
-            method: 'GET',
-            credentials: 'include'  // Send cookie with request
-        });
+    var forms = document.querySelectorAll('.needs-validation');
+    Array.prototype.slice.call(forms).forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
 
-        if (response.ok) {
-            // User is logged in
-            const data = await response.json();
-            console.log('User is logged in');
-
-            $('#loginBlock').hide();
-            $('#userBlock').show();
-            $('#mobileLoginLink').hide();
-            $('#mobileUserBlock').show();
-
-        } else {
-            // User is logged out
-            console.log('User is not logged in');
-
-            $('#loginBlock').show();
-            $('#userBlock').hide();
-            $('#mobileLoginLink').show();
-            $('#mobileUserBlock').hide();
-        }
-    } catch (error) {
-        console.error('Auth check failed:', error);
-        $('#loginBlock').show();
-        $('#userBlock').hide();
-        $('#mobileLoginLink').show();
-        $('#mobileUserBlock').hide();
-    }
+    console.log('Form validation initialized!');
 }
 
-// Handle login with cookie
+// Handle login - REAL VERSION with cookie authentication
 function handleLogin(API_URL) {
     const email = $('#loginEmailField').val().trim();
     const password = $('#loginPasswordField').val();
 
-    if (!email || !password) {
-        alert('Bitte Email und Passwort eingeben!');
+    // Validate form first
+    const loginForm = document.getElementById('loginForm');
+    if (!loginForm.checkValidity()) {
+        loginForm.classList.add('was-validated');
         return;
     }
 
@@ -189,51 +217,63 @@ function handleLogin(API_URL) {
         type: 'POST',
         contentType: 'application/json',
         xhrFields: {
-            withCredentials: true  // Allow cookies
+            withCredentials: true  // ✅ Allow cookies
         },
         crossDomain: true,
         data: JSON.stringify({ email, password }),
         success: function (data) {
-            window.location.reload();
             console.log('Login successful');
-            $('#loginModal').modal('hide');
-            $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open');
 
-            // Update UI to show logged-in state
-            refreshAuthUI();
+            // Remove focus and close modal properly
+            document.activeElement.blur();
+            const modalEl = document.getElementById('loginModal');
+            const loginModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            loginModal.hide();
+
+            // Update UI to show user profile
+            $('#loginBlock').hide();
+            $('#userBlock').show();
+            $('#mobileLoginLink').hide();
+            $('#mobileUserBlock').show();
+
+            alert('Login erfolgreich!');
         },
         error: function (xhr) {
-            console.error(' Login failed:', xhr.responseText);
-
+            console.error('Login error:', xhr);
+            const errorMsg = xhr.responseJSON?.message || xhr.responseText || 'Unbekannter Fehler';
+            alert('Login fehlgeschlagen: ' + errorMsg);
         },
     });
 }
 
-// Handle logout with cookie deletion
-function handleLogout(API_URL) {
+// Handle logout - REAL VERSION
+function handleLogout() {
     $.ajax({
-        url: `${API_URL}/logout`,
+        url: 'http://localhost:8080/api/auth/logout',
         type: 'POST',
         xhrFields: {
-            withCredentials: true  // CRITICAL: Send cookie to delete it
+            withCredentials: true  // Send cookie to delete it
         },
         crossDomain: true,
         success: function () {
             console.log('Logout successful');
-            window.location.reload();
 
-            // Update UI to show logged-out state
-            refreshAuthUI();
+            // Update UI to show login button
+            $('#loginBlock').show();
+            $('#userBlock').hide();
+            $('#mobileLoginLink').show();
+            $('#mobileUserBlock').hide();
+
+            alert('Logout erfolgreich!');
         },
         error: function (xhr) {
             console.error('Logout failed:', xhr.responseText);
-
+            alert('Logout fehlgeschlagen');
         },
     });
 }
 
-// Handle register with cookie
+// Handle register - REAL VERSION
 function handleRegister(API_URL) {
     const anrede = $('#anrede').val();
     const email = $('#emailField').val().trim();
@@ -242,28 +282,35 @@ function handleRegister(API_URL) {
     const repeatPassword = $('#repeatPasswordField').val();
     const country = $('#country').val();
 
-    if (password !== repeatPassword) {
-        // Show error feedback for password mismatch
-        $('#repeatPasswordField').addClass('is-invalid');
+    // Validate form first
+    const registerForm = document.getElementById('registerForm');
+    if (!registerForm.checkValidity()) {
+        registerForm.classList.add('was-validated');
         return;
     }
 
-    let gender = 'diverse';  // default
+    // Check password match
+    if (password !== repeatPassword) {
+        $('#repeatPasswordField').addClass('is-invalid');
+        alert('Passwörter stimmen nicht überein!');
+        return;
+    }
+
+    // Map anrede to gender
+    let gender = 'diverse';
     if (anrede === 'frau') {
         gender = 'female';
     } else if (anrede === 'herr') {
         gender = 'male';
     }
 
-
     $.ajax({
         url: `${API_URL}/register`,
         type: 'POST',
         contentType: 'application/json',
         xhrFields: {
-            withCredentials: true  // CRITICAL: Allow cookies
+            withCredentials: true
         },
-        crossDomain: true,
         data: JSON.stringify({
             email: email,
             username: username,
@@ -272,31 +319,26 @@ function handleRegister(API_URL) {
             gender: gender
         }),
         success: function () {
-            window.location.reload();
             console.log('Registration successful');
 
-            // Clear form fields
-            $('#anrede').val('');
-            $('#emailField').val('');
-            $('#usernameField').val('');
-            $('#passwordField').val('');
-            $('#repeatPasswordField').val('');
-            $('#country').val('');
+            // Remove focus and close modal properly
+            document.activeElement.blur();
+            const regEl = document.getElementById('registerModal');
+            const regModal = bootstrap.Modal.getInstance(regEl) || new bootstrap.Modal(regEl);
+            regModal.hide();
 
-            // Remove validation classes
-            $('#registerForm').removeClass('was-validated');
-            $('#registerForm input, #registerForm select').removeClass('is-valid is-invalid');
+            // Update UI to show user profile
+            $('#loginBlock').hide();
+            $('#userBlock').show();
+            $('#mobileLoginLink').hide();
+            $('#mobileUserBlock').show();
 
-            // Close modal
-            $('#registerModal').modal('hide');
-            $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open');
-
-            // Update UI to show logged-in state
-            refreshAuthUI();
+            alert('Registrierung erfolgreich!');
         },
         error: function (xhr) {
-            console.error('Registration failed:', xhr.responseText);
+            console.error('Registration error:', xhr);
+            const errorMsg = xhr.responseJSON?.message || xhr.responseText || 'Unbekannter Fehler';
+            alert('Registrierung fehlgeschlagen: ' + errorMsg);
         },
     });
 }
@@ -310,19 +352,76 @@ function handlePasswordReset(API_URL) {
         return;
     }
 
-    $.ajax({
-        url: `${API_URL}/reset-password`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ email }),
-        success: function () {
+    // Close modal
+    document.activeElement.blur();
+    const resetEl = document.getElementById('pswZurückModal');
+    const resetModal = bootstrap.Modal.getInstance(resetEl) || new bootstrap.Modal(resetEl);
+    resetModal.hide();
 
-            $('#pswZurückModal').modal('hide');
-            $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open');
-        },
-        error: function (xhr) {
-            alert('Fehler beim Zurücksetzen: ' + xhr.responseText);
-        },
-    });
+    // Show success message
+    alert('Ein Link zum Zurücksetzen des Passworts wurde an ' + email + ' gesendet.');
 }
+
+// Handle password reset - DEMO VERSION (no backend call)
+function handlePasswordReset(API_URL) {
+    const email = $('#resetEmailField').val().trim();
+
+    // Validate form first
+    const resetForm = document.getElementById('resetPasswordForm');
+    if (!resetForm.checkValidity()) {
+        resetForm.classList.add('was-validated');
+        return;
+    }
+
+    if (!email) {
+        alert('Bitte Email eingeben!');
+        return;
+    }
+
+    // Close modal
+    document.activeElement.blur();
+    const resetEl = document.getElementById('pswZurückModal');
+    const resetModal = bootstrap.Modal.getInstance(resetEl) || new bootstrap.Modal(resetEl);
+    resetModal.hide();
+
+    // Show success message (no actual API call)
+    alert('Ein Link zum Zurücksetzen des Passworts wurde an ' + email + ' gesendet.');
+
+    // Clear the email field for next time
+    $('#resetEmailField').val('');
+    resetForm.classList.remove('was-validated');
+}
+
+// Check if user is logged in via cookie
+ async function checkAuthStatus() {
+     try {
+         const response = await fetch('http://localhost:8080/api/auth/me', {
+             method: 'GET',
+             credentials: 'include'  // Send cookie with request
+         });
+
+         if (response.ok) {
+             // User is logged in
+             $('#loginBlock').hide();
+             $('#userBlock').show();
+             $('#mobileLoginLink').hide();
+             $('#mobileUserBlock').show();
+             console.log('User is logged in');
+         } else {
+             // User is logged out
+             $('#loginBlock').show();
+             $('#userBlock').hide();
+             $('#mobileLoginLink').show();
+             $('#mobileUserBlock').hide();
+             console.log('User is logged out');
+         }
+     }
+     catch (error) {
+         console.error('Auth check failed:', error);
+         // Default to logged out state
+         $('#loginBlock').show();
+         $('#userBlock').hide();
+         $('#mobileLoginLink').show();
+         $('#mobileUserBlock').hide();
+     }
+ }
