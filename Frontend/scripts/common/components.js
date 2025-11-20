@@ -18,7 +18,7 @@ $(document).ready(function() {
         setActiveNavLink();
 
         // 3. Check if user is logged in
-        refreshAuthUI();
+        // refreshAuthUI();
         checkAuthStatus();
     });
 
