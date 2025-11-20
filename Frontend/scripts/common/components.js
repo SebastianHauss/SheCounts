@@ -1,5 +1,3 @@
-// components.js
-
 $(document).ready(function() {
 
     // Prevent scroll on page load
@@ -17,6 +15,10 @@ $(document).ready(function() {
 
         // 2. Re-initialize Auth functionality
         initializeAuth();
+        setActiveNavLink();
+
+        // 3. Check if user is logged in
+        refreshAuthUI();
         checkAuthStatus();
     });
 
@@ -79,6 +81,64 @@ function initializeNavbarComponents() {
     }
 
     console.log('All Bootstrap components initialized!');
+}
+
+// === Highlight active navbar link (robust) ===
+function normalizePathToKey(path) {
+    if (!path) return 'index';
+    let p = path.split('#')[0].split('?')[0];
+    try {
+        if (p.startsWith('http')) {
+            p = new URL(p).pathname;
+        }
+    } catch (e) {}
+
+    p = p.replace(/\/$/, '');
+
+    if (p === '' || p === '/') return 'index';
+
+    const segments = p.split('/');
+    const last = segments[segments.length - 1] || '';
+
+    if (last === '' || last === '/') return 'index';
+
+    return last.replace(/\.html$/i, '');
+}
+
+function setActiveNavLink() {
+    const currentKey = normalizePathToKey(window.location.pathname);
+    let matchFound = false;
+
+    $('#navbar-placeholder .nav-link, #navbar-placeholder .dropdown-item').each(function () {
+        const href = $(this).attr('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript')) {
+            return;
+        }
+
+        const linkKey = normalizePathToKey(href);
+
+        if (linkKey === currentKey) {
+            $(this).addClass('active');
+            $(this).attr('aria-current', 'page');
+            matchFound = true;
+
+
+            const dropdownParent = $(this).closest('.dropdown');
+            if (dropdownParent.length) {
+                const parentToggle = dropdownParent.find('> .nav-link.dropdown-toggle');
+                parentToggle.addClass('active').attr('aria-current', 'page');
+            }
+        } else {
+            $(this).removeClass('active');
+            $(this).removeAttr('aria-current');
+        }
+    });
+
+    if (!matchFound && currentKey === 'index') {
+        $('#navbar-placeholder .nav-link').first()
+            .addClass('active')
+            .attr('aria-current', 'page');
+    }
 }
 
 // Function to initialize authentication
