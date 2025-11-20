@@ -162,6 +162,8 @@ public class AuthenticationService implements AuthService {
         cookie.setSecure(false); // TODO: change to true in production with HTTPS or use @value
         cookie.setPath("/");
         cookie.setMaxAge(24 * 60 * 60);
+        cookie.setDomain("localhost");
+        cookie.setAttribute("SameSite", "Lax");
         return cookie;
     }
 }

@@ -44,8 +44,8 @@
             </div>
           </div>
 
-          <form>
-            <fieldset disabled>
+          <form id="profileForm" class="needs-validation" novalidate>
+            <fieldset id="formFieldset" disabled>
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input
@@ -64,7 +64,11 @@
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
+                  required
                 />
+                <div class="invalid-feedback">
+                  Bitte geben Sie eine gültige E-Mail-Adresse ein.
+                </div>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label"
@@ -74,7 +78,12 @@
                   type="password"
                   class="form-control"
                   id="exampleInputPassword1"
+                  minlength="6"
+                  required
                 />
+                <div class="invalid-feedback">
+                  Passwort muss mindestens 6 Zeichen lang sein.
+                </div>
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword2" class="form-label"
@@ -84,15 +93,22 @@
                   type="password"
                   class="form-control"
                   id="exampleInputPassword2"
+                  required
                 />
+                <div class="invalid-feedback">
+                  Passwörter müssen übereinstimmen.
+                </div>
               </div>
               <div class="mb-3">
                 <label for="birthday" class="form-label">Birthday</label>
-                <input type="date" class="form-control" id="birthday" />
+                <input type="date" class="form-control" id="birthday" required />
+                <div class="invalid-feedback">
+                  Bitte geben Sie Ihr Geburtsdatum ein.
+                </div>
               </div>
 
               <div class="mb-3">
-                <label class="form-label">Geschlect:</label><br />
+                <label class="form-label">Geschlecht:</label><br />
                 <div class="form-check ms-4">
                   <input
                     type="radio"
@@ -100,6 +116,7 @@
                     id="female"
                     name="gender"
                     value="female"
+                    required
                   />
                   <label class="form-check-label" for="female">weiblich</label>
                   <br />
@@ -121,16 +138,22 @@
                   />
                   <label class="form-check-label" for="male">männlich</label>
                   <br />
+                  <div class="invalid-feedback">
+                    Bitte wählen Sie ein Geschlecht aus.
+                  </div>
                 </div>
               </div>
 
               <div class="mb-3">
                 <label for="country" class="form-label">Country</label>
-                <select class="form-select" id="country">
+                <select class="form-select" id="country" required>
                   <option selected>Österreich</option>
                   <option>Deutschland</option>
                   <option>Schweiz</option>
                 </select>
+                <div class="invalid-feedback">
+                  Bitte wählen Sie ein Land aus.
+                </div>
               </div>
             </fieldset>
             <div class="d-flex justify-content-between mb-3">
@@ -175,5 +198,6 @@
     <!--Custom JS scripts-->
     <script src="../../scripts/common/modal-util.js"></script>
     <script src="../../scripts/common/components.js"></script>
+    <script src="../../scripts/users/profile.js"></script>
   </body>
 </html>

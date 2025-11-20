@@ -2,6 +2,12 @@
 
 $(document).ready(function() {
 
+    // Prevent scroll on page load
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Load navbar first, then initialize everything
     $('#navbar-placeholder').load('/components/navbar-home.html', function() {
         console.log('Navbar loaded successfully!');
@@ -79,9 +85,17 @@ function initializeAuth() {
     console.log('Initializing authentication...');
 
     const API_URL = 'http://localhost:8080/api/auth';
+    // ✅ CHECK localStorage on page load
+    if (localStorage.getItem('demoLoggedIn') === 'true') {
+        $('#loginBlock').hide();
+        $('#userBlock').show();
+        $('#mobileLoginLink').hide();
+        $('#mobileUserBlock').show();
+        console.log('Demo user is logged in');
+    }
 
-    // Update navbar based on login state
-    updateNavbar();
+    // checkAuthStatus();
+    // updateNavbar();
 
     // Attach event listeners for login
     $('#loginButton').off('click').on('click', function (e) {
@@ -161,71 +175,191 @@ function updateNavbar() {
 }
 
 // Handle login
+
+// function handleLogin(API_URL) {
+//     const email = $('#loginEmailField').val().trim();
+//     const password = $('#loginPasswordField').val();
+//
+//     $.ajax({
+//         url: `${API_URL}/login`,
+//         type: 'POST',
+//         contentType: 'application/json',
+//         xhrFields: {
+//             withCredentials: true  // ✅ Allow cookies
+//         },
+//         crossDomain: true,
+//         data: JSON.stringify({ email, password }),
+//         success: function (data) {
+//             console.log('Login successful');
+//             window.location.reload();  // ✅ Reload to check cookie
+//         },
+//         error: function (xhr) {
+//             console.error('Login error:', xhr);
+//             alert('Login fehlgeschlagen: ' + (xhr.responseText || 'Unbekannter Fehler'));
+//         },
+//     });
+// }
+
+// Handle login - DEMO VERSION (no API call)
 function handleLogin(API_URL) {
     const email = $('#loginEmailField').val().trim();
     const password = $('#loginPasswordField').val();
 
+    // Just check if fields are filled
     if (!email || !password) {
         alert('Bitte Email und Passwort eingeben!');
         return;
     }
 
-    $.ajax({
-        url: `${API_URL}/login`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ email, password }),
-        success: function (data) {
-            localStorage.setItem('userId', data);
-            alert('Login erfolgreich!');
-            $('#loginModal').modal('hide');
-            updateNavbar();
-            $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open');
-        },
-        error: function (xhr) {
-            console.error('Login error:', xhr);
-            console.error('Status:', xhr.status);
-            console.error('Response:', xhr.responseText);
-            alert('Login fehlgeschlagen: ' + (xhr.responseText || xhr.statusText || 'Unbekannter Fehler'));
-        },
-    });
+    // FAKE SUCCESS - Just update UI
+    console.log('Demo login successful');
+
+    //  SAVE to localStorage
+    localStorage.setItem('demoLoggedIn', 'true');
+
+    // remove focus from loginButton (or whatever is active)
+    document.activeElement.blur();
+
+    // Close modal
+    // $('#loginModal').modal('hide');
+    // $('.modal-backdrop').remove();
+    // $('body').removeClass('modal-open');
+
+    // use Bootstrap 5 JS API to hide modal
+    const modalEl = document.getElementById('loginModal');
+    const loginModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+    loginModal.hide();
+
+    // Show "Mein Profil" instead of Login
+    $('#loginBlock').hide();
+    $('#userBlock').show();
+    $('#mobileLoginLink').hide();
+    $('#mobileUserBlock').show();
+
+    alert('Login erfolgreich! (Demo-Modus)');
 }
 
-// Handle logout
+// // Handle logout
+// function handleLogout() {
+//     $.ajax({
+//         url: 'http://localhost:8080/api/auth/logout',
+//         type: 'POST',
+//         xhrFields: {
+//             withCredentials: true  // ✅ Send cookie to delete it
+//         },
+//         crossDomain: true,
+//         success: function () {
+//             console.log('Logout successful');
+//             window.location.reload();
+//         },
+//         error: function (xhr) {
+//             console.error('Logout failed:', xhr.responseText);
+//         },
+//     });
+// }
+
+// Handle logout - DEMO VERSION
 function handleLogout() {
-    localStorage.removeItem('userId');
-    updateNavbar();
-    alert('Logout erfolgreich!');
+    // REMOVE from localStorage
+    localStorage.removeItem('demoLoggedIn');
+    // Show Login instead of profile
+    $('#loginBlock').show();
+    $('#userBlock').hide();
+    $('#mobileLoginLink').show();
+    $('#mobileUserBlock').hide();
+
+    alert('Logout erfolgreich! (Demo-Modus)');
 }
 
-// Handle register
+// // Handle register
+// function handleRegister(API_URL) {
+//     const anrede = $('#anrede').val();
+//     const email = $('#emailField').val().trim();
+//     const username = $('#usernameField').val().trim();
+//     const password = $('#passwordField').val();
+//     const repeatPassword = $('#repeatPasswordField').val();
+//     const country = $('#country').val();
+//
+//     if (password !== repeatPassword) {
+//         $('#repeatPasswordField').addClass('is-invalid');
+//         return;
+//     }
+//
+//     let gender = 'diverse';
+//     if (anrede === 'frau') {
+//         gender = 'female';
+//     } else if (anrede === 'herr') {
+//         gender = 'male';
+//     }
+//
+//     $.ajax({
+//         url: `${API_URL}/register`,
+//         type: 'POST',
+//         contentType: 'application/json',
+//         xhrFields: {
+//             withCredentials: true
+//         },
+//         data: JSON.stringify({   email: email,
+//             username: username,
+//             password: password,
+//             country: country,
+//             gender: gender     }),
+//         success: function () {
+//             alert('Registrierung erfolgreich!');
+//             window.location.reload();
+//              $('#registerModal').modal('hide');
+//              $('#emailField, #usernameField, #passwordField').val('');
+//              $('.modal-backdrop').remove();
+//              $('body').removeClass('modal-open');
+//         },
+//         error: function (xhr) {
+//             alert('Registrierung fehlgeschlagen: ' + xhr.responseText);
+//         },
+//     });
+// }
+
+// Handle register - DEMO VERSION (no API call)
 function handleRegister(API_URL) {
+    const anrede = $('#anrede').val();
     const email = $('#emailField').val().trim();
     const username = $('#usernameField').val().trim();
     const password = $('#passwordField').val();
+    const repeatPassword = $('#repeatPasswordField').val();
+    const country = $('#country').val();
 
-    if (!email || !username || !password) {
-        alert('Bitte alle Felder ausfüllen!');
+    // Check password match
+    if (password !== repeatPassword) {
+        $('#repeatPasswordField').addClass('is-invalid');
         return;
     }
 
-    $.ajax({
-        url: `${API_URL}/register`,
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify({ email, username, password }),
-        success: function () {
-            alert('Registrierung erfolgreich!');
-            $('#registerModal').modal('hide');
-            $('#emailField, #usernameField, #passwordField').val('');
-            $('.modal-backdrop').remove();
-            $('body').removeClass('modal-open');
-        },
-        error: function (xhr) {
-            alert('Registrierung fehlgeschlagen: ' + xhr.responseText);
-        },
-    });
+    // FAKE SUCCESS - Just update UI
+    console.log('Demo registration successful');
+
+    // SAVE to localStorage
+    localStorage.setItem('demoLoggedIn', 'true');
+
+
+
+    // // Close modal
+    // $('#registerModal').modal('hide');
+    // $('.modal-backdrop').remove();
+    // $('body').removeClass('modal-open');
+
+    document.activeElement.blur();
+
+    const regEl = document.getElementById('registerModal');
+    const regModal = bootstrap.Modal.getInstance(regEl) || new bootstrap.Modal(regEl);
+    regModal.hide();
+
+
+    // Show "Mein Profil" instead of Login
+    $('#loginBlock').hide();
+    $('#userBlock').show();
+    $('#mobileLoginLink').hide();
+    $('#mobileUserBlock').show();
+
+    alert('Registrierung erfolgreich! (Demo-Modus)');
 }
 
 // Handle password reset
@@ -237,11 +371,17 @@ function handlePasswordReset(API_URL) {
         return;
     }
 
+    document.activeElement.blur();
+    const resetEl = document.getElementById('pswZurückModal');
+    const resetModal = bootstrap.Modal.getInstance(resetEl) || new bootstrap.Modal(resetEl);
+    resetModal.hide();
+
+
     $.ajax({
         url: `${API_URL}/reset-password`,
         type: 'POST',
         contentType: 'application/json',
-        data: JSON.stringify({ email }),
+        data: JSON.stringify({email}),
         success: function () {
             alert('Zurücksetzen erfolgreich!');
             $('#pswZurückModal').modal('hide');
@@ -253,3 +393,36 @@ function handlePasswordReset(API_URL) {
         },
     });
 }
+
+// // Check if user is logged in via cookie
+// async function checkAuthStatus() {
+//     try {
+//         const response = await fetch('http://localhost:8080/api/auth/me', {
+//             method: 'GET',
+//             credentials: 'include'  // Send cookie with request
+//         });
+//
+//         if (response.ok) {
+//             // User is logged in
+//             $('#loginBlock').hide();
+//             $('#userBlock').show();
+//             $('#mobileLoginLink').hide();
+//             $('#mobileUserBlock').show();
+//             console.log('User is logged in');
+//         } else {
+//             // User is logged out
+//             $('#loginBlock').show();
+//             $('#userBlock').hide();
+//             $('#mobileLoginLink').show();
+//             $('#mobileUserBlock').hide();
+//             console.log('User is logged out');
+//         }
+//     } catch (error) {
+//         console.error('Auth check failed:', error);
+//         // Default to logged out state
+//         $('#loginBlock').show();
+//         $('#userBlock').hide();
+//         $('#mobileLoginLink').show();
+//         $('#mobileUserBlock').hide();
+//     }
+// }
