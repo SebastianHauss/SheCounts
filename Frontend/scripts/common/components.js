@@ -18,7 +18,6 @@ $(document).ready(function() {
         setActiveNavLink();
 
         // 3. Check if user is logged in
-        // refreshAuthUI();
         checkAuthStatus();
     });
 
@@ -146,17 +145,6 @@ function initializeAuth() {
     console.log('Initializing authentication...');
 
     const API_URL = 'http://localhost:8080/api/auth';
-    // CHECK localStorage on page load
-    // if (localStorage.getItem('demoLoggedIn') === 'true') {
-    //     $('#loginBlock').hide();
-    //     $('#userBlock').show();
-    //     $('#mobileLoginLink').hide();
-    //     $('#mobileUserBlock').show();
-    //     console.log('Demo user is logged in');
-    // }
-
-    // checkAuthStatus();
-    // updateNavbar();
 
     // Attach event listeners for login
     $('#loginButton').off('click').on('click', function (e) {
@@ -212,29 +200,6 @@ function initializeFormValidation() {
     console.log('Form validation initialized!');
 }
 
-// Helper: Update navbar visibility based on login state
-// function updateNavbar() {
-//     console.log('Updating navbar...');
-//     const userId = localStorage.getItem('userId');
-//     console.log('userId =', userId);
-//
-//     if (userId && userId.trim() !== '') {
-//         // User is logged in - show profile, hide login
-//         $('#loginBlock').hide();
-//         $('#userBlock').show();
-//         $('#mobileLoginLink').hide();
-//         $('#mobileUserBlock').show();
-//         console.log('User is logged in');
-//     } else {
-//         // User is logged out - show login, hide profile
-//         $('#loginBlock').show();
-//         $('#userBlock').hide();
-//         $('#mobileLoginLink').show();
-//         $('#mobileUserBlock').hide();
-//         console.log('User is logged out');
-//     }
-// }
-
 // Handle login - REAL VERSION with cookie authentication
 function handleLogin(API_URL) {
     const email = $('#loginEmailField').val().trim();
@@ -281,45 +246,6 @@ function handleLogin(API_URL) {
     });
 }
 
-// // Handle login - DEMO VERSION (no API call)
-// function handleLogin(API_URL) {
-//     const email = $('#loginEmailField').val().trim();
-//     const password = $('#loginPasswordField').val();
-//
-//     // Just check if fields are filled
-//     if (!email || !password) {
-//         alert('Bitte Email und Passwort eingeben!');
-//         return;
-//     }
-//
-//     // FAKE SUCCESS - Just update UI
-//     console.log('Demo login successful');
-//
-//     //  SAVE to localStorage
-//     localStorage.setItem('demoLoggedIn', 'true');
-//
-//     // remove focus from loginButton (or whatever is active)
-//     document.activeElement.blur();
-//
-//     // Close modal
-//     // $('#loginModal').modal('hide');
-//     // $('.modal-backdrop').remove();
-//     // $('body').removeClass('modal-open');
-//
-//     // use Bootstrap 5 JS API to hide modal
-//     const modalEl = document.getElementById('loginModal');
-//     const loginModal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
-//     loginModal.hide();
-//
-//     // Show "Mein Profil" instead of Login
-//     $('#loginBlock').hide();
-//     $('#userBlock').show();
-//     $('#mobileLoginLink').hide();
-//     $('#mobileUserBlock').show();
-//
-//     alert('Login erfolgreich! (Demo-Modus)');
-// }
-
 // Handle logout - REAL VERSION
 function handleLogout() {
     $.ajax({
@@ -346,19 +272,6 @@ function handleLogout() {
         },
     });
 }
-
-// // Handle logout - DEMO VERSION
-// function handleLogout() {
-//     // REMOVE from localStorage
-//     localStorage.removeItem('demoLoggedIn');
-//     // Show Login instead of profile
-//     $('#loginBlock').show();
-//     $('#userBlock').hide();
-//     $('#mobileLoginLink').show();
-//     $('#mobileUserBlock').hide();
-//
-//     alert('Logout erfolgreich! (Demo-Modus)');
-// }
 
 // Handle register - REAL VERSION
 function handleRegister(API_URL) {
@@ -430,50 +343,6 @@ function handleRegister(API_URL) {
     });
 }
 
-// // Handle register - DEMO VERSION (no API call)
-// function handleRegister(API_URL) {
-//     const anrede = $('#anrede').val();
-//     const email = $('#emailField').val().trim();
-//     const username = $('#usernameField').val().trim();
-//     const password = $('#passwordField').val();
-//     const repeatPassword = $('#repeatPasswordField').val();
-//     const country = $('#country').val();
-//
-//     // Check password match
-//     if (password !== repeatPassword) {
-//         $('#repeatPasswordField').addClass('is-invalid');
-//         return;
-//     }
-//
-//     // FAKE SUCCESS - Just update UI
-//     console.log('Demo registration successful');
-//
-//     // SAVE to localStorage
-//     localStorage.setItem('demoLoggedIn', 'true');
-//
-//
-//
-//     // // Close modal
-//     // $('#registerModal').modal('hide');
-//     // $('.modal-backdrop').remove();
-//     // $('body').removeClass('modal-open');
-//
-//     document.activeElement.blur();
-//
-//     const regEl = document.getElementById('registerModal');
-//     const regModal = bootstrap.Modal.getInstance(regEl) || new bootstrap.Modal(regEl);
-//     regModal.hide();
-//
-//
-//     // Show "Mein Profil" instead of Login
-//     $('#loginBlock').hide();
-//     $('#userBlock').show();
-//     $('#mobileLoginLink').hide();
-//     $('#mobileUserBlock').show();
-//
-//     alert('Registrierung erfolgreich! (Demo-Modus)');
-// }
-
 // Handle password reset
 function handlePasswordReset(API_URL) {
     const email = $('#resetEmailField').val().trim();
@@ -491,22 +360,6 @@ function handlePasswordReset(API_URL) {
 
     // Show success message
     alert('Ein Link zum Zurücksetzen des Passworts wurde an ' + email + ' gesendet.');
-
-    // $.ajax({
-    //     url: `${API_URL}/reset-password`,
-    //     type: 'POST',
-    //     contentType: 'application/json',
-    //     data: JSON.stringify({email}),
-    //     success: function () {
-    //         alert('Zurücksetzen erfolgreich!');
-    //         $('#pswZurückModal').modal('hide');
-    //         $('.modal-backdrop').remove();
-    //         $('body').removeClass('modal-open');
-    //     },
-    //     error: function (xhr) {
-    //         alert('Fehler beim Zurücksetzen: ' + xhr.responseText);
-    //     },
-    // });
 }
 
 // Handle password reset - DEMO VERSION (no backend call)
