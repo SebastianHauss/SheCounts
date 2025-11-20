@@ -30,16 +30,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     ) throws ServletException, IOException {
 
         String path = request.getServletPath();
-        if (path.startsWith("/api/auth/")) {
-            // Login, Register, Test überspringen
+        System.out.println("🔍 Processing request to: " + path);
+
+        if (path.equals("/api/auth/login") ||
+                path.equals("/api/auth/register") ||
+                path.equals("/api/auth/test") ||
+                path.equals("/api/auth/logout") ||
+                path.startsWith("/api/auth/reset-password")) {
+            System.out.println("⏭️ Skipping public endpoint");
             filterChain.doFilter(request, response);
             return;
         }
 
         try {
             String token = extractToken(request);
+            System.out.println("🍪 Token extracted: " + (token != null ? "YES" : "NO"));
+
             if (token != null) {
+                System.out.println("✅ Validating token...");
                 UserDetails userDetails = authenticationService.validateToken(token);
+                System.out.println("✅ Token valid for user: " + userDetails.getUsername());
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails,
@@ -53,17 +63,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     request.setAttribute("userId", ((SCUserDetails) userDetails).getId());
                 }
 
+            } else {
+                System.out.println("❌ No token found in request");
             }
         } catch (Exception exception) {
-            //doesn't throw exception, User is just not authenticated
-            System.out.println("Token was invalid");
+            System.out.println("⚠️ Token validation failed: " + exception.getMessage());
+            exception.printStackTrace();
         }
 
         filterChain.doFilter(request, response);
     }
 
     private String extractToken(HttpServletRequest request) {
-// 1) Try cookie first
+        // 1) Try cookie first
         if (request.getCookies() != null) {
             for (Cookie c : request.getCookies()) {
                 if ("auth_token".equals(c.getName())) {
@@ -73,7 +85,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         // 2) Fallback: Authorization header (for API testing)
-
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
