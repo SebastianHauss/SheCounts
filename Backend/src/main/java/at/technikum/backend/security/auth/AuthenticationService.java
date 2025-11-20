@@ -159,11 +159,12 @@ public class AuthenticationService implements AuthService {
     private Cookie createAuthCookie(String tokenValue) {
         Cookie cookie = new Cookie("auth_token", tokenValue);
         cookie.setHttpOnly(true);
-        cookie.setSecure(false); // TODO: change to true in production with HTTPS or use @value
+        cookie.setSecure(false); // false for localhost HTTP (true for production HTTPS)
         cookie.setPath("/");
         cookie.setMaxAge(24 * 60 * 60);
-        cookie.setDomain("localhost");
-        cookie.setAttribute("SameSite", "Lax");
+        // REMOVE setDomain - let browser handle it automatically
+        // cookie.setDomain("localhost");
+        cookie.setAttribute("SameSite", "Lax"); //  Use Lax, not None
         return cookie;
     }
 }
