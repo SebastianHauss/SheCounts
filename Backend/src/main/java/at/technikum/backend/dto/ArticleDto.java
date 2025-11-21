@@ -9,5 +9,4 @@ public class ArticleDto {
     private String content;
     private String author;
     private LocalDateTime createdAt;
-    private List<UUID> commentsIds;
 }
