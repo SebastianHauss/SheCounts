@@ -61,6 +61,7 @@ public class ArticleService {
         articleRepository.delete(checkIfArticleExists(id).get());
     }
 
+    /*
     public String getArticleContentByFilename(String filename) {
         try {
             ClassPathResource resource = new ClassPathResource("static/articles/" + filename);
@@ -69,11 +70,7 @@ public class ArticleService {
             throw new RuntimeException("Could not read article content from file: " + filename, e);
         }
     }
-
-
-
-
-
+     */
 
     public Optional<Article> checkIfArticleExists(UUID id) {
         return articleRepository.findById(id);
