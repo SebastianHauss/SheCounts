@@ -16,9 +16,27 @@
     background-repeat: no-repeat;
 }
 
+.hero-section p.lead {
+    font-weight: 400;
+    padding: 0 30px;
+
+}
+
 .primary-btn {
     background-color: var(--myPink);
     color: white;
+    transition: opacity 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: var(--myGrey);
+    opacity: 0.9;
+}
+
+.primary-btn:hover {
+    color: white;
+    background-color: var(--myPink);
+    opacity: 0.8;
 }
 
 .hero-section h1,
@@ -41,6 +59,11 @@
 .card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* soft shadow effect */
     cursor: pointer;
+}
+
+#call-to-action {
+    background-color: var(--myPink);
+    width: 100%;
 }
 
 /* --- Grid Cards --- */
