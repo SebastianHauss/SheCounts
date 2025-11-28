@@ -62,7 +62,7 @@
 }
 
 #call-to-action {
-    background-color: var(--myPink);
+    background-color: color-mix(in srgb, var(--myPink) 80%, white);
     width: 100%;
 }
 
