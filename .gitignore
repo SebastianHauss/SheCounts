@@ -12,7 +12,7 @@ node_modules/
 
 HELP.md
 target/
-test/
+Backend/src/test
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
