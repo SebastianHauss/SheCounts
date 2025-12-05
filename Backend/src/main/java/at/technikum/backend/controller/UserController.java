@@ -32,20 +32,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User read(@PathVariable UUID id) {
-        return userService.read(id);
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public User create(@RequestBody @Valid User user) {
-        return userService.create(user);
+    public UserDto read(@PathVariable UUID id) {
+        return userMapper.toDto(userService.read(id));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public User update(@PathVariable UUID id, @RequestBody @Valid User user) {
-        return userService.update(id, user);
+    public UserDto update(@PathVariable UUID id, @RequestBody @Valid UserDto userDto) {
+        User user = userMapper.toEntity(userDto);
+        return userMapper.toDto(userService.update(id, user));
     }
 
     @DeleteMapping("/{id}")
