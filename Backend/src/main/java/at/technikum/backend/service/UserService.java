@@ -1,5 +1,6 @@
 package at.technikum.backend.service;
 
+import at.technikum.backend.dto.UserDto;
 import at.technikum.backend.entity.User;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
 import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
@@ -30,22 +31,16 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found."));
     }
 
-    public User create(User user) {
-        if (checkIfEmailExists(user.getEmail()).isPresent()) {
-            throw new EntityAlreadyExistsException("This email is already registered. Choose another email or login to your account.");
-        }
-        return userRepository.save(user);
-    }
-
     @Transactional
     public User update(UUID id, User user) {
-        if (checkIfUserIdExists(user.getId()).isEmpty()) {
-            throw new EntityNotFoundException("User not found.");
-        }
-        if (!id.equals(user.getId())){
-            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
-        }
-        return userRepository.save(user);
+        User existing = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found."));
+
+        existing.setUsername(user.getUsername());
+        existing.setEmail(user.getEmail());
+        existing.setAdmin(user.isAdmin());
+
+        return userRepository.save(existing);
     }
 
     @Transactional
@@ -53,10 +48,6 @@ public class UserService {
         User user = checkIfUserIdExists(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found."));
         userRepository.delete(user);
-    }
-
-    public Optional<User> checkIfEmailExists(String email) {
-        return userRepository.findByEmail(email);
     }
 
     public Optional<User> checkIfUserIdExists(UUID id) {

@@ -4,13 +4,17 @@ package at.technikum.backend.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
+@Data
 @Entity
 @Table(name = "app_user")
 public class User {
@@ -19,7 +23,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    //@NotBlank(message = "username darf nicht leer sein")
+    @NotBlank(message = "username darf nicht leer sein")
     private String username;
 
     @Email
@@ -56,73 +60,5 @@ public class User {
     public User() {
         this.notifications = new ArrayList<>();
         this.comments = new ArrayList<>();
-    }
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public boolean isAdmin() {
-        return this.isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.isAdmin = admin;
-    }
-
-    public List<Notification> getNotifications() {
-        return this.notifications;
-    }
-
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
-    }
-
-    public List<Comment> getComments() {
-        return this.comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public Profile getProfile() {
-        return this.profile;
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
     }
 }

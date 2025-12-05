@@ -40,23 +40,24 @@ public class ProfileService {
 
     @Transactional
     public Profile update(UUID id, Profile profile) {
-        if (checkIfProfileExists(profile.getId()).isEmpty()) {
-            throw new EntityNotFoundException("Profile not found.");
-        }
-        if (!id.equals(profile.getId())){
-            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
-        }
-        return profileRepository.save(profile);
+        Profile existing = profileRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Profile not found."));
+
+        existing.setProfilePicUrl(profile.getProfilePicUrl());
+        existing.setGender(profile.getGender());
+        existing.setCountry(profile.getCountry());
+
+        return profileRepository.save(existing);
     }
 
-    @Transactional
+   /* @Transactional
     public void delete(UUID id) {
         if (checkIfProfileExists(id).isEmpty()) {
             throw new EntityNotFoundException("Profile not found.");
         }
         profileRepository.delete(checkIfProfileExists(id).get());
     }
-
+       */
     public Optional<Profile> checkIfProfileExists(UUID id) {
         return profileRepository.findById(id);
     }

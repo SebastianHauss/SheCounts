@@ -124,6 +124,10 @@ public class AuthenticationService implements AuthService {
     public String generateToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        claims.put("isAdmin", isAdmin);
 
         return Jwts.builder()
                 .setClaims(claims)

@@ -1,8 +1,11 @@
 package at.technikum.backend.controller;
 
+import at.technikum.backend.dto.ArticleDto;
 import at.technikum.backend.entity.Article;
+import at.technikum.backend.mapper.ArticleMapper;
 import at.technikum.backend.service.ArticleService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,34 +14,36 @@ import java.util.UUID;
 @CrossOrigin
 @RestController
 @RequestMapping("/api/articles")
-public class ArticleController { /*fjjkfjf*/
+@RequiredArgsConstructor
+public class ArticleController {
 
     private final ArticleService articleService;
+    private final ArticleMapper articleMapper;
 
-    public ArticleController(ArticleService articleService) {
-        this.articleService = articleService;
-    }
-
-
+    /*
     @GetMapping("/content/{filename}/html")
     public String getArticleHtml(@PathVariable String filename) {
         return articleService.getArticleContentByFilename(filename);
     }
-
+    */
+    
     @GetMapping
-    public List<Article> readAll() {
-        return articleService.readAll();
+    public List<ArticleDto> readAll() {
+        List<Article> articleList = articleService.readAll();
+        return articleList.stream()
+                .map(articleMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Article read(@PathVariable UUID id) {
-        return articleService.read(id);
+    public ArticleDto read(@PathVariable UUID id) {
+        return articleMapper.toDto(articleService.read(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Article create(@RequestBody @Valid Article article) {
-        return articleService.create(article);
+    public ArticleDto create(@RequestBody @Valid Article article) {
+        return articleMapper.toDto(articleService.create(article));
     }
 
     @PutMapping("/{id}")
