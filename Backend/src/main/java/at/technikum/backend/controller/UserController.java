@@ -24,7 +24,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<UserDto> readAll() {
         List<User> userList = userService.readAll();

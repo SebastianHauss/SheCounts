@@ -41,13 +41,17 @@ public class NotificationService {
 
     @Transactional
     public Notification update(UUID id, Notification notification) {
-        if (checkIfExistsById(notification.getId()).isEmpty()) {
-            throw new EntityNotFoundException("Notification not found.");
-        }
-        if(!id.equals(notification.getId())){
-            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
-        }
-        return notificationRepository.save(notification);
+
+        Notification existing = notificationRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Notification not found."));
+
+        // Felder aktualisieren
+        existing.setTitle(notification.getTitle());
+        existing.setMessage(notification.getMessage());
+        existing.setRead(notification.isRead());
+        existing.setUser(notification.getUser());
+
+        return notificationRepository.save(existing);
     }
 
     @Transactional

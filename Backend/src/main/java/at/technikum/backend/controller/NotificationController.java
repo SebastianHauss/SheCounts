@@ -32,15 +32,21 @@ public class NotificationController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public NotificationDto create(@RequestBody @Valid Notification notification) {
-        return notificationMapper.toDto(notificationService.create(notification));
+    public NotificationDto create(@RequestBody @Valid NotificationDto notificationDto) {
+        return notificationMapper.toDto(
+                notificationService.create(notificationMapper.toEntity(notificationDto))
+        );
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public NotificationDto update(@PathVariable UUID id, @RequestBody @Valid NotificationDto notificationDto) {
+    public NotificationDto update(
+            @PathVariable UUID id,
+            @RequestBody @Valid NotificationDto notificationDto)
+    {
+        Notification notification = notificationMapper.toEntity(notificationDto);
         return notificationMapper.toDto(
-                notificationService.update(id, notificationMapper.toEntity(notificationDto))
+                notificationService.update(id, notification)
         );
     }
 
