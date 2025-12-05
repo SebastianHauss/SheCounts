@@ -9,53 +9,16 @@
 
 body {
   box-sizing: border-box;
-}
-
-/* --- Navbar --- */
-.nav-homepage,
-.myBG {
-  background-color: var(--myPastelGreen);
-}
-
-.myTitleFont {
-  font-family: 'Lobster', cursive;
-  color: white;
-}
-
-.mySearchBar {
-  width: 110%;
-  background-color: white;
-  border: 2px solid var(--myPastelGreen);
-  border-radius: 25px;
-}
-
-.logo {
-  max-height: 70px;
-  width: auto;
-  height: auto;
-}
-
-.loginBtn {
-  background-color: var(--myGrey) !important;
-  color: white !important;
-}
-
-.loginBtn:hover {
-  background-color: var(--myPink);
-}
-
-.magnifiyingGlass {
-  text-shadow: 0 0 1px white;
-  font-weight: bold;
+  background-color: color-mix(in srgb, var(--myGrey) 10%, white);;
 }
 
 /* --- Carousel --- */
 .carousel-inner {
-  background-color: var(--myBeige);
+  background-color: color-mix(in srgb, var(--myGrey) 20%, white);
 }
 
 .carousel-slide-3 h3 a {
-  color: var(--myGrey);
+  color: var(--myPink);)
   font-weight: 600;
   text-decoration: none;
 }

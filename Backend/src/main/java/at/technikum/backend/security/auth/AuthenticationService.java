@@ -8,6 +8,12 @@ import at.technikum.backend.repository.UserRepository;
 import at.technikum.backend.security.authdtos.AuthenticationRequest;
 import at.technikum.backend.security.authdtos.AuthenticationResponse;
 import at.technikum.backend.security.authdtos.RegisterRequest;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,35 +21,29 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Service;
-
 @Service
-public class AuthenticationService implements AuthService{
+public class AuthenticationService implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
     private final ProfileRepository profileRepository;
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
-
+    private final Long jwtExpiryMs = 86400000L;
     @Value("${jwt.secret}")
     private String secretKey;
-    private final Long jwtExpiryMs = 86400000L;
 
     public AuthenticationService(AuthenticationManager authenticationManager,
-                                 UserRepository userRepository,
-                                 ProfileRepository profileRepository,
-                                 UserDetailsService userDetailsService,
-                                 PasswordEncoder passwordEncoder) {
+            UserRepository userRepository,
+            ProfileRepository profileRepository,
+            UserDetailsService userDetailsService,
+            PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.userRepository = userRepository;
         this.profileRepository = profileRepository;
@@ -51,23 +51,27 @@ public class AuthenticationService implements AuthService{
         this.passwordEncoder = passwordEncoder;
     }
 
-
-    public ResponseEntity<AuthenticationResponse> login(AuthenticationRequest loginRequest) {
+    public ResponseEntity<AuthenticationResponse> login(
+            AuthenticationRequest loginRequest,
+            HttpServletResponse httpServletResponse) {
         UserDetails userDetails = authenticate(
                 loginRequest.getEmail(),
-                loginRequest.getPassword()
-        );
+                loginRequest.getPassword());
 
         String tokenValue = generateToken(userDetails);
 
-        AuthenticationResponse response = AuthenticationResponse.builder()
+        httpServletResponse.addCookie(createAuthCookie(tokenValue));
+
+        AuthenticationResponse authResponse = AuthenticationResponse.builder()
                 .token(tokenValue)
                 .build();
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(authResponse);
     }
 
-    public ResponseEntity<AuthenticationResponse> register(RegisterRequest request) {
+    public ResponseEntity<AuthenticationResponse> register(
+            RegisterRequest request,
+            HttpServletResponse httpServletResponse) {
         User user = new User();
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
@@ -75,17 +79,17 @@ public class AuthenticationService implements AuthService{
 
         userRepository.save(user);
 
-        //if a user is created a profile should be created as well
+        // if a user is created a profile should be created as well
         Profile profile = new Profile();
         profile.setUser(user);
         profile.setCountry(request.getCountry());
 
         String gender = request.getGender();
-        if (gender.equalsIgnoreCase("female")){
+        if (gender.equalsIgnoreCase("female")) {
             profile.setGender(Gender.FEMALE);
-        }else if (gender.equalsIgnoreCase("male")){
+        } else if (gender.equalsIgnoreCase("male")) {
             profile.setGender(Gender.MALE);
-        }else {
+        } else {
             profile.setGender(Gender.DIVERSE);
         }
 
@@ -94,25 +98,24 @@ public class AuthenticationService implements AuthService{
         user.setProfile(profile);
         userRepository.save(user);
 
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
 
         String tokenValue = generateToken(userDetails);
 
-        AuthenticationResponse response = AuthenticationResponse.builder()
+        httpServletResponse.addCookie(createAuthCookie(tokenValue));
+
+        AuthenticationResponse authResponse = AuthenticationResponse.builder()
                 .token(tokenValue)
                 .build();
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(authResponse);
     }
-
 
     @Override
     public UserDetails authenticate(String username, String password) {
 
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password)
-        );
+                new UsernamePasswordAuthenticationToken(username, password));
 
         return userDetailsService.loadUserByUsername(username);
     }
@@ -142,7 +145,7 @@ public class AuthenticationService implements AuthService{
         return userDetailsService.loadUserByUsername(username);
     }
 
-    private String extractUsername(String token){
+    private String extractUsername(String token) {
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(getSigningKey())
                 .build()
@@ -152,8 +155,20 @@ public class AuthenticationService implements AuthService{
         return claims.getSubject();
     }
 
-    private Key getSigningKey(){
+    private Key getSigningKey() {
         byte[] keyBytes = secretKey.getBytes();
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    private Cookie createAuthCookie(String tokenValue) {
+        Cookie cookie = new Cookie("auth_token", tokenValue);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false); // false for localhost HTTP (true for production HTTPS)
+        cookie.setPath("/");
+        cookie.setMaxAge(24 * 60 * 60);
+        // REMOVE setDomain - let browser handle it automatically
+        // cookie.setDomain("localhost");
+        cookie.setAttribute("SameSite", "Lax"); //  Use Lax, not None
+        return cookie;
     }
 }

@@ -15,7 +15,6 @@ document
       );
       const targetModalEl = document.getElementById(targetModalId);
 
-      // Hide current modal first
       currentModal.hide();
 
       // Wait for the modal to be completely hidden
