@@ -1,8 +1,11 @@
 package at.technikum.backend.controller;
 
+import at.technikum.backend.dto.NotificationDto;
 import at.technikum.backend.entity.Notification;
+import at.technikum.backend.mapper.NotificationMapper;
 import at.technikum.backend.service.NotificationService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,34 +14,35 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/notifications")
+@RequiredArgsConstructor
 public class NotificationController {
 
     private final NotificationService notificationService;
-
-    public NotificationController(NotificationService notificationService) {
-        this.notificationService = notificationService;
-    }
+    private final NotificationMapper notificationMapper;
 
     @GetMapping
-    public List<Notification> readAll() {  //für den Admin
-        return notificationService.readAll();
+    public List<NotificationDto> readAll() {  //für den Admin
+        return notificationService.readAll().stream().map(notificationMapper::toDto).toList();
     }
 
     @GetMapping("/{id}")
-    public Notification read(@PathVariable UUID id) {
-        return notificationService.read(id);
+    public NotificationDto read(@PathVariable UUID id) {
+        return notificationMapper.toDto(notificationService.read(id));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Notification create(@RequestBody @Valid Notification notification) {
-        return notificationService.create(notification);
+    public NotificationDto create(@RequestBody @Valid NotificationDto notificationDto) {
+        Notification notification = notificationMapper.toEntity(notificationDto);
+        return notificationMapper.toDto(notificationService.create(notification));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Notification update(@PathVariable UUID id, @RequestBody @Valid Notification notification) {
-        return notificationService.update(id, notification);
+    public NotificationDto update(@PathVariable UUID id, @RequestBody @Valid NotificationDto notificationDto) {
+        return notificationMapper.toDto(
+                notificationService.update(id, notificationMapper.toEntity(notificationDto))
+        );
     }
 
     @DeleteMapping("/{id}")

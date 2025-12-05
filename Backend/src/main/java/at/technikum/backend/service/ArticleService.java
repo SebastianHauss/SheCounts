@@ -36,7 +36,7 @@ public class ArticleService {
     }
 
     public Article create(Article article) {
-        if (checkIfArticleExists(article.getId()).isPresent()) {
+        if (article.getId() != null && checkIfArticleExists(article.getId()).isPresent()) {
             throw new EntityAlreadyExistsException("Article already exists.");
         }
         return articleRepository.save(article);

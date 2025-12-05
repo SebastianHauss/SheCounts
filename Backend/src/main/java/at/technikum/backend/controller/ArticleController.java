@@ -42,8 +42,8 @@ public class ArticleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Article create(@RequestBody @Valid Article article) {
-        return articleService.create(article);
+    public ArticleDto create(@RequestBody @Valid Article article) {
+        return articleMapper.toDto(articleService.create(article));
     }
 
     @PutMapping("/{id}")
