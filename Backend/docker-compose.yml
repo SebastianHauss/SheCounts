@@ -11,5 +11,14 @@ services:
       POSTGRES_DB: shecounts-db
     volumes:
       - db_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer:latest
+    container_name: adminer_shecounts
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - "8085:8080"
 volumes:
   db_data: null

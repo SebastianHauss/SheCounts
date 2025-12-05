@@ -6,6 +6,7 @@ import at.technikum.backend.mapper.UserMapper;
 import at.technikum.backend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping
     public List<UserDto> readAll() {
         List<User> userList = userService.readAll();

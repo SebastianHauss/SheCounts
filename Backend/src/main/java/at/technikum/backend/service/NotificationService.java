@@ -33,7 +33,7 @@ public class NotificationService {
     }
 
     public Notification create(Notification notification) {
-        if (checkIfExistsById(notification.getId()).isPresent()) {
+        if (notification.getId() != null && checkIfExistsById(notification.getId()).isPresent()) {
             throw new EntityAlreadyExistsException("Notification already exists.");
         }
         return notificationRepository.save(notification);

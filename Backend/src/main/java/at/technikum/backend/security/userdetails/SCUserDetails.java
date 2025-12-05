@@ -58,4 +58,9 @@ public class SCUserDetails implements UserDetails {
     public UUID getId() {
         return user.getId();
     }
+
+    public boolean isAdmin(){
+        return user.isAdmin();
+    }
+
 }
