@@ -1,7 +1,5 @@
 package at.technikum.backend.mapper;
 
-import at.technikum.backend.dto.ProfileDto;
-import at.technikum.backend.entity.Profile;
 import at.technikum.backend.entity.User;
 import at.technikum.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

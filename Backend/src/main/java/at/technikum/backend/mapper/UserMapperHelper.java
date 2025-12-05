@@ -2,8 +2,6 @@ package at.technikum.backend.mapper;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.repository.ProfileRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Component;
