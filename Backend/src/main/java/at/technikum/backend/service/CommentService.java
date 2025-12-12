@@ -80,7 +80,7 @@ public class CommentService {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        if (!existing.getUser().getId().equals(user.getId())) {
+        if (!existing.getUser().getId().equals(user.getId()) && !user.isAdmin()) {
             throw new UnauthorizedException("You can only update your own comments");
         }
 
