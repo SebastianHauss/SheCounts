@@ -9,8 +9,10 @@ import org.mapstruct.Mapping;
 public interface ProfileMapper {
 
     @Mapping(target = "userId", source = "user", qualifiedByName = "getUUIDFromUser")
+    @Mapping(target = "profilePicId", source = "profilePic", qualifiedByName = "getUUIDFromFileEntity")
     ProfileDto toDto(Profile profile);
 
     @Mapping(target = "user", source = "userId", qualifiedByName = "getUserFromUUID")
+    @Mapping(target = "profilePic", source = "profilePicId", qualifiedByName = "getFileEntityFromUUID")
     Profile toEntity(ProfileDto profileDto);
 }

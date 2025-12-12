@@ -10,7 +10,7 @@ import java.util.UUID;
 public class ProfileDto {
 
     private UUID id;
-    private String profilePicUrl;
+    private UUID profilePicId;
     private String gender;
     private String country;
     private UUID userId;
