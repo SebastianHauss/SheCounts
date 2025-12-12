@@ -1,5 +1,8 @@
 package at.technikum.backend.service;
 
+import at.technikum.backend.entity.FileEntity;
+import at.technikum.backend.repository.FileRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -14,9 +17,11 @@ import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 @Service
+@RequiredArgsConstructor
 public class FileSystemStorageService implements StorageService{
 
     private final Path rootLocation = Paths.get("/app/uploads");
+    private final FileRepository fileRespository;
 
     @Override
     public void init() {
@@ -28,7 +33,7 @@ public class FileSystemStorageService implements StorageService{
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public FileEntity store(MultipartFile file) {
         try {
             if (file.isEmpty()){
                 throw new RuntimeException("Cannot store empty file");
@@ -38,6 +43,14 @@ public class FileSystemStorageService implements StorageService{
                 rootLocation.resolve(file.getOriginalFilename()),
                 StandardCopyOption.REPLACE_EXISTING
             );
+
+            FileEntity fileEntity = new FileEntity();
+            fileEntity.setFilename(file.getOriginalFilename());
+            fileEntity.setPath(rootLocation.resolve(file.getOriginalFilename()).toString());
+            fileRespository.save(fileEntity);
+
+            return fileEntity;
+
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file.", e);
         }

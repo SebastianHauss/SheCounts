@@ -1,5 +1,6 @@
 package at.technikum.backend.controller;
 
+import at.technikum.backend.entity.FileEntity;
 import at.technikum.backend.service.StorageService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.nio.file.Path;
 
 @RestController
@@ -40,9 +42,9 @@ public class FileUploadController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<String> handleFileUpload(@RequestParam("file")MultipartFile file){
-        storageService.store(file);
-        return ResponseEntity.ok("File uploaded successfully: " + file.getOriginalFilename());
+    public ResponseEntity<FileEntity> handleFileUpload(@RequestParam("file")MultipartFile file){
+        FileEntity fileEntity = storageService.store(file);
+        return ResponseEntity.ok(fileEntity);
     }
 
 }

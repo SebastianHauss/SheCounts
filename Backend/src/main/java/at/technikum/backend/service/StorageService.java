@@ -1,5 +1,6 @@
 package at.technikum.backend.service;
 
+import at.technikum.backend.entity.FileEntity;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,7 +12,7 @@ public interface StorageService {
     void init();
 
     //Speichert die hochgeladene Datei im Upload-Ordner
-    void store(MultipartFile file);
+    FileEntity store(MultipartFile file);
 
     //Gibt eine Liste aller gespeicherten Dateien zurück
     Stream<Path> loadAll();
