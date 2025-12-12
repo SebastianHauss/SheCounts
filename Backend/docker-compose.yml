@@ -20,5 +20,12 @@ services:
       - db
     ports:
       - "8085:8080"
+
+  app:
+    image: my-spring-app
+    volumes:
+      - app-data:/app/uploads
+
 volumes:
   db_data: null
+  app-data:
