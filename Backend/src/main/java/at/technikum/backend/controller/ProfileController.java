@@ -5,6 +5,8 @@ import at.technikum.backend.entity.Profile;
 import at.technikum.backend.mapper.ProfileMapper;
 import at.technikum.backend.service.ProfileService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,14 +15,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/profiles")
+@RequiredArgsConstructor
 public class ProfileController {
+    
     private final ProfileService profileService;
     private final ProfileMapper profileMapper;
-
-    public ProfileController(ProfileService profileService, ProfileMapper profileMapper) {
-        this.profileService = profileService;
-        this.profileMapper = profileMapper;
-    }
 
     @GetMapping
     public List<ProfileDto> readAll() {
