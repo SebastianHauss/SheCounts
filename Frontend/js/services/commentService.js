@@ -66,8 +66,8 @@ function getArticleIdFromPage() {
 }
 
 function renderComments(comments) {
-  const container = $('#discussion .comment').parent();
-  container.find('.comment').remove();
+  const container = $('#comments-container');
+  container.empty();
 
   comments.forEach((comment) => {
     const commentDiv = $(`
