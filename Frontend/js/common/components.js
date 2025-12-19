@@ -295,6 +295,7 @@ function handleRegister(API_URL) {
             gender: gender,
         }),
         success: function () {
+            window.dispatchEvent(new Event('authChanged'));
             document.activeElement.blur();
             const regEl = document.getElementById('registerModal');
             const regModal =
