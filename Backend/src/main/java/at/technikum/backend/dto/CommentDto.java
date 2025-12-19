@@ -22,6 +22,8 @@ public class CommentDto {
 
     private UUID userId;
 
+    private String userName;
+
     @NotBlank(message = "Title is required")
     @Size(max = 200, message = "Title must be less than 200 characters")
     private String title;

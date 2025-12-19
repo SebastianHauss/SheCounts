@@ -21,7 +21,7 @@ public class UserConfig {
 
                 User user1 = new User("emily", "emily@example.com", passwordEncoder.encode("emily123"));
                 User user2 = new User("alex", "alex@example.com", passwordEncoder.encode("alex123"));
-                User user3 = new User("seb6", "seb6@gmail.com", passwordEncoder.encode("seb123"));
+                User user3 = new User("seb", "seb@gmail.com", passwordEncoder.encode("seb123"));
 
                 userRepository.saveAll(List.of(admin, user1, user2, user3));
             }

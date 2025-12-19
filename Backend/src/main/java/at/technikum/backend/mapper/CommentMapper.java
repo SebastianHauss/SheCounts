@@ -10,6 +10,7 @@ import at.technikum.backend.entity.Comment;
 public interface CommentMapper {
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.username", target = "userName")
     @Mapping(source = "article.id", target = "articleId")
     CommentDto toDto(Comment comment);
 

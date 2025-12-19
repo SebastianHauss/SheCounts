@@ -13,6 +13,8 @@ public interface UserMapper {
     UserDto toDto(User user);
 
     @Mapping(target = "profile", source = "profileId", qualifiedByName = "getProfileFromUUID")
+    @Mapping(target = "password", ignore = true)
+    @Mapping(target = "notifications", ignore = true)
+    @Mapping(target = "comments", ignore = true)
     User toEntity(UserDto userDto);
-
 }
