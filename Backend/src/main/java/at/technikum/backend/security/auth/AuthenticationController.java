@@ -3,6 +3,7 @@ package at.technikum.backend.security.auth;
 import at.technikum.backend.security.authdtos.AuthenticationRequest;
 import at.technikum.backend.security.authdtos.AuthenticationResponse;
 import at.technikum.backend.security.authdtos.RegisterRequest;
+import at.technikum.backend.security.userdetails.SCUserDetails;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Cookie;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
-
 
 @RestController
 @RequestMapping("/api/auth")
@@ -25,16 +25,21 @@ public class AuthenticationController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<Map<String, String>> me(Authentication auth) {
+    public ResponseEntity<Map<String, Object>> me(Authentication auth) {
         if (auth == null || !auth.isAuthenticated()) {
             return ResponseEntity.status(401).build();
         }
 
-        Map<String, String> response = new HashMap<>();
+        Map<String, Object> response = new HashMap<>();
         response.put("username", auth.getName());
+
+        if (auth.getPrincipal() instanceof SCUserDetails userDetails) {
+            response.put("userId", userDetails.getId().toString());
+            response.put("isAdmin", userDetails.isAdmin());
+        }
+
         return ResponseEntity.ok(response);
     }
-
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(
@@ -66,5 +71,4 @@ public class AuthenticationController {
     public String test() {
         return "The authentication endpoint is working!";
     }
-
 }
