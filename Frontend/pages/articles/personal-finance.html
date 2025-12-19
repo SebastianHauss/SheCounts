@@ -288,62 +288,62 @@
     </div>
 
     <!--DISCUSSION FIELD-->
-    <div
-      class="col-12 col-lg-7 offset-lg-2 mt-5 mb-3 shadow discussion-box bg-light"
-    >
-      <div
-        id="discussion"
-        data-article-id="49f4c9e9-f8a4-4da6-b854-92a3b4c257bd"
-      >
-        <h1>Diskussionsforum</h1>
-        <p><i class="bi bi-chat-left-text"></i></p>
-        <!-- Post Form -->
-        <div class="discussion-box-form mb-3 position-relative">
-          <input
-            id="title-field"
-            type="text"
-            class="form-control mb-2"
-            placeholder="Titel hinzufügen"
-          />
-
-          <div class="position-relative">
-            <textarea
-              id="content-field"
-              class="form-control pe-5"
-              rows="3"
-              placeholder="Was sagst du dazu?"
-            ></textarea>
-            <button
-              id="post-button"
-              class="btn btn-light position-absolute"
-              style="bottom: 8px; right: 8px"
-            >
-              Posten
-            </button>
+    <div class="col-12 col-lg-7 offset-lg-2 mt-5 mb-5">
+      <div id="discussion" 
+          class="discussion-section" 
+          data-article-id="49f4c9e9-f8a4-4da6-b854-92a3b4c257bd">
+        
+        <!-- Discussion Header -->
+        <div class="discussion-header">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <h2 class="mb-1">
+                <i class="bi bi-chat-dots me-2"></i>Diskussion
+              </h2>
+              <p class="text-muted mb-0" id="comment-count-text">
+                <i class="bi bi-chat-left-text me-1"></i>
+                <span id="discussion-count">Lädt...</span>
+              </p>
+            </div>
           </div>
         </div>
 
-        <!-- Kommentare -->
-        <div id="comments-container"></div>
+        <!-- Post Form Card -->
+        <div class="comment-form-card mb-4">
+          <h5 class="mb-3">
+            <i class="bi bi-pencil-square me-2"></i>Deine Meinung
+          </h5>
+          <div class="discussion-box-form">
+            <input
+              id="title-field"
+              type="text"
+              class="form-control form-control-lg mb-3"
+              placeholder="Titel deines Beitrags"
+            />
 
-        <!-- Antwort-Formular -->
-        <div class="reply-form mt-4 d-none">
-          <label for="reply-text" class="visually-hidden">Antwort</label>
-
-          <div class="position-relative">
-            <textarea
-              id="reply-text"
-              class="form-control pe-5"
-              rows="3"
-              placeholder="Deine Antwort..."
-            ></textarea>
-            <button
-              class="btn btn-sm btn-light position-absolute"
-              style="bottom: 8px; right: 8px"
-            >
-              Antwort senden
-            </button>
+            <div class="position-relative">
+              <textarea
+                id="content-field"
+                class="form-control"
+                rows="4"
+                placeholder="Teile deine Gedanken..."
+              ></textarea>
+              <button
+                id="post-button"
+                class="btn btn-primary post-button"
+              >
+                <i class="bi bi-send me-2"></i>Posten
+              </button>
+            </div>
           </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+          <h5 class="mb-3">
+            <i class="bi bi-chat-quote me-2"></i>Alle Beiträge
+          </h5>
+          <div id="comments-container"></div>
         </div>
       </div>
     </div>
