@@ -1,0 +1,32 @@
+name: CI/CD Build
+
+on:
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "21"
+          cache: "maven"
+
+      - name: Build & Test (Backend with embedded Frontend)
+        working-directory: Backend
+        run: mvn -B test package
+
+      - name: Upload executable JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-with-frontend
+          path: Backend/target/*.jar
