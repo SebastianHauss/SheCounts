@@ -1,0 +1,504 @@
+<!-- ===== NAVIGATION BAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark nav-homepage sticky-top">
+  <div class="container-fluid">
+
+    <!-- LOGO -->
+    <a class="navbar-brand d-flex align-items-center" href="/index.html">
+      <img
+              class="logo"
+              src="/img/logo/shecounts-logo.png"
+              alt="SheCounts Logo"
+              height="40"
+      />
+    </a>
+
+    <!-- HAMBURGER MENU BUTTON -->
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarContent"
+            aria-controls="navbarContent"
+            aria-expanded="false"
+            aria-label="Navigation öffnen"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- COLLAPSIBLE NAVIGATION CONTENT - Collapses on mobile, expands on desktop -->
+    <div class="collapse navbar-collapse" id="navbarContent">
+
+      <!-- MAIN NAVIGATION LINKS - Left-aligned menu items -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <!-- Home Link -->
+        <li class="nav-item">
+          <a class="nav-link" href="/index.html">
+            Home
+          </a>
+        </li>
+
+        <!-- Erste Schritte Link -->
+        <li class="nav-item">
+          <a class="nav-link" href="/pages/general/getting-started.html">
+            Erste Schritte
+          </a>
+        </li>
+
+        <!-- Blogartikel Dropdown -->
+        <li class="nav-item dropdown">
+          <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+          >
+            Blogartikel
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/pages/articles/financial-literacy.html">
+                Finanzwissen von Grund auf
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/pages/articles/personal-finance.html">
+                Private Finanzen
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">
+                Ehe und Partnerschaft
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/pages/articles/financial-security.html">
+                Finanzielle Sicherheit
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/pages/admin/create-article.html">
+            Artikel Erstellen
+          </a>
+        </li>
+
+        <!-- LOGIN LINK - Only visible on mobile (inside hamburger menu) -->
+        <li class="nav-item d-lg-none" id="mobileLoginLink">
+          <a
+                  class="nav-link"
+                  href="#"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+          >
+            Login
+          </a>
+        </li>
+
+        <li class="nav-item dropdown mobile-login" id="mobileUserBlock" style="display: none">
+          <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Mein Profil
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" href="/pages/users/profile.html">
+                Profil Einstellungen
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="../pages/admin/user-list.html">
+                User Liste
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">
+                Benachrichtigungen
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="#" id="logoutBtnMobile">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+<!--       RIGHT SIDE CONTENT - Search and Login (always visible, outside hamburger) -->
+      <div class="d-flex align-items-center gap-3">
+
+        <!-- SEARCH FORM - Always visible on all screen sizes -->
+        <form class="d-flex mobile-search" role="search">
+          <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Suche"
+          />
+          <button class="btn btn-outline-light" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </form>
+
+        <!-- LOGIN BUTTON - Hidden on mobile (<992px), visible on desktop -->
+        <!-- This shows when user is NOT logged in -->
+        <div id="loginBlock">
+          <button
+                  class="btn loginBtn px-4"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+          >
+            Login
+          </button>
+        </div>
+
+        <!-- USER PROFILE DROPDOWN - Shows when user IS logged in -->
+        <!-- Initially hidden with style="display: none" -->
+        <div id="userBlock" class="dropdown" style="display: none">
+          <a
+                  class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+          >
+            <img
+                    src="/img/users/profile-picture.png"
+                    alt="Profilbild"
+                    width="40"
+                    height="40"
+                    class="rounded-circle me-2"
+            />
+            <strong>Mein Profil</strong>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" href="/pages/users/profile.html">
+                Profil Einstellungen
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="/pages/users/user-list.html">
+                User Liste
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item" href="#">
+                Benachrichtigungen
+              </a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="#" id="logoutBtn">
+                Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== MODAL POPUPS ===== -->
+
+<!-- LOGIN MODAL -->
+<div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        aria-labelledby="loginModalTitle"
+
+
+
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalTitle">Login</h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Schließen"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="loginForm" class="needs-validation" novalidate>
+          <!-- Email Field -->
+          <div class="mb-3">
+            <label for="loginEmailField" class="form-label">
+              Email Adresse
+            </label>
+            <input
+                    type="email"
+                    class="form-control"
+                    id="loginEmailField"
+                    required
+            />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige Email-Adresse ein.
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="mb-3">
+            <label for="loginPasswordField" class="form-label">
+              Passwort
+            </label>
+            <input
+                    type="password"
+                    class="form-control"
+                    id="loginPasswordField"
+                    minlength="6"
+                    required
+            />
+            <div class="invalid-feedback">
+              Bitte geben Sie Ihr 6-stelliges Passwort ein.
+            </div>
+          </div>
+
+          <!-- Login Button -->
+          <button
+                  id="loginButton"
+                  type="submit"
+                  class="btn btn-primary w-100 mb-3"
+          >
+            Login
+          </button>
+
+          <!-- Registration Link -->
+          <div class="text-center mb-3">
+            Noch nicht registriert? &nbsp;
+            <a
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#registerModal"
+                    data-bs-dismiss="modal"
+            >
+              Hier registrieren
+            </a>
+          </div>
+
+          <!-- Forgot Password Link -->
+          <div class="text-center">
+            <a
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#pswZurückModal"
+                    data-bs-dismiss="modal"
+            >
+              Passwort vergessen?
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD RESET MODAL -->
+<div
+        class="modal fade"
+        id="pswZurückModal"
+        tabindex="-1"
+        aria-labelledby="pswZurückLabel"
+
+
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pswZurückLabel">
+          Passwort zurücksetzen
+        </h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Schließen"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-muted">
+          Geben Sie Ihre Email-Adresse ein. Wir senden Ihnen einen Link zum
+          Zurücksetzen Ihres Passworts.
+        </p>
+        <form id="resetPasswordForm" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="resetEmailField" class="form-label">
+              Email Adresse
+            </label>
+            <input
+                    type="email"
+                    class="form-control"
+                    id="resetEmailField"
+                    required
+            />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige Email-Adresse ein.
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+        >
+          Abbrechen
+        </button>
+        <button
+                id="resetPasswordBtn"
+                type="button"
+                class="btn btn-primary"
+        >
+          Link senden
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- REGISTRATION MODAL -->
+<div
+        class="modal fade"
+        id="registerModal"
+        tabindex="-1"
+        aria-labelledby="registerModalTitle"
+
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalTitle">Registrieren</h5>
+        <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Schließen"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form id="registerForm" class="needs-validation" novalidate>
+          <!-- Anrede (Salutation) -->
+          <div class="mb-3">
+            <label for="anrede" class="form-label">Anrede</label>
+            <select class="form-select" id="anrede" required>
+              <option value="" selected disabled>Bitte wählen</option>
+              <option value="frau">Frau</option>
+              <option value="herr">Herr</option>
+              <option value="neutral">Person (neutral)</option>
+            </select>
+            <div class="invalid-feedback">
+              Bitte wählen Sie eine Anrede.
+            </div>
+          </div>
+
+          <!-- Username -->
+          <div class="mb-3">
+            <label for="usernameField" class="form-label">Username</label>
+            <input
+                    type="text"
+                    class="form-control"
+                    id="usernameField"
+                    required
+                    maxlength="30"
+            />
+            <div class="invalid-feedback">
+              Bitte geben Sie einen Username ein.
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="emailField" class="form-label">Email</label>
+            <input
+                    type="email"
+                    class="form-control"
+                    id="emailField"
+                    required
+            />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige Email-Adresse ein.
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="passwordField" class="form-label">Passwort</label>
+            <input
+                    type="password"
+                    class="form-control"
+                    id="passwordField"
+                    minlength="6"
+                    required
+            />
+            <div class="invalid-feedback">
+              Bitte geben Sie ein Passwort mit mindestens 6 Zeichen ein.
+            </div>
+          </div>
+
+          <!-- Repeat Password -->
+          <div class="mb-3">
+            <label for="repeatPasswordField" class="form-label">
+              Passwort wiederholen
+            </label>
+            <input
+                    type="password"
+                    class="form-control"
+                    id="repeatPasswordField"
+                    minlength="6"
+                    required
+            />
+            <div class="invalid-feedback">
+              Bitte wiederholen Sie Ihr Passwort.
+            </div>
+          </div>
+
+          <!-- Country -->
+          <div class="mb-3">
+            <label for="country" class="form-label">Land</label>
+            <select class="form-select" id="country" required>
+              <option value="" selected disabled>Bitte wählen</option>
+              <option value="at">Österreich</option>
+              <option value="de">Deutschland</option>
+              <option value="ch">Schweiz</option>
+            </select>
+            <div class="invalid-feedback">
+              Bitte wählen Sie ein Land.
+            </div>
+          </div>
+
+          <!-- Register Button -->
+          <button
+                  id="registerButton"
+                  type="submit"
+                  class="btn btn-primary w-100 mb-3"
+          >
+            Registrieren
+          </button>
+
+          <!-- Login Link -->
+          <div class="text-center">
+            Ich habe schon einen Account: &nbsp;
+            <a
+                    href="#"
+                    data-bs-toggle="modal"
+                    data-bs-target="#loginModal"
+                    data-bs-dismiss="modal"
+            >
+              Login
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
