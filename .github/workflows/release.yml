@@ -29,6 +29,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Sync frontend into backend static resources
+        run: |
+          rm -rf Backend/src/main/resources/static
+          mkdir -p Backend/src/main/resources/static
+          cp -r Frontend/* Backend/src/main/resources/static/
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -36,7 +42,7 @@ jobs:
           java-version: "21"
           cache: "maven"
 
-      - name: Build & Test (Backend + Postgres)
+      - name: Build & Test (Backend + Frontend + Postgres)
         working-directory: Backend
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/shecounts-db
