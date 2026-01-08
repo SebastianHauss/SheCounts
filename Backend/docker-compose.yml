@@ -1,5 +1,5 @@
 ---
-version: "3.8"
+#version: "3.8"
 services:
   db:
     image: postgres:16-alpine
@@ -22,7 +22,9 @@ services:
       - "8085:8080"
 
   minio:
-    image: bitnami/minio:2024
+    image: minio/minio:latest
+    container_name: shecounts_minio
+    command: server /data --console-address ":9001"
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadminpw
@@ -32,8 +34,12 @@ services:
       - "9001:9001"
     volumes:
       - minio:/data
-    networks:
-      - app
+#    networks:
+#      - app
+
+#volumes:
+#  db_data: null
 
 volumes:
-  db_data: null
+  db_data:
+  minio:
