@@ -22,7 +22,7 @@ public class FileService {
             "image/webp"
     );
 
-    private static final long MAX_FILE_SIZE = 20 * 1024 * 1024; // 5MB
+    private static final long MAX_FILE_SIZE = 20 * 1024 * 1024;
 
     public String uploadProfilePicture(MultipartFile file) {
         validateFile(file);
