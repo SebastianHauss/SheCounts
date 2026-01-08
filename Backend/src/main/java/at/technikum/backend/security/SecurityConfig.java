@@ -79,7 +79,13 @@ public class SecurityConfig {
                         // Auth endpoints
                         .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/api/files/**").permitAll()
+
+                        .requestMatchers("/actuator/**").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/api/articles/**").permitAll()
+
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/comments/**").permitAll()
 

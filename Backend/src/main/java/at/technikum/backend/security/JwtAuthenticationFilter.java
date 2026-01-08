@@ -73,27 +73,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 path.equals("/api/auth/register") ||
                 path.equals("/api/auth/test") ||
                 path.equals("/api/auth/logout") ||
-                path.startsWith("/api/auth/reset-password");
+                path.startsWith("/api/auth/reset-password") ||
+                path.startsWith("/actuator/") ||
+                path.startsWith("/swagger-ui/") ||
+                path.startsWith("/v3/api-docs") ||
+                path.startsWith("/api/files/**");
     }
 
     private String extractToken(HttpServletRequest request) {
-        // Try cookie first
+        // cookie only
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("auth_token".equals(cookie.getName())) {
-                    log.trace("Token extracted from cookie");
                     return cookie.getValue();
                 }
             }
         }
 
-        // Fallback: Authorization header
+        // optional header fallback
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            log.trace("Token extracted from Authorization header");
             return bearerToken.substring(7);
         }
 
         return null;
     }
+
 }
