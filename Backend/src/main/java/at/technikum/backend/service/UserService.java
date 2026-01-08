@@ -53,4 +53,18 @@ public class UserService {
     public Optional<User> checkIfUserIdExists(UUID id) {
         return userRepository.findById(id);
     }
+
+    public void updateProfilePicture(String email, String fileId) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setProfilePictureId(fileId);
+        userRepository.save(user);
+    }
+
+    public String getProfilePictureId(String email) {
+        return userRepository.findByEmail(email)
+                .map(User::getProfilePictureId)
+                .orElse(null);
+    }
 }
