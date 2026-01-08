@@ -14,6 +14,10 @@ let removePictureBtn;
 
 $(document).ready(function () {
     initProfilePicture();
+    // when login/logout happens, refresh user + picture
+    window.addEventListener('authChanged', () => {
+        loadProfilePicture();
+    });
 });
 
 function initProfilePicture() {
