@@ -2,7 +2,6 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
-import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ProfileRepository;
 import jakarta.transaction.Transactional;

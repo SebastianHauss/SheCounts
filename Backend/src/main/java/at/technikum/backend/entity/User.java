@@ -15,6 +15,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "app_user")
+
 public class User {
 
     @Id
@@ -45,6 +46,9 @@ public class User {
 
     @OneToOne(mappedBy = "user")
     private Profile profile;
+
+    @Column(name = "profile_picture_id")
+    private String profilePictureId;
 
     public User(String username, String email, String password) {
         this.username = username;
