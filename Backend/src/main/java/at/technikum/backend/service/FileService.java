@@ -39,7 +39,7 @@ public class FileService {
         }
 
         if (file.getSize() > MAX_FILE_SIZE) {
-            throw new IllegalArgumentException("File size exceeds maximum allowed size of 5MB");
+            throw new IllegalArgumentException("File size exceeds maximum allowed size of 20MB");
         }
 
         String contentType = file.getContentType();
