@@ -51,7 +51,7 @@ const checkAdminAccess = async () => {
 
   if (!currentUser.isAdmin) {
     alert('Sie haben keine Berechtigung, diese Seite zu sehen.');
-    window.location.href = '/index.html';
+    window.location.href = '../../index.html';
     return false;
   }
 
@@ -71,19 +71,19 @@ const loadUsers = async () => {
     if (!response.ok) {
       if (response.status === 401) {
         alert('Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.');
-        window.location.href = '/pages/auth/login.html';
+        window.location.href = '../../index.html';
         return;
       }
       if (response.status === 403) {
         alert('Sie haben keine Berechtigung, Benutzerdaten anzuzeigen.');
-        window.location.href = '/index.html';
+        window.location.href = '../../index.html';
         return;
       }
       throw new Error(`HTTP Error: ${response.status}`);
     }
 
     allUsers = await response.json();
-    console.log('Loaded users from backend:', allUsers); // Debug
+    console.log('Loaded users from backend:', allUsers);
     displayUsers(allUsers);
   } catch (error) {
     console.error('Fehler beim Laden der Benutzer:', error);
@@ -161,7 +161,7 @@ const displayUsers = (users) => {
                  data-fallback="${fallbackAvatar}"
                  onerror="handleImageError(this)">
             <div>
-              <a href="profile.html?id=${user.id}" class="fw-semibold text-decoration-none">
+              <a href="../users/profile.html?id=${user.id}" class="fw-semibold text-decoration-none">
                 ${user.username}
               </a>
               ${isAdmin ? '<span class="badge bg-primary ms-2">Admin</span>' : ''}
@@ -173,7 +173,7 @@ const displayUsers = (users) => {
         <td>${country}</td>
         <td>${statusBadge(isActive)}</td>
         <td class="text-end">
-          <a href="/pages/users/profile.html?id=${user.id}"
+          <a href="../users/profile.html?id=${user.id}"
              class="btn btn-sm btn-outline-primary" 
              title="View Details">
             <i class="bi bi-eye"></i>

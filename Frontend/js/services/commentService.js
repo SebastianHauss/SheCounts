@@ -224,6 +224,32 @@ function getArticleIdFromPage() {
   return params.get('articleId');
 }
 
+function getProfileImageUrl(comment) {
+  // Prüfe, ob eine gültige UUID vorhanden ist
+  const isValidFileId =
+    comment.profilePictureId &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      comment.profilePictureId
+    );
+
+  // Fallback Avatar mit ui-avatars.com
+  const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+    comment.userName || 'Anonymous'
+  )}&background=6c757d&color=fff&size=128&bold=true`;
+
+  // Profilbild-URL bestimmen
+  return isValidFileId
+    ? `${API_URL}/files/${comment.profilePictureId}`
+    : fallbackAvatar;
+}
+
+function handleImageError(img, fallbackUrl) {
+  if (img.dataset.errorHandled !== 'true') {
+    img.dataset.errorHandled = 'true';
+    img.src = fallbackUrl;
+  }
+}
+
 function renderComments(comments) {
   const container = $('#comments-container');
   container.empty();
@@ -240,13 +266,20 @@ function renderComments(comments) {
   }
 
   comments.forEach((comment) => {
+    // Erstelle Profilbild-URLs
+    const profilePicUrl = getProfileImageUrl(comment);
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+      comment.userName || 'Anonymous'
+    )}&background=6c757d&color=fff&size=128&bold=true`;
+
     const commentDiv = $(`
             <div class="comment d-flex" data-comment-id="${comment.id}">
-                <img src="../../img/users/profile-picture.png" 
-                     class="rounded-circle flex-shrink-0" 
+                <img src="${profilePicUrl}" 
+                     class="rounded-circle flex-shrink-0 comment-avatar" 
                      width="48" 
                      height="48" 
-                     alt="User avatar" />
+                     alt="${comment.userName || 'User'} avatar"
+                     data-fallback="${fallbackAvatar}" />
                 <div class="ms-3 flex-grow-1">
                     <div class="d-flex justify-content-between align-items-start mb-2">
                         <div>
@@ -267,6 +300,12 @@ function renderComments(comments) {
                 </div>
             </div>
         `);
+
+    // Füge Error-Handler für das Profilbild hinzu
+    const imgElement = commentDiv.find('.comment-avatar')[0];
+    imgElement.onerror = function () {
+      handleImageError(this, fallbackAvatar);
+    };
 
     commentDiv.find('.username').text(comment.userName || 'Anonymous');
     commentDiv

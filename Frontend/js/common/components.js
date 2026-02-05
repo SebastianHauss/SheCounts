@@ -1,3 +1,5 @@
+// compontents.js
+
 $(document).ready(function () {
     // Prevent scroll on page load
     if ('scrollRestoration' in history) {
@@ -199,7 +201,7 @@ function handleLogin(API_URL) {
         },
         crossDomain: true,
         data: JSON.stringify({ email, password }),
-        success: function (data) {
+        success: async function (data) {
             window.dispatchEvent(new Event('authChanged'));
 
             document.activeElement.blur();
@@ -214,7 +216,12 @@ function handleLogin(API_URL) {
             $('#mobileLoginLink').hide();
             $('#mobileUserBlock').show();
 
+            if (data.userId) {
+                await loadAndUpdateUserProfile(data.userId);
+            }
+
             alert('Login erfolgreich!');
+            window.location.reload();
         },
         error: function (xhr) {
             console.error('Login failed:', xhr);
@@ -259,7 +266,7 @@ function handleRegister(API_URL) {
     const username = $('#usernameField').val().trim();
     const password = $('#passwordField').val();
     const repeatPassword = $('#repeatPasswordField').val();
-    const country = $('#country').val();
+    const country = $('#register-country').val();
 
     const registerForm = document.getElementById('registerForm');
     if (!registerForm.checkValidity()) {
@@ -294,21 +301,27 @@ function handleRegister(API_URL) {
             country: country,
             gender: gender,
         }),
-        success: function () {
+        success: async function (data) {
             window.dispatchEvent(new Event('authChanged'));
+
             document.activeElement.blur();
-            const regEl = document.getElementById('registerModal');
-            const regModal =
-                bootstrap.Modal.getInstance(regEl) ||
-                new bootstrap.Modal(regEl);
-            regModal.hide();
+            const modalEl = document.getElementById('loginModal');
+            const loginModal =
+                bootstrap.Modal.getInstance(modalEl) ||
+                new bootstrap.Modal(modalEl);
+            loginModal.hide();
 
             $('#loginBlock').hide();
             $('#userBlock').show();
             $('#mobileLoginLink').hide();
             $('#mobileUserBlock').show();
 
-            alert('Registrierung erfolgreich!');
+            if (data.userId) {
+                await loadAndUpdateUserProfile(data.userId);
+            }
+
+            alert('Login erfolgreich!');
+            window.location.reload();
         },
         error: function (xhr) {
             console.error('Registration failed:', xhr);
@@ -329,10 +342,15 @@ async function checkAuthStatus() {
         });
 
         if (response.ok) {
+            const authData = await response.json();
+            
+            // Zeige User-Block an
             $('#loginBlock').hide();
             $('#userBlock').show();
             $('#mobileLoginLink').hide();
             $('#mobileUserBlock').show();
+            
+            await loadAndUpdateUserProfile(authData.userId);
         } else {
             $('#loginBlock').show();
             $('#userBlock').hide();
@@ -345,6 +363,71 @@ async function checkAuthStatus() {
         $('#userBlock').hide();
         $('#mobileLoginLink').show();
         $('#mobileUserBlock').hide();
+    }
+}
+
+async function loadAndUpdateUserProfile(userId) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            console.log('Full user data loaded:', userData);
+            updateProfileImage(userData);
+        } else {
+            console.warn('Could not load full user profile, using fallback');
+            // Fallback: zeige nur Standard-Avatar
+            const fallbackData = { username: 'User' };
+            updateProfileImage(fallbackData);
+        }
+    } catch (error) {
+        console.error('Error loading user profile:', error);
+        // Fallback
+        updateProfileImage({ username: 'User' });
+    }
+}
+
+function updateProfileImage(userData) {
+    const BASE_URL = 'http://localhost:8080/api';
+    
+    // Prüfe, ob eine gültige UUID vorhanden ist
+    const isValidFileId =
+        userData.profilePictureId &&
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+            userData.profilePictureId
+        );
+    
+    // Fallback Avatar mit ui-avatars.com
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        userData.username || 'User'
+    )}&background=6c757d&color=fff&size=128&bold=true`;
+    
+    // Profilbild-URL bestimmen
+    const profilePicUrl = isValidFileId
+        ? `${BASE_URL}/files/${userData.profilePictureId}`
+        : fallbackAvatar;
+    
+    console.log('Updating navbar profile image:', profilePicUrl);
+    
+    // Aktualisiere das Profilbild in der Desktop-Navigation
+    const $profileImg = $('#userBlock img');
+    $profileImg.attr('src', profilePicUrl);
+    $profileImg.attr('data-fallback', fallbackAvatar);
+    
+    // Füge Error-Handler hinzu
+    $profileImg.off('error').on('error', function() {
+        if (this.dataset.errorHandled !== 'true') {
+            this.dataset.errorHandled = 'true';
+            this.src = fallbackAvatar;
+        }
+    });
+    
+    // Aktualisiere den Benutzernamen
+    if (userData.username) {
+        $('#userBlock strong').text(userData.username);
     }
 }
 

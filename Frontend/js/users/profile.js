@@ -1,69 +1,240 @@
-document.addEventListener('DOMContentLoaded', function () {
+// profile.js
+
+const BASE_URL = 'http://localhost:8080/api';
+
+let currentUserId = null;
+let currentUserData = null;
+let isViewingOwnProfile = false;
+
+/* =========================
+   Utils
+========================= */
+
+function setFormDisabled(disabled) {
+  document
+    .querySelectorAll('#profileForm input, #profileForm select')
+    .forEach((el) => (el.disabled = disabled));
+}
+
+function getUserIdFromUrl() {
+  return new URLSearchParams(window.location.search).get('id');
+}
+
+function setCountrySelect(countryCode) {
+  const select = document.getElementById('profile-country');
+  if (!select || !countryCode) return;
+
+  select.value = countryCode;
+}
+
+/* =========================
+   API
+========================= */
+
+async function getCurrentUser() {
+  try {
+    const res = await fetch(`${BASE_URL}/auth/me`, {
+      credentials: 'include',
+    });
+    return res.ok ? await res.json() : null;
+  } catch (e) {
+    console.error('getCurrentUser failed', e);
+    return null;
+  }
+}
+
+async function loadUserProfile(userId) {
+  try {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
+      credentials: 'include',
+    });
+
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) {
+    console.error('loadUserProfile failed', e);
+    return null;
+  }
+}
+
+async function saveProfile(profileData) {
+  try {
+    // Update User
+    await fetch(`${BASE_URL}/users/${currentUserId}`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: profileData.username,
+        email: profileData.email,
+        admin: currentUserData.admin,
+      }),
+    });
+
+    // Update Profile
+    await fetch(`${BASE_URL}/profiles/${currentUserData.profileId}`, {
+      method: 'PUT',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: currentUserData.profileId,
+        gender: profileData.gender.toUpperCase(),
+        country: profileData.country,
+        birthday: profileData.birthday,
+        userId: currentUserId,
+        profilePicUrl: currentUserData.profile?.profilePicUrl ?? null,
+      }),
+    });
+
+    alert('Profil erfolgreich gespeichert!');
+
+    // Navbar aktualisieren nach Profiländerung (zB Username)
+    window.location.reload();
+
+    // Aktualisierte Daten laden
+    currentUserData = await loadUserProfile(currentUserId);
+
+    // Wenn die loadAndUpdateUserProfile Funktion verfügbar ist
+    if (typeof loadAndUpdateUserProfile === 'function') {
+      await loadAndUpdateUserProfile(currentUserId);
+    }
+
+    return true;
+  } catch (e) {
+    console.error('saveProfile failed', e);
+    alert('Fehler beim Speichern');
+    return false;
+  }
+}
+
+/* =========================
+   UI
+========================= */
+
+function populateForm(userData) {
+  document.getElementById('username').value = userData.username ?? '';
+  document.getElementById('email').value = userData.email ?? '';
+
+  if (!userData.profile) return;
+
+  // Gender
+  const gender = userData.profile.gender?.toLowerCase();
+  if (gender) {
+    const radio = document.querySelector(
+      `input[name="gender"][value="${gender}"]`
+    );
+    if (radio) radio.checked = true;
+  }
+
+  // Country
+  const country = userData.profile.country?.toLowerCase();
+  setCountrySelect(country);
+
+  if (userData.profile.birthday) {
+    document.getElementById('birthday').value = userData.profile.birthday;
+  }
+}
+
+/* =========================
+   Init
+========================= */
+
+document.addEventListener('DOMContentLoaded', async () => {
   const form = document.getElementById('profileForm');
-  const fieldset = document.getElementById('formFieldset');
-  const editButton = document.querySelector('.edit-profile-btn');
-  const saveButton = document.querySelector('.mySubBtn');
-  const cancelButton = document.querySelector('.myCancelBtn');
+  const editBtn = document.querySelector('.edit-profile-btn');
+  const cancelBtn = document.querySelector('.myCancelBtn');
+  const deleteBtn = document.getElementById('delete-account-btn');
+  const countrySelect = document.getElementById('profile-country');
 
-  // Profil bearbeiten: Felder aktivieren
-  editButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    fieldset.removeAttribute('disabled');
-    console.log('Profil-Bearbeitung aktiviert');
+  countrySelect.addEventListener('change', (e) => {
+    console.log('Country changed:', e.target.value);
   });
 
-  // Stornieren: wieder sperren + Fehler zurücksetzen
-  cancelButton.addEventListener('click', function (e) {
-    e.preventDefault();
-    fieldset.setAttribute('disabled', 'disabled');
-    form.classList.remove('was-validated');
-    form.reset();
-    console.log('Änderungen storniert');
+  // Determine user
+  const idFromUrl = getUserIdFromUrl();
+
+  if (idFromUrl) {
+    currentUserId = idFromUrl;
+    isViewingOwnProfile = false;
+  } else {
+    const me = await getCurrentUser();
+    if (!me) {
+      alert('Bitte loggen Sie sich ein, um Ihr Profil zu sehen.');
+      return;
+    }
+    currentUserId = me.userId;
+    isViewingOwnProfile = true;
+  }
+
+  currentUserData = await loadUserProfile(currentUserId);
+  if (!currentUserData) return;
+
+  populateForm(currentUserData);
+  setFormDisabled(true);
+
+  /* =========================
+     Buttons
+  ========================= */
+
+  editBtn.addEventListener('click', () => {
+    setFormDisabled(false);
+    console.log('Edit mode');
   });
 
-  // Bootstrap-Validierung beim Absenden
-  form.addEventListener(
-      'submit',
-      function (event) {
-        // Eigentliche Form-Submission verhindern (wir machen es per JS)
-        event.preventDefault();
-        event.stopPropagation();
+  cancelBtn.addEventListener('click', () => {
+    populateForm(currentUserData);
+    setFormDisabled(true);
+    console.log('Edit cancelled');
+  });
 
-        // Browser-API zur Validierung nutzen
-        if (!form.checkValidity()) {
-          // ungültig -> Bootstrap zeigt .invalid-feedback an
-          form.classList.add('was-validated');
-          // wichtig: Feldset NICHT deaktivieren, sonst sind Felder für Validierung "weg"
-          console.log('Formular ist UNGÜLTIG');
-          return;
-        }
+  deleteBtn.addEventListener('click', async () => {
+    const confirmed = confirm(
+      'Sind Sie sicher, dass Sie Ihr Konto löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.'
+    );
+    if (!confirmed) return;
+    try {
+      const res = await fetch(`${BASE_URL}/users/${currentUserId}`, {
+        method: 'DELETE',
+        credentials: 'include',
+      });
+      if (!res.ok) throw new Error(res.status);
+      alert('Konto erfolgreich gelöscht.');
+      window.location.href = '/';
+    } catch (e) {
+      console.error('Konto löschen fehlgeschlagen', e);
+      alert('Fehler beim Löschen des Kontos.');
+    }
+  });
 
-        // gültig
-        form.classList.add('was-validated');
-        console.log('Formular ist GÜLTIG');
+  /* =========================
+     Submit
+  ========================= */
 
-        // Daten sammeln
-        const profileData = {
-          username: document.getElementById('username').value,
-          email: document.getElementById('exampleInputEmail1').value,
-          password: document.getElementById('exampleInputPassword1').value,
-          repeatPassword: document.getElementById('exampleInputPassword2').value,
-          birthday: document.getElementById('birthday').value,
-          gender:
-              document.querySelector('input[name="gender"]:checked')?.value ||
-              null,
-          country: document.getElementById('country').value,
-        };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        console.log('JSON:', JSON.stringify(profileData, null, 2));
+    if (!form.checkValidity()) {
+      form.classList.add('was-validated');
+      return;
+    }
 
-        // TODO: hier dein AJAX/fetch an den Spring-Boot-Endpoint
-        // fetch('/api/profile', { method: 'POST', headers: {...}, body: JSON.stringify(profileData) })
+    const profileData = {
+      username: document.getElementById('username').value,
+      email: document.getElementById('email').value,
+      gender:
+        document.querySelector('input[name="gender"]:checked')?.value ??
+        'diverse',
+      country: countrySelect.value,
+      birthday: document.getElementById('birthday').value || null, // ← NEU
+    };
 
-        // Nach erfolgreichem Speichern: Feldset wieder deaktivieren
-        fieldset.setAttribute('disabled', 'disabled');
-      },
-      false
-  );
+    console.log('SEND PROFILE:', profileData);
+
+    const success = await saveProfile(profileData);
+    if (success) {
+      currentUserData = await loadUserProfile(currentUserId);
+      populateForm(currentUserData);
+      setFormDisabled(true);
+    }
+  });
 });
-
