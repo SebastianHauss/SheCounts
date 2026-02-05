@@ -130,6 +130,7 @@ function populateForm(userData) {
   const country = userData.profile.country?.toLowerCase();
   setCountrySelect(country);
 
+  // Birthday
   if (userData.profile.birthday) {
     document.getElementById('birthday').value = userData.profile.birthday;
   }
@@ -225,7 +226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('input[name="gender"]:checked')?.value ??
         'diverse',
       country: countrySelect.value,
-      birthday: document.getElementById('birthday').value || null, // ← NEU
+      birthday: document.getElementById('birthday').value || null,
     };
 
     console.log('SEND PROFILE:', profileData);

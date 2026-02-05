@@ -233,7 +233,7 @@ const sortUsers = (sortBy) => {
 };
 
 $(document).ready(async function () {
-  console.log('User list page loaded'); // Debug
+  console.log('User list page loaded');
 
   $('#user-table-body').html(`
     <tr>
