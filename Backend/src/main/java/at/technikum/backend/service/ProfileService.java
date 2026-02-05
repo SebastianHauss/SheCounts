@@ -42,7 +42,6 @@ public class ProfileService {
         Profile existing = profileRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Profile not found."));
 
-        existing.setProfilePicUrl(profile.getProfilePicUrl());
         existing.setGender(profile.getGender());
         existing.setCountry(profile.getCountry());
 

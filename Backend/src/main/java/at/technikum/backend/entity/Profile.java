@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -16,10 +18,7 @@ import java.util.UUID;
 public class Profile {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    private String profilePicUrl;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -29,6 +28,9 @@ public class Profile {
     @NotBlank
     private String country;
 
-    @OneToOne(optional = false)
+    @OneToOne
+    @MapsId // "Nutze die ID des Users als meine ID"
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
 }

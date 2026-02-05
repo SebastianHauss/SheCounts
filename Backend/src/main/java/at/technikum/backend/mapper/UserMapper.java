@@ -5,11 +5,11 @@ import at.technikum.backend.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-
-@Mapper(componentModel = "spring", uses = UserMapperHelper.class)
+@Mapper(componentModel = "spring", uses = {UserMapperHelper.class, ProfileMapper.class})
 public interface UserMapper {
 
     @Mapping(target = "profileId", source = "profile", qualifiedByName = "getUUIDFromProfile")
+    @Mapping(target = "profile", source = "profile") 
     UserDto toDto(User user);
 
     @Mapping(target = "profile", source = "profileId", qualifiedByName = "getProfileFromUUID")
