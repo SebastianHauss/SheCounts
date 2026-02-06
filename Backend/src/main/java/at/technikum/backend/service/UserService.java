@@ -1,9 +1,6 @@
 package at.technikum.backend.service;
 
-import at.technikum.backend.dto.UserDto;
 import at.technikum.backend.entity.User;
-import at.technikum.backend.exceptions.EntityAlreadyExistsException;
-import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.UserRepository;
 import jakarta.transaction.Transactional;

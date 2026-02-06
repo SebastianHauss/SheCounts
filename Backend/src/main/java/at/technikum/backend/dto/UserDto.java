@@ -16,4 +16,5 @@ public class UserDto {
     private boolean isAdmin;
     private UUID profileId;
     private String profilePictureId;
+    private ProfileDto profile;
 }

@@ -5,6 +5,8 @@ import at.technikum.backend.exceptions.EntityAlreadyExistsException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ProfileRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class ProfileService {
     private final ProfileRepository profileRepository;
 
@@ -39,24 +42,36 @@ public class ProfileService {
 
     @Transactional
     public Profile update(UUID id, Profile profile) {
+        log.info("ProfileService.update called with id: {}", id);
+
         Profile existing = profileRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Profile not found."));
 
-        existing.setProfilePicUrl(profile.getProfilePicUrl());
+        log.debug("Existing profile - gender: {}, country: {}, birthday: {}",
+                existing.getGender(), existing.getCountry(), existing.getBirthday());
+        log.debug("New values - gender: {}, country: {}, birthday: {}",
+                profile.getGender(), profile.getCountry(), profile.getBirthday());
+
         existing.setGender(profile.getGender());
         existing.setCountry(profile.getCountry());
+        existing.setBirthday(profile.getBirthday());
 
-        return profileRepository.save(existing);
+        Profile saved = profileRepository.save(existing);
+        log.info("Saved profile - gender: {}, country: {}, birthday: {}",
+                saved.getGender(), saved.getCountry(), saved.getBirthday());
+
+        return saved;
     }
 
-   /* @Transactional
-    public void delete(UUID id) {
-        if (checkIfProfileExists(id).isEmpty()) {
-            throw new EntityNotFoundException("Profile not found.");
-        }
-        profileRepository.delete(checkIfProfileExists(id).get());
-    }
-       */
+    /*
+     * @Transactional
+     * public void delete(UUID id) {
+     * if (checkIfProfileExists(id).isEmpty()) {
+     * throw new EntityNotFoundException("Profile not found.");
+     * }
+     * profileRepository.delete(checkIfProfileExists(id).get());
+     * }
+     */
     public Optional<Profile> checkIfProfileExists(UUID id) {
         return profileRepository.findById(id);
     }
