@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,6 +32,7 @@ import at.technikum.backend.repository.UserRepository;
 
 // Bindet Mockito an JUnit 5, damit @Mock und @InjectMocks funktionieren
 @ExtendWith(MockitoExtension.class)
+@DisplayName("CommentService Unit Tests")
 public class CommentServiceTest {
 
     // Mock für das CommentRepository
