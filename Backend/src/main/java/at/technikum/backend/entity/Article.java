@@ -45,6 +45,10 @@ public class Article {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getContent() {
         return content;
     }
