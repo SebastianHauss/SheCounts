@@ -27,16 +27,17 @@ public class ProfileService {
     }
 
     public Profile read(UUID id) {
-        if (checkIfProfileExists(id).isEmpty()) {
-            throw new EntityNotFoundException("Profile not found.");
-        }
-        return checkIfProfileExists(id).get();
+        return checkIfProfileExists(id)
+                .orElseThrow(() -> new EntityNotFoundException("Profile not found."));
     }
 
     public Profile create(Profile profile) {
-        if (checkIfProfileExists(profile.getId()).isPresent()) {
+        UUID id = profile.getId();
+
+        if (profileRepository.findById(id).isPresent()) {
             throw new EntityAlreadyExistsException("Profile already exists.");
         }
+
         return profileRepository.save(profile);
     }
 
