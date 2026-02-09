@@ -2,7 +2,7 @@ name: Backend CI
 
 'on':
   push:
-    branches: [ "develop", "main" ]
+    branches: [ "develop", "main", "feature/**" ]
   pull_request:
     branches: [ "develop", "main" ]
 
@@ -11,7 +11,7 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     if: |
-      (github.event_name == 'push' && github.ref == 'refs/heads/develop') ||
+      (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/'))) ||
       (github.event_name == 'pull_request' && github.base_ref == 'develop')
 
     services:
