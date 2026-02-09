@@ -58,10 +58,20 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+
+        // Frontend Urls
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:3000", // React/Vite
+                "http://localhost:5500", // Live Server
+                "http://127.0.0.1:5500", // Live Server (alternative)
+                "http://localhost:63342", // IntelliJ
+                "http://localhost:63343" // IntelliJ (alternative)
+        ));
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L); // Cache CORS-Preflight für 1 Stunde
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -78,10 +88,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Auth endpoints
                         .requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll()
-
+                        .requestMatchers(HttpMethod.GET, "/api/files/**").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/articles/**").permitAll()
-
+                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/comments/**").permitAll()
+
+                        .requestMatchers(HttpMethod.PUT, "/api/profiles/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/profiles").authenticated()
 
                         // Alle anderen Requests brauchen Authentication
                         .anyRequest().authenticated())
@@ -91,5 +105,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
 }

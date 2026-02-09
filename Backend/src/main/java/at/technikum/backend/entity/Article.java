@@ -2,6 +2,8 @@ package at.technikum.backend.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import lombok.ToString;
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
@@ -10,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@ToString(exclude = {"user", "article"})
 public class Article {
 
     @Id
@@ -40,6 +43,10 @@ public class Article {
 
     public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getContent() {

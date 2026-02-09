@@ -33,9 +33,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain) throws ServletException, IOException {
 
         String path = request.getServletPath();
+        String method = request.getMethod();
 
-        if (isPublicEndpoint(path)) {
-            log.trace("Skipping authentication for public endpoint: {}", path);
+        if (isPublicEndpoint(path, method)) { 
+            log.trace("Skipping authentication for public endpoint: {} {}", method, path);
             filterChain.doFilter(request, response);
             return;
         }
@@ -68,32 +69,48 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private boolean isPublicEndpoint(String path) {
-        return path.equals("/api/auth/login") ||
-                path.equals("/api/auth/register") ||
-                path.equals("/api/auth/test") ||
-                path.equals("/api/auth/logout") ||
-                path.startsWith("/api/auth/reset-password");
+    private boolean isPublicEndpoint(String path, String method) {
+        // Auth endpoints - nur POST
+        if (path.startsWith("/api/auth/") && "POST".equals(method)) {
+            return path.equals("/api/auth/login") ||
+                    path.equals("/api/auth/register") ||
+                    path.equals("/api/auth/test");
+        }
+
+        // Files - nur GET ist öffentlich
+        if (path.startsWith("/api/files/") && "GET".equals(method)) {
+            return true;
+        }
+
+        // Articles/Comments - nur GET
+        if ((path.startsWith("/api/articles") || path.startsWith("/api/comments"))
+                && "GET".equals(method)) {
+            return true;
+        }
+
+        // Swagger/Actuator
+        return path.startsWith("/actuator/") ||
+                path.startsWith("/swagger-ui/") ||
+                path.startsWith("/v3/api-docs");
     }
 
     private String extractToken(HttpServletRequest request) {
-        // Try cookie first
+        // cookie only
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("auth_token".equals(cookie.getName())) {
-                    log.trace("Token extracted from cookie");
                     return cookie.getValue();
                 }
             }
         }
 
-        // Fallback: Authorization header
+        // optional header fallback
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            log.trace("Token extracted from Authorization header");
             return bearerToken.substring(7);
         }
 
         return null;
     }
+
 }

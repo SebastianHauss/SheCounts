@@ -2,14 +2,20 @@ package at.technikum.backend.controller;
 
 import at.technikum.backend.dto.UserDto;
 import at.technikum.backend.entity.User;
+import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.mapper.UserMapper;
+import at.technikum.backend.repository.UserRepository;
 import at.technikum.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,12 +27,22 @@ public class UserController {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final UserRepository userRepository;
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<UserDto> readAll() {
         List<User> userList = userService.readAll();
         return userList.stream().map(userMapper::toDto).toList();
+    }
+
+    @GetMapping("/me")
+    public UserDto me(Authentication authentication) {
+        String email = authentication.getName();
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        return userMapper.toDto(user);
     }
 
     @GetMapping("/{id}")
@@ -43,7 +59,17 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
+    public void delete(@PathVariable UUID id, @AuthenticationPrincipal UserDetails userDetails) {
+        // Hole den aktuellen User aus dem JWT Token
+        String currentUserEmail = userDetails.getUsername();
+        User currentUser = userRepository.findByEmail(currentUserEmail)
+                .orElseThrow(() -> new EntityNotFoundException("Current user not found"));
+
+        // Prüfe: Ist es der eigene Account ODER ist der User Admin?
+        if (!currentUser.getId().equals(id) && !currentUser.isAdmin()) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only delete your own account");
+        }
+
         userService.delete(id);
     }
 }
