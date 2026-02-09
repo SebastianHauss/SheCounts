@@ -2,6 +2,7 @@ package at.technikum.backend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -94,6 +95,23 @@ public class ProfileServiceTest {
     }
 
     @Test
+    void checkIfProfileExists_shouldReturnProfile_whenFound() {
+        // ---------- given ----------
+        UUID id = UUID.randomUUID();
+        Profile profile = mock(Profile.class);
+
+        when(profileRepository.findById(id)).thenReturn(Optional.of(profile));
+
+        // ---------- when ----------
+        Optional<Profile> result = profileService.checkIfProfileExists(id);
+
+        // ---------- then ----------
+        assertTrue(result.isPresent());
+        assertEquals(profile, result.get());
+        verify(profileRepository).findById(id);
+    }
+
+    @Test
     void update_shouldUpdateAndSaveProfile_whenProfileExists() {
         // ---------- given ----------
         UUID id = UUID.randomUUID();
@@ -171,5 +189,20 @@ public class ProfileServiceTest {
 
         verify(profileRepository).findById(id);
         verify(profileRepository, never()).save(any());
+    }
+
+    @Test
+    void checkIfProfileExists_shouldReturnEmpty_whenNotFound() {
+        // ---------- given ----------
+        UUID id = UUID.randomUUID();
+
+        when(profileRepository.findById(id)).thenReturn(Optional.empty());
+
+        // ---------- when ----------
+        Optional<Profile> result = profileService.checkIfProfileExists(id);
+
+        // ---------- then ----------
+        assertTrue(result.isEmpty());
+        verify(profileRepository).findById(id);
     }
 }
