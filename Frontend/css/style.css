@@ -9,15 +9,16 @@
 
 body {
   box-sizing: border-box;
+  background-color: color-mix(in srgb, var(--myGrey) 10%, white);;
 }
 
 /* --- Carousel --- */
 .carousel-inner {
-  background-color: var(--myBeige);
+  background-color: color-mix(in srgb, var(--myGrey) 20%, white);
 }
 
 .carousel-slide-3 h3 a {
-  color: var(--myGrey);
+  color: var(--myPink);
   font-weight: 600;
   text-decoration: none;
 }
@@ -149,6 +150,10 @@ background-color: var(--myBeige);
   border: 1px solid #b60e0e;
   background-color: #f61212;
   border-radius: 80px;
+}
+
+.edit-profile-btn:hover {
+  background-color: #dddcdc;
 }
 
 /* ---- Login Register PopUp Buttons ---- */

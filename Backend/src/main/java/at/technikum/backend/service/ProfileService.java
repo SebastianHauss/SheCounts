@@ -2,10 +2,11 @@ package at.technikum.backend.service;
 
 import at.technikum.backend.entity.Profile;
 import at.technikum.backend.exceptions.EntityAlreadyExistsException;
-import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ProfileRepository;
 import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class ProfileService {
     private final ProfileRepository profileRepository;
 
@@ -25,38 +27,52 @@ public class ProfileService {
     }
 
     public Profile read(UUID id) {
-        if (checkIfProfileExists(id).isEmpty()) {
-            throw new EntityNotFoundException("Profile not found.");
-        }
-        return checkIfProfileExists(id).get();
+        return checkIfProfileExists(id)
+                .orElseThrow(() -> new EntityNotFoundException("Profile not found."));
     }
 
     public Profile create(Profile profile) {
-        if (checkIfProfileExists(profile.getId()).isPresent()) {
+        UUID id = profile.getId();
+
+        if (profileRepository.findById(id).isPresent()) {
             throw new EntityAlreadyExistsException("Profile already exists.");
         }
+
         return profileRepository.save(profile);
     }
 
     @Transactional
     public Profile update(UUID id, Profile profile) {
-        if (checkIfProfileExists(profile.getId()).isEmpty()) {
-            throw new EntityNotFoundException("Profile not found.");
-        }
-        if (!id.equals(profile.getId())){
-            throw new EntityIdDoesNotMatchException("UUID doesn't match Object Id");
-        }
-        return profileRepository.save(profile);
+        log.info("ProfileService.update called with id: {}", id);
+
+        Profile existing = profileRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Profile not found."));
+
+        log.debug("Existing profile - gender: {}, country: {}, birthday: {}",
+                existing.getGender(), existing.getCountry(), existing.getBirthday());
+        log.debug("New values - gender: {}, country: {}, birthday: {}",
+                profile.getGender(), profile.getCountry(), profile.getBirthday());
+
+        existing.setGender(profile.getGender());
+        existing.setCountry(profile.getCountry());
+        existing.setBirthday(profile.getBirthday());
+
+        Profile saved = profileRepository.save(existing);
+        log.info("Saved profile - gender: {}, country: {}, birthday: {}",
+                saved.getGender(), saved.getCountry(), saved.getBirthday());
+
+        return saved;
     }
 
-    @Transactional
-    public void delete(UUID id) {
-        if (checkIfProfileExists(id).isEmpty()) {
-            throw new EntityNotFoundException("Profile not found.");
-        }
-        profileRepository.delete(checkIfProfileExists(id).get());
-    }
-
+    /*
+     * @Transactional
+     * public void delete(UUID id) {
+     * if (checkIfProfileExists(id).isEmpty()) {
+     * throw new EntityNotFoundException("Profile not found.");
+     * }
+     * profileRepository.delete(checkIfProfileExists(id).get());
+     * }
+     */
     public Optional<Profile> checkIfProfileExists(UUID id) {
         return profileRepository.findById(id);
     }

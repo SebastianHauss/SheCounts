@@ -3,18 +3,26 @@ package at.technikum.backend.entity;
 import at.technikum.backend.enums.Gender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString(exclude = "user")
 public class Profile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
-    private String profilePicUrl;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -24,50 +32,11 @@ public class Profile {
     @NotBlank
     private String country;
 
-    @OneToOne(optional = false)
+    @Column(name = "birthday")
+    private LocalDate birthday;
+
+    @OneToOne
+    @JoinColumn(name = "user_id", unique = true)
+    @JsonIgnore
     private User user;
-
-    public Profile() {}
-
-    public Profile(User user, Gender gender, String country) {
-        this.user = user;
-        this.gender = gender;
-        this.country = country;
-    }
-
-    public UUID getId() {
-        return this.id;
-    }
-
-    public String getProfilePicUrl() {
-        return profilePicUrl;
-    }
-
-    public void setProfilePicUrl(String profilePicUrl) {
-        this.profilePicUrl = profilePicUrl;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

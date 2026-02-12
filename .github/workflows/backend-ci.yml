@@ -1,0 +1,92 @@
+name: Backend CI
+
+'on':
+  push:
+    branches: [ "develop", "main", "feature/**" ]
+  pull_request:
+    branches: [ "develop", "main" ]
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+    if: |
+      (github.event_name == 'push' && (github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/feature/'))) ||
+      (github.event_name == 'pull_request' && github.base_ref == 'develop')
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: shecounts-db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U admin -d shecounts-db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Test (Backend)
+        working-directory: Backend
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/shecounts-db
+          SPRING_DATASOURCE_USERNAME: admin
+          SPRING_DATASOURCE_PASSWORD: admin
+        run: mvn -B test
+
+  build_and_upload:
+    name: Build & upload JAR (main)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: shecounts-db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U admin -d shecounts-db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Build (Backend)
+        working-directory: Backend
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/shecounts-db
+          SPRING_DATASOURCE_USERNAME: admin
+          SPRING_DATASOURCE_PASSWORD: admin
+        run: mvn -B test package
+
+      - name: Upload JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-jar
+          path: Backend/target/*.jar

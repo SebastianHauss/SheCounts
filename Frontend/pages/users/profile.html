@@ -1,205 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SheCounts - Profile</title>
-    <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
-            crossorigin="anonymous"
-    />
-    <link rel="icon" type="image/x-icon" href="../../img/favicon.ico" />
-    <!--    Bootstrap Icons-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <!--Custom CSS    -->
-    <link rel="stylesheet" href="../../css/index.css"/>
-    <link rel="stylesheet" href="../../css/style.css"/>
-    <link rel="stylesheet" href="../../css/components.css"/>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SheCounts - Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+  <link rel="icon" type="image/x-icon" href="../../img/favicon.ico" />
+  <!--    Bootstrap Icons-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-  </head>
-  <body>
-    <div id="navbar-placeholder"></div>
+  <!--Custom CSS    -->
+  <link rel="stylesheet" href="../../css/index.css" />
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/components.css" />
+
+</head>
+
+<body>
+  <div id="navbar-placeholder"></div>
 
 
-    <div class="container shadow-lg p-5 my-5 bg-body rounded">
-      <div class="row justify-content-center">
-        <div class="col-11 col-lg-7">
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="col-7">
-              <h1>Profil Einstellungen</h1>
+  <div class="container shadow-lg p-5 my-5 bg-body rounded">
+    <div class="row justify-content-center">
+      <div class="col-11 col-lg-7">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="col-7">
+            <h1>Profil Einstellungen</h1>
+          </div>
+
+          <div class="col-4 d-flex flex-column align-items-center">
+            <img id="profile-picture-preview" src="../../img/users/profile-pic-avatar.png" alt="Profile Picture"
+              class="rounded-circle me-5" width="130" height="130"
+              style="object-fit: cover; border: 3px solid #dee2e6;" />
+
+            <input type="file" id="profile-picture-input" accept="image/jpeg,image/png,image/gif,image/webp"
+              style="display: none;" />
+
+            <button type="button" class="btn myPictureBtn px-3 mt-2 me-5" id="select-picture-btn">
+              Bild auswählen
+            </button>
+            <button type="button" class="btn btn-primary px-3 mt-2 me-5" id="upload-picture-btn" style="display: none;">
+              Hochladen
+            </button>
+            <button type="button" class="btn btn-outline-danger px-3 mt-2 me-5" id="remove-picture-btn">
+              Entfernen
+            </button>
+          </div>
+        </div>
+
+        <form id="profileForm" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required />
+            <div class="invalid-feedback">
+              Bitte geben Sie eine gültige E-Mail-Adresse ein.
             </div>
-            <div class="col-4 d-flex flex-column align-items-center">
-              <img
-                src="https://fastly.picsum.photos/id/206/200/300.jpg?hmac=zgY9ucK8PnViYfAc_jWui8B3N-I1-cVdM4BtXYOpk7I"
-                alt="Profile Picture"
-                class="rounded-circle me-5"
-                width="130"
-                height="130"
-              />
-              <button type="button" class="btn myPictureBtn px-3 mt-4 me-5">
-                Bearbeiten
-              </button>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" minlength="6" />
+            <div class="invalid-feedback">
+              Passwort muss mindestens 6 Zeichen lang sein.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="passwordRepeat" class="form-label">Repeat password</label>
+            <input type="password" class="form-control" id="passwordRepeat" />
+            <div class="invalid-feedback">
+              Passwörter müssen übereinstimmen.
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="birthday" class="form-label">Geburtsdatum</label>
+            <input type="date" class="form-control" id="birthday" max="2026-02-05" min="1900-01-01" />
+            <div class="invalid-feedback">
+              Bitte geben Sie ein gültiges Geburtsdatum ein.
             </div>
           </div>
 
-          <form id="profileForm" class="needs-validation" novalidate>
-            <fieldset id="formFieldset" disabled>
-              <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  aria-describedby="usernameHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Email address</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Bitte geben Sie eine gültige E-Mail-Adresse ein.
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Password</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword1"
-                  minlength="6"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Passwort muss mindestens 6 Zeichen lang sein.
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="exampleInputPassword2" class="form-label"
-                  >Repeat password</label
-                >
-                <input
-                  type="password"
-                  class="form-control"
-                  id="exampleInputPassword2"
-
-                  required
-                />
-                <div class="invalid-feedback">
-                  Passwörter müssen übereinstimmen.
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="birthday" class="form-label">Birthday</label>
-                <input type="date" class="form-control" id="birthday" required />
-                <div class="invalid-feedback">
-                  Bitte geben Sie Ihr Geburtsdatum ein.
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label class="form-label">Geschlecht:</label><br />
-                <div class="form-check ms-4">
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    id="female"
-                    name="gender"
-                    value="female"
-                    required
-                  />
-                  <label class="form-check-label" for="female">weiblich</label>
-                  <br />
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    id="divers"
-                    name="gender"
-                    value="divers"
-                  />
-                  <label class="form-check-label" for="divers">divers</label>
-                  <br />
-                  <input
-                    type="radio"
-                    class="form-check-input"
-                    id="male"
-                    name="gender"
-                    value="male"
-                  />
-                  <label class="form-check-label" for="male">männlich</label>
-                  <br />
-                  <div class="invalid-feedback">
-                    Bitte wählen Sie ein Geschlecht aus.
-                  </div>
-                </div>
-              </div>
-
-              <div class="mb-3">
-                <label for="country" class="form-label">Country</label>
-                <select class="form-select" id="country" required>
-                  <option selected>Österreich</option>
-                  <option>Deutschland</option>
-                  <option>Schweiz</option>
-                </select>
-                <div class="invalid-feedback">
-                  Bitte wählen Sie ein Land aus.
-                </div>
-              </div>
-            </fieldset>
-            <div class="d-flex justify-content-between mb-3">
-              <div>
-                <button type="submit" class="btn edit-profile-btn mt-2 me-5">
-                  Profil bearbeiten
-                </button>
-              </div>
-
-              <div>
-                <button type="submit" class="btn mySubBtn mt-2">
-                  Speichern
-                </button>
-                <button type="submit" class="btn myCancelBtn mt-2">
-                  Stornieren
-                </button>
+          <div class="mb-3">
+            <label class="form-label">Geschlecht:</label><br />
+            <div class="form-check ms-4">
+              <input type="radio" class="form-check-input" id="female" name="gender" value="female" required />
+              <label class="form-check-label" for="female">weiblich</label>
+              <br />
+              <input type="radio" class="form-check-input" id="diverse" name="gender" value="diverse" />
+              <label class="form-check-label" for="diverse">divers</label>
+              <br />
+              <input type="radio" class="form-check-input" id="male" name="gender" value="male" />
+              <label class="form-check-label" for="male">männlich</label>
+              <br />
+              <div class="invalid-feedback">
+                Bitte wählen Sie ein Geschlecht aus.
               </div>
             </div>
-          </form>
-        </div>
-      </div>
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-danger myDeleteAccBtn">Delete Account</button>
+          </div>
+
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <select class="form-select" id="profile-country" required>
+              <option value="">-- Bitte wählen --</option>
+              <option value="at">Österreich</option>
+              <option value="de">Deutschland</option>
+              <option value="ch">Schweiz</option>
+            </select>
+            <div class="invalid-feedback">
+              Bitte wählen Sie ein Land aus.
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between mb-3">
+            <div>
+              <button type="button" class="btn edit-profile-btn mt-2 me-5">
+                Profil bearbeiten
+              </button>
+            </div>
+
+            <div>
+              <button type="submit" class="btn mySubBtn mt-2">
+                Speichern
+              </button>
+              <button type="button" class="btn myCancelBtn mt-2">
+                Stornieren
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+    <div class="d-flex justify-content-end">
+      <button id="delete-account-btn" class="btn btn-danger myDeleteAccBtn">Delete Account</button>
+    </div>
+  </div>
 
-    <div id="footer-placeholder"></div>
+  <div id="footer-placeholder"></div>
 
-    <!--JQuery Import-->
-    <script
-            src="https://code.jquery.com/jquery-3.7.1.js"
-            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-            crossorigin="anonymous"></script>
-    <!-- Bootstrap JS ONLY  -->
-    <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-            crossorigin="anonymous"
-    ></script>
+  <!--JQuery Import-->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <!-- Bootstrap JS ONLY  -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+    crossorigin="anonymous"></script>
 
 
-    <!--Custom JS scripts-->
-    <script src="../../scripts/common/modal-util.js"></script>
-    <script src="../../scripts/common/components.js"></script>
-    <script src="../../scripts/users/profile.js"></script>
-  </body>
+  <!--Custom JS scripts-->
+  <script src="../../js/common/modal-util.js"></script>
+  <script src="../../js/users/profile.js"></script>
+  <script src="../../js/users/profile-picture.js"></script>
+  <script src="../../js/common/components.js"></script>
+
+</body>
+
 </html>

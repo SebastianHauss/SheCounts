@@ -14,6 +14,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Key;
 import java.util.Date;
@@ -69,17 +71,21 @@ public class AuthenticationService implements AuthService {
         return ResponseEntity.ok(authResponse);
     }
 
+    @Transactional
     public ResponseEntity<AuthenticationResponse> register(
             RegisterRequest request,
             HttpServletResponse httpServletResponse) {
+
+        // User erstellen
         User user = new User();
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setAdmin(false);
 
-        userRepository.save(user);
+        user = userRepository.save(user); // ⬅️ WICHTIG: Rückgabewert verwenden
 
-        // if a user is created a profile should be created as well
+        // Profile erstellen - ID wird automatisch generiert
         Profile profile = new Profile();
         profile.setUser(user);
         profile.setCountry(request.getCountry());
@@ -93,22 +99,18 @@ public class AuthenticationService implements AuthService {
             profile.setGender(Gender.DIVERSE);
         }
 
-        profileRepository.save(profile);
+        profileRepository.save(profile); // ⬅️ Funktioniert jetzt!
 
-        user.setProfile(profile);
-        userRepository.save(user);
-
+        // Token generieren
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
-
         String tokenValue = generateToken(userDetails);
 
         httpServletResponse.addCookie(createAuthCookie(tokenValue));
 
-        AuthenticationResponse authResponse = AuthenticationResponse.builder()
-                .token(tokenValue)
-                .build();
-
-        return ResponseEntity.ok(authResponse);
+        return ResponseEntity.ok(
+                AuthenticationResponse.builder()
+                        .token(tokenValue)
+                        .build());
     }
 
     @Override
@@ -124,6 +126,10 @@ public class AuthenticationService implements AuthService {
     public String generateToken(UserDetails userDetails) {
 
         Map<String, Object> claims = new HashMap<>();
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        claims.put("isAdmin", isAdmin);
 
         return Jwts.builder()
                 .setClaims(claims)
@@ -164,7 +170,7 @@ public class AuthenticationService implements AuthService {
         cookie.setMaxAge(24 * 60 * 60);
         // REMOVE setDomain - let browser handle it automatically
         // cookie.setDomain("localhost");
-        cookie.setAttribute("SameSite", "Lax"); //  Use Lax, not None
+        cookie.setAttribute("SameSite", "Lax"); // Use Lax, not None
         return cookie;
     }
 }

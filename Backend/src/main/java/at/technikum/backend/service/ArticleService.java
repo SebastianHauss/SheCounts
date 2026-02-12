@@ -35,7 +35,7 @@ public class ArticleService {
     }
 
     public Article create(Article article) {
-        if (checkIfArticleExists(article.getId()).isPresent()) {
+        if (article.getId() != null && checkIfArticleExists(article.getId()).isPresent()) {
             throw new EntityAlreadyExistsException("Article already exists.");
         }
         return articleRepository.save(article);
@@ -60,6 +60,7 @@ public class ArticleService {
         articleRepository.delete(checkIfArticleExists(id).get());
     }
 
+    /*
     public String getArticleContentByFilename(String filename) {
         try {
             ClassPathResource resource = new ClassPathResource("static/articles/" + filename);
@@ -68,11 +69,7 @@ public class ArticleService {
             throw new RuntimeException("Could not read article content from file: " + filename, e);
         }
     }
-
-
-
-
-
+     */
 
     public Optional<Article> checkIfArticleExists(UUID id) {
         return articleRepository.findById(id);
