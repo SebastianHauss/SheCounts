@@ -1,4 +1,4 @@
-
+console.log("Loaded scroll-to-discussion.js");
 
 document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('floating-button');

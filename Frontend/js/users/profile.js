@@ -1,4 +1,4 @@
-// profile.js
+console.log("Loaded profile.js");
 
 const BASE_URL = 'http://localhost:8080/api';
 

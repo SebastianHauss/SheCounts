@@ -1,4 +1,4 @@
-// compontents.js
+console.log("Loaded components.js");
 
 $(document).ready(function () {
     // Prevent scroll on page load
