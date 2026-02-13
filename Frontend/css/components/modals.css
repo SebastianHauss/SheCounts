@@ -1,0 +1,9 @@
+
+.modal-backdrop + .modal-backdrop {
+    display: none !important;
+}
+
+.modal-open {
+    overflow: hidden !important;
+}
+

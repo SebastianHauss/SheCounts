@@ -1,0 +1,122 @@
+/* ===================================
+   SHECOUNTS - CSS CUSTOM PROPERTIES
+   =================================== */
+
+:root {
+    /* ===================================
+       BRAND COLORS
+       =================================== */
+    --color-primary: #c3868d;              /* Main pink */
+    --color-primary-dark: #b56468;         /* Darker pink for hover states */
+    --color-secondary: #796f80;            /* Grey */
+    --color-accent-green: #a9b8a3;         /* Pastel green */
+    --color-accent-beige: #fbeae1;         /* Beige */
+
+    /* ===================================
+       NEUTRAL COLORS
+       =================================== */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-grey-light: #dddcdc;
+    --color-grey-medium: #474343;
+    --color-grey-dark: #212529;
+
+    /* ===================================
+       SEMANTIC COLORS
+       =================================== */
+    --color-success: #28a745;
+    --color-danger: #f61212;
+    --color-danger-dark: #b60e0e;
+    --color-warning: #ffc107;
+    --color-info: #17a2b8;
+
+    /* ===================================
+       BACKGROUND COLORS
+       =================================== */
+    --bg-body: color-mix(in srgb, var(--color-secondary) 10%, white);
+    --bg-carousel: color-mix(in srgb, var(--color-secondary) 20%, white);
+    --bg-light: var(--color-accent-beige);
+    --bg-hover: var(--color-grey-light);
+    --bg-call-to-action: color-mix(in srgb, var(--color-primary) 80%, white);: color-mix(in srgb, var(--color-primary) 80%, white);: color-mix(in srgb, var(--color-primary) 80%, white);
+
+    /* ===================================
+       BUTTON COLORS
+       =================================== */
+    --btn-primary-bg: var(--color-primary);
+    --btn-primary-hover: var(--color-primary-dark);
+    --btn-secondary-bg: #e6a4b1;
+    --btn-secondary-border: #ca5f75;
+    --btn-secondary-hover: #dc4e6b;
+    --btn-light-bg: var(--color-accent-beige);
+    --btn-light-hover: var(--color-grey-light);
+
+    /* ===================================
+       BORDERS
+       =================================== */
+    --border-color-light: var(--color-grey-medium);
+    --border-color-danger: var(--color-danger-dark);
+    --border-rgb: 121, 111, 128;
+
+    /* ===================================
+       SPACING SCALE
+       =================================== */
+    --spacing-xs: 0.25rem;    /* 4px */
+    --spacing-sm: 0.5rem;     /* 8px */
+    --spacing-md: 1rem;       /* 16px */
+    --spacing-lg: 1.5rem;     /* 24px */
+    --spacing-xl: 2rem;       /* 32px */
+    --spacing-xxl: 3rem;      /* 48px */
+
+    /* ===================================
+       BORDER RADIUS
+       =================================== */
+    --radius-sm: 0.25rem;     /* 4px */
+    --radius-md: 0.625rem;    /* 10px */
+    --radius-lg: 0.9375rem;   /* 15px */
+    --radius-xl: 5rem;        /* 80px - for pill buttons */
+
+    /* ===================================
+       SHADOWS
+       =================================== */
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+    /* ===================================
+       TYPOGRAPHY
+       =================================== */
+    --font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-size-base: 1rem;      /* 16px */
+    --font-size-sm: 0.875rem;    /* 14px */
+    --font-size-md: 1rem;        /* 16px */
+    --font-size-lg: 1.1rem;      /* ~17.6px */
+    --font-size-xl: 1.2rem;      /* ~19.2px */
+    --font-size-xxl: 1.875rem;   /* 30px */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --line-height-base: 1.5;
+
+    /* ===================================
+       TRANSITIONS
+       =================================== */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-base: 0.3s ease-in-out;
+    --transition-slow: 0.5s ease-in-out;
+
+    /* ===================================
+       Z-INDEX LAYERS
+       =================================== */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-tooltip: 1070;
+
+    /* ===================================
+       LAYOUT VALUES
+       =================================== */
+    --sidebar-top-offset: 100px;
+    --footer-margin-top: 3rem;
+}

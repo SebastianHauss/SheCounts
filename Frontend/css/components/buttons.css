@@ -1,0 +1,181 @@
+/* ---- Profil Einstellungen Buttons ---- */
+.myPictureBtn {
+    border: 1px solid #474343;
+    border-radius: 80px;
+}
+.myPictureBtn:hover {
+    background-color: #dddcdc;
+}
+
+.mySubBtn {
+    border: 1px solid #ca5f75;
+    background-color: #e6a4b1;
+    border-radius: 80px;
+}
+
+.mySubBtn:hover {
+    background-color: #dc4e6b;
+}
+
+.myCancelBtn,
+.edit-profile-btn {
+    background-color: var(--color-accent-beige);
+    border-radius: 15px;
+}
+.myCancelBtn:hover,
+.myEditProfileBtn:hover {
+    background-color: #dddcdc;
+}
+
+.myDeleteAccBtn {
+    border: 1px solid #b60e0e;
+    background-color: #f61212;
+    border-radius: 80px;
+}
+
+.edit-profile-btn:hover {
+    background-color: #dddcdc;
+}
+
+/* ---- Login Register PopUp Buttons ---- */
+button.myPopUpBtn {
+    width: 100%;
+    color: white;
+    background-color: var(--color-primary);
+}
+
+.myPopUpBtn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.primary-btn {
+    background-color: var(--color-primary);
+    color: white;
+    transition: opacity 0.3s ease;
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    opacity: 0.9;
+}
+
+.primary-btn:hover {
+    color: white;
+    background-color: var(--color-primary);
+    opacity: 0.8;
+}
+
+.edit-btn.unauthorized,
+.delete-btn.unauthorized {
+    display: none;
+}
+
+/* Unauthorized Buttons Article Comment Section */
+.edit-btn.unauthorized,
+.delete-btn.unauthorized {
+    display: none !important;
+}
+
+/* Comment Action Buttons */
+.comment .btn {
+    border-radius: 8px;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.comment .edit-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #495057;
+    margin-right: 0.5rem;
+}
+
+.comment .edit-btn:hover {
+    background: #6c63ff;
+    border-color: #6c63ff;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.comment .delete-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #dc3545;
+}
+
+.comment .delete-btn:hover {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Edit Mode Buttons for comments */
+.comment .save-btn {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    border: none;
+    color: white;
+}
+
+.comment .save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+.comment .cancel-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+}
+
+.comment .cancel-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.post-button {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    border-radius: 8px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff1493 0%, #ff1493 100%);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.post-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 20, 147, 0.4);
+    background: linear-gradient(135deg, #e0127e 0%, #c0106e 100%);
+}
+
+#floating-button {
+    position: sticky;
+    top: 50%; /* Vertically centered */
+    transform: translateY(-50%);
+    float: right;
+    margin-left: 20px;
+    margin-right: -75px; /* Pushes it outside the article column */
+    width: 60px;
+    height: 60px;
+    background-color: #ff1493 !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/*NAVBAR*/
+.loginBtn {
+    background-color: var(--color-secondary) !important;
+    color: white !important;
+}
+
+.loginBtn:hover {
+    background-color: var(--color-primary);
+}
+

@@ -1,0 +1,221 @@
+.article-container {
+    max-width: 2500px;
+    margin-top: 4rem;
+}
+
+.article-sidebar {
+    padding: 1.5rem 1.5rem 4rem 1.5rem;
+    min-height: 400px;
+}
+
+.main-article-container {
+    padding: 0 3.5rem 4rem 3.5rem !important;
+}
+
+.comment-container p {
+    margin: 0;
+    padding: 0;
+}
+
+.comment-icon {
+    background-color: rgba(var(--border-rgb), 0.2);
+    border-radius: 5px;
+}
+
+.comment-icon:hover {
+    background-color: rgba(var(--border-rgb), 0.1);
+}
+
+.text-justify {
+    text-align: justify;
+    hyphens: auto;
+}
+
+.discussion-box {
+    display: block;
+    padding: 12px;
+}
+
+#reply-text {
+    width: 90%;
+    margin-left: auto;
+}
+
+.article-link .underline-on-hover {
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.article-link:hover .underline-on-hover {
+    border-color: black;
+}
+
+/* ===== DISCUSSION SECTION ===== */
+.discussion-section {
+    background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.discussion-header h2 {
+    color: #2c3e50;
+    font-weight: 700;
+    font-size: 1.75rem;
+}
+
+#comment-count-text {
+    font-size: 0.95rem;
+}
+
+/* ===== COMMENT FORM CARD ===== */
+.comment-form-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.comment-form-card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.comment-form-card h5 {
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.discussion-box-form input.form-control,
+.discussion-box-form textarea.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.discussion-box-form input.form-control:focus,
+.discussion-box-form textarea.form-control:focus {
+    border-color: #6c63ff;
+    box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.1);
+}
+
+/* ===== COMMENTS SECTION ===== */
+.comments-section h5 {
+    color: #495057;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+/* ===== INDIVIDUAL COMMENT CARDS ===== */
+.comment {
+    background: white;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.comment:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    transform: translateX(4px);
+    border-color: #dee2e6;
+}
+
+.comment img.rounded-circle {
+    border: 3px solid #f8f9fa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.comment .username {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 0.95rem;
+}
+
+.comment .timestamp {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.comment h6.comment-title {
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+}
+
+.comment .comment-text {
+    color: #495057;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Edit Mode Inputs */
+.comment .edit-title,
+.comment .edit-text {
+    border: 2px solid #6c63ff;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.comment .edit-title:focus,
+.comment .edit-text:focus {
+    border-color: #5a52d5;
+    box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.15);
+}
+
+/* Empty State */
+.no-comments-message {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6c757d;
+}
+
+.no-comments-message i {
+    font-size: 3rem;
+    color: #dee2e6;
+    margin-bottom: 1rem;
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .discussion-section {
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .comment-form-card {
+        padding: 1rem;
+    }
+
+    .post-button {
+        position: static;
+        width: 100%;
+        margin-top: 0.75rem;
+    }
+
+    .comment {
+        flex-direction: column;
+    }
+
+    .comment img.rounded-circle {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 991px) {
+
+    .discussion-box {
+        display: block;
+        margin: 0 auto;
+    }
+}
