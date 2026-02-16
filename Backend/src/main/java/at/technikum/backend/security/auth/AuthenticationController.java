@@ -52,9 +52,9 @@ public class AuthenticationController {
     public ResponseEntity<Void> logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("auth_token", "");
         cookie.setHttpOnly(true);
-        cookie.setSecure(false); // true in production
+        cookie.setSecure(false);
         cookie.setPath("/");
-        cookie.setMaxAge(0); // deletes the cookie
+        cookie.setMaxAge(0);
         response.addCookie(cookie);
 
         return ResponseEntity.noContent().build();

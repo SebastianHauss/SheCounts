@@ -60,12 +60,10 @@ public class UserController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable UUID id, @AuthenticationPrincipal UserDetails userDetails) {
-        // Hole den aktuellen User aus dem JWT Token
         String currentUserEmail = userDetails.getUsername();
         User currentUser = userRepository.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new EntityNotFoundException("Current user not found"));
 
-        // Prüfe: Ist es der eigene Account ODER ist der User Admin?
         if (!currentUser.getId().equals(id) && !currentUser.isAdmin()) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can only delete your own account");
         }
