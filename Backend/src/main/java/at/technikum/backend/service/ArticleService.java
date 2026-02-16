@@ -6,10 +6,8 @@ import at.technikum.backend.exceptions.EntityIdDoesNotMatchException;
 import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
 import jakarta.transaction.Transactional;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,17 +57,6 @@ public class ArticleService {
         }
         articleRepository.delete(checkIfArticleExists(id).get());
     }
-
-    /*
-    public String getArticleContentByFilename(String filename) {
-        try {
-            ClassPathResource resource = new ClassPathResource("static/articles/" + filename);
-            return new String(resource.getInputStream().readAllBytes());
-        } catch (IOException e) {
-            throw new RuntimeException("Could not read article content from file: " + filename, e);
-        }
-    }
-     */
 
     public Optional<Article> checkIfArticleExists(UUID id) {
         return articleRepository.findById(id);

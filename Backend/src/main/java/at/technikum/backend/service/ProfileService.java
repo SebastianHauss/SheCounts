@@ -64,15 +64,6 @@ public class ProfileService {
         return saved;
     }
 
-    /*
-     * @Transactional
-     * public void delete(UUID id) {
-     * if (checkIfProfileExists(id).isEmpty()) {
-     * throw new EntityNotFoundException("Profile not found.");
-     * }
-     * profileRepository.delete(checkIfProfileExists(id).get());
-     * }
-     */
     public Optional<Profile> checkIfProfileExists(UUID id) {
         return profileRepository.findById(id);
     }

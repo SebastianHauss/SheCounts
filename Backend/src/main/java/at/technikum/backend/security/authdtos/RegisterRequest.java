@@ -1,6 +1,5 @@
 package at.technikum.backend.security.authdtos;
 
-import at.technikum.backend.enums.Gender;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
