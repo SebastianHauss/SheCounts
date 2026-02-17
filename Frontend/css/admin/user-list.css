@@ -2,41 +2,41 @@
 #userlist-container {
   max-width: 1000px;
   margin: 80px auto;
-  padding: 2rem;
+  padding: var(--spacing-xl);
   background-color: var(--color-white);
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
   font-size: 1rem;
 }
 
 /* --- Headline --- */
 .user-list-h1 {
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-xl);
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  color: #333;
+  color: var(--color-grey-dark);
 }
 
 /* --- Table Styling --- */
 .table-hover tbody tr:hover {
-  background-color: #f1f1f1;
-  transition: background-color 0.2s ease;
+  background-color: var(--color-grey-light);
+  transition: background-color var(--transition-slow);
 }
 
 .table th {
-  background-color: #f8f9fa;
+  background-color: var(--color-grey-light);
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 0.05rem;
-  color: #666;
-  border-bottom: 2px solid #dee2e6;
+  color: var(--color-grey-medium);
+  border-bottom: 2px solid var(color-grey-fair);
 }
 
 .table td,
 .table th {
   vertical-align: middle;
-  padding: 1rem;
+  padding: var(--spacing-md);
 }
 
 /* --- Avatar --- */
@@ -52,9 +52,9 @@
 .username-cell {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--spacing-sm);
 }
 
 .pagination {
-  margin-top: 40px;
+  margin-top: var(--spacing-xxl);
 }

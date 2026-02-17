@@ -8,13 +8,12 @@
 
 .hero-section p.lead {
     font-weight: 400;
-    padding: 0 30px;
-
+    padding: 0 var(--spacing-xl);
 }
 
 .hero-section h1,
 .hero-section p {
-    color: white;
+    color: var(--color-white);
 }
 
 /*Call to Action*/
