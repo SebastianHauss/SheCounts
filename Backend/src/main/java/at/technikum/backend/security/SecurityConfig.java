@@ -61,11 +61,11 @@ public class SecurityConfig {
 
         // Frontend Urls
         configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000", // React/Vite
-                "http://localhost:5500", // Live Server
-                "http://127.0.0.1:5500", // Live Server (alternative)
-                "http://localhost:63342", // IntelliJ
-                "http://localhost:63343" // IntelliJ (alternative)
+                "http://localhost:3000", 
+                "http://localhost:5500", 
+                "http://127.0.0.1:5500", 
+                "http://localhost:63342", 
+                "http://localhost:63343"
         ));
 
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));

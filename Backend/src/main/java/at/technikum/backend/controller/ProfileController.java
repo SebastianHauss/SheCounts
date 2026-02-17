@@ -45,10 +45,4 @@ public class ProfileController {
         Profile profile = profileMapper.toEntity(profileDto);
         return profileMapper.toDto(profileService.update(id, profile));
     }
-
-    /*@DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable UUID id) {
-        profileService.delete(id);
-    }*/
 }

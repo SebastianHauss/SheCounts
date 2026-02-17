@@ -76,16 +76,14 @@ public class AuthenticationService implements AuthService {
             RegisterRequest request,
             HttpServletResponse httpServletResponse) {
 
-        // User erstellen
         User user = new User();
         user.setEmail(request.getEmail());
         user.setUsername(request.getUsername());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setAdmin(false);
 
-        user = userRepository.save(user); // ⬅️ WICHTIG: Rückgabewert verwenden
+        user = userRepository.save(user); 
 
-        // Profile erstellen - ID wird automatisch generiert
         Profile profile = new Profile();
         profile.setUser(user);
         profile.setCountry(request.getCountry());
@@ -99,9 +97,8 @@ public class AuthenticationService implements AuthService {
             profile.setGender(Gender.DIVERSE);
         }
 
-        profileRepository.save(profile); // ⬅️ Funktioniert jetzt!
+        profileRepository.save(profile);
 
-        // Token generieren
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
         String tokenValue = generateToken(userDetails);
 
@@ -165,12 +162,10 @@ public class AuthenticationService implements AuthService {
     private Cookie createAuthCookie(String tokenValue) {
         Cookie cookie = new Cookie("auth_token", tokenValue);
         cookie.setHttpOnly(true);
-        cookie.setSecure(false); // false for localhost HTTP (true for production HTTPS)
+        cookie.setSecure(false);
         cookie.setPath("/");
         cookie.setMaxAge(24 * 60 * 60);
-        // REMOVE setDomain - let browser handle it automatically
-        // cookie.setDomain("localhost");
-        cookie.setAttribute("SameSite", "Lax"); // Use Lax, not None
+        cookie.setAttribute("SameSite", "Lax"); 
         return cookie;
     }
 }
