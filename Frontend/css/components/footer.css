@@ -1,5 +1,6 @@
 #footer-placeholder {
     margin-top: 48px;
+    background-color: var(--color-accent-green);
 }
 
 /* Media Queries */
