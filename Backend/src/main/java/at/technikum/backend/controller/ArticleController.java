@@ -20,13 +20,6 @@ public class ArticleController {
 
     private final ArticleService articleService;
     private final ArticleMapper articleMapper;
-
-    /*
-    @GetMapping("/content/{filename}/html")
-    public String getArticleHtml(@PathVariable String filename) {
-        return articleService.getArticleContentByFilename(filename);
-    }
-    */
     
     @GetMapping
     public List<ArticleDto> readAll() {
