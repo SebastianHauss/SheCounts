@@ -1,3 +1,5 @@
+console.log("Loaded modal-util.js");
+
 document
   .querySelectorAll('[data-bs-toggle="modal"][data-bs-dismiss="modal"]')
   .forEach((link) => {

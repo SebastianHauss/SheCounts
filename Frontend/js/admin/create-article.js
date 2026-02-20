@@ -1,3 +1,5 @@
+console.log("Loaded create-article.js");
+
 const API_URL = 'http://localhost:8080/api/articles';
 const AUTH_URL = 'http://localhost:8080/api/auth/me';
 

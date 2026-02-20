@@ -1,0 +1,26 @@
+/* --- Sidebar --- */
+.sideBar {
+    border-radius: 10px;
+    position: sticky;
+    top: 100px; /* Abstand von oben: Sticky wird erst ab hier aktiv */
+    padding: 30px;
+    height: 300px;
+}
+
+.sideBarLink {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.sideBarLink:hover {
+    color: var(--color-secondary);
+}
+
+.p2Element {
+    font-size: 1.1rem;
+}
+.p3Element {
+    font-size: 1rem;
+}
