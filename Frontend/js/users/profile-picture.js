@@ -30,6 +30,11 @@ async function initProfilePicture() {
   uploadPictureBtn = document.getElementById('upload-picture-btn');
   removePictureBtn = document.getElementById('remove-picture-btn');
 
+  if (!profilePicturePreview) {
+    console.log('profile-picture UI not present on this page – skipping init');
+    return;
+  }
+
   await determineProfileUserId();
 
   if (selectPictureBtn) {
@@ -82,6 +87,11 @@ async function determineProfileUserId() {
         currentProfileUserId = meData.userId;
         isOwnProfile = true;
         console.log('Viewing own profile:', currentProfileUserId);
+      } else {
+        // Not logged in (e.g., guest reading public pages)
+        currentProfileUserId = null;
+        isOwnProfile = false;
+        console.log('No logged-in user (guest)');
       }
     } catch (error) {
       console.error('Error getting current user:', error);
@@ -94,20 +104,20 @@ function handleFileSelect(event) {
   const file = event.target.files[0];
 
   if (!file) {
-    uploadPictureBtn.style.display = 'none';
+    if (uploadPictureBtn) uploadPictureBtn.style.display = 'none';
     return;
   }
 
   if (!validateFile(file)) {
     profilePictureInput.value = '';
-    uploadPictureBtn.style.display = 'none';
+    if (uploadPictureBtn) uploadPictureBtn.style.display = 'none';
     return;
   }
 
   const reader = new FileReader();
   reader.onload = (e) => {
     profilePicturePreview.src = e.target.result;
-    uploadPictureBtn.style.display = 'block';
+    if (uploadPictureBtn) uploadPictureBtn.style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
@@ -196,6 +206,7 @@ function handleUpload() {
 
 // Load Profile Picture from Backend (jQuery AJAX)
 function loadProfilePicture() {
+  if (!profilePicturePreview) return;
   if (!currentProfileUserId) {
     console.warn('No profile user ID set');
     profilePicturePreview.src = '../../img/users/profile-pic-avatar.png';
@@ -224,12 +235,6 @@ function loadProfilePicture() {
 
     error: function (xhr) {
       console.error('User laden fehlgeschlagen:', xhr.status, xhr.responseText);
-
-      if (xhr.status === 401 || xhr.status === 403) {
-        alert('Bitte melde dich an!');
-        window.location.href = '../../index.html';
-        return;
-      }
 
       profilePicturePreview.src = '../../img/users/profile-pic-avatar.png';
     },
