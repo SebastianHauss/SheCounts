@@ -190,7 +190,7 @@ public class ArticleServiceTest {
         assertThrows(EntityNotFoundException.class,
                 () -> articleService.read(articleId));
 
-        verify(articleRepository).findById(articleId);  // 1 call (throws before 2nd)
+        verify(articleRepository).findById(articleId);
     }
 
     @Test
@@ -264,7 +264,7 @@ public class ArticleServiceTest {
         assertThrows(EntityNotFoundException.class,
                 () -> articleService.delete(articleId));
 
-        verify(articleRepository).findById(articleId);  // 1 call (throws before 2nd)
+        verify(articleRepository).findById(articleId);
         verify(articleRepository, never()).delete(any());
     }
 
