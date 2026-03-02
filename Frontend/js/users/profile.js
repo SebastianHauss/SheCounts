@@ -1,7 +1,5 @@
 console.log("Loaded profile.js");
 
-const BASE_URL = 'http://localhost:8080/api';
-
 let currentUserId = null;
 let currentUserData = null;
 let isViewingOwnProfile = false;
@@ -30,18 +28,6 @@ function setCountrySelect(countryCode) {
 /* =========================
    API
 ========================= */
-
-async function getCurrentUser() {
-  try {
-    const res = await fetch(`${BASE_URL}/auth/me`, {
-      credentials: 'include',
-    });
-    return res.ok ? await res.json() : null;
-  } catch (e) {
-    console.error('getCurrentUser failed', e);
-    return null;
-  }
-}
 
 async function loadUserProfile(userId) {
   try {

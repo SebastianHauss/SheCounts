@@ -1,11 +1,7 @@
 console.log("Loaded profile-picture.js");
 
-// API Base URL
-const API_BASE_URL = 'http://localhost:8080/api';
-
 // Konstanten
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
-
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
@@ -82,7 +78,7 @@ async function determineProfileUserId() {
   } else {
     // Eigenes Profil
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/me`, {
+      const response = await fetch(`${BASE_URL}/auth/me`, {
         credentials: 'include',
       });
 
@@ -163,7 +159,7 @@ function handleUpload() {
   formData.append('file', file);
 
   $.ajax({
-    url: `${API_BASE_URL}/files/profile-picture`,
+    url: `${BASE_URL}/files/profile-picture`,
     type: 'POST',
     data: formData,
 
@@ -218,7 +214,7 @@ function loadProfilePicture() {
   }
 
   $.ajax({
-    url: `${API_BASE_URL}/users/${currentProfileUserId}`,
+    url: `${BASE_URL}/users/${currentProfileUserId}`,
     type: 'GET',
 
     xhrFields: { withCredentials: true },
@@ -228,7 +224,8 @@ function loadProfilePicture() {
       console.log('User loaded:', user);
 
       if (user.profilePictureId) {
-        profilePicturePreview.src = `${API_BASE_URL}/files/${user.profilePictureId}`;
+        profilePicturePreview.src = `${
+            BASE_URL}/files/${user.profilePictureId}`;
         console.log('Loading profile picture:', user.profilePictureId);
       } else {
         profilePicturePreview.src = '../../img/users/profile-pic-avatar.png';
@@ -254,7 +251,7 @@ function handleRemove() {
   if (!confirm('Möchtest du dein Profilbild wirklich entfernen?')) return;
 
   $.ajax({
-    url: `${API_BASE_URL}/files/profile-picture`,
+    url: `${BASE_URL}/files/profile-picture`,
     type: 'DELETE',
 
     xhrFields: { withCredentials: true },

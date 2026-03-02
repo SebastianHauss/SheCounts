@@ -1,3 +1,15 @@
+async function getCurrentUser() {
+    try {
+        const res = await fetch(`${BASE_URL}/auth/me`, {
+            credentials: 'include',
+        });
+        return res.ok ? await res.json() : null;
+    } catch (e) {
+        console.error('getCurrentUser failed', e);
+        return null;
+    }
+}
+
 async function checkAuthStatus() {
     try {
         const response = await fetch('http://localhost:8080/api/auth/me', {
