@@ -14,7 +14,7 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/articles")
+@RequestMapping(value = "/api/articles", produces = "application/json; charset=UTF-8")
 @RequiredArgsConstructor
 public class ArticleController {
 

@@ -7,6 +7,10 @@ import at.technikum.backend.exceptions.EntityNotFoundException;
 import at.technikum.backend.repository.ArticleRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.core.io.ClassPathResource;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,16 +24,27 @@ public class ArticleService {
     public ArticleService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
-    
+
     public List<Article> readAll() {
         return articleRepository.findAll();
     }
 
     public Article read(UUID id) {
-        if (checkIfArticleExists(id).isEmpty()) {
-            throw new EntityNotFoundException("Article couldn't be found.");
+        Article article = checkIfArticleExists(id)
+                .orElseThrow(() -> new EntityNotFoundException("Article couldn't be found."));
+
+        // Load markdown file content from resources
+        String filename = article.getContent();
+
+        try {
+            ClassPathResource resource = new ClassPathResource(filename);
+            String fileContent = new String(resource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
+            article.setContent(fileContent);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not load article content file: " + filename, e);
         }
-        return checkIfArticleExists(id).get();
+
+        return article;
     }
 
     public Article create(Article article) {

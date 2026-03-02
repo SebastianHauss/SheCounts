@@ -223,7 +223,8 @@ function getArticleIdFromPage() {
     return articleId;
   }
   const params = new URLSearchParams(window.location.search);
-  return params.get('articleId');
+  // Dynamic article page uses ?id=...
+  return params.get('id');
 }
 
 function getProfileImageUrl(comment) {
