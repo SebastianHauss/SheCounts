@@ -1,9 +1,5 @@
 console.log("Loaded comment-service.js");
 
-const API_URL = 'http://localhost:8080/api';
-
-let currentUser = null;
-
 $(document).ready(function () {
   const articleId = getArticleIdFromPage();
 

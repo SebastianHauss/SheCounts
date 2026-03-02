@@ -1,10 +1,5 @@
 console.log("Loaded user-list.js");
 
-const BASE_URL = 'http://localhost:8080/api';
-
-let allUsers = [];
-let currentUser = null;
-
 const statusBadge = (isActive) =>
   `<span class="badge ${
     isActive ? 'bg-success' : 'bg-secondary'
@@ -18,27 +13,6 @@ const formatDate = (dateString) => {
     month: '2-digit',
     year: 'numeric',
   });
-};
-
-const getCurrentUser = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/me`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Fehler beim Abrufen der Benutzerinformationen:', error);
-    return null;
-  }
 };
 
 const checkAdminAccess = async () => {
