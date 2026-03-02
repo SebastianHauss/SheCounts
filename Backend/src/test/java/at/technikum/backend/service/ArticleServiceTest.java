@@ -44,8 +44,8 @@ public class ArticleServiceTest {
     @Test
     void readAll_shouldReturnAllArticles() {
         // ---------- given ----------
-        Article article1 = new Article("Content 1", "Author 1");
-        Article article2 = new Article("Content 2", "Author 2");
+        Article article1 = new Article("article-1.md", "Author 1");
+        Article article2 = new Article("article-2.md", "Author 2");
 
         when(articleRepository.findAll())
                 .thenReturn(List.of(article1, article2));
@@ -62,7 +62,7 @@ public class ArticleServiceTest {
     void read_shouldReturnArticle_whenExists() {
         // ---------- given ----------
         UUID articleId = UUID.randomUUID();
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -74,15 +74,15 @@ public class ArticleServiceTest {
         // ---------- then ----------
         assertNotNull(result);
         assertSame(article, result);
-        verify(articleRepository, times(2)).findById(articleId);  // 2 calls!
+        verify(articleRepository).findById(articleId);  // 1 call
     }
 
     @Test
     void create_shouldSaveArticle_whenArticleHasNoId() {
         // ---------- given ----------
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         // article.getId() ist null
-        Article savedArticle = new Article("Content", "Author");
+        Article savedArticle = new Article("article-1.md", "Author");
 
         when(articleRepository.save(article))
                 .thenReturn(savedArticle);
@@ -100,7 +100,7 @@ public class ArticleServiceTest {
     void create_shouldSaveArticle_whenArticleIdDoesNotExist() {
         // ---------- given ----------
         UUID articleId = UUID.randomUUID();
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -121,7 +121,7 @@ public class ArticleServiceTest {
     void update_shouldUpdateArticle_whenIdsMatch() {
         // ---------- given ----------
         UUID articleId = UUID.randomUUID();
-        Article article = new Article("Updated Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -142,7 +142,7 @@ public class ArticleServiceTest {
     void delete_shouldDeleteArticle_whenExists() {
         // ---------- given ----------
         UUID articleId = UUID.randomUUID();
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -152,7 +152,7 @@ public class ArticleServiceTest {
         articleService.delete(articleId);
 
         // ---------- then ----------
-        verify(articleRepository, times(2)).findById(articleId);  // 2 calls!
+        verify(articleRepository, times(2)).findById(articleId);  // 2 calls (via checkIfArticleExists)
         verify(articleRepository).delete(article);
     }
 
@@ -160,7 +160,7 @@ public class ArticleServiceTest {
     void checkIfArticleExists_shouldReturnArticle_whenFound() {
         // ---------- given ----------
         UUID articleId = UUID.randomUUID();
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -190,7 +190,7 @@ public class ArticleServiceTest {
         assertThrows(EntityNotFoundException.class,
                 () -> articleService.read(articleId));
 
-        verify(articleRepository).findById(articleId);  // 1 call (throws before 2nd)
+        verify(articleRepository).findById(articleId);
     }
 
     @Test
@@ -218,7 +218,7 @@ public class ArticleServiceTest {
     void update_shouldThrowException_whenArticleNotFound() {
         // ---------- given ----------
         UUID articleId = UUID.randomUUID();
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -238,7 +238,7 @@ public class ArticleServiceTest {
         UUID pathId = UUID.randomUUID();
         UUID articleId = UUID.randomUUID();
 
-        Article article = new Article("Content", "Author");
+        Article article = new Article("article-1.md", "Author");
         article.setId(articleId);
 
         when(articleRepository.findById(articleId))
@@ -264,7 +264,7 @@ public class ArticleServiceTest {
         assertThrows(EntityNotFoundException.class,
                 () -> articleService.delete(articleId));
 
-        verify(articleRepository).findById(articleId);  // 1 call (throws before 2nd)
+        verify(articleRepository).findById(articleId);
         verify(articleRepository, never()).delete(any());
     }
 
