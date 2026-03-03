@@ -1,71 +1,102 @@
 console.log("Loaded user-list.js");
 
-const BASE_URL = 'http://localhost:8080/api';
-
-let allUsers = [];
-let currentUser = null;
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
 
 const statusBadge = (isActive) =>
-  `<span class="badge ${
-    isActive ? 'bg-success' : 'bg-secondary'
-  }">${isActive ? 'active' : 'inactive'}</span>`;
+    `<span class="badge ${isActive ? 'bg-success' : 'bg-secondary'}">
+    ${isActive ? 'Active' : 'Inactive'}
+  </span>`;
 
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A';
-  const date = new Date(dateString);
-  return date.toLocaleDateString('de-DE', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric',
+  return new Date(dateString).toLocaleDateString('de-DE', {
+    day: '2-digit', month: '2-digit', year: 'numeric',
   });
 };
 
-const getCurrentUser = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/auth/me`, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (!response.ok) {
-      return null;
-    }
-
-    return await response.json();
-  } catch (error) {
-    console.error('Fehler beim Abrufen der Benutzerinformationen:', error);
-    return null;
-  }
-};
+// ─── AUTH ─────────────────────────────────────────────────────────────────────
 
 const checkAdminAccess = async () => {
   currentUser = await getCurrentUser();
-
   if (!currentUser) {
     alert('Sie sind nicht angemeldet. Bitte melden Sie sich an.');
+    window.location.href = '../../index.html';
     return false;
   }
-
   if (!currentUser.isAdmin) {
     alert('Sie haben keine Berechtigung, diese Seite zu sehen.');
     window.location.href = '../../index.html';
     return false;
   }
-
   return true;
 };
+
+async function getCurrentUser() {
+  try {
+    const res = await fetch(`${BASE_URL}/auth/me`, {
+      credentials: 'include',
+    });
+    return res.ok ? await res.json() : null;
+  } catch (e) {
+    console.error('getCurrentUser failed', e);
+    return null;
+  }
+}
+
+async function loadUserProfile(userId) {
+  try {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
+      credentials: 'include',
+    });
+
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) {
+    console.error('loadUserProfile failed', e);
+    return null;
+  }
+}
+
+async function checkAuthStatus() {
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/me', {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const authData = await response.json();
+
+            // Zeige User-Block an
+            $('#loginBlock').hide();
+            $('#userBlock').show();
+            $('#mobileLoginLink').hide();
+            $('#mobileUserBlock').show();
+
+            await loadAndUpdateUserProfile(authData.userId);
+        } else {
+            $('#loginBlock').show();
+            $('#userBlock').hide();
+            $('#mobileLoginLink').show();
+            $('#mobileUserBlock').hide();
+        }
+    } catch (error) {
+        console.error('Auth check failed:', error);
+        $('#loginBlock').show();
+        $('#userBlock').hide();
+        $('#mobileLoginLink').show();
+        $('#mobileUserBlock').hide();
+    }
+}
+
+// ─── LOAD FROM BACKEND ────────────────────────────────────────────────────────
 
 const loadUsers = async () => {
   try {
     const response = await fetch(`${BASE_URL}/users`, {
       method: 'GET',
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     });
 
     if (!response.ok) {
@@ -84,179 +115,304 @@ const loadUsers = async () => {
 
     allUsers = await response.json();
     console.log('Loaded users from backend:', allUsers);
-    displayUsers(allUsers);
+    applyFilters();
   } catch (error) {
     console.error('Fehler beim Laden der Benutzer:', error);
-    $('#user-table-body').html(`
-      <tr>
-        <td colspan="6" class="text-center text-danger py-4">
-          <i class="bi bi-exclamation-triangle"></i>
-          Fehler beim Laden der Benutzerdaten.
-        </td>
-      </tr>
+    $('#user-cards-grid').html(`
+      <div class="user-cards-empty">
+        <i class="bi bi-exclamation-triangle"></i>
+        <p>Fehler beim Laden der Benutzerdaten.</p>
+      </div>
     `);
   }
 };
+
+async function loadAndUpdateUserProfile(userId) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            console.log('Full user data loaded:', userData);
+            updateProfileImage(userData);
+        } else {
+            console.warn('Could not load full user profile, using fallback');
+            // Fallback: zeige nur Standard-Avatar
+            const fallbackData = { username: 'User' };
+            updateProfileImage(fallbackData);
+        }
+    } catch (error) {
+        console.error('Error loading user profile:', error);
+        // Fallback
+        updateProfileImage({ username: 'User' });
+    }
+}
+
+function updateProfileImage(userData) {
+    const BASE_URL = 'http://localhost:8080/api';
+
+    // Prüfe, ob eine gültige UUID vorhanden ist
+    const isValidFileId =
+        userData.profilePictureId &&
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+            userData.profilePictureId
+        );
+
+    // Fallback Avatar mit ui-avatars.com
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        userData.username || 'User'
+    )}&background=6c757d&color=fff&size=128&bold=true`;
+
+    // Profilbild-URL bestimmen
+    const profilePicUrl = isValidFileId
+        ? `${BASE_URL}/files/${userData.profilePictureId}`
+        : fallbackAvatar;
+
+    console.log('Updating navbar profile image:', profilePicUrl);
+
+    // Aktualisiere das Profilbild in der Desktop-Navigation
+    const $profileImg = $('#userBlock img');
+    $profileImg.attr('src', profilePicUrl);
+    $profileImg.attr('data-fallback', fallbackAvatar);
+
+    // Füge Error-Handler hinzu
+    $profileImg.off('error').on('error', function() {
+        if (this.dataset.errorHandled !== 'true') {
+            this.dataset.errorHandled = 'true';
+            this.src = fallbackAvatar;
+        }
+    });
+
+    // Aktualisiere den Benutzernamen
+    if (userData.username) {
+        $('#userBlock strong').text(userData.username);
+    }
+}
+
+// ─── IMAGE FALLBACK ───────────────────────────────────────────────────────────
 
 window.handleImageError = function (img) {
-  if (img.dataset.errorHandled === 'true') {
-    return;
-  }
-
+  if (img.dataset.errorHandled === 'true') return;
   img.dataset.errorHandled = 'true';
   img.onerror = null;
-
-  const fallback = img.dataset.fallback;
-  if (fallback) {
-    img.src = fallback;
-  }
+  if (img.dataset.fallback) img.src = img.dataset.fallback;
 };
+
+// ─── RENDER CARDS ─────────────────────────────────────────────────────────────
 
 const displayUsers = (users) => {
-  const tbody = $('#user-table-body');
-  tbody.empty();
+  const grid = $('#user-cards-grid');
+  grid.empty();
+
+  // Update result count
+  $('#user-count').text(`${users.length} Users`);
+  $('#results-count').text(
+      users.length === allUsers.length
+          ? `${users.length} users`
+          : `${users.length} of ${allUsers.length} users`
+  );
 
   if (users.length === 0) {
-    tbody.append(`
-      <tr>
-        <td colspan="6" class="text-center py-5">
-          <i class="bi bi-inbox" style="font-size: 3rem; color: #ddd;"></i>
-          <p class="mt-3 text-muted">Keine Benutzer gefunden.</p>
-        </td>
-      </tr>
+    grid.append(`
+      <div class="user-cards-empty">
+        <i class="bi bi-search"></i>
+        <p>No users match your filters.</p>
+        <button class="btn btn-sm btn-outline-secondary mt-2" onclick="clearAllFilters()">
+          Clear filters
+        </button>
+      </div>
     `);
     return;
   }
-
-  $('#user-count').text(`${users.length} Users`);
 
   users.forEach((user) => {
-    // Prüft UUID-Format
     const isValidFileId =
-      user.profilePictureId &&
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-        user.profilePictureId
-      );
+        user.profilePictureId &&
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.profilePictureId);
 
-    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'User')}&background=6c757d&color=fff&size=128&bold=true`;
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'User')}&background=a0616a&color=fff&size=128&bold=true`;
+    const profilePicUrl = isValidFileId ? `${BASE_URL}/files/${user.profilePictureId}` : fallbackAvatar;
 
-    const profilePicUrl = isValidFileId
-      ? `${BASE_URL}/files/${user.profilePictureId}`
-      : fallbackAvatar;
-
-    const country = user.profile?.country || 'N/A';
-    const createdAt = formatDate(user.createdAt);
-    const isAdmin = user.admin === true || user.isAdmin === true;
+    const country  = countryName(user.profile?.country);
+    const isAdmin  = user.admin === true || user.isAdmin === true;
     const isActive = !user.deleted;
 
-    tbody.append(`
-      <tr data-user-id="${user.id}">
-        <td>
-          <div class="d-flex align-items-center">
-            <img src="${profilePicUrl}" 
-                 alt="${user.username}" 
-                 class="rounded-circle me-3" 
-                 width="40" 
-                 height="40"
+    grid.append(`
+      <div class="user-card" data-user-id="${user.id}">
+
+        <div class="user-card__banner">
+          <div class="user-card__avatar-wrap">
+            <img src="${profilePicUrl}"
+                 alt="${user.username}"
+                 class="user-card__avatar"
                  data-fallback="${fallbackAvatar}"
-                 onerror="handleImageError(this)">
-            <div>
-              <a href="../users/profile.html?id=${user.id}" class="fw-semibold text-decoration-none">
-                ${user.username}
-              </a>
-              ${isAdmin ? '<span class="badge bg-primary ms-2">Admin</span>' : ''}
+                 onerror="handleImageError(this)" />
+          </div>
+        </div>
+
+        <div class="user-card__body">
+          <a href="../users/profile.html?id=${user.id}" class="user-card__username">
+            ${user.username}
+          </a>
+          <div class="user-card__badges">
+            ${isAdmin ? '<span class="badge bg-primary">Admin</span>' : ''}
+            ${statusBadge(isActive)}
+          </div>
+          <div class="user-card__info">
+            <div class="user-card__info-row">
+              <i class="bi bi-envelope"></i>
+              <span>${user.email}</span>
+            </div>
+            <div class="user-card__info-row">
+              <i class="bi bi-geo-alt"></i>
+              <span>${country}</span>
+            </div>
+            <div class="user-card__info-row">
+              <i class="bi bi-calendar3"></i>
+              <span>${formatDate(user.createdAt)}</span>
             </div>
           </div>
-        </td>
-        <td><small class="text-muted">${createdAt}</small></td>
-        <td>${user.email}</td>
-        <td>${country}</td>
-        <td>${statusBadge(isActive)}</td>
-        <td class="text-end">
-          <a href="../users/profile.html?id=${user.id}"
-             class="btn btn-sm btn-outline-primary" 
-             title="View Details">
-            <i class="bi bi-eye"></i>
+        </div>
+
+        <div class="user-card__footer">
+          <a href="../users/profile.html?id=${user.id}" class="user-card__btn">
+            <i class="bi bi-person"></i> View Profile
           </a>
-        </td>
-      </tr>
+        </div>
+
+      </div>
     `);
   });
-
-  $('#pagination-container').show();
 };
 
-const searchUsers = (searchTerm) => {
-  if (!searchTerm) {
-    displayUsers(allUsers);
-    return;
-  }
+// ─── COUNTRY CODE → DISPLAY NAME ─────────────────────────────────────────────
 
-  const term = searchTerm.toLowerCase();
-  const filtered = allUsers.filter((user) => {
-    return (
-      user.username?.toLowerCase().includes(term) ||
-      user.email?.toLowerCase().includes(term) ||
-      user.profile?.country?.toLowerCase().includes(term)
+const COUNTRY_NAMES = { at: 'Österreich', de: 'Deutschland', ch: 'Schweiz' };
+const countryName = (code) => COUNTRY_NAMES[code?.toLowerCase()] || code || 'N/A';
+
+// ─── COMBINED FILTER LOGIC ────────────────────────────────────────────────────
+// All filters (search, role, sort) run together so they always combine correctly.
+
+const applyFilters = () => {
+  if (!$('#searchInput').length) { displayUsers(allUsers); return; }
+  const searchTerm = $('#searchInput').val().toLowerCase().trim();
+  const roleFilter = $('#filterRole').val();   // '' | 'admin' | 'user'
+  const sortBy     = $('#sortSelect').val();   // '' | 'username' | 'email' | 'created' | 'country' | 'status'
+
+  let result = [...allUsers];
+
+  // 1. Filter by search term (username, email, country)
+  if (searchTerm) {
+    result = result.filter((u) =>
+        u.username?.toLowerCase().includes(searchTerm) ||
+        u.email?.toLowerCase().includes(searchTerm) ||
+        u.profile?.country?.toLowerCase().includes(searchTerm)
     );
-  });
-
-  displayUsers(filtered);
-};
-
-const sortUsers = (sortBy) => {
-  if (!sortBy) {
-    displayUsers(allUsers);
-    return;
   }
 
-  const sorted = [...allUsers].sort((a, b) => {
+  // 2. Filter by role
+  if (roleFilter === 'admin') {
+    result = result.filter((u) => u.admin === true || u.isAdmin === true);
+  } else if (roleFilter === 'user') {
+    result = result.filter((u) => !u.admin && !u.isAdmin);
+  }
+
+  // 3. Sort — all fields null-safe with || '' fallback
+  result.sort((a, b) => {
     switch (sortBy) {
-      case 'username':
-        return a.username.localeCompare(b.username);
-      case 'email':
-        return a.email.localeCompare(b.email);
-      case 'created':
-        return new Date(b.createdAt) - new Date(a.createdAt);
-      case 'country':
-        return (a.profile?.country || '').localeCompare(
-          b.profile?.country || ''
-        );
-      case 'status':
-        return (a.deleted ? 1 : 0) - (b.deleted ? 1 : 0);
-      default:
-        return 0;
+      case 'username': return (a.username || '').localeCompare(b.username || '');
+      case 'email':    return (a.email || '').localeCompare(b.email || '');
+      case 'created':  return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+      case 'country':  return (a.profile?.country || '').localeCompare(b.profile?.country || '');
+      case 'status':   return (a.deleted ? 1 : 0) - (b.deleted ? 1 : 0);
+      default:         return 0;
     }
   });
 
-  displayUsers(sorted);
+  updateFilterTags(searchTerm, roleFilter, sortBy);
+  displayUsers(result);
 };
+
+// ─── FILTER TAGS (visual indicators of active filters) ────────────────────────
+
+const updateFilterTags = (searchTerm, roleFilter, sortBy) => {
+  const container = $('#active-filters');
+  container.empty();
+
+  if (searchTerm) {
+    container.append(filterTag(`Search: "${searchTerm}"`, () => {
+      $('#searchInput').val('');
+      applyFilters();
+    }));
+  }
+
+  if (roleFilter) {
+    const label = roleFilter === 'admin' ? 'Admins only' : 'Users only';
+    container.append(filterTag(label, () => {
+      $('#filterRole').val('');
+      applyFilters();
+    }));
+  }
+
+  if (sortBy) {
+    const labels = { username: 'Sort: Username', email: 'Sort: Email', created: 'Sort: Newest', country: 'Sort: Country', status: 'Sort: Status' };
+    container.append(filterTag(labels[sortBy], () => {
+      $('#sortSelect').val('');
+      applyFilters();
+    }));
+  }
+};
+
+const filterTag = (label, onRemove) => {
+  const tag = $(`
+    <span class="filter-tag">
+      ${label}
+      <button aria-label="Remove filter"><i class="bi bi-x"></i></button>
+    </span>
+  `);
+  tag.find('button').on('click', onRemove);
+  return tag;
+};
+
+window.clearAllFilters = () => {
+  $('#searchInput').val('');
+  $('#filterRole').val('');
+  $('#sortSelect').val('');
+  applyFilters();
+};
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
 
 $(document).ready(async function () {
   console.log('User list page loaded');
 
-  $('#user-table-body').html(`
-    <tr>
-      <td colspan="6" class="text-center py-5">
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Laden...</span>
-        </div>
-      </td>
-    </tr>
-  `);
+  // Show skeleton cards while loading
+  const skeleton = `
+    <div class="user-card user-card--skeleton">
+      <div class="user-card__banner"></div>
+      <div class="user-card__body" style="align-items:center; gap:0.6rem;">
+        <div class="skeleton-line avatar" style="margin-top:8px;"></div>
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+      </div>
+      <div class="user-card__footer">
+        <div class="skeleton-line" style="height:30px; border-radius:4px;"></div>
+      </div>
+    </div>`;
+  $('#user-cards-grid').html(skeleton.repeat(6));
 
   const hasAccess = await checkAdminAccess();
-  if (!hasAccess) {
-    return;
-  }
+  if (!hasAccess) return;
 
   await loadUsers();
 
-  $('#searchInput').on('input', function () {
-    searchUsers($(this).val());
-  });
-
-  $('#sortSelect').on('change', function () {
-    sortUsers($(this).val());
-  });
+  // All three controls call the same applyFilters function
+  $('#searchInput').on('input', applyFilters);
+  $('#sortSelect').on('change', applyFilters);
+  $('#filterRole').on('change', applyFilters);
 });
