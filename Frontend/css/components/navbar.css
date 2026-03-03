@@ -55,6 +55,16 @@
             width: 100%;
             margin-bottom: 1rem;
         }
+
+        /* Prevent long dropdown titles from overflowing on mobile */
+        .dropdown-item {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .dropdown-menu {
+            width: 100%;
+        }
     }
 
     /* Footer link hover effects */
