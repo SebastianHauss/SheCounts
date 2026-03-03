@@ -26,6 +26,18 @@
   background-color: rgba(var(--border-rgb), 0.1);
 }
 
+@media (max-width: 576px) {
+  .comment-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .comment-container p {
+    padding-right: 0;
+  }
+}
+
 .text-justify {
   text-align: justify;
   hyphens: auto;

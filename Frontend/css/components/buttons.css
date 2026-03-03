@@ -149,28 +149,24 @@ button.myPopUpBtn {
   background: linear-gradient(135deg, #e0127e 0%, #c0106e 100%);
 }
 
-#floating-button {
+/* Zero-height sticky wrapper — keeps button inside the article column */
+.floating-btn-anchor {
   position: sticky;
-  top: 50%;
-  transform: translate(75px, -50%);
-  float: right;
-  margin-left: 20px;
+  top: calc(100vh - 80px);
+  height: 0;
+  overflow: visible;
+  z-index: 1000;
+}
 
+#floating-button {
+  position: absolute;
+  right: 0;
+  top: 0;
   width: 60px;
   height: 60px;
   background-color: #ff1493 !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   text-decoration: none;
-  z-index: 1000;
-}
-
-/* Mobile Floating Button */
-@media (max-width: 768px) {
-  #floating-button {
-    transform: translateY(-50%);
-    margin-left: 0;
-    float: right;
-  }
 }
 
 /*NAVBAR*/

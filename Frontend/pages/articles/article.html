@@ -47,7 +47,7 @@
 
 <main id="main-content">
     <div class="container-fluid article-container">
-        <div class="row g-5">
+        <div class="row gy-5 gx-4">
 
             <!-- SIDEBAR -->
             <div class="d-none d-lg-block col-lg-2">
@@ -66,6 +66,17 @@
 
             <!-- ARTICLE -->
             <article class="col-12 col-lg-7 main-article-container">
+
+                <!-- FLOATING BUTTON: zero-height sticky wrapper, contained in article column -->
+                <div class="floating-btn-anchor">
+                    <a
+                            href="#discussion"
+                            id="floating-button"
+                            class="text-light rounded-circle d-flex align-items-center justify-content-center"
+                    >
+                        <i class="bi bi-chat-text" style="font-size: 1.5rem"></i>
+                    </a>
+                </div>
 
                 <div
                         class="scrollspy-example"
@@ -109,22 +120,6 @@
 
                     <!-- BODY -->
                     <div id="article-body"></div>
-
-                    <!-- FLOATING BUTTON -->
-                    <a
-                            href="#discussion"
-                            id="floating-button"
-                            class="text-light rounded-circle d-flex align-items-center justify-content-center"
-                            style="
-                  bottom: 20px;
-                  right: 20px;
-                  width: 60px;
-                  height: 60px;
-                  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-                "
-                    >
-                        <i class="bi bi-chat-text" style="font-size: 1.5rem"></i>
-                    </a>
 
                 </div>
             </article>
