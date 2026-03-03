@@ -20,6 +20,7 @@ const checkAdminAccess = async () => {
   currentUser = await getCurrentUser();
   if (!currentUser) {
     alert('Sie sind nicht angemeldet. Bitte melden Sie sich an.');
+    window.location.href = '../../index.html';
     return false;
   }
   if (!currentUser.isAdmin) {
@@ -29,6 +30,64 @@ const checkAdminAccess = async () => {
   }
   return true;
 };
+
+async function getCurrentUser() {
+  try {
+    const res = await fetch(`${BASE_URL}/auth/me`, {
+      credentials: 'include',
+    });
+    return res.ok ? await res.json() : null;
+  } catch (e) {
+    console.error('getCurrentUser failed', e);
+    return null;
+  }
+}
+
+async function loadUserProfile(userId) {
+  try {
+    const res = await fetch(`${BASE_URL}/users/${userId}`, {
+      credentials: 'include',
+    });
+
+    if (!res.ok) throw new Error(res.status);
+    return await res.json();
+  } catch (e) {
+    console.error('loadUserProfile failed', e);
+    return null;
+  }
+}
+
+async function checkAuthStatus() {
+    try {
+        const response = await fetch('http://localhost:8080/api/auth/me', {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const authData = await response.json();
+
+            // Zeige User-Block an
+            $('#loginBlock').hide();
+            $('#userBlock').show();
+            $('#mobileLoginLink').hide();
+            $('#mobileUserBlock').show();
+
+            await loadAndUpdateUserProfile(authData.userId);
+        } else {
+            $('#loginBlock').show();
+            $('#userBlock').hide();
+            $('#mobileLoginLink').show();
+            $('#mobileUserBlock').hide();
+        }
+    } catch (error) {
+        console.error('Auth check failed:', error);
+        $('#loginBlock').show();
+        $('#userBlock').hide();
+        $('#mobileLoginLink').show();
+        $('#mobileUserBlock').hide();
+    }
+}
 
 // ─── LOAD FROM BACKEND ────────────────────────────────────────────────────────
 
@@ -67,6 +126,71 @@ const loadUsers = async () => {
     `);
   }
 };
+
+async function loadAndUpdateUserProfile(userId) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            console.log('Full user data loaded:', userData);
+            updateProfileImage(userData);
+        } else {
+            console.warn('Could not load full user profile, using fallback');
+            // Fallback: zeige nur Standard-Avatar
+            const fallbackData = { username: 'User' };
+            updateProfileImage(fallbackData);
+        }
+    } catch (error) {
+        console.error('Error loading user profile:', error);
+        // Fallback
+        updateProfileImage({ username: 'User' });
+    }
+}
+
+function updateProfileImage(userData) {
+    const BASE_URL = 'http://localhost:8080/api';
+
+    // Prüfe, ob eine gültige UUID vorhanden ist
+    const isValidFileId =
+        userData.profilePictureId &&
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+            userData.profilePictureId
+        );
+
+    // Fallback Avatar mit ui-avatars.com
+    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+        userData.username || 'User'
+    )}&background=6c757d&color=fff&size=128&bold=true`;
+
+    // Profilbild-URL bestimmen
+    const profilePicUrl = isValidFileId
+        ? `${BASE_URL}/files/${userData.profilePictureId}`
+        : fallbackAvatar;
+
+    console.log('Updating navbar profile image:', profilePicUrl);
+
+    // Aktualisiere das Profilbild in der Desktop-Navigation
+    const $profileImg = $('#userBlock img');
+    $profileImg.attr('src', profilePicUrl);
+    $profileImg.attr('data-fallback', fallbackAvatar);
+
+    // Füge Error-Handler hinzu
+    $profileImg.off('error').on('error', function() {
+        if (this.dataset.errorHandled !== 'true') {
+            this.dataset.errorHandled = 'true';
+            this.src = fallbackAvatar;
+        }
+    });
+
+    // Aktualisiere den Benutzernamen
+    if (userData.username) {
+        $('#userBlock strong').text(userData.username);
+    }
+}
 
 // ─── IMAGE FALLBACK ───────────────────────────────────────────────────────────
 

@@ -71,3 +71,27 @@ function handleRegister(API_URL) {
         },
     });
 }
+
+async function loadAndUpdateUserProfile(userId) {
+    try {
+        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            method: 'GET',
+            credentials: 'include',
+        });
+
+        if (response.ok) {
+            const userData = await response.json();
+            console.log('Full user data loaded:', userData);
+            updateProfileImage(userData);
+        } else {
+            console.warn('Could not load full user profile, using fallback');
+            // Fallback: zeige nur Standard-Avatar
+            const fallbackData = { username: 'User' };
+            updateProfileImage(fallbackData);
+        }
+    } catch (error) {
+        console.error('Error loading user profile:', error);
+        // Fallback
+        updateProfileImage({ username: 'User' });
+    }
+}
