@@ -1,4 +1,4 @@
-console.log("✅ Loaded navigation.js");
+console.log("Loaded navigation.js");
 
 /**
  * Converts a URL path to a normalized key for matching nav links
