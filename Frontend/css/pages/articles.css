@@ -1,13 +1,3 @@
-:root {
-  --myPastelGreen: #a9b8a3;
-  --myGrey: #796f80;
-  --myPink: #c3868d;
-  --myDarkerPink: #b56468;
-  --myDarkerPink: #b56468;
-  --myBeige: #fbeae1;
-  --myBorderRGB: 121, 111, 128;
-}
-
 .article-container {
   max-width: 2500px;
   margin-top: 4rem;
@@ -28,12 +18,24 @@
 }
 
 .comment-icon {
-  background-color: rgba(var(--myBorderRGB), 0.2);
+  background-color: rgba(var(--border-rgb), 0.2);
   border-radius: 5px;
 }
 
 .comment-icon:hover {
-  background-color: rgba(var(--myBorderRGB), 0.1);
+  background-color: rgba(var(--border-rgb), 0.1);
+}
+
+@media (max-width: 576px) {
+  .comment-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .comment-container p {
+    padding-right: 0;
+  }
 }
 
 .text-justify {
@@ -51,20 +53,6 @@
   margin-left: auto;
 }
 
-/* Media Queries */
-
-@media (max-width: 991px) {
-  /*.article-container {*/
-  /*  display: block;*/
-  /*  margin: 0 auto;*/
-  /*}*/
-
-  .discussion-box {
-    display: block;
-    margin: 0 auto;
-  }
-}
-
 .article-link .underline-on-hover {
   border-bottom: 2px solid transparent;
   transition: border-color 0.2s;
@@ -72,27 +60,6 @@
 
 .article-link:hover .underline-on-hover {
   border-color: black;
-}
-
-#floating-button {
-  position: sticky;
-  top: 50%; /* Vertically centered */
-  transform: translateY(-50%);
-  float: right;
-  margin-left: 20px;
-  margin-right: -75px; /* Pushes it outside the article column */
-  width: 60px;
-  height: 60px;
-  background-color: #ff1493 !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  text-decoration: none;
-  z-index: 1000;
-  transition: opacity 0.3s ease-in-out;
-}
-
-.edit-btn.unauthorized,
-.delete-btn.unauthorized {
-  display: none;
 }
 
 /* ===== DISCUSSION SECTION ===== */
@@ -146,24 +113,6 @@
 .discussion-box-form textarea.form-control:focus {
   border-color: #6c63ff;
   box-shadow: 0 0 0 0.2rem rgba(108, 99, 255, 0.1);
-}
-
-.post-button {
-  position: absolute;
-  bottom: 12px;
-  right: 12px;
-  border-radius: 8px;
-  padding: 0.5rem 1.25rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #ff1493 0%, #ff1493 100%);
-  border: none;
-  transition: all 0.3s ease;
-}
-
-.post-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 20, 147, 0.4);
-  background: linear-gradient(135deg, #e0127e 0%, #c0106e 100%);
 }
 
 /* ===== COMMENTS SECTION ===== */
@@ -221,71 +170,6 @@
   font-size: 0.95rem;
 }
 
-/* Comment Action Buttons */
-.comment .btn {
-  border-radius: 8px;
-  font-size: 0.85rem;
-  padding: 0.4rem 0.9rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-.comment .edit-btn {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  color: #495057;
-  margin-right: 0.5rem;
-}
-
-.comment .edit-btn:hover {
-  background: #6c63ff;
-  border-color: #6c63ff;
-  color: white;
-  transform: translateY(-1px);
-}
-
-.comment .delete-btn {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  color: #dc3545;
-}
-
-.comment .delete-btn:hover {
-  background: #dc3545;
-  border-color: #dc3545;
-  color: white;
-  transform: translateY(-1px);
-}
-
-/* Edit Mode Buttons */
-.comment .save-btn {
-  background: linear-gradient(135deg, #28a745 0%, #218838 100%);
-  border: none;
-  color: white;
-}
-
-.comment .save-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
-}
-
-.comment .cancel-btn {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  color: #6c757d;
-}
-
-.comment .cancel-btn:hover {
-  background: #e9ecef;
-  color: #495057;
-}
-
-/* Unauthorized Buttons */
-.edit-btn.unauthorized,
-.delete-btn.unauthorized {
-  display: none !important;
-}
-
 /* Edit Mode Inputs */
 .comment .edit-title,
 .comment .edit-text {
@@ -313,28 +197,35 @@
   margin-bottom: 1rem;
 }
 
-/* Responsive */
+/* Media Queries */
 @media (max-width: 768px) {
   .discussion-section {
     padding: 1.5rem;
     border-radius: 12px;
   }
-  
+
   .comment-form-card {
     padding: 1rem;
   }
-  
+
   .post-button {
     position: static;
     width: 100%;
     margin-top: 0.75rem;
   }
-  
+
   .comment {
     flex-direction: column;
   }
-  
+
   .comment img.rounded-circle {
     margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 991px) {
+  .discussion-box {
+    display: block;
+    margin: 0 auto;
   }
 }

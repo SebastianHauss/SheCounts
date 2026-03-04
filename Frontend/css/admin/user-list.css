@@ -1,60 +1,341 @@
-/* --- User-List Container --- */
+/* ===================================
+   USER LIST - Admin Page
+   =================================== */
+
 #userlist-container {
-  max-width: 1000px;
+  max-width: 1400px;
   margin: 80px auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-  font-size: 1rem;
+  padding: var(--spacing-xl);
 }
 
-/* --- Headline --- */
 .user-list-h1 {
-  margin-bottom: 2rem;
-  font-size: 2rem;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-grey-dark);
 }
 
-/* --- Table Styling --- */
-.table-hover tbody tr:hover {
-  background-color: #f1f1f1;
-  transition: background-color 0.2s ease;
+/* ===================================
+   SEARCH & FILTER BAR
+   =================================== */
+
+.user-filter-bar {
+  background: var(--color-white);
+  border: 1px solid var(--color-grey-fair);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
 }
 
-.table th {
-  background-color: #f8f9fa;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  letter-spacing: 0.05rem;
-  color: #666;
-  border-bottom: 2px solid #dee2e6;
+.user-filter-bar .form-control,
+.user-filter-bar .form-select {
+  border-color: var(--color-grey-fair);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-grey-dark);
 }
 
-.table td,
-.table th {
-  vertical-align: middle;
-  padding: 1rem;
+.user-filter-bar .form-control:focus,
+.user-filter-bar .form-select:focus {
+  border-color: var(--color-primary-light);
+  box-shadow: 0 0 0 0.2rem var(--color-primary-100);
 }
 
-/* --- Avatar --- */
-.user-avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  margin-right: 0.75rem;
-  object-fit: cover;
+.user-filter-bar .form-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-secondary);
+  margin-bottom: var(--spacing-xs);
 }
 
-/* --- Username Cell with Avatar --- */
-.username-cell {
+/* Active filter tags shown below search row */
+#active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-sm);
+}
+
+.filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  border-radius: var(--radius-xl);
+  padding: 2px var(--spacing-sm);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-medium);
+}
+
+.filter-tag button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-primary-700);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.filter-tag button:hover {
+  color: var(--color-primary);
+}
+
+/* ===================================
+   RESULTS COUNT
+   =================================== */
+
+.results-bar {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-secondary-light);
 }
 
+/* ===================================
+   USER CARDS GRID
+   =================================== */
+
+#user-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* ===================================
+   USER CARD
+   =================================== */
+
+.user-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-grey-fair);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.user-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Pink gradient banner at top */
+.user-card__banner {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-light)
+  );
+  height: 64px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Avatar sits half on banner, half on body */
+.user-card__avatar-wrap {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.user-card__avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-white);
+  box-shadow: var(--shadow-sm);
+  display: block;
+}
+
+/* Card body */
+.user-card__body {
+  padding: 32px var(--spacing-md) var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  flex: 1;
+}
+
+.user-card__username {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-grey-dark);
+  text-decoration: none;
+  text-align: center;
+}
+
+.user-card__username:hover {
+  color: var(--color-primary);
+}
+
+.user-card__badges {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: var(--spacing-xs);
+}
+
+/* Info rows: icon + text */
+.user-card__info {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.user-card__info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  font-size: 0.8rem;
+  color: var(--color-secondary-light);
+  line-height: var(--line-height-base);
+}
+
+.user-card__info-row i {
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.user-card__info-row span {
+  word-break: break-word;
+}
+
+/* Card footer with action button */
+.user-card__footer {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-top: 1px solid var(--color-grey-fair);
+}
+
+.user-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+  background: transparent;
+  border: 1.5px solid var(--color-primary);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.user-card__btn:hover {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* ===================================
+   BADGE COLOR OVERRIDES
+   =================================== */
+
+.badge.bg-success {
+  background-color: var(--color-success) !important;
+}
+.badge.bg-secondary {
+  background-color: var(--color-secondary-light) !important;
+}
+.badge.bg-primary {
+  background-color: var(--color-primary) !important;
+}
+
+/* ===================================
+   EMPTY / ERROR STATE
+   =================================== */
+
+.user-cards-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-md);
+  color: var(--color-secondary-light);
+}
+
+.user-cards-empty i {
+  font-size: 3rem;
+  opacity: 0.3;
+  display: block;
+  margin-bottom: var(--spacing-md);
+}
+
+/* ===================================
+   SKELETON LOADING CARDS
+   =================================== */
+
+.user-card--skeleton .user-card__banner {
+  background: var(--color-grey-light);
+}
+
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    var(--color-grey-light) 25%,
+    var(--color-grey-fair) 50%,
+    var(--color-grey-light) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-sm);
+  height: 12px;
+  width: 100%;
+}
+
+.skeleton-line.short {
+  width: 60%;
+}
+.skeleton-line.avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ===================================
+   PAGINATION
+   =================================== */
+
 .pagination {
-  margin-top: 40px;
+  margin-top: var(--spacing-xl);
+}
+
+.page-link {
+  color: var(--color-primary);
+  border-color: var(--color-grey-fair);
+}
+
+.page-item.active .page-link {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.page-link:hover {
+  color: var(--color-primary-700);
+  background-color: var(--color-primary-100);
 }

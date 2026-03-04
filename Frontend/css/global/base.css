@@ -1,0 +1,12 @@
+:root {
+  --bs-font-sans-serif: 'Poppins', sans-serif;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: color-mix(in srgb, var(--color-secondary) 5%, white);
+}
+
+:focus-visible {
+  outline: 3px solid #0d6efd;
+}
