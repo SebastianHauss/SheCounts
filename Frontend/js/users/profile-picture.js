@@ -1,11 +1,10 @@
-console.log("Loaded profile-picture.js");
+console.log('Loaded profile-picture.js');
 
 // API Base URL
 const API_BASE_URL = 'http://localhost:8080/api';
 
 // Konstanten
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB
-
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 

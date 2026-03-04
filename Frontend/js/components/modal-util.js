@@ -1,4 +1,4 @@
-console.log("Loaded modal-util.js");
+console.log('Loaded modal-util.js');
 
 document
   .querySelectorAll('[data-bs-toggle="modal"][data-bs-dismiss="modal"]')

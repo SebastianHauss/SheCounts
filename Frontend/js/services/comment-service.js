@@ -1,4 +1,4 @@
-console.log("Loaded comment-service.js");
+console.log('Loaded comment-service.js');
 
 const API_URL = 'http://localhost:8080/api';
 

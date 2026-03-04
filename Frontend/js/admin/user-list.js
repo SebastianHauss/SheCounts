@@ -1,16 +1,18 @@
-console.log("Loaded user-list.js");
+console.log('Loaded user-list.js');
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 
 const statusBadge = (isActive) =>
-    `<span class="badge ${isActive ? 'bg-success' : 'bg-secondary'}">
+  `<span class="badge ${isActive ? 'bg-success' : 'bg-secondary'}">
     ${isActive ? 'Active' : 'Inactive'}
   </span>`;
 
 const formatDate = (dateString) => {
   if (!dateString) return 'N/A';
   return new Date(dateString).toLocaleDateString('de-DE', {
-    day: '2-digit', month: '2-digit', year: 'numeric',
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
   });
 };
 
@@ -58,35 +60,35 @@ async function loadUserProfile(userId) {
 }
 
 async function checkAuthStatus() {
-    try {
-        const response = await fetch('http://localhost:8080/api/auth/me', {
-            method: 'GET',
-            credentials: 'include',
-        });
+  try {
+    const response = await fetch('http://localhost:8080/api/auth/me', {
+      method: 'GET',
+      credentials: 'include',
+    });
 
-        if (response.ok) {
-            const authData = await response.json();
+    if (response.ok) {
+      const authData = await response.json();
 
-            // Zeige User-Block an
-            $('#loginBlock').hide();
-            $('#userBlock').show();
-            $('#mobileLoginLink').hide();
-            $('#mobileUserBlock').show();
+      // Zeige User-Block an
+      $('#loginBlock').hide();
+      $('#userBlock').show();
+      $('#mobileLoginLink').hide();
+      $('#mobileUserBlock').show();
 
-            await loadAndUpdateUserProfile(authData.userId);
-        } else {
-            $('#loginBlock').show();
-            $('#userBlock').hide();
-            $('#mobileLoginLink').show();
-            $('#mobileUserBlock').hide();
-        }
-    } catch (error) {
-        console.error('Auth check failed:', error);
-        $('#loginBlock').show();
-        $('#userBlock').hide();
-        $('#mobileLoginLink').show();
-        $('#mobileUserBlock').hide();
+      await loadAndUpdateUserProfile(authData.userId);
+    } else {
+      $('#loginBlock').show();
+      $('#userBlock').hide();
+      $('#mobileLoginLink').show();
+      $('#mobileUserBlock').hide();
     }
+  } catch (error) {
+    console.error('Auth check failed:', error);
+    $('#loginBlock').show();
+    $('#userBlock').hide();
+    $('#mobileLoginLink').show();
+    $('#mobileUserBlock').hide();
+  }
 }
 
 // ─── LOAD FROM BACKEND ────────────────────────────────────────────────────────
@@ -128,68 +130,68 @@ const loadUsers = async () => {
 };
 
 async function loadAndUpdateUserProfile(userId) {
-    try {
-        const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
-            method: 'GET',
-            credentials: 'include',
-        });
+  try {
+    const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+      method: 'GET',
+      credentials: 'include',
+    });
 
-        if (response.ok) {
-            const userData = await response.json();
-            console.log('Full user data loaded:', userData);
-            updateProfileImage(userData);
-        } else {
-            console.warn('Could not load full user profile, using fallback');
-            // Fallback: zeige nur Standard-Avatar
-            const fallbackData = { username: 'User' };
-            updateProfileImage(fallbackData);
-        }
-    } catch (error) {
-        console.error('Error loading user profile:', error);
-        // Fallback
-        updateProfileImage({ username: 'User' });
+    if (response.ok) {
+      const userData = await response.json();
+      console.log('Full user data loaded:', userData);
+      updateProfileImage(userData);
+    } else {
+      console.warn('Could not load full user profile, using fallback');
+      // Fallback: zeige nur Standard-Avatar
+      const fallbackData = { username: 'User' };
+      updateProfileImage(fallbackData);
     }
+  } catch (error) {
+    console.error('Error loading user profile:', error);
+    // Fallback
+    updateProfileImage({ username: 'User' });
+  }
 }
 
 function updateProfileImage(userData) {
-    const BASE_URL = 'http://localhost:8080/api';
+  const BASE_URL = 'http://localhost:8080/api';
 
-    // Prüfe, ob eine gültige UUID vorhanden ist
-    const isValidFileId =
-        userData.profilePictureId &&
-        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-            userData.profilePictureId
-        );
+  // Prüfe, ob eine gültige UUID vorhanden ist
+  const isValidFileId =
+    userData.profilePictureId &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+      userData.profilePictureId
+    );
 
-    // Fallback Avatar mit ui-avatars.com
-    const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
-        userData.username || 'User'
-    )}&background=6c757d&color=fff&size=128&bold=true`;
+  // Fallback Avatar mit ui-avatars.com
+  const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(
+    userData.username || 'User'
+  )}&background=6c757d&color=fff&size=128&bold=true`;
 
-    // Profilbild-URL bestimmen
-    const profilePicUrl = isValidFileId
-        ? `${BASE_URL}/files/${userData.profilePictureId}`
-        : fallbackAvatar;
+  // Profilbild-URL bestimmen
+  const profilePicUrl = isValidFileId
+    ? `${BASE_URL}/files/${userData.profilePictureId}`
+    : fallbackAvatar;
 
-    console.log('Updating navbar profile image:', profilePicUrl);
+  console.log('Updating navbar profile image:', profilePicUrl);
 
-    // Aktualisiere das Profilbild in der Desktop-Navigation
-    const $profileImg = $('#userBlock img');
-    $profileImg.attr('src', profilePicUrl);
-    $profileImg.attr('data-fallback', fallbackAvatar);
+  // Aktualisiere das Profilbild in der Desktop-Navigation
+  const $profileImg = $('#userBlock img');
+  $profileImg.attr('src', profilePicUrl);
+  $profileImg.attr('data-fallback', fallbackAvatar);
 
-    // Füge Error-Handler hinzu
-    $profileImg.off('error').on('error', function() {
-        if (this.dataset.errorHandled !== 'true') {
-            this.dataset.errorHandled = 'true';
-            this.src = fallbackAvatar;
-        }
-    });
-
-    // Aktualisiere den Benutzernamen
-    if (userData.username) {
-        $('#userBlock strong').text(userData.username);
+  // Füge Error-Handler hinzu
+  $profileImg.off('error').on('error', function () {
+    if (this.dataset.errorHandled !== 'true') {
+      this.dataset.errorHandled = 'true';
+      this.src = fallbackAvatar;
     }
+  });
+
+  // Aktualisiere den Benutzernamen
+  if (userData.username) {
+    $('#userBlock strong').text(userData.username);
+  }
 }
 
 // ─── IMAGE FALLBACK ───────────────────────────────────────────────────────────
@@ -210,9 +212,9 @@ const displayUsers = (users) => {
   // Update result count
   $('#user-count').text(`${users.length} Users`);
   $('#results-count').text(
-      users.length === allUsers.length
-          ? `${users.length} users`
-          : `${users.length} of ${allUsers.length} users`
+    users.length === allUsers.length
+      ? `${users.length} users`
+      : `${users.length} of ${allUsers.length} users`
   );
 
   if (users.length === 0) {
@@ -230,14 +232,18 @@ const displayUsers = (users) => {
 
   users.forEach((user) => {
     const isValidFileId =
-        user.profilePictureId &&
-        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(user.profilePictureId);
+      user.profilePictureId &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+        user.profilePictureId
+      );
 
     const fallbackAvatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(user.username || 'User')}&background=a0616a&color=fff&size=128&bold=true`;
-    const profilePicUrl = isValidFileId ? `${BASE_URL}/files/${user.profilePictureId}` : fallbackAvatar;
+    const profilePicUrl = isValidFileId
+      ? `${BASE_URL}/files/${user.profilePictureId}`
+      : fallbackAvatar;
 
-    const country  = countryName(user.profile?.country);
-    const isAdmin  = user.admin === true || user.isAdmin === true;
+    const country = countryName(user.profile?.country);
+    const isAdmin = user.admin === true || user.isAdmin === true;
     const isActive = !user.deleted;
 
     grid.append(`
@@ -291,22 +297,27 @@ const displayUsers = (users) => {
 // ─── COUNTRY CODE → DISPLAY NAME ─────────────────────────────────────────────
 
 const COUNTRY_NAMES = { at: 'Österreich', de: 'Deutschland', ch: 'Schweiz' };
-const countryName = (code) => COUNTRY_NAMES[code?.toLowerCase()] || code || 'N/A';
+const countryName = (code) =>
+  COUNTRY_NAMES[code?.toLowerCase()] || code || 'N/A';
 
 // ─── COMBINED FILTER LOGIC ────────────────────────────────────────────────────
 // All filters (search, role, sort) run together so they always combine correctly.
 
 const applyFilters = () => {
-  if (!$('#searchInput').length) { displayUsers(allUsers); return; }
+  if (!$('#searchInput').length) {
+    displayUsers(allUsers);
+    return;
+  }
   const searchTerm = $('#searchInput').val().toLowerCase().trim();
-  const roleFilter = $('#filterRole').val();   // '' | 'admin' | 'user'
-  const sortBy     = $('#sortSelect').val();   // '' | 'username' | 'email' | 'created' | 'country' | 'status'
+  const roleFilter = $('#filterRole').val(); // '' | 'admin' | 'user'
+  const sortBy = $('#sortSelect').val(); // '' | 'username' | 'email' | 'created' | 'country' | 'status'
 
   let result = [...allUsers];
 
   // 1. Filter by search term (username, email, country)
   if (searchTerm) {
-    result = result.filter((u) =>
+    result = result.filter(
+      (u) =>
         u.username?.toLowerCase().includes(searchTerm) ||
         u.email?.toLowerCase().includes(searchTerm) ||
         u.profile?.country?.toLowerCase().includes(searchTerm)
@@ -323,12 +334,20 @@ const applyFilters = () => {
   // 3. Sort — all fields null-safe with || '' fallback
   result.sort((a, b) => {
     switch (sortBy) {
-      case 'username': return (a.username || '').localeCompare(b.username || '');
-      case 'email':    return (a.email || '').localeCompare(b.email || '');
-      case 'created':  return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
-      case 'country':  return (a.profile?.country || '').localeCompare(b.profile?.country || '');
-      case 'status':   return (a.deleted ? 1 : 0) - (b.deleted ? 1 : 0);
-      default:         return 0;
+      case 'username':
+        return (a.username || '').localeCompare(b.username || '');
+      case 'email':
+        return (a.email || '').localeCompare(b.email || '');
+      case 'created':
+        return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+      case 'country':
+        return (a.profile?.country || '').localeCompare(
+          b.profile?.country || ''
+        );
+      case 'status':
+        return (a.deleted ? 1 : 0) - (b.deleted ? 1 : 0);
+      default:
+        return 0;
     }
   });
 
@@ -343,26 +362,38 @@ const updateFilterTags = (searchTerm, roleFilter, sortBy) => {
   container.empty();
 
   if (searchTerm) {
-    container.append(filterTag(`Search: "${searchTerm}"`, () => {
-      $('#searchInput').val('');
-      applyFilters();
-    }));
+    container.append(
+      filterTag(`Search: "${searchTerm}"`, () => {
+        $('#searchInput').val('');
+        applyFilters();
+      })
+    );
   }
 
   if (roleFilter) {
     const label = roleFilter === 'admin' ? 'Admins only' : 'Users only';
-    container.append(filterTag(label, () => {
-      $('#filterRole').val('');
-      applyFilters();
-    }));
+    container.append(
+      filterTag(label, () => {
+        $('#filterRole').val('');
+        applyFilters();
+      })
+    );
   }
 
   if (sortBy) {
-    const labels = { username: 'Sort: Username', email: 'Sort: Email', created: 'Sort: Newest', country: 'Sort: Country', status: 'Sort: Status' };
-    container.append(filterTag(labels[sortBy], () => {
-      $('#sortSelect').val('');
-      applyFilters();
-    }));
+    const labels = {
+      username: 'Sort: Username',
+      email: 'Sort: Email',
+      created: 'Sort: Newest',
+      country: 'Sort: Country',
+      status: 'Sort: Status',
+    };
+    container.append(
+      filterTag(labels[sortBy], () => {
+        $('#sortSelect').val('');
+        applyFilters();
+      })
+    );
   }
 };
 

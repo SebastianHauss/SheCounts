@@ -1,4 +1,4 @@
-console.log("Loaded scroll-to-discussion.js");
+console.log('Loaded scroll-to-discussion.js');
 
 document.addEventListener('DOMContentLoaded', function () {
   const button = document.getElementById('floating-button');
@@ -6,7 +6,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Exit early if elements don't exist on this page
   if (!button || !target) {
-    console.log('Floating button or discussion section not found - skipping scroll handler');
+    console.log(
+      'Floating button or discussion section not found - skipping scroll handler'
+    );
     return;
   }
 
