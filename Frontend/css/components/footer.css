@@ -1,26 +1,26 @@
 #footer-placeholder {
-    margin-top: 48px;
-    background-color: var(--color-accent-green);
+  margin-top: 48px;
+  background-color: var(--color-accent-green);
 }
 
 /* Media Queries */
 @media (max-width: 991.98px) {
-    footer .container {
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
+  footer .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 @media (max-width: 575.98px) {
-    footer h5 {
-        font-size: 1.25rem;
-    }
+  footer h5 {
+    font-size: 1.25rem;
+  }
 
-    footer h6 {
-        font-size: 1rem;
-    }
+  footer h6 {
+    font-size: 1rem;
+  }
 
-    .social-link i {
-        font-size: 1.25rem !important;
-    }
+  .social-link i {
+    font-size: 1.25rem !important;
+  }
 }
